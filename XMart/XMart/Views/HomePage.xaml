@@ -1,13 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:XMart.Controls"
              x:Class="XMart.Views.HomePage"
              Title="首页">
+
+    <ContentPage.Resources>
+        <Style x:Name="FrameStyle" TargetType="Frame">
+            <Setter Property="WidthRequest" Value="300"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="BorderColor" Value="LightGray"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        <Style x:Name="EntryStyle" TargetType="controls:MyEntry">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="PlaceholderColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="MaxLength" Value="16"/>
+        </Style>
+        <Style TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="30"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Aspect" Value="AspectFit"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid x:Name="MainGrid">
+            <Image Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" />
+            
+            <StackLayout HeightRequest="150" Orientation="Horizontal" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png"/>
+
+                <Frame>
+                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}"/>
+                </Frame>
+
+                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png"/>
+            </StackLayout>
+
+            <StackLayout>
+                
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

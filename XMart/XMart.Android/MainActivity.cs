@@ -32,7 +32,7 @@ namespace XMart.Droid
 
             CarouselViewRenderer.Init();
             //CachedImageRenderer.Init(true);
-
+            
             LoadApplication(new App());
         }
     }
