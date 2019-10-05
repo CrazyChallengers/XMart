@@ -32,12 +32,13 @@
     <EmbeddedResource Update="Views\MePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Views\WebPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="ResponseData\" />
     <Folder Include="Services\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 </Project>
