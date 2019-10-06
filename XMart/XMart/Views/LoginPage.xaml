@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XMart.Controls"
+             Icon="Resource/drawable/circle.png"
+             x:Class="XMart.Views.LoginPage"
+             Title="登录/注册">
+
+    <ContentPage.Resources>
+        <Style x:Name="FrameStyle" TargetType="Frame">
+            <Setter Property="WidthRequest" Value="300"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="BorderColor" Value="LightGray"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+        <Style x:Name="EntryStyle" TargetType="controls:MyEntry">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="PlaceholderColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="MaxLength" Value="16"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="WidthRequest" Value="300"/>
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="Large"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="Resource/drawable/login_bg.png" VerticalOptions="Start" HorizontalOptions="Fill"/>
+            <Label Text="登录" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" FontSize="72"/>
+
+            <StackLayout VerticalOptions="EndAndExpand">
+                <Frame>
+                    <controls:MyEntry x:Name="account" Placeholder="账号" Text="{Binding Account}"/>
+                </Frame>
+
+                <Frame>
+                    <controls:MyEntry x:Name="password" Placeholder="密码" Text="{Binding Password}" IsPassword="True"/>
+                </Frame>
+
+                <Button x:Name="LoginButton" Text="登录" BackgroundColor="{StaticResource MainColor}" TextColor="White"
+                        Clicked="LoginButton_Clicked"/>
+                <Button x:Name="RegisterButton" Text="注册" BackgroundColor="Transparent"
+                        Clicked="RegisterButton_Clicked"/>
+            </StackLayout>
+
+            <Label Text="西南交通大学人工智能研究院" FontSize="Small"
+                   HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+
+    </ContentPage.Content>
+
+</ContentPage>

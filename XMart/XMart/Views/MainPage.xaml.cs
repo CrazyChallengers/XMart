@@ -9,9 +9,23 @@ namespace XMart.Views
 {
     public partial class MainPage : TabbedPage
     {
+        
         public MainPage()
         {
             InitializeComponent();
+
+            InitPages();
+        }
+
+        private void InitPages()
+        {
+            if (true)
+            {
+                //Children.Add(new LoginPage());
+
+                Children.Add(new CartPage());
+                Children.Add(new MePage());
+            }
         }
     }
 }

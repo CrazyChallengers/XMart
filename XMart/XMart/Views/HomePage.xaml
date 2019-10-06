@@ -5,6 +5,7 @@
              xmlns:controls="clr-namespace:XMart.Controls"
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              x:Class="XMart.Views.HomePage"
+             Icon="Resource/drawable/home.png"
              Title="首页">
 
     <ContentPage.Resources>
@@ -15,7 +16,7 @@
             <Setter Property="BackgroundColor" Value="White"/>
             <Setter Property="CornerRadius" Value="15"/>
             <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="VerticalOptions" Value="Center"/>
         </Style>
         <Style x:Key="CarouselFrame" TargetType="Frame">
@@ -27,7 +28,15 @@
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="Margin" Value="10,5"/>
         </Style>
-        <Style x:Name="EntryStyle" TargetType="controls:MyEntry">
+        <Style x:Key="MenuFrame" TargetType="Frame">
+            <Setter Property="BorderColor" Value="LightGray"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="10,5"/>
+        </Style>
+        <Style x:Key="SearchEntry" TargetType="controls:MyEntry">
             <Setter Property="WidthRequest" Value="250"/>
             <Setter Property="PlaceholderColor" Value="LightGray"/>
             <Setter Property="TextColor" Value="White"/>
@@ -37,52 +46,146 @@
             <Setter Property="FontSize" Value="Large"/>
             <Setter Property="MaxLength" Value="16"/>
         </Style>
-        <Style TargetType="ImageButton">
+        <Style x:Key="EarImageButton" TargetType="ImageButton">
             <Setter Property="WidthRequest" Value="30"/>
             <Setter Property="HeightRequest" Value="30"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
             <Setter Property="Aspect" Value="AspectFit"/>
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
-        <Grid x:Name="MainGrid">
+        <Grid x:Name="MainGrid" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="150"/>
+                <RowDefinition Height="100"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            <Image Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" />
-            
-            <StackLayout Grid.Row="0" HeightRequest="100" Orientation="Horizontal" HorizontalOptions="Center">
-                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png"/>
+
+            <Image Grid.Row="0" Grid.RowSpan="2" Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Aspect="AspectFit"/>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
+                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{DynamicResource EarImageButton}"/>
 
                 <Frame Style="{DynamicResource SearchFrame}">
-                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{DynamicResource SearchEntry}"/>
                 </Frame>
 
-                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png"/>
+                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{DynamicResource EarImageButton}"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Orientation="Vertical" HorizontalOptions="Center">
-                <!--轮播图-->
-                <Frame Style="{DynamicResource CarouselFrame}">
-                    <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselItemsSource}"
+            <ScrollView Grid.Row="1">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                    <!--轮播图-->
+                    <Frame Style="{DynamicResource CarouselFrame}">
+                        <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselItemsSource}"
                                         ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
-                        <cv:CarouselViewControl.ItemTemplate>
-                            <DataTemplate>
-                                <ImageButton Source="{Binding ImgSource}"
+                            <cv:CarouselViewControl.ItemTemplate>
+                                <DataTemplate>
+                                    <ImageButton Source="{Binding ImgSource}"
                                          Command="{Binding CarouselCommand}"
                                          CommandParameter="{Binding ImgUrl}"
                                          BackgroundColor="Transparent" Aspect="AspectFill"/>
-                            </DataTemplate>
-                        </cv:CarouselViewControl.ItemTemplate>
-                    </cv:CarouselViewControl>
-                </Frame>
+                                </DataTemplate>
+                            </cv:CarouselViewControl.ItemTemplate>
+                        </cv:CarouselViewControl>
+                    </Frame>
 
-            </StackLayout>
+                    <!--主功能矩阵-->
+                    <Frame Style="{DynamicResource MenuFrame}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.Resources>
+                                <Style TargetType="ImageButton">
+                                    <Setter Property="WidthRequest" Value="50"/>
+                                    <Setter Property="HeightRequest" Value="50"/>
+                                    <Setter Property="BackgroundColor" Value="Transparent"/>
+                                    <!--<Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="Scale" Value="1" />
+                            </VisualState.Setters>
+                        </VisualState>
+
+                        <VisualState x:Name="Pressed">
+                            <VisualState.Setters>
+                                <Setter Property="Scale" Value="0.9" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>-->
+                                </Style>
+                                <Style TargetType="Label">
+                                    <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                                    <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                                    <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                                    <Setter Property="VerticalTextAlignment" Value="Center"/>
+                                    <Setter Property="FontSize" Value="Medium"/>
+                                </Style>
+                            </Grid.Resources>
+
+                            <ImageButton Grid.Row="0" Grid.Column="0" Source="Resource/drawable/circle.png" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="房源管理"/>
+
+                            <ImageButton Grid.Row="0" Grid.Column="1" Source="Resource/drawable/circle.png"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="客源管理"/>
+
+                            <ImageButton Grid.Row="0" Grid.Column="2" Source="Resource/drawable/circle.png" />
+                            <Label Grid.Row="1" Grid.Column="2" Text="外网房源"/>
+
+                            <ImageButton Grid.Row="0" Grid.Column="3" Source="Resource/drawable/circle.png"/>
+                            <Label Grid.Row="1" Grid.Column="3" Text="新闻公告"/>
+
+                            <ImageButton Grid.Row="0" Grid.Column="4" Source="Resource/drawable/circle.png" />
+                            <Label Grid.Row="1" Grid.Column="4" Text="工作总结"/>
+
+                            <ImageButton Grid.Row="0" Grid.Column="5" Source="Resource/drawable/circle.png" />
+                            <Label Grid.Row="1" Grid.Column="5" Text="业务报表"/>
+
+                            <ImageButton Grid.Row="2" Grid.Column="0" Source="Resource/drawable/circle.png" />
+                            <Label Grid.Row="3" Grid.Column="0" Text="跟进记录"/>
+
+                            <ImageButton Grid.Row="2" Grid.Column="1" Source="Resource/drawable/circle.png"/>
+                            <Label Grid.Row="3" Grid.Column="1" Text="通讯录"/>
+
+                            <ImageButton Grid.Row="2" Grid.Column="2" Source="Resource/drawable/circle.png"/>
+                            <Label Grid.Row="3" Grid.Column="2" Text="房贷计算"/>
+
+                            <ImageButton Grid.Row="2" Grid.Column="3" Source="Resource/drawable/circle.png"/>
+                            <Label Grid.Row="3" Grid.Column="3" Text="税费计算"/>
+
+                            <ImageButton Grid.Row="2" Grid.Column="4" Source="Resource/drawable/circle.png"/>
+                            <Label Grid.Row="3" Grid.Column="4" Text="新增房源"/>
+
+                            <ImageButton Grid.Row="2" Grid.Column="5" Source="Resource/drawable/circle.png"/>
+                            <Label Grid.Row="3" Grid.Column="5" Text="新增客源"/>
+
+                        </Grid>
+                    </Frame>
+
+                    <StackLayout HeightRequest="500" BackgroundColor="Yellow"/>
+
+                </StackLayout>
+            </ScrollView>
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>
