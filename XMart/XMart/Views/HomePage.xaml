@@ -27,6 +27,7 @@
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="Margin" Value="10,5"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
         </Style>
         <Style x:Key="MenuFrame" TargetType="Frame">
             <Setter Property="BorderColor" Value="LightGray"/>

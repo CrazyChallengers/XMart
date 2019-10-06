@@ -1,14 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:tb="clr-namespace:Xam.Plugin.TabView;assembly=Xam.Plugin.TabView"
              x:Class="XMart.Views.CategoryPage"
              Icon="Resource/drawable/category.png"
              Title="分类">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <!--
+            <tb:TabViewControl VerticalOptions="FillAndExpand">
+                <tb:TabViewControl.ItemSource>
+                    <tb:TabItem HeaderText="锤子">
+                        <StackLayout>
+                            <Label Text="锤子"/>
+                        </StackLayout>
+                    </tb:TabItem>
+                    <tb:TabItem HeaderText="钉子">
+                        <StackLayout>
+                            <Label Text="锤子"/>
+                        </StackLayout>
+                    </tb:TabItem>
+                </tb:TabViewControl.ItemSource>
+            </tb:TabViewControl>-->
+            
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
