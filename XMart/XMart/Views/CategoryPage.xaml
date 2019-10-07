@@ -3,27 +3,94 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:tb="clr-namespace:Xam.Plugin.TabView;assembly=Xam.Plugin.TabView"
              x:Class="XMart.Views.CategoryPage"
+             xmlns:util="clr-namespace:XMart.Util"
              Icon="Resource/drawable/category.png"
              Title="分类">
+    <ContentPage.Resources>
+        <Style x:Name="LabelStyle" TargetType="Label">
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout>
-            <!--
-            <tb:TabViewControl VerticalOptions="FillAndExpand">
-                <tb:TabViewControl.ItemSource>
-                    <tb:TabItem HeaderText="锤子">
-                        <StackLayout>
-                            <Label Text="锤子"/>
-                        </StackLayout>
-                    </tb:TabItem>
-                    <tb:TabItem HeaderText="钉子">
-                        <StackLayout>
-                            <Label Text="锤子"/>
-                        </StackLayout>
-                    </tb:TabItem>
-                </tb:TabViewControl.ItemSource>
-            </tb:TabViewControl>-->
-            
-            
-        </StackLayout>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <ScrollView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightPink" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <!--一级分类-->
+                <StackLayout x:Name="MainClassStack" BindableLayout.ItemsSource="{Binding MainClassList}" Orientation="Horizontal">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" Style="{DynamicResource LabelStyle}" WidthRequest="100">
+                                <Label.Behaviors>
+                                    <util:RadioBehavior x:Name="MainRadio" GroupName="MainStack"/>
+                                </Label.Behaviors>
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference MainRadio}, Path=IsChecked}" Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource MainColor}" />
+                                        <Setter Property="FontSize" Value="Title" />
+                                        <Setter Property="FontAttributes" Value="Bold" />
+                                    </DataTrigger>
+                                </Label.Triggers>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="MainTGR" NumberOfTapsRequired="1" Tapped="MainTGR_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+            <ScrollView Grid.Row="1" Grid.Column="0" BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
+                <!--二级分类-->
+                <StackLayout x:Name="SubClassStack" BindableLayout.ItemsSource="{Binding SubClassList}" Orientation="Vertical">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding .}" Style="{DynamicResource LabelStyle}" WidthRequest="100">
+                                <Label.Behaviors>
+                                    <util:RadioBehavior x:Name="SubRadio" GroupName="SubStack"/>
+                                </Label.Behaviors>
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference SubRadio}, Path=IsChecked}" Value="True">
+                                        <Setter Property="TextColor" Value="{StaticResource MainColor}" />
+                                        <Setter Property="FontSize" Value="Title" />
+                                        <Setter Property="FontAttributes" Value="Bold"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="SubTGR" NumberOfTapsRequired="1" Tapped="SubTGR_Tapped"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+            <ScrollView Grid.Row="1" Grid.Column="1" BackgroundColor="LightCyan" Orientation="Vertical">
+                <!--商品列表-->
+                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Button Text="{Binding .}" HeightRequest="60"/>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

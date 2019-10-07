@@ -21,10 +21,10 @@ namespace XMart.Views
         {
             if (true)
             {
-                //Children.Add(new LoginPage());
+                Children.Add(new LoginPage());
 
-                Children.Add(new CartPage());
-                Children.Add(new MePage());
+                //Children.Add(new CartPage());
+                //Children.Add(new MePage());
             }
         }
     }
