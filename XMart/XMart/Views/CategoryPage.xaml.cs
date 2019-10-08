@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XMart.Util;
 using XMart.ViewModels;
 
 namespace XMart.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CategoryPage : ContentPage
 	{
         CategoryViewModel categoryViewModel = new CategoryViewModel();
@@ -20,9 +17,18 @@ namespace XMart.Views
 			InitializeComponent ();
 
             BindingContext = categoryViewModel;
-            
 
+            MainClassStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
+            SubClassStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
 		}
+
+        private void Init()
+        {
+            MainClassStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
+            SubClassStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
+
+
+        }
 
         private void MainTGR_Tapped(object sender, EventArgs e)
         {

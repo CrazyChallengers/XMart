@@ -4,8 +4,10 @@
              xmlns:tb="clr-namespace:Xam.Plugin.TabView;assembly=Xam.Plugin.TabView"
              x:Class="XMart.Views.CategoryPage"
              xmlns:util="clr-namespace:XMart.Util"
+             xmlns:controls="clr-namespace:XMart.Controls"
              Icon="Resource/drawable/category.png"
              Title="分类">
+    
     <ContentPage.Resources>
         <Style x:Name="LabelStyle" TargetType="Label">
             <Setter Property="HeightRequest" Value="50"/>
@@ -15,13 +17,42 @@
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
         </Style>
+        <Style x:Key="SearchEntry" TargetType="controls:MyEntry">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="PlaceholderColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="White"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="MaxLength" Value="16"/>
+        </Style>
+        <Style x:Key="EarImageButton" TargetType="ImageButton">
+            <Setter Property="WidthRequest" Value="30"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="Aspect" Value="AspectFit"/>
+        </Style>
+        <Style x:Key="SearchFrame" TargetType="Frame">
+            <Setter Property="WidthRequest" Value="300"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="BorderColor" Value="LightGray"/>
+            <Setter Property="BackgroundColor" Value="White"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
     </ContentPage.Resources>
 
     <ContentPage.Content>
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -30,7 +61,17 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <ScrollView Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightPink" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="{StaticResource MainColor}" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="EndAndExpand">
+                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{DynamicResource EarImageButton}"/>
+
+                <Frame Style="{DynamicResource SearchFrame}">
+                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Style="{DynamicResource SearchEntry}"/>
+                </Frame>
+
+                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{DynamicResource EarImageButton}"/>
+            </StackLayout>
+
+            <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightPink" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                 <!--一级分类-->
                 <StackLayout x:Name="MainClassStack" BindableLayout.ItemsSource="{Binding MainClassList}" Orientation="Horizontal">
                     <BindableLayout.ItemTemplate>
@@ -55,7 +96,7 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView Grid.Row="1" Grid.Column="0" BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
+            <ScrollView Grid.Row="2" Grid.Column="0" BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
                 <!--二级分类-->
                 <StackLayout x:Name="SubClassStack" BindableLayout.ItemsSource="{Binding SubClassList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
@@ -80,12 +121,31 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView Grid.Row="1" Grid.Column="1" BackgroundColor="LightCyan" Orientation="Vertical">
+            <ScrollView Grid.Row="2" Grid.Column="1" BackgroundColor="LightCyan" Orientation="Vertical">
                 <!--商品列表-->
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Button Text="{Binding .}" HeightRequest="60"/>
+                            <Frame HeightRequest="100" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="0,5,0,0" Padding="0" IsClippedToBounds="True">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="1*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="Resource/drawable/beiyesi.png"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding .}" FontSize="Large"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="规格" FontSize="Large"/>
+                                    <Label Grid.Row="2" Grid.Column="1" Text="￥7.00" FontSize="Large" TextColor="Red"/>
+                                    <ImageButton Grid.Row="2" Grid.Column="2" Source="Resource/drawable/circle.png" HeightRequest="30" WidthRequest="30"/>
+                                </Grid>
+                            </Frame>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
