@@ -4,11 +4,86 @@
              x:Class="XMart.Views.CartPage"
              Icon="Resource/drawable/cart.png"
              Title="购物车">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" FontSize="Title">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="购物车"/>
+                        <Span Text="（"/>
+                        <Span Text="{Binding ItemNumber}"/>
+                        <Span Text="）"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <ScrollView Grid.Row="1" Orientation="Vertical" BackgroundColor="LightCyan">
+                <!--购物车商品列表-->
+                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5,0" Padding="0" IsClippedToBounds="True">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="Resource/drawable/beiyesi.png"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding .}" FontSize="Large"/>
+                                    <Picker Grid.Row="1" Grid.Column="1" Title="规格......"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>
+                                    <Label Grid.Row="2" Grid.Column="1" Text="￥7.00" FontSize="Large" TextColor="Red"/>
+                                    <Stepper Grid.Row="2" Grid.Column="2" x:Name="NumberStepper" Increment="1" Minimum="1" 
+                                             HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
+                                    <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}"/>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal">
+                <CheckBox Color="{StaticResource MainColor}"/>
+                <Label Text="全选" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="合计:￥"/>
+                            <Span Text="{Binding TotalSelectedPrice}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="已选:"/>
+                            <Span Text="{Binding SelectedNumber}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" Margin="10,0" BackgroundColor="Crimson" TextColor="White"
+                        HorizontalOptions="End" VerticalOptions="Center"/>
+
+            </StackLayout>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

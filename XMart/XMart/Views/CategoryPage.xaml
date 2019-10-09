@@ -61,7 +61,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="{StaticResource MainColor}" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="EndAndExpand">
+            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="{StaticResource MainColor}" 
+                         Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="EndAndExpand">
                 <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{DynamicResource EarImageButton}"/>
 
                 <Frame Style="{DynamicResource SearchFrame}">
@@ -126,7 +127,7 @@
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="100" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="0,5,0,0" Padding="0" IsClippedToBounds="True">
+                            <Frame HeightRequest="100" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5,0" Padding="0" IsClippedToBounds="True">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>

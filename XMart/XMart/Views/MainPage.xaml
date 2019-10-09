@@ -12,7 +12,7 @@
 
     <views:HomePage/>
     <views:CategoryPage/>
-    <!--<views:CartPage/>
-    <views:MePage/>-->
+    <views:CartPage/>
+    <views:MePage/>
 
 </TabbedPage>

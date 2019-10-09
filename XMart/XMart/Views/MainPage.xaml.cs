@@ -13,19 +13,8 @@ namespace XMart.Views
         public MainPage()
         {
             InitializeComponent();
-
-            InitPages();
+            
         }
-
-        private void InitPages()
-        {
-            if (true)
-            {
-                Children.Add(new LoginPage());
-
-                //Children.Add(new CartPage());
-                //Children.Add(new MePage());
-            }
-        }
+        
     }
 }
