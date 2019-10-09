@@ -1,13 +1,8 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
 using Android.OS;
 using CarouselView.FormsPlugin.Android;
-using FFImageLoading.Forms.Platform;
 
 namespace XMart.Droid
 {

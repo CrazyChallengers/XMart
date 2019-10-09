@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XMart.Controls.NumericUpDown">
+
+    <ContentView.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="TextColor" Value="Black" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="VerticalOptions" Value="Center" />
+            <Setter Property="Margin" Value="0, 0" />
+        </Style>
+    </ContentView.Resources>
+
+    <ContentView.Content>
+        <Frame HeightRequest="24" CornerRadius="24" BackgroundColor="White" Padding="0" BorderColor="{StaticResource MainColor}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                
+                <Label x:Name="MinusButton" Grid.Column="0" Text="-">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MinusTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+                
+                <Label x:Name="ValueText" Grid.Column="1"/>
+                
+                <Label x:Name="PlusButton" Grid.Column="2" Text="+">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="PlusTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

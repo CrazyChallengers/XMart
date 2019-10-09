@@ -58,7 +58,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid x:Name="MainGrid" RowSpacing="0">
+        <Grid x:Name="MainGrid" RowSpacing="0" BackgroundColor="Transparent">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition/>
@@ -66,6 +66,7 @@
 
             <Image Grid.Row="0" Grid.RowSpan="2" Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Aspect="AspectFit"/>
 
+            <!--头部-->
             <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
                 <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{DynamicResource EarImageButton}"/>
 
@@ -181,8 +182,57 @@
 
                         </Grid>
                     </Frame>
+                    
+                    <!--折扣商品列表-->
+                    <Label Text="特价好货" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding DiscountList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame HeightRequest="180" WidthRequest="120" BorderColor="LightGray" HasShadow="True" 
+                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="120"/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
 
-                    <StackLayout HeightRequest="500" BackgroundColor="Yellow"/>
+                                            <Image Grid.Row="0" Source="Resource/drawable/beiyesi.png" Aspect="AspectFill"/>
+                                            <Label Grid.Row="1" Text="{Binding .}" FontSize="Large"/>
+                                            <Label Grid.Row="2" Text="￥7.00" TextColor="Red"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--专题列表-->
+                    <Label Text="精彩专题" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding FeatureList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame HeightRequest="180" WidthRequest="120" BorderColor="LightGray" HasShadow="True" 
+                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="120"/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0" Source="Resource/drawable/beiyesi.png" Aspect="AspectFill"/>
+                                            <Label Grid.Row="1" Text="{Binding .}" FontSize="Large"/>
+                                            <Label Grid.Row="2" Text="简介"/>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+
 
                 </StackLayout>
             </ScrollView>

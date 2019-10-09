@@ -17,6 +17,22 @@ namespace XMart.ViewModels
 
         public Command CarouselSelectedCommand { set; get; }
 
+        private List<string> featureList;   //专题列表
+
+        public List<string> FeatureList
+        {
+            get { return featureList; }
+            set { SetProperty(ref featureList, value); }
+        }
+
+        private List<string> discountList;   //折扣商品
+
+        public List<string> DiscountList
+        {
+            get { return discountList; }
+            set { SetProperty(ref discountList, value); }
+        }
+        
         public HomeViewModel()
         {
             Title = "首页";

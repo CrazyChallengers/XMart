@@ -34,6 +34,16 @@ namespace XMart.Views
                 new CarouselItem { ImgSource = "http://phone.68fc.cn/indexpic/3.jpg", ImgUrl = "http://phone.68fc.cn/indexpic/3.html", CarouselCommand = homeViewModel.CarouselSelectedCommand }
             };
 
+            homeViewModel.DiscountList = new List<string>
+            {
+                "折扣商品1","折扣商品2","折扣商品3","折扣商品4","折扣商品5","折扣商品6"
+            };
+
+            homeViewModel.FeatureList = new List<string>
+            {
+                "专题1","专题2","专题3","专题4","专题5","专题6"
+            };
+
             BindingContext = homeViewModel;
         }
     }

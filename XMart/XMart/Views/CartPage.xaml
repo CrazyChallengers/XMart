@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XMart.Controls"
              x:Class="XMart.Views.CartPage"
              Icon="Resource/drawable/cart.png"
              Title="购物车">
@@ -13,6 +14,7 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
+            <!--头部-->
             <Label Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" FontSize="Title">
                 <Label.FormattedText>
                     <FormattedString>
@@ -23,9 +25,9 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-
+            
+            <!--购物车商品列表-->
             <ScrollView Grid.Row="1" Orientation="Vertical" BackgroundColor="LightCyan">
-                <!--购物车商品列表-->
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
@@ -46,11 +48,10 @@
                                     <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="Resource/drawable/beiyesi.png"/>
                                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding .}" FontSize="Large"/>
                                     <Picker Grid.Row="1" Grid.Column="1" Title="规格......"/>
-                                    <Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>
+                                    <!--<Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>-->
                                     <Label Grid.Row="2" Grid.Column="1" Text="￥7.00" FontSize="Large" TextColor="Red"/>
-                                    <Stepper Grid.Row="2" Grid.Column="2" x:Name="NumberStepper" Increment="1" Minimum="1" 
-                                             HorizontalOptions="FillAndExpand" VerticalOptions="Center"/>
-                                    <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}"/>
+                                    <controls:NumericUpDown Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"/>
+                                    <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}" VerticalOptions="Start"/>
                                 </Grid>
                             </Frame>
                         </DataTemplate>
@@ -58,6 +59,7 @@
                 </StackLayout>
             </ScrollView>
 
+            <!--底部-->
             <StackLayout Grid.Row="2" Orientation="Horizontal">
                 <CheckBox Color="{StaticResource MainColor}"/>
                 <Label Text="全选" HorizontalOptions="Start" VerticalOptions="Center"/>
