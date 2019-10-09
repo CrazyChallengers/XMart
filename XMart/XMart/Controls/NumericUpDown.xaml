@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XMart.Controls"
              x:Class="XMart.Controls.NumericUpDown">
 
     <ContentView.Resources>
@@ -22,15 +23,15 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 
-                <Label x:Name="MinusButton" Grid.Column="0" Text="-">
+                <Label x:Name="MinusButton" Grid.Column="0" Text="-" Margin="12,0,0,0">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="MinusTapped" />
                     </Label.GestureRecognizers>
                 </Label>
                 
-                <Label x:Name="ValueText" Grid.Column="1"/>
+                <controls:MyEntry x:Name="ValueText" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
                 
-                <Label x:Name="PlusButton" Grid.Column="2" Text="+">
+                <Label x:Name="PlusButton" Grid.Column="2" Text="+" Margin="0,0,12,0">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="PlusTapped" />
                     </Label.GestureRecognizers>

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XMart.Controls;
 
 namespace XMart.Controls
 {
@@ -16,7 +17,7 @@ namespace XMart.Controls
         public NumericUpDown()
         {
             InitializeComponent();
-            ValueText.SetBinding(Label.TextProperty, new Binding(nameof(Value), BindingMode.TwoWay, source: this));
+            ValueText.SetBinding(MyEntry.TextProperty, new Binding(nameof(Value), BindingMode.TwoWay, source: this));
         }
 
         public static readonly BindableProperty ValueProperty =

@@ -50,7 +50,9 @@
                                     <Picker Grid.Row="1" Grid.Column="1" Title="规格......"/>
                                     <!--<Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>-->
                                     <Label Grid.Row="2" Grid.Column="1" Text="￥7.00" FontSize="Large" TextColor="Red"/>
-                                    <controls:NumericUpDown Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"/>
+                                    <controls:NumericUpDown Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" 
+                                                            x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
+                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                     <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}" VerticalOptions="Start"/>
                                 </Grid>
                             </Frame>
