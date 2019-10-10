@@ -8,54 +8,6 @@
              Icon="Resource/drawable/home.png"
              Title="首页">
 
-    <ContentPage.Resources>
-        <Style x:Key="SearchFrame" TargetType="Frame">
-            <Setter Property="WidthRequest" Value="300"/>
-            <Setter Property="HeightRequest" Value="30"/>
-            <Setter Property="BorderColor" Value="LightGray"/>
-            <Setter Property="BackgroundColor" Value="White"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-        </Style>
-        <Style x:Key="CarouselFrame" TargetType="Frame">
-            <Setter Property="HeightRequest" Value="250"/>
-            <Setter Property="BorderColor" Value="LightGray"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="VerticalOptions" Value="Start"/>
-            <Setter Property="Margin" Value="10,5"/>
-            <Setter Property="IsClippedToBounds" Value="True"/>
-        </Style>
-        <Style x:Key="MenuFrame" TargetType="Frame">
-            <Setter Property="BorderColor" Value="LightGray"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Padding" Value="5"/>
-            <Setter Property="HorizontalOptions" Value="Center"/>
-            <Setter Property="VerticalOptions" Value="Start"/>
-            <Setter Property="Margin" Value="10,5"/>
-        </Style>
-        <Style x:Key="SearchEntry" TargetType="controls:MyEntry">
-            <Setter Property="WidthRequest" Value="250"/>
-            <Setter Property="PlaceholderColor" Value="LightGray"/>
-            <Setter Property="TextColor" Value="White"/>
-            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
-            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="Large"/>
-            <Setter Property="MaxLength" Value="16"/>
-        </Style>
-        <Style x:Key="EarImageButton" TargetType="ImageButton">
-            <Setter Property="WidthRequest" Value="30"/>
-            <Setter Property="HeightRequest" Value="30"/>
-            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
-            <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="Aspect" Value="AspectFit"/>
-        </Style>
-    </ContentPage.Resources>
 
     <ContentPage.Content>
         <Grid x:Name="MainGrid" RowSpacing="0" BackgroundColor="Transparent">
@@ -68,26 +20,26 @@
 
             <!--头部-->
             <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
-                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{DynamicResource EarImageButton}"/>
+                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
 
                 <Frame Style="{DynamicResource SearchFrame}">
-                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{DynamicResource SearchEntry}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
                 </Frame>
 
-                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{DynamicResource EarImageButton}"/>
+                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
             </StackLayout>
 
             <ScrollView Grid.Row="1">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                     <!--轮播图-->
-                    <Frame Style="{DynamicResource CarouselFrame}">
-                        <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselItemsSource}"
+                    <Frame Style="{StaticResource CarouselFrame}">
+                        <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
                                         ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ImageButton Source="{Binding ImgSource}"
-                                         Command="{Binding CarouselCommand}"
-                                         CommandParameter="{Binding ImgUrl}"
+                                    <ImageButton Source="{Binding pic}"
+                                         Command="{Binding CarouselSelectedCommand}"
+                                         CommandParameter="{Binding url}"
                                          BackgroundColor="Transparent" Aspect="AspectFill"/>
                                 </DataTemplate>
                             </cv:CarouselViewControl.ItemTemplate>
@@ -95,7 +47,7 @@
                     </Frame>
 
                     <!--主功能矩阵-->
-                    <Frame Style="{DynamicResource MenuFrame}">
+                    <Frame Style="{StaticResource MenuFrame}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50"/>
@@ -232,7 +184,6 @@
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
                     </ScrollView>
-
 
                 </StackLayout>
             </ScrollView>

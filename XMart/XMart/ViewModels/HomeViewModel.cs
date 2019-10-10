@@ -32,7 +32,19 @@ namespace XMart.ViewModels
             get { return discountList; }
             set { SetProperty(ref discountList, value); }
         }
-        
+
+        //--------------------------------------
+        private List<AdvertiseInfo> advertiseList;   //comment
+
+        public List<AdvertiseInfo> AdvertiseList
+        {
+            get { return advertiseList; }
+            set { SetProperty(ref advertiseList, value); }
+        }
+
+
+        //--------------------------------------
+
         public HomeViewModel()
         {
             Title = "首页";

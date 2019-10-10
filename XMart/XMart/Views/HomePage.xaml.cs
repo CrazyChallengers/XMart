@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.Models;
 using XMart.ViewModels;
+using XMart.Services;
+using XMart.ResponseData;
 
 namespace XMart.Views
 {
@@ -15,24 +17,27 @@ namespace XMart.Views
     public partial class HomePage : ContentPage
     {
         HomeViewModel homeViewModel = new HomeViewModel();
+        RestService _restService = new RestService();
 
         public HomePage()
         {
             InitializeComponent();
-
+            
+            
             homeViewModel.CarouselSelectedCommand = new Command<string>(
                 async (url) =>
                 {
                     WebPage webPage = new WebPage(url);
                     await Navigation.PushModalAsync(webPage);
                 });
-
+            
+            /*
             homeViewModel.CarouselItemsSource = new List<CarouselItem>()
             {
                 new CarouselItem { ImgSource = "http://phone.68fc.cn/indexpic/1.jpg", ImgUrl = "http://phone.68fc.cn/indexpic/1.html", CarouselCommand = homeViewModel.CarouselSelectedCommand },
                 new CarouselItem { ImgSource = "http://phone.68fc.cn/indexpic/2.jpg", ImgUrl = "http://phone.68fc.cn/indexpic/2.html", CarouselCommand = homeViewModel.CarouselSelectedCommand },
                 new CarouselItem { ImgSource = "http://phone.68fc.cn/indexpic/3.jpg", ImgUrl = "http://phone.68fc.cn/indexpic/3.html", CarouselCommand = homeViewModel.CarouselSelectedCommand }
-            };
+            };*/
 
             homeViewModel.DiscountList = new List<string>
             {
@@ -45,6 +50,20 @@ namespace XMart.Views
             };
 
             BindingContext = homeViewModel;
+        }
+
+        private async void InitHomePage()
+        {
+            HomeContentRD homeContentRD = await _restService.GetHomeContent();
+
+            homeViewModel.AdvertiseList = homeContentRD.data.advertiseList;
+
+            Console.WriteLine(homeContentRD);
+        }
+
+        private void MessageButton_Clicked(object sender, EventArgs e)
+        {
+            InitHomePage();
         }
     }
 }

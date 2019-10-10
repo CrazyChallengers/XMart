@@ -46,9 +46,4 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ResponseData\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
 </Project>
