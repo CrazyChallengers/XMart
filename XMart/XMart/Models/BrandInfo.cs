@@ -11,34 +11,34 @@ namespace XMart.Models
         public string bigpic { get; set; }
 
         [JsonProperty("brandStory")]
-        public string brandStory;   //comment
+        public string brandStory { get; set; }   //comment
 
         [JsonProperty("factoryStatus")]
-        public int factoryStatus;   //comment
+        public int factoryStatus { get; set; }   //comment
 
         [JsonProperty("firstLetter")]
-        public string firstLetter;   //comment
+        public string firstLetter { get; set; }   //comment
 
         [JsonProperty("id")]
-        public int id;   //comment
+        public int id { get; set; }   //comment
 
         [JsonProperty("logo")]
-        public string logo;   //comment
+        public string logo { get; set; }   //comment
 
         [JsonProperty("name")]
-        public string name;   //comment
+        public string name { get; set; }   //comment
 
         [JsonProperty("propductCommentCount")]
-        public int propductCommentCount;   //comment
+        public int propductCommentCount { get; set; }   //comment
 
         [JsonProperty("propductCount")]
-        public int propductCount;   //comment
+        public int propductCount { get; set; }   //comment
 
         [JsonProperty("showStatus")]
-        public int showStatus;   //comment
+        public int showStatus { get; set; }   //comment
 
         [JsonProperty("sort")]
-        public int sort;   //comment
-        
+        public int sort { get; set; }   //comment
+
     }
 }

@@ -23,7 +23,6 @@ namespace XMart.Views
         {
             InitializeComponent();
             
-            
             homeViewModel.CarouselSelectedCommand = new Command<string>(
                 async (url) =>
                 {
@@ -31,24 +30,6 @@ namespace XMart.Views
                     await Navigation.PushModalAsync(webPage);
                 });
             
-            /*
-            homeViewModel.CarouselItemsSource = new List<CarouselItem>()
-            {
-                new CarouselItem { ImgSource = "http://phone.68fc.cn/indexpic/1.jpg", ImgUrl = "http://phone.68fc.cn/indexpic/1.html", CarouselCommand = homeViewModel.CarouselSelectedCommand },
-                new CarouselItem { ImgSource = "http://phone.68fc.cn/indexpic/2.jpg", ImgUrl = "http://phone.68fc.cn/indexpic/2.html", CarouselCommand = homeViewModel.CarouselSelectedCommand },
-                new CarouselItem { ImgSource = "http://phone.68fc.cn/indexpic/3.jpg", ImgUrl = "http://phone.68fc.cn/indexpic/3.html", CarouselCommand = homeViewModel.CarouselSelectedCommand }
-            };*/
-
-            homeViewModel.DiscountList = new List<string>
-            {
-                "折扣商品1","折扣商品2","折扣商品3","折扣商品4","折扣商品5","折扣商品6"
-            };
-
-            homeViewModel.FeatureList = new List<string>
-            {
-                "专题1","专题2","专题3","专题4","专题5","专题6"
-            };
-
             BindingContext = homeViewModel;
         }
 
@@ -57,6 +38,8 @@ namespace XMart.Views
             HomeContentRD homeContentRD = await _restService.GetHomeContent();
 
             homeViewModel.AdvertiseList = homeContentRD.data.advertiseList;
+            homeViewModel.HotProductList = homeContentRD.data.hotProductList;
+            homeViewModel.SubjectList = homeContentRD.data.subjectList;
 
             Console.WriteLine(homeContentRD);
         }

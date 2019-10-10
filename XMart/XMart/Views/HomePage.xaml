@@ -136,9 +136,9 @@
                     </Frame>
                     
                     <!--折扣商品列表-->
-                    <Label Text="特价好货" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="热卖好货" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding DiscountList}">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <Frame HeightRequest="180" WidthRequest="120" BorderColor="LightGray" HasShadow="True" 
@@ -150,9 +150,16 @@
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
 
-                                            <Image Grid.Row="0" Source="Resource/drawable/beiyesi.png" Aspect="AspectFill"/>
-                                            <Label Grid.Row="1" Text="{Binding .}" FontSize="Large"/>
-                                            <Label Grid.Row="2" Text="￥7.00" TextColor="Red"/>
+                                            <Image Grid.Row="0" Source="{Binding pic}" Aspect="AspectFill"/>
+                                            <Label Grid.Row="1" Text="{Binding name}" FontSize="Large"/>
+                                            <Label Grid.Row="2" TextColor="Red">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="￥"/>
+                                                        <Span Text="{Binding price}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
@@ -163,21 +170,19 @@
                     <!--专题列表-->
                     <Label Text="精彩专题" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding FeatureList}">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding SubjectList}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame HeightRequest="180" WidthRequest="120" BorderColor="LightGray" HasShadow="True" 
+                                    <Frame HeightRequest="250" WidthRequest="200" BorderColor="LightGray" HasShadow="True" 
                                            CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
                                         <Grid>
                                             <Grid.RowDefinitions>
-                                                <RowDefinition Height="120"/>
-                                                <RowDefinition/>
+                                                <RowDefinition Height="200"/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
 
-                                            <Image Grid.Row="0" Source="Resource/drawable/beiyesi.png" Aspect="AspectFill"/>
-                                            <Label Grid.Row="1" Text="{Binding .}" FontSize="Large"/>
-                                            <Label Grid.Row="2" Text="简介"/>
+                                            <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding pic}" Aspect="AspectFill"/>
+                                            <Label Grid.Row="1" Text="{Binding title}" FontSize="Large"/>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
