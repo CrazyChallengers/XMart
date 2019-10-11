@@ -39,7 +39,9 @@ namespace XMart.Views
 
             homeViewModel.AdvertiseList = homeContentRD.data.advertiseList;
             homeViewModel.HotProductList = homeContentRD.data.hotProductList;
+            homeViewModel.NewProductList = homeContentRD.data.newProductList;
             homeViewModel.SubjectList = homeContentRD.data.subjectList;
+            homeViewModel.BrandList = homeContentRD.data.brandList;
 
             Console.WriteLine(homeContentRD);
         }

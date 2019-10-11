@@ -10,27 +10,15 @@
 
 
     <ContentPage.Content>
-        <Grid x:Name="MainGrid" RowSpacing="0" BackgroundColor="Transparent">
+        <Grid x:Name="MainGrid" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="100"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Row="0" Grid.RowSpan="2" Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Aspect="AspectFit"/>
-
-            <!--头部-->
-            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
-                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
-
-                <Frame Style="{DynamicResource SearchFrame}">
-                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
-                </Frame>
-
-                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
-            </StackLayout>
-
-            <ScrollView Grid.Row="1">
+            <ScrollView Grid.Row="0" Grid.RowSpan="2">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                    <StackLayout HeightRequest="100"/>
                     <!--轮播图-->
                     <Frame Style="{StaticResource CarouselFrame}">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
@@ -134,8 +122,40 @@
 
                         </Grid>
                     </Frame>
-                    
-                    <!--折扣商品列表-->
+
+                    <!--新品上市列表-->
+                    <Label Text="新品上市" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame HeightRequest="180" WidthRequest="120" BorderColor="LightGray" HasShadow="True" 
+                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="120"/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0" Source="{Binding pic}" Aspect="AspectFill"/>
+                                            <Label Grid.Row="1" Text="{Binding name}" FontSize="Large"/>
+                                            <Label Grid.Row="2" TextColor="Red">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="￥"/>
+                                                        <Span Text="{Binding price}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--热卖商品列表-->
                     <Label Text="热卖好货" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}">
@@ -160,6 +180,29 @@
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--正品大牌列表-->
+                    <Label Text="正品大牌" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding BrandList}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame HeightRequest="250" WidthRequest="200" BorderColor="LightGray" HasShadow="True" 
+                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="200"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+
+                                            <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding logo}" Aspect="AspectFill"/>
+                                            <Label Grid.Row="1" Text="{Binding name}" FontSize="Large"/>
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
@@ -192,6 +235,19 @@
 
                 </StackLayout>
             </ScrollView>
+            
+            <Image Grid.Row="0" Grid.RowSpan="2" Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Aspect="AspectFit"/>
+
+            <!--头部-->
+            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
+                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
+
+                <Frame Style="{DynamicResource SearchFrame}">
+                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
+                </Frame>
+
+                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
+            </StackLayout>
 
         </Grid>
     </ContentPage.Content>
