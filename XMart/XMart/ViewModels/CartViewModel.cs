@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using XMart.Models;
 
 namespace XMart.ViewModels
 {
     public class CartViewModel : BaseViewModel
     {
-        private List<string> itemList;   //商品列表
+        private List<CartItemInfo> itemList;   //商品列表
 
-        public List<string> ItemList
+        public List<CartItemInfo> ItemList
         {
             get { return itemList; }
             set { SetProperty(ref itemList, value); }

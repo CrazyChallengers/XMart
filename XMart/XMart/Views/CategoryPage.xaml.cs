@@ -26,8 +26,7 @@ namespace XMart.Views
         {
             MainClassStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
             SubClassStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
-
-
+            
         }
 
         private void MainTGR_Tapped(object sender, EventArgs e)

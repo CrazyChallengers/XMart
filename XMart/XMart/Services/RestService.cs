@@ -19,6 +19,10 @@ namespace XMart.Services
 
         }
         
+        /// <summary>
+        /// 获取首页相关内容信息
+        /// </summary>
+        /// <returns></returns>
         public async Task<HomeContentRD> GetHomeContent()
         {
             string url = rootUrl + "/home/content";
@@ -28,6 +32,21 @@ namespace XMart.Services
             HomeContentRD homeContentRD = JsonConvert.DeserializeObject<HomeContentRD>(responseBody);
 
             return homeContentRD;
+        }
+
+        /// <summary>
+        /// 获取购物车商品列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CartItemListRD> GetCartItemList(string memberId)
+        {
+            string url = rootUrl + "/cart/list/" + memberId;
+
+            string responseBody = await GetStringDataAsync(url);
+
+            CartItemListRD cartItemListRD = JsonConvert.DeserializeObject<CartItemListRD>(responseBody);
+
+            return cartItemListRD;
         }
 
         //------------------------------------------------------------------------------

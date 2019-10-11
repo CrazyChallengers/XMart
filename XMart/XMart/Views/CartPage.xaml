@@ -32,8 +32,9 @@
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5,0" Padding="0" IsClippedToBounds="True">
-                                <Grid>
+                                <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
+                                        <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
@@ -45,12 +46,20 @@
                                         <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="Resource/drawable/beiyesi.png"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding .}" FontSize="Large"/>
-                                    <Picker Grid.Row="1" Grid.Column="1" Title="规格......"/>
+                                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productPic}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="Large"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="Medium"/>
+                                    <Picker Grid.Row="2" Grid.Column="1" Title="规格......"/>
                                     <!--<Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>-->
-                                    <Label Grid.Row="2" Grid.Column="1" Text="￥7.00" FontSize="Large" TextColor="Red"/>
-                                    <controls:NumericUpDown Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" 
+                                    <Label Grid.Row="3" Grid.Column="1" FontSize="Large" TextColor="Red">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="￥"/>
+                                                <Span Text="{Binding price}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
                                                             x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
                                                             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                                     <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}" VerticalOptions="Start"/>
@@ -84,7 +93,7 @@
                 </Label>
 
                 <Button Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" Margin="10,0" BackgroundColor="Crimson" TextColor="White"
-                        HorizontalOptions="End" VerticalOptions="Center"/>
+                        HorizontalOptions="End" VerticalOptions="Center" Clicked="Button_Clicked"/>
 
             </StackLayout>
 

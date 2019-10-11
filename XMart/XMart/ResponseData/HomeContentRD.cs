@@ -7,16 +7,10 @@ using Newtonsoft.Json;
 
 namespace XMart.ResponseData
 {
-    public class HomeContentRD
+    public class HomeContentRD : CommonRD
     {
-        [JsonProperty("code")]
-        public int code { get; set; }
-
         [JsonProperty("data")]
         public HomeContentDataList data { get; set; }
-
-        [JsonProperty("message")]
-        public string message { get; set; }
     }
 
     public class HomeContentDataList

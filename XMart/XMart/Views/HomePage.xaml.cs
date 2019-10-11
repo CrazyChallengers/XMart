@@ -22,7 +22,9 @@ namespace XMart.Views
         public HomePage()
         {
             InitializeComponent();
-            
+
+            InitHomePage();
+
             homeViewModel.CarouselSelectedCommand = new Command<string>(
                 async (url) =>
                 {
@@ -43,12 +45,12 @@ namespace XMart.Views
             homeViewModel.SubjectList = homeContentRD.data.subjectList;
             homeViewModel.BrandList = homeContentRD.data.brandList;
 
-            Console.WriteLine(homeContentRD);
+            //Console.WriteLine(homeContentRD);
         }
 
         private void MessageButton_Clicked(object sender, EventArgs e)
         {
-            InitHomePage();
+            
         }
     }
 }
