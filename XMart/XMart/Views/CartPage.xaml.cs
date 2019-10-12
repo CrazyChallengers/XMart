@@ -15,7 +15,7 @@ namespace XMart.Views
 
 		public CartPage ()
 		{
-			InitializeComponent ();
+            InitializeComponent();
 
             InitCart();
 

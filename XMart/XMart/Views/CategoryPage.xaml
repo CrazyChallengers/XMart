@@ -21,19 +21,17 @@
 
     <ContentPage.Content>
 
-        <Grid>
+        <Grid BackgroundColor="{StaticResource MainColor}" ColumnSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="65"/>
-                <RowDefinition Height="40"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="{StaticResource MainColor}" 
+            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
                          Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="EndAndExpand">
                 <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
 
@@ -44,49 +42,24 @@
                 <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}"/>
             </StackLayout>
 
-            <ScrollView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" BackgroundColor="LightPink" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+            <ScrollView Grid.Row="1" Grid.Column="0" BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
                 <!--一级分类-->
-                <StackLayout x:Name="MainClassStack" BindableLayout.ItemsSource="{Binding MainClassList}" Orientation="Horizontal">
+                <StackLayout x:Name="ParentStack" BindableLayout.ItemsSource="{Binding ParentCategoryList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Label Text="{Binding .}" Style="{DynamicResource LabelStyle}" WidthRequest="100">
+                            <Label Text="{Binding name}" Style="{DynamicResource LabelStyle}" WidthRequest="100">
                                 <Label.Behaviors>
-                                    <util:RadioBehavior x:Name="MainRadio" GroupName="MainStack"/>
+                                    <util:RadioBehavior x:Name="ParentRadio" GroupName="ParentGroup"/>
                                 </Label.Behaviors>
                                 <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference MainRadio}, Path=IsChecked}" Value="True">
-                                        <Setter Property="TextColor" Value="{StaticResource MainColor}" />
-                                        <Setter Property="FontSize" Value="Title" />
-                                        <Setter Property="FontAttributes" Value="Bold" />
-                                    </DataTrigger>
-                                </Label.Triggers>
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer x:Name="MainTGR" NumberOfTapsRequired="1" Tapped="MainTGR_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-            </ScrollView>
-
-            <ScrollView Grid.Row="2" Grid.Column="0" BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
-                <!--二级分类-->
-                <StackLayout x:Name="SubClassStack" BindableLayout.ItemsSource="{Binding SubClassList}" Orientation="Vertical">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding .}" Style="{DynamicResource LabelStyle}" WidthRequest="100">
-                                <Label.Behaviors>
-                                    <util:RadioBehavior x:Name="SubRadio" GroupName="SubStack"/>
-                                </Label.Behaviors>
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference SubRadio}, Path=IsChecked}" Value="True">
+                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ParentRadio}, Path=IsChecked}" Value="True">
                                         <Setter Property="TextColor" Value="{StaticResource MainColor}" />
                                         <Setter Property="FontSize" Value="Title" />
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                     </DataTrigger>
                                 </Label.Triggers>
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer x:Name="SubTGR" NumberOfTapsRequired="1" Tapped="SubTGR_Tapped"/>
+                                    <TapGestureRecognizer x:Name="ParentGR" NumberOfTapsRequired="1" Tapped="ParentGR_Tapped"/>
                                 </Label.GestureRecognizers>
                             </Label>
                         </DataTemplate>
@@ -94,34 +67,20 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView Grid.Row="2" Grid.Column="1" BackgroundColor="LightCyan" Orientation="Vertical">
-                <!--商品列表-->
-                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
+            <ScrollView Grid.Row="1" Grid.Column="1" BackgroundColor="LightCyan" Orientation="Vertical">
+                <!--二级分类-->
+                <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Start">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="100" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5,0" Padding="0" IsClippedToBounds="True">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="2*"/>
-                                        <ColumnDefinition Width="1*"/>
-                                    </Grid.ColumnDefinitions>
-
-                                    <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="Resource/drawable/beiyesi.png"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding .}" FontSize="Large"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="规格" FontSize="Large"/>
-                                    <Label Grid.Row="2" Grid.Column="1" Text="￥7.00" FontSize="Large" TextColor="Red"/>
-                                    <ImageButton Grid.Row="2" Grid.Column="2" Source="Resource/drawable/circle.png" HeightRequest="30" WidthRequest="30"/>
-                                </Grid>
+                            <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
+                                <StackLayout Orientation="Vertical">
+                                    <Image HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
+                                    <Label Text="{Binding name}" FontSize="Large" HorizontalOptions="Center"/>
+                                </StackLayout>
                             </Frame>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
-                </StackLayout>
+                </FlexLayout>
             </ScrollView>
 
         </Grid>

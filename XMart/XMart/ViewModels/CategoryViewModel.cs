@@ -1,50 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using XMart.Models;
 
 namespace XMart.ViewModels
 {
     public class CategoryViewModel : BaseViewModel
     {
-        private List<string> mainClassList;   //一级大类
+        private List<ParentCategoryInfo> parentCategoryList;   //一级目录
 
-        public List<string> MainClassList
+        public List<ParentCategoryInfo> ParentCategoryList
         {
-            get { return mainClassList; }
-            set { SetProperty(ref mainClassList, value); }
+            get { return parentCategoryList; }
+            set { SetProperty(ref parentCategoryList, value); }
         }
 
-        private List<string> subClassList;   //二级小类
+        private List<SubCategoryInfo> subCategoryList;   //二级目录
 
-        public List<string> SubClassList
+        public List<SubCategoryInfo> SubCategoryList
         {
-            get { return subClassList; }
-            set { SetProperty(ref subClassList, value); }
+            get { return subCategoryList; }
+            set { SetProperty(ref subCategoryList, value); }
         }
 
-        private List<string> itemList;   //商品列表
-
-        public List<string> ItemList
-        {
-            get { return itemList; }
-            set { SetProperty(ref itemList, value); }
-        }
-        
         public CategoryViewModel()
         {
-            //Title = ""
-
-            MainClassList = new List<string>
-            {
-                "A","B","C","D","E","F","G","H","I","J"
-            };
-
-            SubClassList = new List<string>();
-
-            for (int i = 0; i < 10; i++)
-            {
-                SubClassList.Add(MainClassList[i] + i);
-            }
+            
 
         }
     }

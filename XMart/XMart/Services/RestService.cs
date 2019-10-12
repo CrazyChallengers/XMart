@@ -12,7 +12,8 @@ namespace XMart.Services
     public class RestService
     {
         HttpClient _client = new HttpClient();
-        string rootUrl = "http://118.24.96.42:8082";    //测试
+        string rootUrl = "http://118.24.96.42:8082";    //旧
+        string rootUrl2 = "http://118.24.96.42:8083";    //新
 
         public RestService()
         {
@@ -47,6 +48,21 @@ namespace XMart.Services
             CartItemListRD cartItemListRD = JsonConvert.DeserializeObject<CartItemListRD>(responseBody);
 
             return cartItemListRD;
+        }
+
+        /// <summary>
+        /// 获取分类列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CategoryRD> GetCategories()
+        {
+            string url = rootUrl2 + "/ProductCategory/getXProductCategory";
+
+            string responseBody = await GetStringDataAsync(url);
+
+            CategoryRD categoryRD = JsonConvert.DeserializeObject<CategoryRD>(responseBody);
+
+            return categoryRD;
         }
 
         //------------------------------------------------------------------------------

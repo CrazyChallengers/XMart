@@ -31,12 +31,12 @@
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5,0" Padding="0" IsClippedToBounds="True">
+                            <Frame HeightRequest="140" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5,0" Padding="0" IsClippedToBounds="True">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>
-                                        <RowDefinition/>
+                                        <RowDefinition Height="40"/>
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
@@ -47,11 +47,11 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Image Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productPic}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="Large"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="Medium"/>
                                     <Picker Grid.Row="2" Grid.Column="1" Title="规格......"/>
                                     <!--<Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>-->
-                                    <Label Grid.Row="3" Grid.Column="1" FontSize="Large" TextColor="Red">
+                                    <Label Grid.Row="3" Grid.Column="1" FontSize="Large" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥"/>
