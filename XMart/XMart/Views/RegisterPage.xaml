@@ -1,12 +1,107 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:XMart.Controls"
              x:Class="XMart.Views.RegisterPage">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="BorderColor" Value="{StaticResource MainColor}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <Style x:Key="EntryStyle" TargetType="controls:MyEntry">
+            <Setter Property="PlaceholderColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="MaxLength" Value="16"/>
+        </Style>
+        <Style x:Key="LabelStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,0"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid x:Name="MainGrid">
+
+            <StackLayout VerticalOptions="FillAndExpand">
+                <ff:CachedImage Source="logo.png" VerticalOptions="EndAndExpand" HeightRequest="128" WidthRequest="128"/>
+
+                <Label Text="XMart原材料智能采购" TextColor="Black" FontSize="Title"
+                   VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="新用户注册" TextColor="Black" FontSize="Title"
+                   VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
+
+                <Grid VerticalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Frame  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                        <controls:MyEntry Placeholder="手机号" Text="{Binding Acccount}" Keyboard="Telephone" Style="{DynamicResource EntryStyle}"/>
+                    </Frame>
+
+                    <StackLayout Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+                        <Frame WidthRequest="140">
+                            <controls:MyEntry Placeholder="验证码"  Text="{Binding UserName}" Keyboard="Numeric" Style="{DynamicResource EntryStyle}"/>
+                        </Frame>
+                        <Button x:Name="ACButton" Text="发送验证码" CornerRadius="20"
+                                WidthRequest="100" HeightRequest="40"
+                                BackgroundColor="{StaticResource MainColor}" FontSize="Medium"
+                                HorizontalOptions="Center" VerticalOptions="Center" 
+                                Clicked="ACButton_Clicked"/>
+                    </StackLayout>
+                    
+                    <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" >
+                        <controls:MyEntry Placeholder="用户名"  Text="{Binding UserName}" Style="{DynamicResource EntryStyle}"/>
+                    </Frame>
+
+                    <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
+                        <controls:MyEntry Placeholder="密码" Text="{Binding Password}" IsPassword="True" Style="{DynamicResource EntryStyle}"/>
+                    </Frame>
+
+                    <Frame Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                        <controls:MyEntry Placeholder="确认密码" Text="{Binding RePassword}" IsPassword="True" Style="{DynamicResource EntryStyle}"/>
+                    </Frame>
+
+                </Grid>
+
+                <Button x:Name="RegisterButton" Text="确定注册" CornerRadius="25"
+                        WidthRequest="250" HeightRequest="40"
+                        BackgroundColor="{StaticResource MainColor}" FontSize="Large"
+                        HorizontalOptions="Center" VerticalOptions="StartAndExpand" 
+                        Clicked="RegisterButton_Clicked"/>
+            </StackLayout>
+
+            <ImageButton x:Name="BackButton" Source="Resource/drawable/back.png" BackgroundColor="LightGray"
+                     HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="StartAndExpand"
+                     HorizontalOptions="StartAndExpand" Margin="40" Clicked="BackButton_Clicked"/>
+
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -29,6 +29,10 @@ namespace XMart.Views
         {
 
         }
-        
+
+        private void RememberPwd_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+
+        }
     }
 }

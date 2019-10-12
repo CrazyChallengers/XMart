@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XMart.Views;
 
 namespace XMart.Views
 {
@@ -13,8 +14,6 @@ namespace XMart.Views
         public MainPage()
         {
             InitializeComponent();
-            
         }
-        
     }
 }

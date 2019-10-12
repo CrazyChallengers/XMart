@@ -3,6 +3,7 @@ using Android.Content.PM;
 using Android.Views;
 using Android.OS;
 using CarouselView.FormsPlugin.Android;
+using FFImageLoading.Forms.Platform;
 
 namespace XMart.Droid
 {
@@ -26,7 +27,7 @@ namespace XMart.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             CarouselViewRenderer.Init();
-            //CachedImageRenderer.Init(true);
+            CachedImageRenderer.Init(true);
             
             LoadApplication(new App());
         }

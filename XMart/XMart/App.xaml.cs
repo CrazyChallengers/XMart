@@ -16,7 +16,7 @@ namespace XMart
             HotReloader.Current.Run(this);
             #endif
             */
-            MainPage = new MainPage();
+            MainPage = new LoginPage();
         }
 
         protected override void OnStart()

@@ -8,11 +8,11 @@
 
     <ContentPage.Resources>
         <Style x:Name="FrameStyle" TargetType="Frame">
-            <Setter Property="WidthRequest" Value="300"/>
-            <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="BorderColor" Value="LightGray"/>
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="BorderColor" Value="{StaticResource MainColor}"/>
             <Setter Property="BackgroundColor" Value="Transparent"/>
-            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="Padding" Value="0"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -28,9 +28,9 @@
             <Setter Property="MaxLength" Value="16"/>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="WidthRequest" Value="300"/>
-            <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="CornerRadius" Value="25"/>
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
             <Setter Property="FontSize" Value="Large"/>
@@ -44,12 +44,17 @@
 
             <StackLayout VerticalOptions="EndAndExpand">
                 <Frame>
-                    <controls:MyEntry x:Name="account" Placeholder="账号" Text="{Binding Account}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="手机号" Text="{Binding Account}"/>
                 </Frame>
 
                 <Frame>
                     <controls:MyEntry x:Name="password" Placeholder="密码" Text="{Binding Password}" IsPassword="True"/>
                 </Frame>
+
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <CheckBox x:Name="RememberPwd" IsChecked="{Binding IsRememberPwd}" CheckedChanged="RememberPwd_CheckedChanged" Color="{StaticResource MainColor}"/>
+                    <Label Text="记住密码" VerticalOptions="CenterAndExpand" TextColor="Black"/>
+                </StackLayout>
 
                 <Button x:Name="LoginButton" Text="登录" BackgroundColor="{StaticResource MainColor}" TextColor="White"
                         Clicked="LoginButton_Clicked"/>

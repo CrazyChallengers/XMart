@@ -16,5 +16,20 @@ namespace XMart.Views
 		{
 			InitializeComponent ();
 		}
-	}
+
+        private void ACButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RegisterButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BackButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
