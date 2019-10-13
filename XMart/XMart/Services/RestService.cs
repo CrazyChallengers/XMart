@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XMart.ResponseData;
 using Newtonsoft.Json;
+using XMart.Models;
 
 namespace XMart.Services
 {
@@ -38,6 +39,7 @@ namespace XMart.Services
         /// <summary>
         /// 获取购物车商品列表
         /// </summary>
+        /// <param name="memberId">用户Id</param>
         /// <returns></returns>
         public async Task<CartItemListRD> GetCartItemList(string memberId)
         {
@@ -63,6 +65,77 @@ namespace XMart.Services
             CategoryRD categoryRD = JsonConvert.DeserializeObject<CategoryRD>(responseBody);
 
             return categoryRD;
+        }
+
+        /// <summary>
+        /// 发送验证码
+        /// </summary>
+        /// <param name="tel">手机号</param>
+        /// <returns></returns>
+        public async Task<SimpleRD> SendAuthCode(string tel)
+        {
+            string url = rootUrl2 + "/User/getAuthCode?tel=" + tel;
+
+            string responseBody = await GetStringDataAsync(url);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);
+
+            return simpleRD;
+        }
+
+        /// <summary>
+        /// 注册
+        /// </summary>
+        /// <param name="registerPara"></param>
+        /// <returns></returns>
+        public async Task<SimpleRD> Register(RegisterPara registerPara)
+        {
+            string url = rootUrl2 + "/User/register";
+
+            string httpContent = JsonConvert.SerializeObject(registerPara);
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);
+
+            return simpleRD;
+        }
+
+        /// <summary>
+        /// 忘记密码、重置密码
+        /// </summary>
+        /// <param name="resetPwdPara"></param>
+        /// <returns></returns>
+        public async Task<SimpleRD> ResetPwd(ResetPwdPara resetPwdPara)
+        {
+            string url = rootUrl2 + "/User/resetPwd";
+
+            string httpContent = JsonConvert.SerializeObject(resetPwdPara);
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);
+
+            return simpleRD;
+        }
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="tel">手机号</param>
+        /// <param name="pwd">密码</param>
+        /// <returns></returns>
+        public async Task<SimpleRD> Login(string tel, string pwd)
+        {
+            string url = rootUrl2 + "/User/login";
+
+            string httpContent = "{\"tel\":\"" + tel + "\",\"pwd\":\"" + pwd + "\"}";
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);
+
+            return simpleRD;
         }
 
         //------------------------------------------------------------------------------

@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:XMart.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.ResetPwdPage">
+
+    <ContentPage.Resources>
+        <Style TargetType="Frame">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="BorderColor" Value="{StaticResource MainColor}"/>
+            <Setter Property="BackgroundColor" Value="Transparent"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="IsClippedToBounds" Value="True"/>
+        </Style>
+        <Style x:Key="EntryStyle" TargetType="controls:MyEntry">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="PlaceholderColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+            <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="MaxLength" Value="16"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="WidthRequest" Value="250"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="CornerRadius" Value="20"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
+        </Style>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout>
+            <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="{DynamicResource MainColor}"
+                     HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="Start"
+                     HorizontalOptions="StartAndExpand" Margin="20,40" Clicked="BackButton_Clicked"/>
+
+            <Label Text="密码忘了？" HorizontalOptions="Start" VerticalOptions="Start" FontSize="48" Margin="20,0"/>
+            <Label Text="你可真是一个小机灵鬼儿" HorizontalOptions="Start" VerticalOptions="Start" FontSize="36" Margin="20,0"/>
+
+            <Grid VerticalOptions="CenterAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Frame  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                    <controls:MyEntry Placeholder="手机号" Text="{Binding Tel}" Keyboard="Telephone" Style="{DynamicResource EntryStyle}"/>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+                    <controls:MyEntry Placeholder="新密码" Text="{Binding Pwd}" IsPassword="True" MaxLength="16" Style="{DynamicResource EntryStyle}"/>
+                </Frame>
+
+                <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
+                    <controls:MyEntry Placeholder="确认密码" Text="{Binding SecondPwd}" IsPassword="True" MaxLength="16" Style="{DynamicResource EntryStyle}"/>
+                </Frame>
+
+                <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+                    <Frame WidthRequest="140">
+                        <controls:MyEntry Placeholder="验证码"  Text="{Binding AuthCode}" Keyboard="Numeric" MaxLength="6" Style="{DynamicResource EntryStyle}"/>
+                    </Frame>
+                    <Button x:Name="ACButton" Text="{Binding AuthCodeButtonText}" IsEnabled="{Binding IsEnable}" BackgroundColor="{Binding ButtonColor}" 
+                            WidthRequest="100" FontSize="Medium" Clicked="ACButton_Clicked"/>
+                </StackLayout>
+            </Grid>
+
+            <Button x:Name="ResetButton" Text="确定重置" VerticalOptions="StartAndExpand" Clicked="ResetButton_Clicked"/>
+
+            <ff:CachedImage Source="xmart_logo.png" HorizontalOptions="CenterAndExpand" Margin="0,0,0,20" HeightRequest="40"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

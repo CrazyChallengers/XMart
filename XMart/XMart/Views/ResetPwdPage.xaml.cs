@@ -1,32 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using Plugin.Toast;
+using Plugin.Toast.Abstractions;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XMart.ResponseData;
 using XMart.ViewModels;
 using XMart.Models;
-using XMart.ResponseData;
 using XMart.Services;
 using XMart.Util;
-using Plugin.Toast;
-using Plugin.Toast.Abstractions;
 
 namespace XMart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class RegisterPage : ContentPage
+    public partial class ResetPwdPage : ContentPage
     {
         RestService _restService = new RestService();
-        RegisterViewModel registerViewModel = new RegisterViewModel();
+        ResetPwdViewModel resetPwdViewModel = new ResetPwdViewModel();
 
-        public RegisterPage()
+        public ResetPwdPage()
         {
             InitializeComponent();
 
-            BindingContext = registerViewModel;
+            BindingContext = resetPwdViewModel;
         }
 
         /// <summary>
@@ -38,8 +33,8 @@ namespace XMart.Views
         {
             OnACButtonClicked();
 
-            registerViewModel.myTimer =  new MyTimer { EndDate = DateTime.Now.Add(new TimeSpan(900000000)) };
-            registerViewModel.LoadAsync();
+            resetPwdViewModel.myTimer = new MyTimer { EndDate = DateTime.Now.Add(new TimeSpan(900000000)) };
+            resetPwdViewModel.LoadAsync();
         }
 
         /// <summary>
@@ -47,13 +42,13 @@ namespace XMart.Views
         /// </summary>
         private async void OnACButtonClicked()
         {
-            if (string.IsNullOrWhiteSpace(registerViewModel.Tel) || !Tools.IsPhoneNumber(registerViewModel.Tel))
+            if (string.IsNullOrWhiteSpace(resetPwdViewModel.Tel) || !Tools.IsPhoneNumber(resetPwdViewModel.Tel))
             {
                 CrossToastPopUp.Current.ShowToastWarning("请检查手机号！", ToastLength.Long);
                 return;
             }
 
-            SimpleRD simpleRD = await _restService.SendAuthCode(registerViewModel.Tel);
+            SimpleRD simpleRD = await _restService.SendAuthCode(resetPwdViewModel.Tel);
 
             if (simpleRD.code == 200)
             {
@@ -66,68 +61,48 @@ namespace XMart.Views
         }
 
         /// <summary>
-        /// 注册按钮事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RegisterButton_Clicked(object sender, EventArgs e)
-        {
-            if (CheckInput())
-            {
-                OnRegister();
-            }
-        }
-
-        /// <summary>
         /// 检查输入
         /// </summary>
         /// <returns></returns>
         private bool CheckInput()
         {
-            if (string.IsNullOrWhiteSpace(registerViewModel.Tel))
+            if (string.IsNullOrWhiteSpace(resetPwdViewModel.Tel))
             {
                 CrossToastPopUp.Current.ShowToastWarning("手机号不能为空，请输入！", ToastLength.Long);
                 return false;
             }
 
-            if (!Tools.IsPhoneNumber(registerViewModel.Tel))
+            if (!Tools.IsPhoneNumber(resetPwdViewModel.Tel))
             {
                 CrossToastPopUp.Current.ShowToastWarning("手机号格式错误，请重新输入！", ToastLength.Long);
                 return false;
             }
 
-
-            if (string.IsNullOrWhiteSpace(registerViewModel.UserName))
-            {
-                CrossToastPopUp.Current.ShowToastWarning("用户名不能为空，请输入！", ToastLength.Long);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(registerViewModel.Pwd))
+            if (string.IsNullOrWhiteSpace(resetPwdViewModel.Pwd))
             {
                 CrossToastPopUp.Current.ShowToastWarning("密码不能为空，请输入！", ToastLength.Long);
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(registerViewModel.SecondPwd))
+            if (string.IsNullOrWhiteSpace(resetPwdViewModel.SecondPwd))
             {
                 CrossToastPopUp.Current.ShowToastWarning("确认密码不能为空，请输入！", ToastLength.Long);
                 return false;
             }
 
-            if (registerViewModel.Pwd != registerViewModel.SecondPwd)
+            if (resetPwdViewModel.Pwd != resetPwdViewModel.SecondPwd)
             {
                 CrossToastPopUp.Current.ShowToastWarning("两次输入密码不一致，请检查！", ToastLength.Long);
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(registerViewModel.AuthCode))
+            if (string.IsNullOrWhiteSpace(resetPwdViewModel.AuthCode))
             {
                 CrossToastPopUp.Current.ShowToastWarning("验证码不能为空，请输入！", ToastLength.Long);
                 return false;
             }
 
-            if (registerViewModel.AuthCode.Length < 6)
+            if (resetPwdViewModel.AuthCode.Length < 6)
             {
                 CrossToastPopUp.Current.ShowToastWarning("验证码长度为6位，请检查！", ToastLength.Long);
                 return false;
@@ -137,19 +112,18 @@ namespace XMart.Views
         }
 
         /// <summary>
-        /// 注册
+        /// 重置
         /// </summary>
-        private async void OnRegister()
+        private async void OnReset()
         {
-            RegisterPara registerPara = new RegisterPara
+            ResetPwdPara resetPwdPara = new ResetPwdPara
             {
-                authCode = registerViewModel.AuthCode,
-                tel = registerViewModel.Tel,
-                pwd = registerViewModel.Pwd,
-                username = registerViewModel.UserName
+                authCode = resetPwdViewModel.AuthCode,
+                tel = resetPwdViewModel.Tel,
+                newPwd = resetPwdViewModel.Pwd
             };
 
-            SimpleRD simpleRD = await _restService.Register(registerPara);
+            SimpleRD simpleRD = await _restService.ResetPwd(resetPwdPara);
 
             if (simpleRD.code == 200)
             {
@@ -171,5 +145,17 @@ namespace XMart.Views
             Navigation.PopModalAsync();
         }
 
+        /// <summary>
+        /// 重置按钮事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ResetButton_Clicked(object sender, EventArgs e)
+        {
+            if (CheckInput())
+            {
+                OnReset();
+            }
+        }
     }
 }
