@@ -10,7 +10,6 @@ namespace XMart.ViewModels
     {
         public Command CarouselSelectedCommand { set; get; }
         
-
         //--------------------------------------
         private List<AdvertiseInfo> advertiseList;   //广告
 

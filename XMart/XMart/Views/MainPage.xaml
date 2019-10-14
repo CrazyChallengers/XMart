@@ -5,7 +5,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.BarItemColor="LightGray"
             android:TabbedPage.BarSelectedItemColor="{StaticResource MainColor}"
-            android:TabbedPage.IsSwipePagingEnabled="False"
+            android:TabbedPage.IsSwipePagingEnabled="True"
             xmlns:local="clr-namespace:XMart"
             xmlns:views="clr-namespace:XMart.Views"
             x:Class="XMart.Views.MainPage">

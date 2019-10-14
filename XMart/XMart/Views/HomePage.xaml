@@ -22,13 +22,16 @@
                     <!--轮播图-->
                     <Frame Style="{StaticResource CarouselFrame}">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
-                                        ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
+                                                ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ImageButton Source="{Binding pic}"
-                                         Command="{Binding CarouselSelectedCommand}"
-                                         CommandParameter="{Binding url}"
-                                         BackgroundColor="Transparent" Aspect="AspectFill"/>
+                                    <ff:CachedImage Source="{Binding pic}" BackgroundColor="Transparent" Aspect="AspectFill">
+                                        <ff:CachedImage.GestureRecognizers>
+                                            <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1"
+                                                                  Command="{Binding CarouselSelectedCommand}"
+                                                                  CommandParameter="{Binding url}"/>
+                                        </ff:CachedImage.GestureRecognizers>
+                                    </ff:CachedImage>
                                 </DataTemplate>
                             </cv:CarouselViewControl.ItemTemplate>
                         </cv:CarouselViewControl>
@@ -124,22 +127,17 @@
                     </Frame>
 
                     <!--新品上市列表-->
-                    <Label Text="新品上市" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="新品上市" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame HeightRequest="180" WidthRequest="120" BorderColor="LightGray" HasShadow="True" 
-                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="120"/>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-
-                                            <Image Grid.Row="0" Source="{Binding pic}" Aspect="AspectFill"/>
-                                            <Label Grid.Row="1" Text="{Binding name}" FontSize="Large"/>
+                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                        <Frame BorderColor="LightGray" HasShadow="True" 
+                                               CornerRadius="5" Padding="0" IsClippedToBounds="True">
+                                            <ff:CachedImage Grid.Row="0" Source="{Binding pic}" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Label Grid.Row="1" Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
                                             <Label Grid.Row="2" TextColor="Red">
                                                 <Label.FormattedText>
                                                     <FormattedString>
@@ -148,86 +146,67 @@
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
-                                        </Grid>
-                                    </Frame>
+                                    </StackLayout>
+                                    
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
                     </ScrollView>
 
                     <!--热卖商品列表-->
-                    <Label Text="热卖好货" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="热卖好货" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame HeightRequest="180" WidthRequest="120" BorderColor="LightGray" HasShadow="True" 
-                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="120"/>
-                                                <RowDefinition/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-
-                                            <Image Grid.Row="0" Source="{Binding pic}" Aspect="AspectFill"/>
-                                            <Label Grid.Row="1" Text="{Binding name}" FontSize="Large"/>
-                                            <Label Grid.Row="2" TextColor="Red">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="￥"/>
-                                                        <Span Text="{Binding price}"/>
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
-                                        </Grid>
-                                    </Frame>
+                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                        <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" 
+                                               CornerRadius="5" Padding="0" IsClippedToBounds="True">
+                                            <ff:CachedImage Grid.Row="0" Source="{Binding pic}" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Label Grid.Row="1" Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label Grid.Row="2" TextColor="Red">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥"/>
+                                                    <Span Text="{Binding price}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
                     </ScrollView>
 
                     <!--正品大牌列表-->
-                    <Label Text="正品大牌" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="正品大牌" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding BrandList}">
+                        <FlexLayout HeightRequest="220" Wrap="Wrap" JustifyContent="Center" AlignContent="Start" BindableLayout.ItemsSource="{Binding BrandList}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame HeightRequest="250" WidthRequest="200" BorderColor="LightGray" HasShadow="True" 
-                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="200"/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-
-                                            <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding logo}" Aspect="AspectFill"/>
-                                            <Label Grid.Row="1" Text="{Binding name}" FontSize="Large"/>
-                                        </Grid>
+                                    <Frame HeightRequest="100" BorderColor="LightGray" HasShadow="True" 
+                                           CornerRadius="5" Padding="0" Margin="5" IsClippedToBounds="True">
+                                        <ff:CachedImage Source="{Binding logo}" Aspect="AspectFill"/>
                                     </Frame>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
-                        </StackLayout>
+                        </FlexLayout>
                     </ScrollView>
 
                     <!--专题列表-->
-                    <Label Text="精彩专题" FontSize="Title" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="精彩专题" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding SubjectList}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Frame HeightRequest="250" WidthRequest="200" BorderColor="LightGray" HasShadow="True" 
-                                           CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
-                                        <Grid>
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition Height="200"/>
-                                                <RowDefinition/>
-                                            </Grid.RowDefinitions>
-
-                                            <Image Grid.Row="0" Grid.RowSpan="2" Source="{Binding pic}" Aspect="AspectFill"/>
-                                            <Label Grid.Row="1" Text="{Binding title}" FontSize="Large"/>
-                                        </Grid>
-                                    </Frame>
+                                    <StackLayout WidthRequest="250" Orientation="Vertical" Margin="5">
+                                        <Frame BorderColor="LightGray" HasShadow="True" CornerRadius="5" Padding="0" IsClippedToBounds="True">
+                                            <ff:CachedImage Source="{Binding pic}" Aspect="AspectFill"/>
+                                        </Frame>
+                                        <Label Text="{Binding title}" FontSize="Large" TextColor="Black"/>
+                                    </StackLayout>
+                                    
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>

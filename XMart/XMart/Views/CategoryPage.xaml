@@ -5,6 +5,7 @@
              x:Class="XMart.Views.CategoryPage"
              xmlns:util="clr-namespace:XMart.Util"
              xmlns:controls="clr-namespace:XMart.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Icon="Resource/drawable/category.png"
              Title="分类">
     
@@ -67,14 +68,14 @@
                 </StackLayout>
             </ScrollView>
 
-            <ScrollView Grid.Row="1" Grid.Column="1" BackgroundColor="LightCyan" Orientation="Vertical">
+            <ScrollView Grid.Row="1" Grid.Column="1" BackgroundColor="WhiteSmoke" Orientation="Vertical">
                 <!--二级分类-->
                 <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Start">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
                                 <StackLayout Orientation="Vertical">
-                                    <Image HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
+                                    <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
                                     <Label Text="{Binding name}" FontSize="Large" HorizontalOptions="Center"/>
                                 </StackLayout>
                             </Frame>
