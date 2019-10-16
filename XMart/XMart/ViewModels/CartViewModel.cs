@@ -31,10 +31,29 @@ namespace XMart.ViewModels
             set { SetProperty(ref itemNumber, value); }
         }
 
+        private bool isAllChecked;   //是否全选
+
+        public bool IsAllChecked
+        {
+            get { return isAllChecked; }
+            set { SetProperty(ref isAllChecked, value); }
+        }
+
+        private int checkedNumber;   //选择数量
+
+        public int CheckedNumber
+        {
+            get { return checkedNumber; }
+            set { SetProperty(ref checkedNumber, value); }
+        }
+
 
         public CartViewModel()
         {
             Title = "购物车";
+
+            IsAllChecked = false;
+            CheckedNumber = 0;
         }
     }
 }

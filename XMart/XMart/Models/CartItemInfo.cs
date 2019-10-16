@@ -70,5 +70,6 @@ namespace XMart.Models
         [JsonProperty("sp3")]
         public string sp3 { get; set; }    //comment
 
+        public bool IsChecked { get; set; }
     }
 }

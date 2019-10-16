@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace XMart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OrderPage : ContentPage
+    public partial class OrderDetailPage : ContentPage
     {
-        public OrderPage()
+        public OrderDetailPage()
         {
             InitializeComponent();
         }

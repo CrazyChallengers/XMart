@@ -62,8 +62,8 @@
                                     </Label>
                                     <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
                                                             x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
-                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                                    <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}" VerticalOptions="Start"/>
+                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding quantity}"/>
+                                    <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}" VerticalOptions="Start" IsChecked="{Binding IsChecked,Mode=TwoWay}" CheckedChanged="CheckBox_CheckedChanged"/>
                                 </Grid>
                             </Frame>
                         </DataTemplate>
@@ -73,13 +73,13 @@
 
             <!--底部-->
             <StackLayout Grid.Row="2" Orientation="Horizontal">
-                <CheckBox Color="{StaticResource MainColor}"/>
-                <Label Text="全选" HorizontalOptions="Start" VerticalOptions="Center"/>
+                <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>
+                <Label Text="全选  合计：" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="合计:￥"/>
-                            <Span Text="{Binding TotalSelectedPrice}"/>
+                            <Span Text="￥" TextColor="Red"/>
+                            <Span Text="{Binding TotalSelectedPrice}" TextColor="Red" FontSize="Title" FontAttributes="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -88,13 +88,13 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="已选:"/>
-                            <Span Text="{Binding SelectedNumber}"/>
+                            <Span Text="{Binding CheckedNumber}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <Button Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" Margin="10,0" BackgroundColor="Crimson" TextColor="White"
-                        HorizontalOptions="End" VerticalOptions="Center" Clicked="Button_Clicked"/>
+                <Button x:Name="OrderButton" Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" Margin="10,0" BackgroundColor="Crimson" TextColor="White"
+                        HorizontalOptions="End" VerticalOptions="Center" Clicked="OrderButton_Clicked"/>
 
             </StackLayout>
 
