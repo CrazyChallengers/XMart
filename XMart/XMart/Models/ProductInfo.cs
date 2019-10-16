@@ -132,6 +132,6 @@ namespace XMart.Models
 
         [JsonProperty("weight")]
         public double weight { get; set; }   //comment
-        
+
     }
 }

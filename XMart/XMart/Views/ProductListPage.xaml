@@ -7,6 +7,19 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="XMart.Views.ProductListPage">
+
+    <ContentPage.Resources>
+        <Style x:Key="ButtonStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="100"/>
+            <Setter Property="HeightRequest" Value="30"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -16,7 +29,7 @@
             </Grid.RowDefinitions>
 
             <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                <ImageButton x:Name="BackButton" Source="back.png" Clicked="BackButton_Clicked" Style="{StaticResource EarImageButton}" CornerRadius="15" BackgroundColor="{StaticResource MainColor}"/>
+                <ImageButton x:Name="BackButton" Source="back_gray.png" Clicked="BackButton_Clicked" Style="{StaticResource EarImageButton}"/>
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300" BackgroundColor="WhiteSmoke">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
                 </Frame>
@@ -24,17 +37,17 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1" Orientation="Horizontal">
-                <Button Text="物流" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Button Text="新品" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Button Text="品牌" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
-                <Button Text="分类" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button Text="物流" Style="{DynamicResource ButtonStyle}"/>
+                <Button Text="新品" Style="{DynamicResource ButtonStyle}"/>
+                <Button Text="品牌" Style="{DynamicResource ButtonStyle}"/>
+                <Button Text="分类" Style="{DynamicResource ButtonStyle}"/>
             </StackLayout>
 
             <ScrollView Grid.Row="2" Orientation="Vertical">
-                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
+                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ProductList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}">
+                            <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -43,13 +56,13 @@
                                         <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="140"/>
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productPic}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding productSubTitle}" FontSize="Medium"/>
+                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding pic}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding name}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding subTitle}" FontSize="Medium"/>
                                     <Label Grid.Row="2" Grid.Column="1" FontSize="Large" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
@@ -59,10 +72,14 @@
                                         </Label.FormattedText>
                                     </Label>
                                     <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                                        <Label Text="1.3万+条评价" FontSize="Small"/>
-                                        <Label Text="98%好评" FontSize="Small"/>
+                                        <Label Text="1.3万+条评价" FontSize="Small" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Label Text="98%好评" FontSize="Small" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     </StackLayout>
                                 </Grid>
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="ItemFrame" NumberOfTapsRequired="1" Tapped="ItemFrame_Tapped"/>
+                                </Frame.GestureRecognizers>
                             </Frame>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>

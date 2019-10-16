@@ -98,19 +98,19 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Row="0" Grid.Column="0" Source="Resource/drawable/circle.png" Style="{DynamicResource CommonImage}"/>
+                        <Image Grid.Row="0" Grid.Column="0" Source="order_red.png" Style="{DynamicResource CommonImage}"/>
                         <Label Grid.Row="1" Grid.Column="0" Text="我的订单" Style="{DynamicResource CommonLabel}"/>
 
-                        <Image Grid.Row="0" Grid.Column="1" Source="Resource/drawable/circle.png" Style="{DynamicResource CommonImage}"/>
+                        <Image Grid.Row="0" Grid.Column="1" Source="pay.png" Style="{DynamicResource CommonImage}"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="待付款" Style="{DynamicResource CommonLabel}"/>
 
-                        <Image Grid.Row="0" Grid.Column="2" Source="Resource/drawable/circle.png" Style="{DynamicResource CommonImage}"/>
+                        <Image Grid.Row="0" Grid.Column="2" Source="box.png" Style="{DynamicResource CommonImage}"/>
                         <Label Grid.Row="1" Grid.Column="2" Text="待收货" Style="{DynamicResource CommonLabel}"/>
 
-                        <Image Grid.Row="0" Grid.Column="3" Source="Resource/drawable/circle.png" Style="{DynamicResource CommonImage}"/>
+                        <Image Grid.Row="0" Grid.Column="3" Source="comment.png" Style="{DynamicResource CommonImage}"/>
                         <Label Grid.Row="1" Grid.Column="3" Text="待评价" Style="{DynamicResource CommonLabel}"/>
 
-                        <Image Grid.Row="0" Grid.Column="4" Source="Resource/drawable/circle.png" Style="{DynamicResource CommonImage}"/>
+                        <Image Grid.Row="0" Grid.Column="4" Source="service2.png" Style="{DynamicResource CommonImage}"/>
                         <Label Grid.Row="1" Grid.Column="4" Text="售后服务" Style="{DynamicResource CommonLabel}"/>
 
                     </Grid>

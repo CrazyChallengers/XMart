@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.ProductDetailPage">
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="0">
+                <StackLayout>
+                    <!--
+                <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
+                                    ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
+                    <cv:CarouselViewControl.ItemTemplate>
+                        <DataTemplate>
+                            <ff:CachedImage Source="{Binding pic}" BackgroundColor="Transparent" Aspect="AspectFill">
+                                <ff:CachedImage.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1" Tapped="CarouselItem_Tapped"/>
+                                </ff:CachedImage.GestureRecognizers>
+                            </ff:CachedImage>
+                        </DataTemplate>
+                    </cv:CarouselViewControl.ItemTemplate>
+                </cv:CarouselViewControl>-->
+                    <BoxView BackgroundColor="LightPink" HeightRequest="300"/>
+
+                    <Grid HeightRequest="60" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition Width="60"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="￥" FontSize="Large"/>
+                                    <Span Text="400" FontSize="Title"/>
+                                    <Span Text="." FontSize="Large"/>
+                                    <Span Text="00" FontSize="Large"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="降价通知" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                        <ImageButton Grid.Row="0" Grid.Column="2" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                        <Label Grid.Row="1" Grid.Column="2" Text="1.1万" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    </Grid>
+
+                    <Label VerticalOptions="Center" VerticalTextAlignment="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="热卖" BackgroundColor="Red" TextColor="White" FontSize="Small"/>
+                                <Span Text="{Binding product.name}" TextColor="Black" FontAttributes="Bold" FontSize="Large"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Text="{Binding product.subTitle}"
+                       FontSize="Medium"/>
+
+                    <BoxView HeightRequest="600" BackgroundColor="LightCyan"/>
+
+                </StackLayout>
+            </ScrollView>
+
+            <!--底部栏-->
+            <Grid Grid.Row="1" RowSpacing="0" ColumnSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <ImageButton Grid.Row="0" Grid.Column="0" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                <Label Grid.Row="1" Grid.Column="0" Text="联系客服" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="购物车" FontSize="Small" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="AddToCartBtn" Text="加入购物车" HeightRequest="40" CornerRadius="20" Margin="5,0" BackgroundColor="Crimson" TextColor="White"
+                        VerticalOptions="Center" Clicked="AddToCartBtn_Clicked"/>
+
+                <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="立即购买" HeightRequest="40" CornerRadius="20" Margin="5,0" BackgroundColor="{StaticResource MainColor}" TextColor="White"
+                        VerticalOptions="Center" Clicked="BuyButton_Clicked"/>
+            </Grid>
+
+            <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Gray"
+                     HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="StartAndExpand"
+                     HorizontalOptions="StartAndExpand" Margin="20,40"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
