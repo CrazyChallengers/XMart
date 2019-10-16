@@ -32,7 +32,7 @@
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="140" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5,0" Padding="0" IsClippedToBounds="True">
+                            <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>

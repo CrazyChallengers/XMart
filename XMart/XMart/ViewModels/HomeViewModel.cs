@@ -8,9 +8,6 @@ namespace XMart.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
-        public Command CarouselSelectedCommand { set; get; }
-        
-        //--------------------------------------
         private List<AdvertiseInfo> advertiseList;   //广告
 
         public List<AdvertiseInfo> AdvertiseList
@@ -51,12 +48,9 @@ namespace XMart.ViewModels
             set { SetProperty(ref subjectList, value); }
         }
         
-        //--------------------------------------
-
         public HomeViewModel()
         {
             Title = "首页";
-            
         }
     }
 }

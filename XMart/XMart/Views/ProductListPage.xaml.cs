@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using XMart.Models;
+using XMart.ViewModels;
+using XMart.Services;
+using XMart.ResponseData;
+
+namespace XMart.Views
+{
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ProductListPage : ContentPage
+    {
+        public ProductListPage(SubCategoryInfo subCategoryInfo)
+        {
+            InitializeComponent();
+        }
+
+        private void BackButton_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PopModalAsync();
+        }
+    }
+}

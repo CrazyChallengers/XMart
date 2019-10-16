@@ -8,33 +8,15 @@
             <Color x:Key="MainColor">#FFCC00</Color>
             
             <!--style-->
-            <Style x:Key="SearchFrame" TargetType="Frame">
-                <Setter Property="WidthRequest" Value="300"/>
-                <Setter Property="HeightRequest" Value="30"/>
-                <Setter Property="BorderColor" Value="LightGray"/>
+            <Style x:Key="BaseFrame" TargetType="Frame">
+                <Setter Property="BorderColor" Value="Transparent"/>
+                <Setter Property="HasShadow" Value="False"/>
                 <Setter Property="BackgroundColor" Value="White"/>
                 <Setter Property="CornerRadius" Value="15"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="VerticalOptions" Value="Center"/>
-            </Style>
-            <Style x:Key="CarouselFrame" TargetType="Frame">
-                <Setter Property="HeightRequest" Value="250"/>
-                <Setter Property="BorderColor" Value="LightGray"/>
-                <Setter Property="CornerRadius" Value="15"/>
-                <Setter Property="Padding" Value="0"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="VerticalOptions" Value="Start"/>
-                <Setter Property="Margin" Value="10,5"/>
                 <Setter Property="IsClippedToBounds" Value="True"/>
-            </Style>
-            <Style x:Key="MenuFrame" TargetType="Frame">
-                <Setter Property="BorderColor" Value="LightGray"/>
-                <Setter Property="CornerRadius" Value="15"/>
-                <Setter Property="Padding" Value="5"/>
-                <Setter Property="HorizontalOptions" Value="Center"/>
-                <Setter Property="VerticalOptions" Value="Start"/>
-                <Setter Property="Margin" Value="10,5"/>
             </Style>
             <Style x:Key="SearchEntry" TargetType="controls:MyEntry">
                 <Setter Property="WidthRequest" Value="250"/>

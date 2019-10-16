@@ -8,28 +8,29 @@
              Icon="Resource/drawable/home.png"
              Title="首页">
 
+    <ContentPage.Resources>
+        <Style x:Key="SectionTitle" TargetType="Label">
+            <Setter Property="FontSize" Value="Title"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="5,0"/>
+        </Style>
+    </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid x:Name="MainGrid" RowSpacing="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="100"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-
-            <ScrollView Grid.Row="0" Grid.RowSpan="2">
+        <Grid x:Name="MainGrid">
+            <ScrollView>
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                    <StackLayout HeightRequest="100"/>
+                    <StackLayout HeightRequest="80"/>
                     <!--轮播图-->
-                    <Frame Style="{StaticResource CarouselFrame}">
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="250" Margin="10,0">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
                                 <DataTemplate>
                                     <ff:CachedImage Source="{Binding pic}" BackgroundColor="Transparent" Aspect="AspectFill">
                                         <ff:CachedImage.GestureRecognizers>
-                                            <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1"
-                                                                  Command="{Binding CarouselSelectedCommand}"
-                                                                  CommandParameter="{Binding url}"/>
+                                            <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1" Tapped="CarouselItem_Tapped"/>
                                         </ff:CachedImage.GestureRecognizers>
                                     </ff:CachedImage>
                                 </DataTemplate>
@@ -38,7 +39,7 @@
                     </Frame>
 
                     <!--主功能矩阵-->
-                    <Frame Style="{StaticResource MenuFrame}">
+                    <Frame Style="{StaticResource BaseFrame}" Margin="10,5" Padding="5">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50"/>
@@ -127,14 +128,13 @@
                     </Frame>
 
                     <!--新品上市列表-->
-                    <Label Text="新品上市" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="新品上市" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
-                                        <Frame BorderColor="LightGray" HasShadow="True" 
-                                               CornerRadius="5" Padding="0" IsClippedToBounds="True">
+                                        <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Grid.Row="0" Source="{Binding pic}" Aspect="AspectFit"/>
                                         </Frame>
                                         <Label Grid.Row="1" Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
@@ -154,14 +154,13 @@
                     </ScrollView>
 
                     <!--热卖商品列表-->
-                    <Label Text="热卖好货" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="热卖好货" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
-                                        <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" 
-                                               CornerRadius="5" Padding="0" IsClippedToBounds="True">
+                                        <Frame HeightRequest="120" CornerRadius="5" Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Grid.Row="0" Source="{Binding pic}" Aspect="AspectFit"/>
                                         </Frame>
                                         <Label Grid.Row="1" Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
@@ -180,31 +179,28 @@
                     </ScrollView>
 
                     <!--正品大牌列表-->
-                    <Label Text="正品大牌" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
-                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <FlexLayout HeightRequest="220" Wrap="Wrap" JustifyContent="Center" AlignContent="Start" BindableLayout.ItemsSource="{Binding BrandList}">
-                            <BindableLayout.ItemTemplate>
-                                <DataTemplate>
-                                    <Frame HeightRequest="100" BorderColor="LightGray" HasShadow="True" 
-                                           CornerRadius="5" Padding="0" Margin="5" IsClippedToBounds="True">
-                                        <ff:CachedImage Source="{Binding logo}" Aspect="AspectFill"/>
-                                    </Frame>
-                                </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </FlexLayout>
-                    </ScrollView>
+                    <Label Text="正品大牌" Style="{DynamicResource SectionTitle}"/>
+                    <FlexLayout HeightRequest="220" Wrap="Wrap" JustifyContent="Center" AlignContent="Start" BindableLayout.ItemsSource="{Binding BrandList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame HeightRequest="100" CornerRadius="5" Margin="5" Style="{StaticResource BaseFrame}">
+                                    <ff:CachedImage Source="{Binding logo}" Aspect="AspectFill"/>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
 
                     <!--专题列表-->
-                    <Label Text="精彩专题" FontSize="Title" FontAttributes="Bold" HorizontalOptions="Start" Margin="5,0"/>
+                    <Label Text="精彩专题" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding SubjectList}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout WidthRequest="250" Orientation="Vertical" Margin="5">
-                                        <Frame BorderColor="LightGray" HasShadow="True" CornerRadius="5" Padding="0" IsClippedToBounds="True">
+                                        <Frame CornerRadius="5" Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding pic}" Aspect="AspectFill"/>
                                         </Frame>
-                                        <Label Text="{Binding title}" FontSize="Large" TextColor="Black"/>
+                                        <Label Text="{Binding title}" FontSize="Large"/>
                                     </StackLayout>
                                     
                                 </DataTemplate>
@@ -215,19 +211,18 @@
                 </StackLayout>
             </ScrollView>
             
-            <Image Grid.Row="0" Grid.RowSpan="2" Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Aspect="AspectFit"/>
+            <ff:CachedImage Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Aspect="Fill"/>
 
             <!--头部-->
-            <StackLayout Grid.Row="0" Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="CenterAndExpand">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="StartAndExpand" Margin="0,35">
                 <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
 
-                <Frame Style="{DynamicResource SearchFrame}">
+                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300">
                     <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
                 </Frame>
 
                 <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
             </StackLayout>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

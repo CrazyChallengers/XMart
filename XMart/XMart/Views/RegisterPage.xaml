@@ -88,7 +88,7 @@
                 <Button x:Name="RegisterButton" Text="确定注册" VerticalOptions="StartAndExpand" Clicked="RegisterButton_Clicked"/>
             </StackLayout>
 
-            <ImageButton x:Name="BackButton" Source="Resource/drawable/back.png" BackgroundColor="Transparent"
+            <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Transparent"
                      HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="StartAndExpand"
                      HorizontalOptions="StartAndExpand" Margin="20,40" Clicked="BackButton_Clicked"/>
 

@@ -10,6 +10,7 @@ using XMart.Models;
 using XMart.ViewModels;
 using XMart.Services;
 using XMart.ResponseData;
+using CarouselView.FormsPlugin.Abstractions;
 
 namespace XMart.Views
 {
@@ -25,13 +26,6 @@ namespace XMart.Views
             InitializeComponent();
 
             InitHomePage();
-
-            homeViewModel.CarouselSelectedCommand = new Command<string>(
-                async (url) =>
-                {
-                    WebPage webPage = new WebPage(url);
-                    await Navigation.PushModalAsync(webPage);
-                });
 
             Device.StartTimer(new TimeSpan(0, 0, 5), () =>
             {
@@ -49,11 +43,9 @@ namespace XMart.Views
             BindingContext = homeViewModel;
         }
 
-        private void Carousel_PositionSelected(object sender, CarouselView.FormsPlugin.Abstractions.PositionSelectedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// 初始化首页
+        /// </summary>
         private async void InitHomePage()
         {
             HomeContentRD homeContentRD = await _restService.GetHomeContent();
@@ -63,18 +55,29 @@ namespace XMart.Views
             homeViewModel.NewProductList = homeContentRD.data.newProductList;
             homeViewModel.SubjectList = homeContentRD.data.subjectList;
             homeViewModel.BrandList = homeContentRD.data.brandList;
-
-            //Console.WriteLine(homeContentRD);
         }
 
+        /// <summary>
+        /// 消息按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MessageButton_Clicked(object sender, EventArgs e)
         {
             
         }
 
+        /// <summary>
+        /// 轮播图选择事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CarouselItem_Tapped(object sender, EventArgs e)
         {
-
+            int index = carousel.Position;
+            string url = homeViewModel.AdvertiseList[index].url;
+            WebPage webPage = new WebPage(url);
+            Navigation.PushModalAsync(webPage);
         }
     }
 }

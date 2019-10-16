@@ -10,10 +10,18 @@
              Title="分类">
     
     <ContentPage.Resources>
-        <Style x:Name="LabelStyle" TargetType="Label">
+        <Style x:Key="ParentLabel" TargetType="Label">
             <Setter Property="HeightRequest" Value="50"/>
             <Setter Property="FontSize" Value="Large"/>
-            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="SubLabel" TargetType="Label">
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
@@ -36,7 +44,7 @@
                          Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="EndAndExpand">
                 <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
 
-                <Frame Style="{StaticResource SearchFrame}">
+                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300">
                     <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Style="{StaticResource SearchEntry}"/>
                 </Frame>
 
@@ -48,7 +56,7 @@
                 <StackLayout x:Name="ParentStack" BindableLayout.ItemsSource="{Binding ParentCategoryList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Label Text="{Binding name}" Style="{DynamicResource LabelStyle}" WidthRequest="100">
+                            <Label Text="{Binding name}" Style="{DynamicResource ParentLabel}" WidthRequest="100">
                                 <Label.Behaviors>
                                     <util:RadioBehavior x:Name="ParentRadio" GroupName="ParentGroup"/>
                                 </Label.Behaviors>
@@ -73,12 +81,16 @@
                 <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Start">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="120" BorderColor="LightGray" HasShadow="True" CornerRadius="5" Margin="5" Padding="0" IsClippedToBounds="True">
-                                <StackLayout Orientation="Vertical">
+                            <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
+                                <Frame CornerRadius="5" Style="{StaticResource BaseFrame}">
                                     <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
-                                    <Label Text="{Binding name}" FontSize="Large" HorizontalOptions="Center"/>
-                                </StackLayout>
-                            </Frame>
+                                </Frame>
+                                <Label Text="{Binding name}" Style="{DynamicResource SubLabel}"/>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="CategorySelected" NumberOfTapsRequired="1" Tapped="SubTGR_Tapped"/>
+                                </StackLayout.GestureRecognizers>
+                            </StackLayout>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </FlexLayout>

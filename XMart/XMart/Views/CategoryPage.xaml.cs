@@ -26,6 +26,9 @@ namespace XMart.Views
             BindingContext = categoryViewModel;
 		}
 
+        /// <summary>
+        /// 初始化
+        /// </summary>
         private async void InitCategories()
         {
             CategoryRD categoryRD = await _restService.GetCategories();
@@ -53,6 +56,11 @@ namespace XMart.Views
             ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
         }
 
+        /// <summary>
+        /// 一级目录点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ParentGR_Tapped(object sender, EventArgs e)
         {
             Label label = sender as Label;
@@ -79,10 +87,19 @@ namespace XMart.Views
             categoryViewModel.SubCategoryList = temp;
         }
 
+        /// <summary>
+        /// 二级目录点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SubTGR_Tapped(object sender, EventArgs e)
         {
+            StackLayout stackLayout = sender as StackLayout;
+            int index = SubStack.Children.IndexOf(stackLayout);
 
+            SubCategoryInfo subCategoryInfo = categoryViewModel.SubCategoryList[index];
+            ProductListPage productListPage = new ProductListPage(subCategoryInfo);
+            Navigation.PushModalAsync(productListPage);
         }
-
     }
 }

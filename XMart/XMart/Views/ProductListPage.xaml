@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:XMart.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.ProductListPage">
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <ImageButton x:Name="BackButton" Source="back.png" Clicked="BackButton_Clicked" Style="{StaticResource EarImageButton}" CornerRadius="15" BackgroundColor="{StaticResource MainColor}"/>
+                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300" BackgroundColor="WhiteSmoke">
+                    <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
+                </Frame>
+                <Picker WidthRequest="50" Title="排序"/>
+            </StackLayout>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal">
+                <Button Text="物流" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button Text="新品" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button Text="品牌" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <Button Text="分类" WidthRequest="100" HeightRequest="30" CornerRadius="15" Padding="0" BackgroundColor="LightGray" HorizontalOptions="Center" VerticalOptions="Center"/>
+            </StackLayout>
+
+            <ScrollView Grid.Row="2" Orientation="Vertical">
+                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}">
+                                <Grid RowSpacing="0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productPic}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding productSubTitle}" FontSize="Medium"/>
+                                    <Label Grid.Row="2" Grid.Column="1" FontSize="Large" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="￥"/>
+                                                <Span Text="{Binding price}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                        <Label Text="1.3万+条评价" FontSize="Small"/>
+                                        <Label Text="98%好评" FontSize="Small"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
