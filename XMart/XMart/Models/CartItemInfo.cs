@@ -1,11 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace XMart.Models
 {
-    public class CartItemInfo
+    public class CartItemInfo : BaseModel
     {
         [JsonProperty("createDate")]
         public string createDate { get; set; }   //comment
@@ -70,6 +67,13 @@ namespace XMart.Models
         [JsonProperty("sp3")]
         public string sp3 { get; set; }    //comment
 
-        public bool IsChecked { get; set; }
+        private bool isChecked;   //comment
+
+        public bool IsChecked
+        {
+            get { return isChecked; }
+            set { SetProperty(ref isChecked, value); }
+        }
+
     }
 }

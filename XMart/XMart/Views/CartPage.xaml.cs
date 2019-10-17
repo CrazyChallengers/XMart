@@ -68,11 +68,22 @@ namespace XMart.Views
         {
             double totalPrice = 0;
             int number = 0;
-            foreach (var item in cartViewModel.ItemList)
+
+            if (cartViewModel.IsAllChecked)
             {
-                //item.IsChecked = cartViewModel.IsAllChecked ? true : false;
-                totalPrice += (item.price * item.quantity);
-                number += item.quantity;
+                foreach (var item in cartViewModel.ItemList)
+                {
+                    item.IsChecked = true;
+                    totalPrice += (item.price * item.quantity);
+                    number += item.quantity;
+                }
+            }
+            else
+            {
+                foreach (var item in cartViewModel.ItemList)
+                {
+                    item.IsChecked = false;
+                }
             }
 
             cartViewModel.TotalSelectedPrice = totalPrice.ToString();

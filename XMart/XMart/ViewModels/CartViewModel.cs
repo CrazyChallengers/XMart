@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using XMart.Models;
 
 namespace XMart.ViewModels
@@ -52,7 +50,6 @@ namespace XMart.ViewModels
         {
             Title = "购物车";
 
-            IsAllChecked = false;
             CheckedNumber = 0;
         }
     }
