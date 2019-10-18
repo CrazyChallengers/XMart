@@ -85,38 +85,6 @@
                 </Frame>
 
                 <Frame HasShadow="False" Padding="5" CornerRadius="20" Margin="5">
-                    <Grid HeightRequest="100">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="2*"/>
-                            <RowDefinition Height="1*"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-
-                        <Image Grid.Row="0" Grid.Column="0" Source="order_red.png" Style="{DynamicResource CommonImage}"/>
-                        <Label Grid.Row="1" Grid.Column="0" Text="我的订单" Style="{DynamicResource CommonLabel}"/>
-
-                        <Image Grid.Row="0" Grid.Column="1" Source="pay.png" Style="{DynamicResource CommonImage}"/>
-                        <Label Grid.Row="1" Grid.Column="1" Text="待付款" Style="{DynamicResource CommonLabel}"/>
-
-                        <Image Grid.Row="0" Grid.Column="2" Source="box.png" Style="{DynamicResource CommonImage}"/>
-                        <Label Grid.Row="1" Grid.Column="2" Text="待收货" Style="{DynamicResource CommonLabel}"/>
-
-                        <Image Grid.Row="0" Grid.Column="3" Source="comment.png" Style="{DynamicResource CommonImage}"/>
-                        <Label Grid.Row="1" Grid.Column="3" Text="待评价" Style="{DynamicResource CommonLabel}"/>
-
-                        <Image Grid.Row="0" Grid.Column="4" Source="service2.png" Style="{DynamicResource CommonImage}"/>
-                        <Label Grid.Row="1" Grid.Column="4" Text="售后服务" Style="{DynamicResource CommonLabel}"/>
-
-                    </Grid>
-                </Frame>
-
-                <Frame HasShadow="False" Padding="5" CornerRadius="20" Margin="5">
                     <Grid HeightRequest="80">
                         <Grid.RowDefinitions>
                             <RowDefinition/>

@@ -38,7 +38,21 @@ namespace XMart.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private void SingleCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        {
+            if (!e.Value)
+            {
+                cartViewModel.IsAllChecked = false;
+                cartViewModel.AllCheckedButton_Color = Color.LightGray;
+            }
+
+            OnCount();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnCount()
         {
             double totalPrice = 0;
             int number = 0;
@@ -48,41 +62,6 @@ namespace XMart.Views
                 {
                     totalPrice += (item.price * item.quantity);
                     number += item.quantity;
-                }
-                else
-                {
-                    cartViewModel.IsAllChecked = false;
-                }
-            }
-
-            cartViewModel.TotalSelectedPrice = totalPrice.ToString();
-            cartViewModel.CheckedNumber = number;
-        }
-
-        /// <summary>
-        /// 全选框
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AllCheckedButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
-        {
-            double totalPrice = 0;
-            int number = 0;
-
-            if (cartViewModel.IsAllChecked)
-            {
-                foreach (var item in cartViewModel.ItemList)
-                {
-                    item.IsChecked = true;
-                    totalPrice += (item.price * item.quantity);
-                    number += item.quantity;
-                }
-            }
-            else
-            {
-                foreach (var item in cartViewModel.ItemList)
-                {
-                    item.IsChecked = false;
                 }
             }
 
@@ -98,6 +77,18 @@ namespace XMart.Views
         private void OrderButton_Clicked(object sender, System.EventArgs e)
         {
 
+        }
+
+        private void AllCheckedButton_Clicked(object sender, System.EventArgs e)
+        {
+            cartViewModel.IsAllChecked = !cartViewModel.IsAllChecked;
+            cartViewModel.AllCheckedButton_Color = cartViewModel.IsAllChecked ? Color.Crimson : Color.LightGray;
+            foreach (var item in cartViewModel.ItemList)
+            {
+                item.IsChecked = cartViewModel.IsAllChecked;
+            }
+
+            OnCount();
         }
     }
 }

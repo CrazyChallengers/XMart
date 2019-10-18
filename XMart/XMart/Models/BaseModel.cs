@@ -6,7 +6,7 @@ using System.Text;
 
 namespace XMart.Models
 {
-    public class BaseModel
+    public class BaseModel : INotifyPropertyChanged
     {
         protected bool SetProperty<T>(ref T backingStore, T value, [CallerMemberName]string propertyName = "", Action onChanged = null)
         {

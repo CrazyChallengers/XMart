@@ -11,8 +11,9 @@
     
     <ContentPage.Resources>
         <Style x:Key="ParentLabel" TargetType="Label">
-            <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="FontSize" Value="Large"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="WidthRequest" Value="100"/>
+            <Setter Property="FontSize" Value="Medium"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -30,7 +31,7 @@
 
     <ContentPage.Content>
 
-        <Grid BackgroundColor="{StaticResource MainColor}" ColumnSpacing="0">
+        <Grid ColumnSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="65"/>
                 <RowDefinition/>
@@ -40,6 +41,7 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
+            <!--顶部-->
             <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
                          Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="EndAndExpand">
                 <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
@@ -51,19 +53,21 @@
                 <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}"/>
             </StackLayout>
 
-            <ScrollView Grid.Row="1" Grid.Column="0" BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
-                <!--一级分类-->
+            <!--一级分类-->
+            <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseFrame}">
+                <ScrollView BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
+                
                 <StackLayout x:Name="ParentStack" BindableLayout.ItemsSource="{Binding ParentCategoryList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Label Text="{Binding name}" Style="{DynamicResource ParentLabel}" WidthRequest="100">
+                            <Label Text="{Binding name}" Style="{DynamicResource ParentLabel}">
                                 <Label.Behaviors>
                                     <util:RadioBehavior x:Name="ParentRadio" GroupName="ParentGroup"/>
                                 </Label.Behaviors>
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ParentRadio}, Path=IsChecked}" Value="True">
                                         <Setter Property="TextColor" Value="{StaticResource MainColor}" />
-                                        <Setter Property="FontSize" Value="Title" />
+                                        <Setter Property="FontSize" Value="Large" />
                                         <Setter Property="FontAttributes" Value="Bold"/>
                                     </DataTrigger>
                                 </Label.Triggers>
@@ -75,10 +79,11 @@
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
             </ScrollView>
-
-            <ScrollView Grid.Row="1" Grid.Column="1" BackgroundColor="WhiteSmoke" Orientation="Vertical">
-                <!--二级分类-->
-                <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Start">
+            </Frame>
+            
+            <!--二级分类-->
+            <ScrollView Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+                <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Center">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">

@@ -40,9 +40,7 @@
 
     <ContentPage.Content>
         <StackLayout>
-            <ff:CachedImage Source="login_bg.png" VerticalOptions="Start" Aspect="AspectFill"/>
-            <ff:CachedImage Source="xmart_logo2.png" VerticalOptions="Start"/>
-            <Label Text="登录" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" FontSize="72"/>
+            <ff:CachedImage Source="xmart_logo2.png" VerticalOptions="EndAndExpand"/>
             <Label Text="欢迎使用XMart原材料智能采购平台！" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" FontSize="Large"/>
 
             <StackLayout VerticalOptions="EndAndExpand">
@@ -71,8 +69,12 @@
                         Clicked="RegisterButton_Clicked"/>
             </StackLayout>
 
-            <Label Text="西南交通大学人工智能研究院" FontSize="Small"
-                   HorizontalOptions="Center" VerticalOptions="CenterAndExpand" />
+            <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <Label Text="西南交通大学人工智能研究院" FontSize="Small" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                <Label Text="四川大学工业互联网研究院" FontSize="Small" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                <Label Text="成都万云互联科技有限公司" FontSize="Small" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+            </StackLayout>
+            
         </StackLayout>
 
     </ContentPage.Content>

@@ -23,7 +23,7 @@
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                     <StackLayout HeightRequest="80"/>
                     <!--轮播图-->
-                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="250" Margin="10,0">
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="150" Margin="5,0">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
@@ -39,16 +39,13 @@
                     </Frame>
 
                     <!--主功能矩阵-->
-                    <Frame Style="{StaticResource BaseFrame}" Margin="10,5" Padding="5">
+                    <Frame Style="{StaticResource BaseFrame}" Margin="5" Padding="5">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="50"/>
-                                <RowDefinition Height="20"/>
-                                <RowDefinition Height="50"/>
+                                <RowDefinition Height="40"/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="*"/>
@@ -58,8 +55,8 @@
 
                             <Grid.Resources>
                                 <Style TargetType="ImageButton">
-                                    <Setter Property="WidthRequest" Value="50"/>
-                                    <Setter Property="HeightRequest" Value="50"/>
+                                    <Setter Property="WidthRequest" Value="40"/>
+                                    <Setter Property="HeightRequest" Value="40"/>
                                     <Setter Property="BackgroundColor" Value="Transparent"/>
                                     <!--<Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
@@ -88,44 +85,115 @@
                                 </Style>
                             </Grid.Resources>
 
-                            <ImageButton Grid.Row="0" Grid.Column="0" Source="Resource/drawable/circle.png" />
-                            <Label Grid.Row="1" Grid.Column="0" Text="房源管理"/>
+                            <ImageButton Grid.Row="0" Grid.Column="0" Source="order_red.png" />
+                            <Label Grid.Row="1" Grid.Column="0" Text="我的订单"/>
 
-                            <ImageButton Grid.Row="0" Grid.Column="1" Source="Resource/drawable/circle.png"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="客源管理"/>
+                            <ImageButton Grid.Row="0" Grid.Column="1" Source="pay.png"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="待付款"/>
 
-                            <ImageButton Grid.Row="0" Grid.Column="2" Source="Resource/drawable/circle.png" />
-                            <Label Grid.Row="1" Grid.Column="2" Text="外网房源"/>
+                            <ImageButton Grid.Row="0" Grid.Column="2" Source="box.png" />
+                            <Label Grid.Row="1" Grid.Column="2" Text="待收货"/>
 
-                            <ImageButton Grid.Row="0" Grid.Column="3" Source="Resource/drawable/circle.png"/>
-                            <Label Grid.Row="1" Grid.Column="3" Text="新闻公告"/>
+                            <ImageButton Grid.Row="0" Grid.Column="3" Source="comment.png"/>
+                            <Label Grid.Row="1" Grid.Column="3" Text="待评价"/>
 
-                            <ImageButton Grid.Row="0" Grid.Column="4" Source="Resource/drawable/circle.png" />
-                            <Label Grid.Row="1" Grid.Column="4" Text="工作总结"/>
-
-                            <ImageButton Grid.Row="0" Grid.Column="5" Source="Resource/drawable/circle.png" />
-                            <Label Grid.Row="1" Grid.Column="5" Text="业务报表"/>
-
-                            <ImageButton Grid.Row="2" Grid.Column="0" Source="Resource/drawable/circle.png" />
-                            <Label Grid.Row="3" Grid.Column="0" Text="跟进记录"/>
-
-                            <ImageButton Grid.Row="2" Grid.Column="1" Source="Resource/drawable/circle.png"/>
-                            <Label Grid.Row="3" Grid.Column="1" Text="通讯录"/>
-
-                            <ImageButton Grid.Row="2" Grid.Column="2" Source="Resource/drawable/circle.png"/>
-                            <Label Grid.Row="3" Grid.Column="2" Text="房贷计算"/>
-
-                            <ImageButton Grid.Row="2" Grid.Column="3" Source="Resource/drawable/circle.png"/>
-                            <Label Grid.Row="3" Grid.Column="3" Text="税费计算"/>
-
-                            <ImageButton Grid.Row="2" Grid.Column="4" Source="Resource/drawable/circle.png"/>
-                            <Label Grid.Row="3" Grid.Column="4" Text="新增房源"/>
-
-                            <ImageButton Grid.Row="2" Grid.Column="5" Source="Resource/drawable/circle.png"/>
-                            <Label Grid.Row="3" Grid.Column="5" Text="新增客源"/>
+                            <ImageButton Grid.Row="0" Grid.Column="4" Source="service2.png" />
+                            <Label Grid.Row="1" Grid.Column="4" Text="售后服务"/>
 
                         </Grid>
                     </Frame>
+                    
+                    <!--最近订单-->
+                    <Label Text="最近订单" Style="{DynamicResource SectionTitle}"/>
+                    <StackLayout Orientation="Vertical">
+                        <Grid HeightRequest="60" Margin="5,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill" VerticalOptions="Fill">
+                                <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
+                            </Frame>
+
+                            <Label Grid.Row="0" Grid.Column="1" Text="订单一" FontSize="Large" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="这里是物流信息gfasuigs" VerticalOptions="Center"/>
+                        </Grid>
+                        <Grid HeightRequest="60" Margin="5,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill" VerticalOptions="Fill">
+                                <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
+                            </Frame>
+
+                            <Label Grid.Row="0" Grid.Column="1" Text="订单二" FontSize="Large" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="这里是物流信息gfasuigs" VerticalOptions="Center"/>
+                        </Grid>
+                        <Grid HeightRequest="60" Margin="5,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="80"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill" VerticalOptions="Fill">
+                                <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
+                            </Frame>
+
+                            <Label Grid.Row="0" Grid.Column="1" Text="订单三" FontSize="Large" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="这里是物流信息gfasuigs" VerticalOptions="Center"/>
+                        </Grid>
+                    </StackLayout>
+
+                    <!--推荐拼单列表-->
+                    <Label Text="热门拼单" Style="{DynamicResource SectionTitle}" TextColor="Red"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}" Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Height="180" WidthRequest="120" Margin="5,0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="120"/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+
+                                        <Frame Grid.Row="0" Style="{StaticResource BaseFrame}">
+                                            <ff:CachedImage Grid.Row="0" Source="{Binding pic}" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Frame Grid.Row="0" HeightRequest="20" WidthRequest="20" CornerRadius="10" Padding="0"
+                                               BorderColor="Red" HorizontalOptions="End" VerticalOptions="Start">
+                                            <Label Text="拼" TextColor="Red" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        </Frame>
+                                        <Label Grid.Row="1" Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label Grid.Row="2">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥" TextColor="Red"/>
+                                                    <Span Text="{Binding price}" TextColor="Red" FontSize="Large"/>
+                                                    <Span Text="￥9999" TextDecorations="Strikethrough"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
 
                     <!--新品上市列表-->
                     <Label Text="新品上市" Style="{DynamicResource SectionTitle}"/>
@@ -135,17 +203,17 @@
                                 <DataTemplate>
                                     <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
                                         <Frame Style="{StaticResource BaseFrame}">
-                                            <ff:CachedImage Grid.Row="0" Source="{Binding pic}" Aspect="AspectFit"/>
+                                            <ff:CachedImage Source="{Binding pic}" Aspect="AspectFit"/>
                                         </Frame>
-                                        <Label Grid.Row="1" Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
-                                            <Label Grid.Row="2" TextColor="Red">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="￥"/>
-                                                        <Span Text="{Binding price}"/>
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
+                                        <Label Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥"/>
+                                                    <Span Text="{Binding price}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
                                     </StackLayout>
                                     
                                 </DataTemplate>
@@ -161,10 +229,10 @@
                                 <DataTemplate>
                                     <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
                                         <Frame HeightRequest="120" CornerRadius="5" Style="{StaticResource BaseFrame}">
-                                            <ff:CachedImage Grid.Row="0" Source="{Binding pic}" Aspect="AspectFit"/>
+                                            <ff:CachedImage Source="{Binding pic}" Aspect="AspectFit"/>
                                         </Frame>
-                                        <Label Grid.Row="1" Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
-                                        <Label Grid.Row="2" TextColor="Red">
+                                        <Label Text="{Binding name}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥"/>
@@ -211,18 +279,14 @@
                 </StackLayout>
             </ScrollView>
             
-            <ff:CachedImage Source="Resource/drawable/navi_back.png" VerticalOptions="StartAndExpand" HorizontalOptions="Fill" Aspect="Fill"/>
-
             <!--头部-->
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="StartAndExpand" Margin="0,35">
-                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
-
-                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300">
+            <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" Margin="5,35" VerticalOptions="StartAndExpand" HorizontalOptions="Fill">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
                     <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
-                </Frame>
-
-                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
-            </StackLayout>
+                    <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
+                </StackLayout>
+            </Frame>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

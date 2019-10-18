@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Xamarin.Forms;
 using XMart.Models;
 
 namespace XMart.ViewModels
@@ -45,12 +46,22 @@ namespace XMart.ViewModels
             set { SetProperty(ref checkedNumber, value); }
         }
 
+        private Color allCheckedButton_Color;   //comment
+
+        public Color AllCheckedButton_Color
+        {
+            get { return allCheckedButton_Color; }
+            set { SetProperty(ref allCheckedButton_Color, value); }
+        }
 
         public CartViewModel()
         {
             Title = "购物车";
 
+            TotalSelectedPrice = "0";
             CheckedNumber = 0;
+            IsAllChecked = false;
+            allCheckedButton_Color = Color.LightGray;
         }
     }
 }

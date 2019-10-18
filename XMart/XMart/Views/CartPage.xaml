@@ -26,10 +26,14 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            
+
+            <Button Grid.Row="0" x:Name="AllCheckedButton" Text="全选" TextColor="White" BackgroundColor="{Binding AllCheckedButton_Color}" 
+                        HeightRequest="30" WidthRequest="50" CornerRadius="15" Padding="0" Margin="10,0" HorizontalOptions="End" VerticalOptions="EndAndExpand"
+                        Clicked="AllCheckedButton_Clicked"/>
+
             <!--购物车商品列表-->
             <ScrollView Grid.Row="1" Orientation="Vertical">
-                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList}" Orientation="Vertical">
+                <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList,Mode=TwoWay}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}">
@@ -63,7 +67,8 @@
                                     <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
                                                             x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
                                                             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding quantity}"/>
-                                    <CheckBox Grid.Row="0" Grid.Column="3" Color="{StaticResource MainColor}" VerticalOptions="Start" IsChecked="{Binding IsChecked,Mode=TwoWay}" CheckedChanged="CheckBox_CheckedChanged"/>
+                                    <CheckBox Grid.Row="0" Grid.Column="3" x:Name="SingleCheckBox" Color="Crimson" 
+                                              VerticalOptions="Start" IsChecked="{Binding IsChecked,Mode=TwoWay}" CheckedChanged="SingleCheckBox_CheckedChanged"/>
                                 </Grid>
                             </Frame>
                         </DataTemplate>
@@ -72,9 +77,12 @@
             </ScrollView>
 
             <!--底部-->
-            <StackLayout Grid.Row="2" Orientation="Horizontal">
-                <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>
-                <Label Text="全选  合计：" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10,0">
+                <!--
+                <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
+                          IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
+
+                <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center"/>
                 <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                     <Label.FormattedText>
                         <FormattedString>
@@ -93,7 +101,7 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Button x:Name="OrderButton" Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" Margin="10,0" BackgroundColor="Crimson" TextColor="White"
+                <Button x:Name="OrderButton" Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
                         HorizontalOptions="End" VerticalOptions="Center" Clicked="OrderButton_Clicked"/>
 
             </StackLayout>

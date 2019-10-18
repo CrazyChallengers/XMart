@@ -75,5 +75,10 @@ namespace XMart.Models
             set { SetProperty(ref isChecked, value); }
         }
 
+        public CartItemInfo()
+        {
+            IsChecked = false;
+        }
+
     }
 }
