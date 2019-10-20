@@ -12,5 +12,12 @@ namespace XMart.ResponseData
         
         [JsonProperty("message")]
         public string message { get; set; }
+
+        [JsonProperty("success")]
+        public bool success { get; set; }   //comment
+
+        [JsonProperty("timestamp")]
+        public Int64 timestamp { get; set; }   //comment
+
     }
 }

@@ -7,6 +7,7 @@ using XMart.ResponseData;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
 using System.IO;
+using XMart.Models;
 
 namespace XMart.Views
 {
@@ -96,18 +97,22 @@ namespace XMart.Views
         /// </summary>
         private async void OnLogin()
         {
-            SimpleRD simpleRD = await _restService.Login(loginViewModel.Tel, loginViewModel.Pwd);
+            LoginPara loginPara = new LoginPara();
+            loginPara.userName = loginViewModel.Tel;
+            loginPara.userPwd = loginViewModel.Pwd;
 
-            if (simpleRD.code == 200)
+            LoginRD loginRD = await _restService.Login(loginPara);
+
+            if (loginRD.code == 200)
             {
-                CrossToastPopUp.Current.ShowToastSuccess(simpleRD.message, ToastLength.Long);
+                CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
 
                 MainPage mainPage = new MainPage();
                 await Navigation.PushModalAsync(mainPage);
             }
             else
             {
-                CrossToastPopUp.Current.ShowToastError(simpleRD.message, ToastLength.Long);
+                CrossToastPopUp.Current.ShowToastError(loginRD.message, ToastLength.Long);
             }
         }
 

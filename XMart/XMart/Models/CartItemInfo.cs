@@ -4,6 +4,7 @@ namespace XMart.Models
 {
     public class CartItemInfo : BaseModel
     {
+        
         [JsonProperty("createDate")]
         public string createDate { get; set; }   //comment
 
@@ -66,6 +67,26 @@ namespace XMart.Models
 
         [JsonProperty("sp3")]
         public string sp3 { get; set; }    //comment
+        
+        /*
+        //[JsonProperty("checked")]
+        //public string checked { get; set; }   //comment
+
+        [JsonProperty("limitNum")]
+        public int limitNum { get; set; }   //comment
+
+        [JsonProperty("productId")]
+        public int productId { get; set; }   //comment
+
+        [JsonProperty("productName")]
+        public string productName { get; set; }   //comment
+
+        [JsonProperty("productNum")]
+        public int productNum { get; set; }   //comment
+
+        [JsonProperty("salePrice")]
+        public double salePrice { get; set; }   //comment
+        */
 
         private bool isChecked;   //comment
 
@@ -79,6 +100,5 @@ namespace XMart.Models
         {
             IsChecked = false;
         }
-
     }
 }

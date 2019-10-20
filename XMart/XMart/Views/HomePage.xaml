@@ -165,7 +165,7 @@
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Height="180" WidthRequest="120" Margin="5,0">
+                                    <Grid HeightRequest="180" WidthRequest="120" Margin="5,0">
                                         <Grid.RowDefinitions>
                                             <RowDefinition Height="120"/>
                                             <RowDefinition/>
