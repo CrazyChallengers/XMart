@@ -8,6 +8,7 @@ namespace XMart.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+        /*
         private List<AdvertiseInfo> advertiseList;   //广告
 
         public List<AdvertiseInfo> AdvertiseList
@@ -47,7 +48,17 @@ namespace XMart.ViewModels
             get { return subjectList; }
             set { SetProperty(ref subjectList, value); }
         }
-        
+        */
+
+        private List<HomePanelContent> advertiseList;   //comment
+
+        public List<HomePanelContent> AdvertiseList
+        {
+            get { return advertiseList; }
+            set { SetProperty(ref advertiseList, value); }
+        }
+
+
         public HomeViewModel()
         {
             Title = "首页";

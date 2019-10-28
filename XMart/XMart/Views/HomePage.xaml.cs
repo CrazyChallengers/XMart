@@ -50,11 +50,11 @@ namespace XMart.Views
         {
             HomeContentRD homeContentRD = await _restService.GetHomeContent();
 
-            homeViewModel.AdvertiseList = homeContentRD.data.advertiseList;
-            homeViewModel.HotProductList = homeContentRD.data.hotProductList;
-            homeViewModel.NewProductList = homeContentRD.data.newProductList;
-            homeViewModel.SubjectList = homeContentRD.data.subjectList;
-            homeViewModel.BrandList = homeContentRD.data.brandList;
+            homeViewModel.AdvertiseList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
+            //homeViewModel.HotProductList = homeContentRD.data.hotProductList;
+            //homeViewModel.NewProductList = homeContentRD.data.newProductList;
+            //homeViewModel.SubjectList = homeContentRD.data.subjectList;
+            //homeViewModel.BrandList = homeContentRD.data.brandList;
         }
 
         /// <summary>
@@ -75,7 +75,8 @@ namespace XMart.Views
         private void CarouselItem_Tapped(object sender, EventArgs e)
         {
             int index = carousel.Position;
-            string url = homeViewModel.AdvertiseList[index].url;
+            //string url = homeViewModel.AdvertiseList[index].url;
+            string url = "http://www.baidu.com/";
             WebPage webPage = new WebPage(url);
             Navigation.PushModalAsync(webPage);
         }

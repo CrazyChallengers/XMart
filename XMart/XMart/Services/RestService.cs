@@ -28,7 +28,7 @@ namespace XMart.Services
         /// <returns></returns>
         public async Task<HomeContentRD> GetHomeContent()
         {
-            string url = rootUrl + "/home/content";
+            string url = rootUrl3 + "/goods/home";
 
             string responseBody = await GetStringDataAsync(url);
 
@@ -75,7 +75,7 @@ namespace XMart.Services
         /// <returns></returns>
         public async Task<SimpleRD> SendAuthCode(string tel)
         {
-            string url = rootUrl2 + "/User/getAuthCode?tel=" + tel;
+            string url = rootUrl3 + "/User/getAuthCode?tel=" + tel;
 
             string responseBody = await GetStringDataAsync(url);
 

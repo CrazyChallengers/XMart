@@ -28,7 +28,7 @@
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
                                 <DataTemplate>
-                                    <ff:CachedImage Source="{Binding pic}" BackgroundColor="Transparent" Aspect="AspectFill">
+                                    <ff:CachedImage Source="{Binding picUrl}" BackgroundColor="Transparent" Aspect="AspectFill">
                                         <ff:CachedImage.GestureRecognizers>
                                             <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1" Tapped="CarouselItem_Tapped"/>
                                         </ff:CachedImage.GestureRecognizers>
