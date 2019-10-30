@@ -97,12 +97,17 @@ namespace XMart.Views
         /// </summary>
         private async void OnLogin()
         {
-            LoginPara loginPara = new LoginPara();
-            loginPara.userName = loginViewModel.Tel;
-            loginPara.userPwd = loginViewModel.Pwd;
+            LoginPara loginPara = new LoginPara
+            {
+                userName = loginViewModel.Tel,
+                userPwd = loginViewModel.Pwd,
+                authCode = "",
+                tel = ""
+            };
 
             LoginRD loginRD = await _restService.Login(loginPara);
 
+            /*
             if (loginRD.code == 200)
             {
                 CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
@@ -113,6 +118,17 @@ namespace XMart.Views
             else
             {
                 CrossToastPopUp.Current.ShowToastError(loginRD.message, ToastLength.Long);
+            }*/
+            if (loginRD.result.message == null)
+            {
+                CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
+
+                MainPage mainPage = new MainPage();
+                await Navigation.PushModalAsync(mainPage);
+            }
+            else
+            {
+                CrossToastPopUp.Current.ShowToastError(loginRD.result.message, ToastLength.Long);
             }
         }
 

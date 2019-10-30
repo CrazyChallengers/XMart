@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.Models;
@@ -33,12 +32,20 @@ namespace XMart.Views
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     // interact with UI elements
-                    carousel.Position = index % homeViewModel.AdvertiseList.Count();
+                    carousel.Position = index % homeViewModel.CarouselList.Count();
                     index += 1;
-                    index %= homeViewModel.AdvertiseList.Count();
+                    index %= homeViewModel.CarouselList.Count();
                 });
                 return true; // runs again, or false to stop
             });
+
+            homeViewModel.ItemTapCommand = new Command<string>(
+                execute: (string productId) => 
+                {
+                    ProductDetailPage productDetailPage = new ProductDetailPage(productId);
+                    Navigation.PushModalAsync(productDetailPage);
+                }
+                );
 
             BindingContext = homeViewModel;
         }
@@ -50,11 +57,11 @@ namespace XMart.Views
         {
             HomeContentRD homeContentRD = await _restService.GetHomeContent();
 
-            homeViewModel.AdvertiseList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
-            //homeViewModel.HotProductList = homeContentRD.data.hotProductList;
-            //homeViewModel.NewProductList = homeContentRD.data.newProductList;
-            //homeViewModel.SubjectList = homeContentRD.data.subjectList;
-            //homeViewModel.BrandList = homeContentRD.data.brandList;
+            homeViewModel.CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
+            homeViewModel.HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
+            homeViewModel.OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
+            homeViewModel.GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
+            homeViewModel.BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
         }
 
         /// <summary>
@@ -79,6 +86,17 @@ namespace XMart.Views
             string url = "http://www.baidu.com/";
             WebPage webPage = new WebPage(url);
             Navigation.PushModalAsync(webPage);
+        }
+
+        private void ItemTapped_Tapped(object sender, EventArgs e)
+        {
+            StackLayout stackLayout = sender as StackLayout;
+            //stackLayout.Children
+            int index = HotProductStack.Children.IndexOf(stackLayout);
+
+            long id = homeViewModel.HotProductList[index].productId;
+            ProductDetailPage productDetailPage = new ProductDetailPage(id.ToString());
+            Navigation.PushModalAsync(productDetailPage);
         }
     }
 }

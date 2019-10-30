@@ -21,7 +21,7 @@ namespace XMart.Views
 		{
 			InitializeComponent ();
 
-            InitCategories();
+            //InitCategories();
 
             BindingContext = categoryViewModel;
 		}

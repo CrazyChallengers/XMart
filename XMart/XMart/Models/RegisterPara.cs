@@ -13,8 +13,8 @@ namespace XMart.Models
         [JsonProperty("userPwd")]
         public string userPwd { get; set; }   //密码
 
-        //[JsonProperty("tel")]
-        //public string tel { get; set; }   //手机号
+        [JsonProperty("tel")]
+        public string tel { get; set; }   //手机号
 
         [JsonProperty("userName")]
         public string userName { get; set; }   //用户名

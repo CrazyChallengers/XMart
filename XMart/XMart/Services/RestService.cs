@@ -69,13 +69,13 @@ namespace XMart.Services
         }
 
         /// <summary>
-        /// 发送验证码
+        /// 发送验证码 ok
         /// </summary>
         /// <param name="tel">手机号</param>
         /// <returns></returns>
         public async Task<SimpleRD> SendAuthCode(string tel)
         {
-            string url = rootUrl3 + "/User/getAuthCode?tel=" + tel;
+            string url = rootUrl3 + "/member/getAuthCode?tel=" + tel;
 
             string responseBody = await GetStringDataAsync(url);
 
@@ -85,13 +85,13 @@ namespace XMart.Services
         }
 
         /// <summary>
-        /// 注册
+        /// 注册 ok
         /// </summary>
         /// <param name="registerPara"></param>
         /// <returns></returns>
         public async Task<SimpleRD> Register(RegisterPara registerPara)
         {
-            string url = rootUrl2 + "/User/register";
+            string url = rootUrl3 + "/member/register";
 
             string httpContent = JsonConvert.SerializeObject(registerPara);
 
@@ -121,7 +121,7 @@ namespace XMart.Services
         }
 
         /// <summary>
-        /// 登录
+        /// 登录 ok
         /// </summary>
         /// <param name="tel">手机号</param>
         /// <param name="pwd">密码</param>
@@ -139,7 +139,20 @@ namespace XMart.Services
             return loginRD;
         }
 
-        //------------------------------------------------------------------------------
+        /// <summary>
+        /// 获取商品详情
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public async Task<ProductDetailRD> GetProductDetail(string productId)
+        {
+            string url = rootUrl3 + "/goods/productDet?productId=" + productId;
+            string responseBody = await GetStringDataAsync(url);
+            ProductDetailRD productDetailRD = JsonConvert.DeserializeObject<ProductDetailRD>(responseBody);
+            return productDetailRD;
+        }
+
+        #region
         /// <summary>
         /// 截取字符串，处理网站返回值
         /// </summary>
@@ -265,5 +278,6 @@ namespace XMart.Services
 
             return responseData;
         }
+        #endregion
     }
 }

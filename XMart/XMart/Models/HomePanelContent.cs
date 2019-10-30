@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
+using XMart.Views;
 
 namespace XMart.Models
 {
@@ -29,7 +32,7 @@ namespace XMart.Models
         public string picUrl3 { get; set; }   //comment
 
         [JsonProperty("productId")]
-        public int productId { get; set; }   //comment
+        public long productId { get; set; }   //comment
 
         [JsonProperty("productImageBig")]
         public string productImageBig { get; set; }   //comment
@@ -52,5 +55,18 @@ namespace XMart.Models
         [JsonProperty("updated")]
         public string updated { get; set; }   //comment
 
+        public ICommand ItemTapCommand { set; get; }
+
+        public HomePanelContent()
+        {
+            ItemTapCommand = new Command(
+                execute: () =>
+                {
+                    ProductDetailPage productDetailPage = new ProductDetailPage(productId.ToString());
+                    //Navigation.PushModalAsync(productDetailPage);
+                    //Console.WriteLine(productId);
+                }
+                );
+        }
     }
 }

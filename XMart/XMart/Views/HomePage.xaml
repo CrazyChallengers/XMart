@@ -24,7 +24,7 @@
                     <StackLayout HeightRequest="80"/>
                     <!--轮播图-->
                     <Frame Style="{StaticResource BaseFrame}" HeightRequest="150" Margin="5,0">
-                        <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
+                        <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselList}"
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
                                 <DataTemplate>
@@ -103,7 +103,6 @@
                         </Grid>
                     </Frame>
                     
-                    <!--最近订单-->
                     <Label Text="最近订单" Style="{DynamicResource SectionTitle}"/>
                     <StackLayout Orientation="Vertical">
                         <Grid HeightRequest="60" Margin="5,0">
@@ -159,7 +158,127 @@
                         </Grid>
                     </StackLayout>
 
-                    <!--推荐拼单列表-->
+                    <!--热门商品-->
+                    <Label Text="热门商品" Style="{DynamicResource SectionTitle}"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout x:Name="HotProductStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                        <Frame Style="{StaticResource BaseFrame}">
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Label Text="{Binding productName}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥"/>
+                                                    <Span Text="{Binding salePrice}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>-->
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ItemTapped_Tapped"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--官方精选-->
+                    <Label Text="官方精选" Style="{DynamicResource SectionTitle}"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding OfficialChoiceList}" Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                        <Frame Style="{StaticResource BaseFrame}">
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Label Text="{Binding productName}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥"/>
+                                                    <Span Text="{Binding salePrice}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--品牌周边-->
+                    <Label Text="品牌周边" Style="{DynamicResource SectionTitle}"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding GoodBrandList}" Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                        <Frame Style="{StaticResource BaseFrame}">
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Label Text="{Binding productName}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥"/>
+                                                    <Span Text="{Binding salePrice}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--品牌精选-->
+                    <Label Text="品牌精选" Style="{DynamicResource SectionTitle}"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding BrandChoiceList}" Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                        <Frame Style="{StaticResource BaseFrame}">
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                        </Frame>
+                                        <Label Text="{Binding productName}" FontSize="Large" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥"/>
+                                                    <Span Text="{Binding salePrice}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+
+                        </StackLayout>
+                    </ScrollView>
+
+                    <!--
                     <Label Text="热门拼单" Style="{DynamicResource SectionTitle}" TextColor="Red"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}" Spacing="0">
@@ -195,7 +314,7 @@
                         </StackLayout>
                     </ScrollView>
 
-                    <!--新品上市列表-->
+
                     <Label Text="新品上市" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding NewProductList}" Spacing="0">
@@ -221,7 +340,7 @@
                         </StackLayout>
                     </ScrollView>
 
-                    <!--热卖商品列表-->
+
                     <Label Text="热卖好货" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
@@ -246,7 +365,7 @@
                         </StackLayout>
                     </ScrollView>
 
-                    <!--正品大牌列表-->
+
                     <Label Text="正品大牌" Style="{DynamicResource SectionTitle}"/>
                     <FlexLayout HeightRequest="220" Wrap="Wrap" JustifyContent="Center" AlignContent="Start" BindableLayout.ItemsSource="{Binding BrandList}">
                         <BindableLayout.ItemTemplate>
@@ -258,7 +377,7 @@
                         </BindableLayout.ItemTemplate>
                     </FlexLayout>
 
-                    <!--专题列表-->
+
                     <Label Text="精彩专题" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding SubjectList}">
@@ -275,7 +394,7 @@
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
                     </ScrollView>
-
+-->
                 </StackLayout>
             </ScrollView>
             

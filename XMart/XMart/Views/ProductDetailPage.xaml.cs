@@ -16,15 +16,35 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetailPage : ContentPage
     {
+        RestService restService = new RestService();
         ProductDetailVM productDetailVM = new ProductDetailVM();
 
-        public ProductDetailPage(ProductInfo productInfo)
+        public ProductDetailPage(string productId)
         {
             InitializeComponent();
 
-            productDetailVM.product = productInfo;
+            InitProductDetailPageAsync(productId);
+            //productDetailVM.product = productInfo;
 
             BindingContext = productDetailVM;
+        }
+
+        private async void InitProductDetailPageAsync(string productId)
+        {
+            try
+            {
+                ProductDetailRD productDetailRD = await restService.GetProductDetail(productId);
+
+                if (productDetailRD.result != null)
+                {
+                    productDetailVM.Product = productDetailRD.result;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         private void CarouselItem_Tapped(object sender, EventArgs e)

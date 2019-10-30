@@ -144,9 +144,9 @@ namespace XMart.Views
             RegisterPara registerPara = new RegisterPara
             {
                 authCode = registerViewModel.AuthCode,
-                //tel = registerViewModel.Tel,
-                //pwd = registerViewModel.Pwd,
-                //username = registerViewModel.UserName
+                tel = registerViewModel.Tel,
+                userPwd = registerViewModel.Pwd,
+                userName = registerViewModel.UserName
             };
 
             SimpleRD simpleRD = await _restService.Register(registerPara);

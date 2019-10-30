@@ -17,7 +17,7 @@ namespace XMart.Views
         {
             InitializeComponent();
 
-            InitCart();
+            //InitCart();
 
             BindingContext = cartViewModel;
         }

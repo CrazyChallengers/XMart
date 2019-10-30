@@ -36,7 +36,7 @@ namespace XMart.Models
         public int productCategoryId { get; set; }    //comment
 
         [JsonProperty("productId")]
-        public int productId { get; set; }    //comment
+        public long productId { get; set; }    //comment
 
         [JsonProperty("productName")]
         public string productName { get; set; }    //comment

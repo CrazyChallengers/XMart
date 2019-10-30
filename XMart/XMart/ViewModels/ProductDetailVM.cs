@@ -7,8 +7,13 @@ namespace XMart.ViewModels
 {
     public class ProductDetailVM : BaseViewModel
     {
-        public ProductInfo product { get; set; }   //商品信息
+        private ProductInfo product;   //comment
 
+        public ProductInfo Product
+        {
+            get { return product; }
+            set { SetProperty(ref product, value); }
+        }
 
         public ProductDetailVM()
         {

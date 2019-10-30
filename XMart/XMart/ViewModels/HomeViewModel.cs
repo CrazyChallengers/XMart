@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 using XMart.Models;
 
@@ -50,14 +51,47 @@ namespace XMart.ViewModels
         }
         */
 
-        private List<HomePanelContent> advertiseList;   //comment
+        private List<HomePanelContent> carouselList;   //comment
 
-        public List<HomePanelContent> AdvertiseList
+        public List<HomePanelContent> CarouselList
         {
-            get { return advertiseList; }
-            set { SetProperty(ref advertiseList, value); }
+            get { return carouselList; }
+            set { SetProperty(ref carouselList, value); }
         }
 
+        private List<HomePanelContent> hotProductList;   //comment
+
+        public List<HomePanelContent> HotProductList
+        {
+            get { return hotProductList; }
+            set { SetProperty(ref hotProductList, value); }
+        }
+
+        private List<HomePanelContent> officialChoiceList;   //comment
+
+        public List<HomePanelContent> OfficialChoiceList
+        {
+            get { return officialChoiceList; }
+            set { SetProperty(ref officialChoiceList, value); }
+        }
+
+        private List<HomePanelContent> goodBrandList;   //comment
+
+        public List<HomePanelContent> GoodBrandList
+        {
+            get { return goodBrandList; }
+            set { SetProperty(ref goodBrandList, value); }
+        }
+
+        private List<HomePanelContent> brandChoiceList;   //comment
+
+        public List<HomePanelContent> BrandChoiceList
+        {
+            get { return brandChoiceList; }
+            set { SetProperty(ref brandChoiceList, value); }
+        }
+
+        public ICommand ItemTapCommand { set; get; }
 
         public HomeViewModel()
         {

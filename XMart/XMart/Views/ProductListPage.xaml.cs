@@ -24,10 +24,10 @@ namespace XMart.Views
 
             productListVM.ProductList = new List<ProductInfo>
             {
-                new ProductInfo{name = "产品一", subTitle="这里是产品一的简介balabala", price = 300.00, pic="circle.png"},
-                new ProductInfo{name = "产品二", subTitle="这里是产品二的简介balabala", price = 300.00, pic="circle.png"},
-                new ProductInfo{name = "产品三", subTitle="这里是产品三的简介balabala", price = 300.00, pic="circle.png"},
-                new ProductInfo{name = "产品四", subTitle="这里是产品四的简介balabala", price = 300.00, pic="circle.png"}
+                new ProductInfo{productName = "产品一", subTitle="这里是产品一的简介balabala", tprice = 300.00, productImageBig="circle.png"},
+                new ProductInfo{productName = "产品二", subTitle="这里是产品二的简介balabala", tprice = 300.00, productImageBig="circle.png"},
+                new ProductInfo{productName = "产品三", subTitle="这里是产品三的简介balabala", tprice = 300.00, productImageBig="circle.png"},
+                new ProductInfo{productName = "产品四", subTitle="这里是产品四的简介balabala", tprice = 300.00, productImageBig="circle.png"}
             };
 
             BindingContext = productListVM;
@@ -44,7 +44,7 @@ namespace XMart.Views
             int index = ItemStack.Children.IndexOf(frame);
 
             ProductInfo productInfo = productListVM.ProductList[index];
-            ProductDetailPage productDetailPage = new ProductDetailPage(productInfo);
+            ProductDetailPage productDetailPage = new ProductDetailPage(productInfo.productId.ToString());
             Navigation.PushModalAsync(productDetailPage);
         }
     }

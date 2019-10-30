@@ -10,7 +10,7 @@ namespace XMart.ResponseData
     public class HomeContentRD : CommonRD
     {
         [JsonProperty("result")]
-        public List<HomeContentDataList> result { get; set; }
+        public HomeContentDataList[] result { get; set; }
     }
 
     public class HomeContentDataList
@@ -50,45 +50,3 @@ namespace XMart.ResponseData
 
     }
 }
-
-/*
- {
-  "code": 0,
-  "message": "string",
-  "result": [
-    {
-      "created": "2019-10-28T03:15:16.235Z",
-      "id": 0,
-      "limitNum": 0,
-      "name": "string",
-      "panelContents": [
-        {
-          "created": "2019-10-28T03:15:16.235Z",
-          "fullUrl": "string",
-          "id": 0,
-          "panelId": 0,
-          "picUrl": "string",
-          "picUrl2": "string",
-          "picUrl3": "string",
-          "productId": 0,
-          "productImageBig": "string",
-          "productName": "string",
-          "salePrice": 0,
-          "sortOrder": 0,
-          "subTitle": "string",
-          "type": 0,
-          "updated": "2019-10-28T03:15:16.236Z"
-        }
-      ],
-      "position": 0,
-      "remark": "string",
-      "sortOrder": 0,
-      "status": 0,
-      "type": 0,
-      "updated": "2019-10-28T03:15:16.236Z"
-    }
-  ],
-  "success": true,
-  "timestamp": 0
-}
-     */

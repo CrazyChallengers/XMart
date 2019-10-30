@@ -45,7 +45,7 @@
 
             <StackLayout VerticalOptions="EndAndExpand">
                 <Frame>
-                    <controls:MyEntry x:Name="account" Placeholder="手机号" Text="{Binding Tel}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="用户名" Text="{Binding Tel}"/>
                 </Frame>
 
                 <Frame>
