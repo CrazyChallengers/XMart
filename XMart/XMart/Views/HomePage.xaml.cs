@@ -62,6 +62,7 @@ namespace XMart.Views
             homeViewModel.OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
             homeViewModel.GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
             homeViewModel.BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
+
         }
 
         /// <summary>
