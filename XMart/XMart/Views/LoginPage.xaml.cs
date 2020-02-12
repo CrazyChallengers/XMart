@@ -99,10 +99,10 @@ namespace XMart.Views
         {
             LoginPara loginPara = new LoginPara
             {
-                userName = loginViewModel.Tel,
+                //userName = loginViewModel.Tel,
                 userPwd = loginViewModel.Pwd,
                 authCode = "",
-                tel = ""
+                tel = loginViewModel.Tel
             };
 
             LoginRD loginRD = await _restService.Login(loginPara);

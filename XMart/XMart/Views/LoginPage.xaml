@@ -41,7 +41,7 @@
     <ContentPage.Content>
         <StackLayout>
             <ff:CachedImage Source="xmart_logo2.png" VerticalOptions="EndAndExpand"/>
-            <Label Text="欢迎使用XMart原材料智能采购平台！" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" FontSize="Large"/>
+            <Label Text="欢迎使用万联家具批发平台！" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" FontSize="Large"/>
 
             <StackLayout VerticalOptions="EndAndExpand">
                 <Frame>

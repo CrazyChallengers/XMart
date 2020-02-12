@@ -15,8 +15,8 @@ namespace XMart.Services
         HttpClient _client = new HttpClient();
         string rootUrl = "http://118.24.96.42:8082";    //旧
         string rootUrl2 = "http://118.24.96.42:8083";    //新
-        string rootUrl3 = "http://101.37.205.58:7777";    //更新
-
+        string rootUrl3 = "http://120.26.3.153:7777";    //更新
+        
         public RestService()
         {
 
@@ -91,7 +91,7 @@ namespace XMart.Services
         /// <returns></returns>
         public async Task<SimpleRD> Register(RegisterPara registerPara)
         {
-            string url = rootUrl3 + "/member/register";
+            string url = rootUrl3 + "/member/registerByInvite";
 
             string httpContent = JsonConvert.SerializeObject(registerPara);
 
@@ -128,7 +128,7 @@ namespace XMart.Services
         /// <returns></returns>
         public async Task<LoginRD> Login(LoginPara loginPara)
         {
-            string url = rootUrl3 + "/member/login";
+            string url = rootUrl3 + "/member/loginByTel";
 
             string httpContent = JsonConvert.SerializeObject(loginPara);
 

@@ -16,7 +16,13 @@ namespace XMart.Models
         [JsonProperty("tel")]
         public string tel { get; set; }   //手机号
 
-        [JsonProperty("userName")]
-        public string userName { get; set; }   //用户名
+        //[JsonProperty("userName")]
+        //public string userName { get; set; }   //用户名
+
+        [JsonProperty("userType")]
+        public string userType { get; set; }   //用户类型
+
+        [JsonProperty("invitePhone")]
+        public string invitePhone { get; set; }   //邀请码
     }
 }

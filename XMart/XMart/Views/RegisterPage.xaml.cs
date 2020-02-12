@@ -95,13 +95,12 @@ namespace XMart.Views
                 CrossToastPopUp.Current.ShowToastWarning("手机号格式错误，请重新输入！", ToastLength.Long);
                 return false;
             }
-
-
+            /*
             if (string.IsNullOrWhiteSpace(registerViewModel.UserName))
             {
                 CrossToastPopUp.Current.ShowToastWarning("用户名不能为空，请输入！", ToastLength.Long);
                 return false;
-            }
+            }*/
 
             if (string.IsNullOrWhiteSpace(registerViewModel.Pwd))
             {
@@ -118,6 +117,12 @@ namespace XMart.Views
             if (registerViewModel.Pwd != registerViewModel.SecondPwd)
             {
                 CrossToastPopUp.Current.ShowToastWarning("两次输入密码不一致，请检查！", ToastLength.Long);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(registerViewModel.InvitePhone))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("邀请码不能为空，请输入！", ToastLength.Long);
                 return false;
             }
 
@@ -146,8 +151,11 @@ namespace XMart.Views
                 authCode = registerViewModel.AuthCode,
                 tel = registerViewModel.Tel,
                 userPwd = registerViewModel.Pwd,
-                userName = registerViewModel.UserName
+                //userName = registerViewModel.UserName,
+                invitePhone = registerViewModel.InvitePhone
             };
+
+            registerPara.userType = CustomerRadio.IsChecked ? "0" : "1";
 
             SimpleRD simpleRD = await _restService.Register(registerPara);
 

@@ -13,8 +13,8 @@ namespace XMart.Models
         [JsonProperty("tel")]
         public string tel { get; set; }   //comment
 
-        [JsonProperty("userName")]
-        public string userName { get; set; }   //comment
+        //[JsonProperty("userName")]
+        //public string userName { get; set; }   //comment
 
         [JsonProperty("userPwd")]
         public string userPwd { get; set; }   //comment

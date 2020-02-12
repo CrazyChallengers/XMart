@@ -57,6 +57,14 @@ namespace XMart.ViewModels
             set { SetProperty(ref authCodeButtonText, value); }
         }
 
+        private string invitePhone;   //邀请手机号
+
+        public string InvitePhone
+        {
+            get { return invitePhone; }
+            set { SetProperty(ref invitePhone, value); }
+        }
+
         private bool isEnable;   //可否点击
 
         public bool IsEnable

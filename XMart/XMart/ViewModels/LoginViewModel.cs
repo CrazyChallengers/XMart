@@ -30,7 +30,6 @@ namespace XMart.ViewModels
             set { SetProperty(ref isRememberPwd, value); }
         }
 
-
         public LoginViewModel()
         {
 

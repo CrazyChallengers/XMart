@@ -14,6 +14,9 @@ namespace XMart.Models
         [JsonProperty("username", NullValueHandling = NullValueHandling.Ignore)]
         public string username { get; set; }   //comment
 
+        [JsonProperty("userType", NullValueHandling = NullValueHandling.Ignore)]
+        public string userType { get; set; }   //comment
+
         [JsonProperty("address", NullValueHandling = NullValueHandling.Ignore)]
         public string address { get; set; }   //comment
 
