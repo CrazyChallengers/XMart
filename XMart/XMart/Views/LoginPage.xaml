@@ -55,18 +55,24 @@
                 <StackLayout WidthRequest="250" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
                     <Label Text="密码忘了？" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
                         <Label.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="FogotPwd" NumberOfTapsRequired="1" Tapped="FogotPwd_Tapped"/>
+                            <TapGestureRecognizer x:Name="FogotPwd" NumberOfTapsRequired="1" Command="{Binding FindPwdCommand}"/>
                         </Label.GestureRecognizers>
                     </Label>
                     <CheckBox x:Name="RememberPwd" IsChecked="{Binding IsRememberPwd}" HorizontalOptions="EndAndExpand"
                               CheckedChanged="RememberPwd_CheckedChanged" Color="{StaticResource MainColor}"/>
+                    <!--
+                    <CheckBox.Triggers>
+                        <EventTrigger Event="CheckedChanged">
+                            <controls:RememberPwdAction/>
+                        </EventTrigger>
+                    </CheckBox.Triggers>-->
+                    
                     <Label Text="记住密码" HorizontalOptions="End" VerticalOptions="CenterAndExpand" TextColor="Black"/>
                 </StackLayout>
 
                 <Button x:Name="LoginButton" Text="登录" BackgroundColor="{StaticResource MainColor}" TextColor="White"
-                        Clicked="LoginButton_Clicked"/>
-                <Button x:Name="RegisterButton" Text="注册" BackgroundColor="Transparent"
-                        Clicked="RegisterButton_Clicked"/>
+                        Command="{Binding LoginCommand}"/>
+                <Button x:Name="RegisterButton" Text="注册" BackgroundColor="Transparent" Command="{Binding ToRegisterPageCommand}"/>
             </StackLayout>
 
             <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">

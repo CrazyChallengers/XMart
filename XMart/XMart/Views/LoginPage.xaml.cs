@@ -15,7 +15,7 @@ namespace XMart.Views
 	public partial class LoginPage : ContentPage
 	{
         LoginViewModel loginViewModel = new LoginViewModel();
-        RestService _restService = new RestService();
+        //RestService _restService = new RestService();
         string fileName;
 
         public LoginPage ()
@@ -37,98 +37,12 @@ namespace XMart.Views
                 {
                     loginViewModel.Tel = tel;
                     loginViewModel.Pwd = pwd;
-                    RememberPwd.IsChecked = true;
+                    loginViewModel.IsRememberPwd = true;
                 }
                 else
                 {
                     //input pwd
                 }
-            }
-        }
-
-        /// <summary>
-        /// 跳转到注册页面
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RegisterButton_Clicked(object sender, EventArgs e)
-        {
-            RegisterPage registerPage = new RegisterPage();
-
-            Navigation.PushModalAsync(registerPage);
-        }
-
-        /// <summary>
-        /// 登录按钮事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void LoginButton_Clicked(object sender, EventArgs e)
-        {
-            if (CheckInput())
-            {
-                OnLogin();
-            }
-        }
-
-        /// <summary>
-        /// 检查输入
-        /// </summary>
-        /// <returns></returns>
-        private bool CheckInput()
-        {
-            if (string.IsNullOrWhiteSpace(loginViewModel.Tel))
-            {
-                CrossToastPopUp.Current.ShowToastWarning("手机号不能为空，请输入！", ToastLength.Long);
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(loginViewModel.Pwd))
-            {
-                CrossToastPopUp.Current.ShowToastWarning("密码不能为空，请输入！", ToastLength.Long);
-                return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// 登录
-        /// </summary>
-        private async void OnLogin()
-        {
-            LoginPara loginPara = new LoginPara
-            {
-                //userName = loginViewModel.Tel,
-                userPwd = loginViewModel.Pwd,
-                authCode = "",
-                tel = loginViewModel.Tel
-            };
-
-            LoginRD loginRD = await _restService.Login(loginPara);
-
-            /*
-            if (loginRD.code == 200)
-            {
-                CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
-
-                MainPage mainPage = new MainPage();
-                await Navigation.PushModalAsync(mainPage);
-            }
-            else
-            {
-                CrossToastPopUp.Current.ShowToastError(loginRD.message, ToastLength.Long);
-            }*/
-            if (loginRD.result.message == null)
-            {
-                CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
-
-                MainPage mainPage = new MainPage();
-                await Navigation.PushModalAsync(mainPage);
-            }
-            else
-            {
-                CrossToastPopUp.Current.ShowToastError(loginRD.result.message, ToastLength.Long);
             }
         }
 
@@ -160,16 +74,5 @@ namespace XMart.Views
             }
         }
 
-        /// <summary>
-        /// 忘记密码tap事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void FogotPwd_Tapped(object sender, EventArgs e)
-        {
-            ResetPwdPage resetPwdPage = new ResetPwdPage();
-
-            Navigation.PushModalAsync(resetPwdPage);
-        }
     }
 }

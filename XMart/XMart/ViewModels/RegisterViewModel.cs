@@ -1,8 +1,13 @@
-﻿using System;
+﻿using Plugin.Toast;
+using Plugin.Toast.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XMart.Models;
+using XMart.ResponseData;
+using XMart.Services;
 using XMart.Util;
 
 namespace XMart.ViewModels
@@ -10,7 +15,6 @@ namespace XMart.ViewModels
     public class RegisterViewModel : BaseViewModel
     {
         private string tel;   //手机号
-
         public string Tel
         {
             get { return tel; }
@@ -18,7 +22,6 @@ namespace XMart.ViewModels
         }
 
         private string authCode;   //验证码
-
         public string AuthCode
         {
             get { return authCode; }
@@ -26,7 +29,6 @@ namespace XMart.ViewModels
         }
 
         private string userName;   //用户名
-
         public string UserName
         {
             get { return userName; }
@@ -34,7 +36,6 @@ namespace XMart.ViewModels
         }
 
         private string pwd;   //密码
-
         public string Pwd
         {
             get { return pwd; }
@@ -42,7 +43,6 @@ namespace XMart.ViewModels
         }
 
         private string secondPwd;   //确认密码
-
         public string SecondPwd
         {
             get { return secondPwd; }
@@ -50,7 +50,6 @@ namespace XMart.ViewModels
         }
 
         private string authCodeButtonText;   //comment
-
         public string AuthCodeButtonText
         {
             get { return authCodeButtonText; }
@@ -58,7 +57,6 @@ namespace XMart.ViewModels
         }
 
         private string invitePhone;   //邀请手机号
-
         public string InvitePhone
         {
             get { return invitePhone; }
@@ -66,7 +64,6 @@ namespace XMart.ViewModels
         }
 
         private bool isEnable;   //可否点击
-
         public bool IsEnable
         {
             get { return isEnable; }
@@ -74,22 +71,54 @@ namespace XMart.ViewModels
         }
 
         private Color buttonColor;   //发送验证码按钮颜色
-
         public Color ButtonColor
         {
             get { return buttonColor; }
             set { SetProperty(ref buttonColor, value); }
         }
 
-        public long Tick { get; set; }
+        private bool isCustomerChecked;   //
+        public bool IsCustomerChecked
+        {
+            get { return isCustomerChecked; }
+            set { SetProperty(ref isCustomerChecked, value); }
+        }
 
+        private bool isDesignerChecked;   //
+        public bool IsDesignerChecked
+        {
+            get { return isDesignerChecked; }
+            set { SetProperty(ref isDesignerChecked, value); }
+        }
+
+        public long Tick { get; set; }
         public MyTimer myTimer { get; set; }
+        RestService _restService = new RestService();
+
+        public Command SendAuthCodeCommand { get; private set; }
+        public Command RegisterCommand { get; private set; }
 
         public RegisterViewModel()
         {
             AuthCodeButtonText = "发送验证码";
             IsEnable = true;
             ButtonColor = Color.FromHex("FFCC00");
+
+            SendAuthCodeCommand = new Command(() =>
+            {
+                OnACButtonClicked();
+
+                myTimer = new MyTimer { EndDate = DateTime.Now.Add(new TimeSpan(900000000)) };
+                LoadAsync();
+            }, () => { return true; });
+
+            RegisterCommand = new Command(() =>
+            {
+                if (CheckInput())
+                {
+                    OnRegister();
+                }
+            }, () => { return true; });
         }
 
         public void LoadAsync()
@@ -107,7 +136,6 @@ namespace XMart.ViewModels
             myTimer.Ticked -= OnCountdownTicked;
             myTimer.Completed -= OnCountdownCompleted;
             return Task.CompletedTask;
-
         }
 
         void OnCountdownTicked()
@@ -121,6 +149,120 @@ namespace XMart.ViewModels
             IsEnable = true;
             ButtonColor = Color.FromHex("FFCC00");
             UnloadAsync();
+        }
+
+        /// <summary>
+        /// 响应发送验证码
+        /// </summary>
+        private async void OnACButtonClicked()
+        {
+            if (string.IsNullOrWhiteSpace(Tel) || !Tools.IsPhoneNumber(Tel))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("请检查手机号！", ToastLength.Long);
+                return;
+            }
+
+            SimpleRD simpleRD = await _restService.SendAuthCode(Tel);
+
+            if (simpleRD.code == 200)
+            {
+                CrossToastPopUp.Current.ShowToastSuccess(simpleRD.message + "，请注意查收！", ToastLength.Long);
+            }
+            else
+            {
+                CrossToastPopUp.Current.ShowToastError(simpleRD.message, ToastLength.Long);
+            }
+        }
+
+        /// <summary>
+        /// 检查输入
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckInput()
+        {
+            if (string.IsNullOrWhiteSpace(Tel))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("手机号不能为空，请输入！", ToastLength.Long);
+                return false;
+            }
+
+            if (!Tools.IsPhoneNumber(Tel))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("手机号格式错误，请重新输入！", ToastLength.Long);
+                return false;
+            }
+            /*
+            if (string.IsNullOrWhiteSpace(registerViewModel.UserName))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("用户名不能为空，请输入！", ToastLength.Long);
+                return false;
+            }*/
+
+            if (string.IsNullOrWhiteSpace(Pwd))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("密码不能为空，请输入！", ToastLength.Long);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(SecondPwd))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("确认密码不能为空，请输入！", ToastLength.Long);
+                return false;
+            }
+
+            if (Pwd != SecondPwd)
+            {
+                CrossToastPopUp.Current.ShowToastWarning("两次输入密码不一致，请检查！", ToastLength.Long);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(InvitePhone))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("邀请码不能为空，请输入！", ToastLength.Long);
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(AuthCode))
+            {
+                CrossToastPopUp.Current.ShowToastWarning("验证码不能为空，请输入！", ToastLength.Long);
+                return false;
+            }
+
+            if (AuthCode.Length < 6)
+            {
+                CrossToastPopUp.Current.ShowToastWarning("验证码长度为6位，请检查！", ToastLength.Long);
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 注册
+        /// </summary>
+        private async void OnRegister()
+        {
+            RegisterPara registerPara = new RegisterPara
+            {
+                authCode = AuthCode,
+                tel = Tel,
+                userPwd = Pwd,
+                //userName = registerViewModel.UserName,
+                invitePhone = InvitePhone
+            };
+
+            registerPara.userType = IsCustomerChecked ? "0" : "1";
+
+            SimpleRD simpleRD = await _restService.Register(registerPara);
+
+            if (simpleRD.code == 200)
+            {
+                CrossToastPopUp.Current.ShowToastSuccess(simpleRD.message, ToastLength.Long);
+            }
+            else
+            {
+                CrossToastPopUp.Current.ShowToastError(simpleRD.message, ToastLength.Long);
+            }
         }
     }
 }
