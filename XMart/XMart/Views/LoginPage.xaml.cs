@@ -24,6 +24,7 @@ namespace XMart.Views
 
             BindingContext = loginViewModel;
 
+            /*
             fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
 
             if (File.Exists(fileName))
@@ -43,9 +44,10 @@ namespace XMart.Views
                 {
                     //input pwd
                 }
-            }
+            }*/
         }
 
+        /*
         /// <summary>
         /// 记住密码
         /// </summary>
@@ -72,7 +74,7 @@ namespace XMart.Views
             {
                 //await DisplayAlert("错误", "请输入账号及密码！", "OK");
             }
-        }
+        }*/
 
     }
 }

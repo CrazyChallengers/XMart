@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
              xmlns:controls="clr-namespace:XMart.Controls"
              x:Class="XMart.Views.RegisterPage">
 
@@ -50,8 +51,8 @@
         <Grid x:Name="MainGrid">
 
             <StackLayout VerticalOptions="FillAndExpand">
-                <ff:CachedImage Source="login_bg.png" VerticalOptions="Start" Aspect="AspectFill"/>
-                <ff:CachedImage Source="xmart_logo2.png" VerticalOptions="Start"/>
+                <!--<ff:CachedImage Source="login_bg.png" VerticalOptions="Start" Aspect="AspectFill"/>-->
+                <ff:CachedImage Source="xmart_logo2.png" VerticalOptions="EndAndExpand"/>
                 <Label Text="注册" FontSize="24" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
                 <Label Text="欢迎注册万联家具批发平台！" FontSize="Large" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
                 
@@ -74,7 +75,7 @@
                     <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
                         <Label Text="客户" Style="{DynamicResource LabelStyle}" WidthRequest="150">
                             <Label.Behaviors>
-                                <controls:RadioBehavior x:Name="CustomerRadio" GroupName="IdentityRadio" IsChecked="{Binding IsCustomerChecked}"/>
+                                <behaviors:RadioBehavior x:Name="CustomerRadio" GroupName="IdentityRadio" IsChecked="True"/>
                             </Label.Behaviors>
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference CustomerRadio}, Path=IsChecked}" Value="True">
@@ -87,7 +88,8 @@
 
                         <Label Text="设计师" Style="{DynamicResource LabelStyle}" WidthRequest="150">
                             <Label.Behaviors>
-                                <controls:RadioBehavior x:Name="DesignerRadio" GroupName="IdentityRadio" IsChecked="{Binding IsDesignerChecked}"/>
+                                <behaviors:RadioBehavior x:Name="DesignerRadio" GroupName="IdentityRadio"/>
+                                <behaviors:EventToCommandBehavior EventName="PropertyChanged" Command="{Binding SelectedIdentityCommand}" CommandParameter="{Binding Source={x:Reference DesignerRadio}, Path=IsChecked}"/>
                             </Label.Behaviors>
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference DesignerRadio}, Path=IsChecked}" Value="True">
@@ -132,9 +134,9 @@
                 <Button x:Name="RegisterButton" Text="确定注册" VerticalOptions="StartAndExpand" Command="{Binding RegisterCommand}"/>
             </StackLayout>
 
-            <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Transparent"
+            <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="LightGray"
                      HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="StartAndExpand"
-                     HorizontalOptions="StartAndExpand" Margin="20,40" Clicked="BackButton_Clicked"/>
+                     HorizontalOptions="StartAndExpand" Margin="20,40" Command="{Binding BackCommand}"/>
 
         </Grid>
     </ContentPage.Content>

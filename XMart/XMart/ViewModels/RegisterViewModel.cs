@@ -77,26 +77,16 @@ namespace XMart.ViewModels
             set { SetProperty(ref buttonColor, value); }
         }
 
-        private bool isCustomerChecked;   //
-        public bool IsCustomerChecked
-        {
-            get { return isCustomerChecked; }
-            set { SetProperty(ref isCustomerChecked, value); }
-        }
-
-        private bool isDesignerChecked;   //
-        public bool IsDesignerChecked
-        {
-            get { return isDesignerChecked; }
-            set { SetProperty(ref isDesignerChecked, value); }
-        }
+        private bool IsDesignerChecked { get; set; }
 
         public long Tick { get; set; }
         public MyTimer myTimer { get; set; }
         RestService _restService = new RestService();
 
-        public Command SendAuthCodeCommand { get; private set; }
-        public Command RegisterCommand { get; private set; }
+        public Command SendAuthCodeCommand { get; private set; }   //发送验证码
+        public Command RegisterCommand { get; private set; }   //注册
+        public Command<bool> SelectedIdentityCommand { get; private set; }   //选择注册身份
+        public Command BackCommand { get; private set; }   //返回上一页
 
         public RegisterViewModel()
         {
@@ -118,6 +108,24 @@ namespace XMart.ViewModels
                 {
                     OnRegister();
                 }
+            }, () => { return true; });
+
+            SelectedIdentityCommand = new Command<bool>((bool isChecked) =>
+            {
+                IsDesignerChecked = isChecked;
+                if (IsDesignerChecked)
+                {
+                    CrossToastPopUp.Current.ShowToastWarning("您将要注册成为设计师！", ToastLength.Long);
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastWarning("您将要注册成为客户！", ToastLength.Long);
+                }
+            }, (bool fuck) => { return true; });
+
+            BackCommand = new Command(() =>
+            {
+                Application.Current.MainPage.Navigation.PopModalAsync();
             }, () => { return true; });
         }
 
@@ -251,7 +259,7 @@ namespace XMart.ViewModels
                 invitePhone = InvitePhone
             };
 
-            registerPara.userType = IsCustomerChecked ? "0" : "1";
+            registerPara.userType = IsDesignerChecked ? "1" : "0";
 
             SimpleRD simpleRD = await _restService.Register(registerPara);
 

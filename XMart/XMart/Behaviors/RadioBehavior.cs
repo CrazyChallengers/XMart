@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Xamarin.Forms;
 
-namespace XMart.Controls
+namespace XMart.Behaviors
 {
     public class RadioBehavior : Behavior<View>
     {

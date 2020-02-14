@@ -28,16 +28,5 @@ namespace XMart.Views
             BindingContext = registerViewModel;
         }
 
-
-        /// <summary>
-        /// 返回按钮事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BackButton_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PopModalAsync();
-        }
-
     }
 }

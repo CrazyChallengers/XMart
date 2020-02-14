@@ -36,18 +36,36 @@ namespace XMart.ViewModels
         }
 
         private RestService _restService = new RestService();
+        string fileName;
 
-        public Command ToRegisterPageCommand { get; private set; }
-
-        public Command LoginCommand { get; private set; }
-
-        public Command RememberPwdCommand { get; private set; }
-
-        public Command FindPwdCommand { get; private set; }
+        public Command ToRegisterPageCommand { get; private set; }   //跳转到注册页面
+        public Command LoginCommand { get; private set; }   //登录按钮
+        public Command RememberPwdCommand { get; private set; }   //记住密码
+        public Command FindPwdCommand { get; private set; }   //跳转到找回密码页面
 
         public LoginViewModel()
         {
-            
+            //初始化，检查是否存在已记住的密码
+            fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+
+            if (File.Exists(fileName))
+            {
+                string[] text = File.ReadAllLines(fileName);
+                string check = text[0].Substring(6);
+                string tel = text[1].Substring(8);
+                string pwd = text[2].Substring(9);
+
+                if (check == "Checked")
+                {
+                    Tel = tel;
+                    Pwd = pwd;
+                    IsRememberPwd = true;
+                }
+                else
+                {
+                    //input pwd
+                }
+            }
 
             ToRegisterPageCommand = new Command(() =>
             {
@@ -62,7 +80,6 @@ namespace XMart.ViewModels
                 }
             }, () => { return true; });
 
-            /*
             RememberPwdCommand = new Command(() =>
             {
                 string text = "";
@@ -84,13 +101,12 @@ namespace XMart.ViewModels
                 {
                     //await DisplayAlert("错误", "请输入账号及密码！", "OK");
                 }
-            }, () => { return true; });*/
+            }, () => { return true; });
 
             FindPwdCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PushModalAsync(new ResetPwdPage());
             }, () => { return true; });
-
 
         }
 
