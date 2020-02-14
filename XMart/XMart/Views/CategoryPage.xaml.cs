@@ -7,6 +7,7 @@ using XMart.ViewModels;
 using XMart.Services;
 using XMart.ResponseData;
 using XMart.Models;
+using XMart.Behaviors;
 
 namespace XMart.Views
 {

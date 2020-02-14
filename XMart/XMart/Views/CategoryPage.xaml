@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:tb="clr-namespace:Xam.Plugin.TabView;assembly=Xam.Plugin.TabView"
              x:Class="XMart.Views.CategoryPage"
-             xmlns:util="clr-namespace:XMart.Util"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
              xmlns:controls="clr-namespace:XMart.Controls"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Icon="Resource/drawable/category.png"
@@ -62,7 +61,7 @@
                         <DataTemplate>
                             <Label Text="{Binding name}" Style="{DynamicResource ParentLabel}">
                                 <Label.Behaviors>
-                                    <util:RadioBehavior x:Name="ParentRadio" GroupName="ParentGroup"/>
+                                    <behaviors:RadioBehavior x:Name="ParentRadio" GroupName="ParentGroup"/>
                                 </Label.Behaviors>
                                 <Label.Triggers>
                                     <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ParentRadio}, Path=IsChecked}" Value="True">
