@@ -59,13 +59,29 @@ namespace XMart.Services
         /// <returns></returns>
         public async Task<CategoryRD> GetCategories()
         {
-            string url = rootUrl2 + "/ProductCategory/getXProductCategory";
+            string url = rootUrl3 + "/goods/SearchAllItemCat";
 
             string responseBody = await GetStringDataAsync(url);
 
             CategoryRD categoryRD = JsonConvert.DeserializeObject<CategoryRD>(responseBody);
 
             return categoryRD;
+        }
+
+        public async Task<ProductListRD> GetProductList(int page, int size, string sort, long cid, int priceGt, int priceLte)
+        {
+            string url = rootUrl3 + "/goods/allGoods?page=" + page.ToString()
+                + "&size=" + size.ToString()
+                + "&sort=" + sort
+                + "&cid=" + cid.ToString()
+                + "&priceGt=" + priceGt.ToString()
+                + "&priceLte=" + priceLte.ToString();
+
+            string responseBody = await GetStringDataAsync(url);
+
+            ProductListRD productListRD = JsonConvert.DeserializeObject<ProductListRD>(responseBody);
+
+            return productListRD;
         }
 
         /// <summary>

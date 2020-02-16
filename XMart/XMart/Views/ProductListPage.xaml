@@ -60,14 +60,14 @@
                                         <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding pic}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding name}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImageBig}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" Text="{Binding subTitle}" FontSize="Medium"/>
                                     <Label Grid.Row="2" Grid.Column="1" FontSize="Large" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥"/>
-                                                <Span Text="{Binding price}"/>
+                                                <Span Text="{Binding salePrice}"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

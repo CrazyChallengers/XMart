@@ -16,16 +16,18 @@ namespace XMart.Views
 	{
         RestService _restService = new RestService();
         CategoryViewModel categoryViewModel = new CategoryViewModel();
-        List<SubCategoryInfo> subCategoryList = new List<SubCategoryInfo>();
+        List<Category> categoryList = new List<Category>();
 
 		public CategoryPage ()
 		{
 			InitializeComponent ();
 
-            //InitCategories();
+            InitCategories();
 
             BindingContext = categoryViewModel;
-		}
+
+            //ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
+        }
 
         /// <summary>
         /// 初始化
@@ -34,14 +36,16 @@ namespace XMart.Views
         {
             CategoryRD categoryRD = await _restService.GetCategories();
 
-            categoryViewModel.ParentCategoryList = categoryRD.data.parents;
-            subCategoryList = categoryRD.data.categories;
+            //categoryViewModel.ParentCategoryList = categoryRD.result.parents;
+            //subCategoryList = categoryRD.data.categories;
 
-            List<SubCategoryInfo> temp = new List<SubCategoryInfo>();
+            categoryList = categoryRD.result;
+
+            List<Category> temp = new List<Category>();
             
-            foreach (var item in subCategoryList)
+            foreach (var item in categoryList)
             {
-                if (item.parentId == 1)
+                if (item.isParent)
                 {
                     temp.Add(item);
                 }
@@ -52,7 +56,7 @@ namespace XMart.Views
                 SubCategoryInfo sub = new SubCategoryInfo { id = i, name = "类别1-" + i, parentId = 1 };
                 temp.Add(sub);
             }*/
-            categoryViewModel.SubCategoryList = temp;
+            categoryViewModel.ParentCategoryList = temp;
 
             ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
         }
@@ -70,9 +74,9 @@ namespace XMart.Views
 
             int selectedParentId = categoryViewModel.ParentCategoryList[index].id;
 
-            List<SubCategoryInfo> temp = new List<SubCategoryInfo>();
+            List<Category> temp = new List<Category>();
            
-            foreach (var item in subCategoryList)
+            foreach (var item in categoryList)
             {
                 if (item.parentId == selectedParentId)
                 {
@@ -98,7 +102,7 @@ namespace XMart.Views
             StackLayout stackLayout = sender as StackLayout;
             int index = SubStack.Children.IndexOf(stackLayout);
 
-            SubCategoryInfo subCategoryInfo = categoryViewModel.SubCategoryList[index];
+            Category subCategoryInfo = categoryViewModel.SubCategoryList[index];
             ProductListPage productListPage = new ProductListPage(subCategoryInfo);
             Navigation.PushModalAsync(productListPage);
         }

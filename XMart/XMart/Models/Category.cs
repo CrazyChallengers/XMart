@@ -7,43 +7,36 @@ namespace XMart.Models
 {
     public class Category
     {
-        [JsonProperty("categories")]
-        public List<SubCategoryInfo> categories { get; set; }   //comment
+        [JsonProperty("created")]
+        public string created { get; set; }   //Comment
 
-        [JsonProperty("parents")]
-        public List<ParentCategoryInfo> parents { get; set; }   //comment
-
-    }
-
-    public class ParentCategoryInfo
-    {
-        [JsonProperty("description")]
-        public string description { get; set; }   //comment
-
-        [JsonProperty("id")]
-        public int id { get; set; }   //comment
-
-        [JsonProperty("name")]
-        public string name { get; set; }   //comment
-
-    }
-
-    public class SubCategoryInfo
-    {
         [JsonProperty("icon")]
-        public string icon { get; set; }   //comment
+        public string icon { get; set; }   //Comment
 
         [JsonProperty("id")]
-        public int id { get; set; }   //comment
+        public int id { get; set; }   //Comment
+
+        [JsonProperty("isParent")]
+        public bool isParent { get; set; }   //Comment
 
         [JsonProperty("name")]
-        public string name { get; set; }   //comment
+        public string name { get; set; }   //Comment
 
         [JsonProperty("parentId")]
-        public int parentId { get; set; }   //comment
+        public int parentId { get; set; }   //Comment
 
-        [JsonProperty("unit")]
-        public string unit { get; set; }   //comment
+        [JsonProperty("remark")]
+        public string remark { get; set; }   //Comment
+
+        [JsonProperty("sortOrder")]
+        public int sortOrder { get; set; }   //Comment
+
+        [JsonProperty("status")]
+        public int status { get; set; }   //Comment
+
+        [JsonProperty("updated")]
+        public string updated { get; set; }   //Comment
 
     }
+
 }

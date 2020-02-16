@@ -53,31 +53,30 @@
             </StackLayout>
 
             <!--一级分类-->
-            <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseFrame}">
+            <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseFrame}" VerticalOptions="Start">
                 <ScrollView BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
-                
-                <StackLayout x:Name="ParentStack" BindableLayout.ItemsSource="{Binding ParentCategoryList}" Orientation="Vertical">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding name}" Style="{DynamicResource ParentLabel}">
-                                <Label.Behaviors>
-                                    <behaviors:RadioBehavior x:Name="ParentRadio" GroupName="ParentGroup"/>
-                                </Label.Behaviors>
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ParentRadio}, Path=IsChecked}" Value="True">
-                                        <Setter Property="TextColor" Value="{StaticResource MainColor}" />
-                                        <Setter Property="FontSize" Value="Large" />
-                                        <Setter Property="FontAttributes" Value="Bold"/>
-                                    </DataTrigger>
-                                </Label.Triggers>
-                                <Label.GestureRecognizers>
-                                    <TapGestureRecognizer x:Name="ParentGR" NumberOfTapsRequired="1" Tapped="ParentGR_Tapped"/>
-                                </Label.GestureRecognizers>
-                            </Label>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </StackLayout>
-            </ScrollView>
+                    <StackLayout x:Name="ParentStack" BindableLayout.ItemsSource="{Binding ParentCategoryList}" Orientation="Vertical">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Label Text="{Binding name}" Style="{DynamicResource ParentLabel}">
+                                    <Label.Behaviors>
+                                        <behaviors:RadioBehavior x:Name="ParentRadio" GroupName="ParentGroup"/>
+                                    </Label.Behaviors>
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ParentRadio}, Path=IsChecked}" Value="True">
+                                            <Setter Property="TextColor" Value="{StaticResource MainColor}" />
+                                            <Setter Property="FontSize" Value="Large" />
+                                            <Setter Property="FontAttributes" Value="Bold"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                    <Label.GestureRecognizers>
+                                            <TapGestureRecognizer x:Name="ParentGR" NumberOfTapsRequired="1" Tapped="ParentGR_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                </Label>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </ScrollView>
             </Frame>
             
             <!--二级分类-->
@@ -86,7 +85,7 @@
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
-                                <Frame CornerRadius="5" Style="{StaticResource BaseFrame}">
+                                <Frame CornerRadius="5" Style="{StaticResource BaseFrame}" BackgroundColor="AntiqueWhite">
                                     <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
                                 </Frame>
                                 <Label Text="{Binding name}" Style="{DynamicResource SubLabel}"/>
