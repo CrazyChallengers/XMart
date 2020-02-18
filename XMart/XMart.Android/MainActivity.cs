@@ -15,6 +15,11 @@ namespace XMart.Droid
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
+            Resources.DisplayMetrics.ScaledDensity = 1;//告诉android不要把自己大小单位缩放
+            //Resources.DisplayMetrics.Density = 1;
+            App.ScreenWidth = Resources.DisplayMetrics.WidthPixels;
+            App.ScreenHeight = Resources.DisplayMetrics.HeightPixels;
+
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
             {
                 //透明状态栏                

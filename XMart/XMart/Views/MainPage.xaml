@@ -9,7 +9,7 @@
             xmlns:local="clr-namespace:XMart"
             xmlns:views="clr-namespace:XMart.Views"
             x:Class="XMart.Views.MainPage">
-    
+
     <views:HomePage/>
     <views:CategoryPage/>
     <views:CartPage/>

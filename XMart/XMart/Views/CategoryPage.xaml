@@ -12,7 +12,7 @@
         <Style x:Key="ParentLabel" TargetType="Label">
             <Setter Property="HeightRequest" Value="40"/>
             <Setter Property="WidthRequest" Value="100"/>
-            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -20,7 +20,7 @@
         </Style>
         <Style x:Key="SubLabel" TargetType="Label">
             <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="FontSize" Value="Medium"/>
+            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -65,7 +65,7 @@
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ParentRadio}, Path=IsChecked}" Value="True">
                                             <Setter Property="TextColor" Value="{StaticResource MainColor}" />
-                                            <Setter Property="FontSize" Value="Large" />
+                                            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[26]}" />
                                             <Setter Property="FontAttributes" Value="Bold"/>
                                         </DataTrigger>
                                     </Label.Triggers>
@@ -88,7 +88,7 @@
                                 <Frame CornerRadius="5" Style="{StaticResource BaseFrame}" BackgroundColor="AntiqueWhite">
                                     <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
                                 </Frame>
-                                <Label Text="{Binding name}" Style="{DynamicResource SubLabel}"/>
+                                <Label Text="{Binding name}" Style="{DynamicResource SubLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[24]}"/>
 
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer x:Name="CategorySelected" NumberOfTapsRequired="1" Tapped="SubTGR_Tapped"/>

@@ -2,11 +2,13 @@
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XMart.Controls"
+             xmlns:util="clr-namespace:XMart.Util"
              x:Class="XMart.App">
     <Application.Resources>
         <ResourceDictionary>
             <Color x:Key="MainColor">#FFCC00</Color>
-            
+
+            <util:ScreenHelper x:Key="Size"></util:ScreenHelper>
             <!--style-->
             <Style x:Key="BaseFrame" TargetType="Frame">
                 <Setter Property="BorderColor" Value="Transparent"/>
@@ -25,7 +27,7 @@
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontSize" Value="32"/>
                 <Setter Property="MaxLength" Value="16"/>
             </Style>
             <Style x:Key="EarImageButton" TargetType="ImageButton">
@@ -36,6 +38,7 @@
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="Aspect" Value="AspectFit"/>
             </Style>
+
         </ResourceDictionary>
 
     </Application.Resources>
