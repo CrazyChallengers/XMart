@@ -45,7 +45,7 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="￥" FontSize="Large"/>
-                                    <Span Text="{Binding Product.tprice}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}"/>
+                                    <Span Text="{Binding Product.tprice}" FontSize="24"/>
                                     <Span Text="." FontSize="Large"/>
                                     <Span Text="00" FontSize="Large"/>
                                 </FormattedString>
@@ -53,21 +53,21 @@
                         </Label>
 
                         <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                        <Label Grid.Row="1" Grid.Column="1" Text="降价通知" FontSize="{Binding Source={StaticResource Size},Path=px[16]}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        <Label Grid.Row="1" Grid.Column="1" Text="降价通知" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                         <ImageButton Grid.Row="0" Grid.Column="2" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                        <Label Grid.Row="1" Grid.Column="2" Text="1.1万" FontSize="{Binding Source={StaticResource Size},Path=px[16]}" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        <Label Grid.Row="1" Grid.Column="2" Text="1.1万" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                     </Grid>
 
                     <Label VerticalOptions="Center" VerticalTextAlignment="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="热卖" BackgroundColor="Red" TextColor="White" FontSize="{Binding Source={StaticResource Size},Path=px[16]}"/>
-                                <Span Text="{Binding Product.productName}" TextColor="Black" FontAttributes="Bold" FontSize="{Binding Source={StaticResource Size},Path=px[24]}"/>
+                                <Span Text="热卖" BackgroundColor="Red" TextColor="White" FontSize="16"/>
+                                <Span Text="{Binding Product.productName}" TextColor="Black" FontAttributes="Bold" FontSize="22"/>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
-                    <Label Text="{Binding Product.subTitle}" FontSize="{Binding Source={StaticResource Size},Path=px[18]}"/>
+                    <Label Text="{Binding Product.subTitle}" FontSize="18"/>
 
                     <BoxView HeightRequest="600" BackgroundColor="LightCyan"/>
 
@@ -87,22 +87,22 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <ImageButton Grid.Row="0" Grid.Column="0" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                <Label Grid.Row="1" Grid.Column="0" Text="联系客服" FontSize="{Binding Source={StaticResource Size},Path=px[16]}" 
+                <Label Grid.Row="1" Grid.Column="0" Text="联系客服" FontSize="16" 
                        HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                 <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="购物车" FontSize="{Binding Source={StaticResource Size},Path=px[16]}" 
+                <Label Grid.Row="1" Grid.Column="1" Text="购物车" FontSize="16" 
                        HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                 <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="AddToCartBtn" Text="加入购物车" HeightRequest="40" 
                         CornerRadius="20" Margin="5,0" BackgroundColor="Crimson" TextColor="White"
                         VerticalOptions="Center" Clicked="AddToCartBtn_Clicked"
-                        FontSize="{Binding Source={StaticResource Size},Path=px[18]}"/>
+                        FontSize="18"/>
 
                 <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="立即购买" HeightRequest="40" 
                         CornerRadius="20" Margin="5,0" BackgroundColor="{StaticResource MainColor}" TextColor="White"
                         VerticalOptions="Center" Clicked="BuyButton_Clicked"
-                        FontSize="{Binding Source={StaticResource Size},Path=px[18]}"/>
+                        FontSize="18"/>
             </Grid>
 
             <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Gray"

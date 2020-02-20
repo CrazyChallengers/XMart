@@ -8,7 +8,7 @@
     <ContentPage.Resources>
         <Style x:Key="CommonLabel" TargetType="Label">
             <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[18]}"/>
+            <Setter Property="FontSize" Value="18"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -16,7 +16,7 @@
         </Style>
         <Style x:Key="ViewCellLabel" TargetType="Label">
             <Setter Property="TextColor" Value="Black"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
@@ -51,11 +51,11 @@
                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
                     <StackLayout Grid.Row="1" Grid.Column='1' Grid.RowSpan="3" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                        <Label  x:Name="UserNameLabel" Text="18428333654" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold"
+                        <Label  x:Name="UserNameLabel" Text="18428333654" FontSize="24" FontAttributes="Bold"
                            TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
-                        <Label x:Name="CompanyLabel" Text="万云互联" FontSize="{Binding Source={StaticResource Size},Path=px[24]}"
+                        <Label x:Name="CompanyLabel" Text="万云互联" FontSize="22"
                            TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
-                        <Label x:Name="EmpNoLabel" Text="No.621503" FontSize="{Binding Source={StaticResource Size},Path=px[24]}"
+                        <Label x:Name="EmpNoLabel" Text="No.621503" FontSize="22"
                            TextColor="White" HorizontalOptions="Start" VerticalOptions="Center"/>
                     </StackLayout>
 
@@ -73,13 +73,13 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold" TextColor="Crimson"/>
+                        <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Grid.Row="1" Grid.Column="0" Text="积分" Style="{DynamicResource CommonLabel}"/>
 
-                        <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold" TextColor="Crimson"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="优惠券" Style="{DynamicResource CommonLabel}"/>
 
-                        <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold" TextColor="Crimson"/>
+                        <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Grid.Row="1" Grid.Column="2" Text="关注" Style="{DynamicResource CommonLabel}"/>
                     </Grid>
                 </Frame>
@@ -97,16 +97,16 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold" TextColor="Crimson"/>
+                        <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Grid.Row="1" Grid.Column="0" Text="我的收藏" Style="{DynamicResource CommonLabel}"/>
 
-                        <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold" TextColor="Crimson"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Grid.Row="1" Grid.Column="1" Text="商品" Style="{DynamicResource CommonLabel}"/>
 
-                        <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold" TextColor="Crimson"/>
+                        <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Grid.Row="1" Grid.Column="2" Text="专题" Style="{DynamicResource CommonLabel}"/>
 
-                        <Label Grid.Row="0" Grid.Column="3" Text="100" Style="{DynamicResource CommonLabel}" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold" TextColor="Crimson"/>
+                        <Label Grid.Row="0" Grid.Column="3" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Grid.Row="1" Grid.Column="3" Text="话题" Style="{DynamicResource CommonLabel}"/>
                     </Grid>
                 </Frame>

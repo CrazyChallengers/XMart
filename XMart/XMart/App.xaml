@@ -27,7 +27,7 @@
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                <Setter Property="FontSize" Value="32"/>
+                <Setter Property="FontSize" Value="24"/>
                 <Setter Property="MaxLength" Value="16"/>
             </Style>
             <Style x:Key="EarImageButton" TargetType="ImageButton">

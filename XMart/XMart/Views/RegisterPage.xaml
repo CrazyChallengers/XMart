@@ -25,7 +25,7 @@
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="MaxLength" Value="16"/>
         </Style>
         <Style TargetType="Button">
@@ -34,12 +34,12 @@
             <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
         </Style>
         <Style x:Name="LabelStyle" TargetType="Label">
             <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -53,8 +53,8 @@
             <StackLayout VerticalOptions="FillAndExpand">
                 <!--<ff:CachedImage Source="login_bg.png" VerticalOptions="Start" Aspect="AspectFill"/>-->
                 <ff:CachedImage Source="xmart_logo2.png" VerticalOptions="EndAndExpand"/>
-                <Label Text="注册" FontSize="{Binding Source={StaticResource Size},Path=px[32]}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
-                <Label Text="欢迎注册万联家具批发平台！" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="注册" FontSize="32" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
+                <Label Text="欢迎注册万联家具批发平台！" FontSize="22" VerticalOptions="Start" HorizontalOptions="CenterAndExpand"/>
                 
                 <Grid VerticalOptions="CenterAndExpand">
                     <Grid.RowDefinitions>
@@ -104,7 +104,7 @@
 
                     <Picker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="50" WidthRequest="200" HorizontalOptions="CenterAndExpand" 
                             ItemsSource="{Binding IdentityList}"  SelectedIndex="{Binding SelectedIdentityIndex}"
-                            FontSize="{Binding Source={StaticResource Size},Path=px[24]}"/>
+                            FontSize="22"/>
 
                     <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
                         <controls:MyEntry Placeholder="手机号" Text="{Binding Tel}" Keyboard="Telephone" Style="{DynamicResource EntryStyle}"/>
@@ -132,7 +132,8 @@
                         <Frame WidthRequest="140">
                             <controls:MyEntry Placeholder="验证码"  Text="{Binding AuthCode}" Keyboard="Numeric" MaxLength="6" Style="{DynamicResource EntryStyle}"/>
                         </Frame>
-                        <Button x:Name="ACButton" Text="{Binding AuthCodeButtonText}" IsEnabled="{Binding IsEnable}" BackgroundColor="{Binding ButtonColor}" WidthRequest="100" FontSize="{Binding Source={StaticResource Size},Path=px[18]}" Command="{Binding SendAuthCodeCommand}"/>
+                        <Button x:Name="ACButton" Text="{Binding AuthCodeButtonText}" IsEnabled="{Binding IsEnable}" 
+                                BackgroundColor="{Binding ButtonColor}" WidthRequest="100" FontSize="18" Command="{Binding SendAuthCodeCommand}"/>
                     </StackLayout>
                     
                 </Grid>

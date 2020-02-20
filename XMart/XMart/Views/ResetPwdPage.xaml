@@ -27,7 +27,7 @@
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
             <Setter Property="HorizontalTextAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="MaxLength" Value="16"/>
         </Style>
         <Style TargetType="Button">
@@ -36,7 +36,7 @@
             <Setter Property="CornerRadius" Value="20"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[24]}"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="BackgroundColor" Value="{StaticResource MainColor}"/>
         </Style>
     </ContentPage.Resources>
@@ -47,8 +47,8 @@
                      HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="Start"
                      HorizontalOptions="StartAndExpand" Margin="20,40" Clicked="BackButton_Clicked"/>
 
-            <Label Text="密码忘了？" HorizontalOptions="Start" VerticalOptions="Start" FontSize="{Binding Source={StaticResource Size},Path=px[48]}" Margin="20,0"/>
-            <Label Text="你可真是一个小机灵鬼儿" HorizontalOptions="Start" VerticalOptions="Start" FontSize="{Binding Source={StaticResource Size},Path=px[36]}" Margin="20,0"/>
+            <Label Text="密码忘了？" HorizontalOptions="Start" VerticalOptions="Start" FontSize="32" Margin="20,0"/>
+            <Label Text="你可真是一个小机灵鬼儿" HorizontalOptions="Start" VerticalOptions="Start" FontSize="24" Margin="20,0"/>
 
             <Grid VerticalOptions="CenterAndExpand">
                 <Grid.RowDefinitions>
@@ -80,7 +80,7 @@
                         <controls:MyEntry Placeholder="验证码"  Text="{Binding AuthCode}" Keyboard="Numeric" MaxLength="6" Style="{DynamicResource EntryStyle}"/>
                     </Frame>
                     <Button x:Name="ACButton" Text="{Binding AuthCodeButtonText}" IsEnabled="{Binding IsEnable}" BackgroundColor="{Binding ButtonColor}" 
-                            WidthRequest="100" FontSize="{Binding Source={StaticResource Size},Path=px[18]}" Clicked="ACButton_Clicked"/>
+                            WidthRequest="100" FontSize="18" Clicked="ACButton_Clicked"/>
                 </StackLayout>
             </Grid>
 
