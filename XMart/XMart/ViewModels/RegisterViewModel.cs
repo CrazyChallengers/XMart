@@ -77,11 +77,21 @@ namespace XMart.ViewModels
             set { SetProperty(ref buttonColor, value); }
         }
 
+        private int selectedIdentityIndex;   //Comment
+        public int SelectedIdentityIndex
+        {
+            get { return selectedIdentityIndex; }
+            set { SetProperty(ref selectedIdentityIndex, value); }
+        }
+
+
         private bool IsDesignerChecked { get; set; }
 
         public long Tick { get; set; }
         public MyTimer myTimer { get; set; }
+        public List<string> IdentityList { get; set; }
         RestService _restService = new RestService();
+
 
         public Command SendAuthCodeCommand { get; private set; }   //发送验证码
         public Command RegisterCommand { get; private set; }   //注册
@@ -93,6 +103,9 @@ namespace XMart.ViewModels
             AuthCodeButtonText = "发送验证码";
             IsEnable = true;
             ButtonColor = Color.FromHex("FFCC00");
+
+            IdentityList = new List<string> { "客户", "设计师" };
+            SelectedIdentityIndex = 0;
 
             SendAuthCodeCommand = new Command(() =>
             {
@@ -212,6 +225,7 @@ namespace XMart.ViewModels
                 return false;
             }
 
+            /*
             if (string.IsNullOrWhiteSpace(SecondPwd))
             {
                 CrossToastPopUp.Current.ShowToastWarning("确认密码不能为空，请输入！", ToastLength.Long);
@@ -222,7 +236,7 @@ namespace XMart.ViewModels
             {
                 CrossToastPopUp.Current.ShowToastWarning("两次输入密码不一致，请检查！", ToastLength.Long);
                 return false;
-            }
+            }*/
 
             if (string.IsNullOrWhiteSpace(InvitePhone))
             {
@@ -256,20 +270,22 @@ namespace XMart.ViewModels
                 tel = Tel,
                 userPwd = Pwd,
                 //userName = registerViewModel.UserName,
-                invitePhone = InvitePhone
+                invitePhone = InvitePhone,
+                userType = SelectedIdentityIndex.ToString()
             };
 
-            registerPara.userType = IsDesignerChecked ? "1" : "0";
+            //registerPara.userType = IsDesignerChecked ? "1" : "0";
 
             SimpleRD simpleRD = await _restService.Register(registerPara);
 
             if (simpleRD.code == 200)
             {
-                CrossToastPopUp.Current.ShowToastSuccess(simpleRD.message, ToastLength.Long);
+                CrossToastPopUp.Current.ShowToastSuccess("注册成功！请返回登录页面！", ToastLength.Long);
+                //Application.Current.MainPage.Navigation.PopModalAsync();
             }
             else
             {
-                CrossToastPopUp.Current.ShowToastError(simpleRD.message, ToastLength.Long);
+                CrossToastPopUp.Current.ShowToastError("注册失败！请联系管理员！", ToastLength.Long);
             }
         }
     }

@@ -20,7 +20,6 @@
             <Setter Property="VerticalOptions" Value="Center"/>
         </Style>
         <Style x:Name="EntryStyle" TargetType="controls:MyEntry">
-            <Setter Property="WidthRequest" Value="250"/>
             <Setter Property="PlaceholderColor" Value="LightGray"/>
             <Setter Property="TextColor" Value="Black"/>
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
@@ -46,11 +45,14 @@
 
             <StackLayout VerticalOptions="EndAndExpand">
                 <Frame>
-                    <controls:MyEntry x:Name="account" Placeholder="用户名" Text="{Binding Tel}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="用户名" Text="{Binding Tel}" WidthRequest="250"/>
                 </Frame>
 
                 <Frame>
-                    <controls:MyEntry x:Name="password" Placeholder="密码" Text="{Binding Pwd}" IsPassword="True"/>
+                    <StackLayout Orientation="Horizontal">
+                        <controls:MyEntry x:Name="password" Placeholder="密码" Text="{Binding Pwd}" IsPassword="{Binding IsPassword}" WidthRequest="200"/>
+                        <ImageButton Source="{Binding EyeSource}" Command="{Binding OpenEyeCommand}" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand"/>
+                    </StackLayout>
                 </Frame>
 
                 <StackLayout WidthRequest="250" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">

@@ -35,6 +35,22 @@ namespace XMart.ViewModels
             set { SetProperty(ref isRememberPwd, value); }
         }
 
+        private string eyeSource;   //Comment
+        public string EyeSource
+        {
+            get { return eyeSource; }
+            set { SetProperty(ref eyeSource, value); }
+        }
+
+        private bool isPassword;   //Comment
+        public bool IsPassword
+        {
+            get { return isPassword; }
+            set { SetProperty(ref isPassword, value); }
+        }
+
+
+
         private RestService _restService = new RestService();
         string fileName;
 
@@ -42,9 +58,12 @@ namespace XMart.ViewModels
         public Command LoginCommand { get; private set; }   //登录按钮
         public Command RememberPwdCommand { get; private set; }   //记住密码
         public Command FindPwdCommand { get; private set; }   //跳转到找回密码页面
+        public Command OpenEyeCommand { get; private set; }
 
         public LoginViewModel()
         {
+            IsPassword = true;
+            EyeSource = "Resource/drawable/close_eye.png";
             //初始化，检查是否存在已记住的密码
             fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
 
@@ -106,6 +125,20 @@ namespace XMart.ViewModels
             FindPwdCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PushModalAsync(new ResetPwdPage());
+            }, () => { return true; });
+
+            OpenEyeCommand = new Command(() =>
+            {
+                if (IsPassword)
+                {
+                    IsPassword = false;
+                    EyeSource = "Resource/drawable/open_eye.png";
+                }
+                else
+                {
+                    IsPassword = true;
+                    EyeSource = "Resource/drawable/close_eye.png";
+                }
             }, () => { return true; });
 
         }
