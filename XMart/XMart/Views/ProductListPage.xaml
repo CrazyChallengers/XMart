@@ -17,7 +17,7 @@
             <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[16]}"/>
+            <Setter Property="FontSize" Value="16"/>
         </Style>
     </ContentPage.Resources>
     
@@ -34,7 +34,7 @@
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300" BackgroundColor="WhiteSmoke">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
                 </Frame>
-                <Picker WidthRequest="50" Title="排序" FontSize="{Binding Source={StaticResource Size},Path=px[24]}"/>
+                <Picker WidthRequest="50" Title="排序" FontSize="22"/>
             </StackLayout>
 
             <StackLayout Grid.Row="1" Orientation="Horizontal">
@@ -62,9 +62,9 @@
                                     </Grid.ColumnDefinitions>
 
                                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImageBig}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding productName}" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding subTitle}" FontSize="{Binding Source={StaticResource Size},Path=px[18]}"/>
-                                    <Label Grid.Row="2" Grid.Column="1" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding productName}" FontSize="22" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding subTitle}" FontSize="18"/>
+                                    <Label Grid.Row="2" Grid.Column="1" FontSize="22" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥"/>
@@ -73,8 +73,8 @@
                                         </Label.FormattedText>
                                     </Label>
                                     <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
-                                        <Label Text="1.3万+条评价" FontSize="{Binding Source={StaticResource Size},Path=px[16]}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                        <Label Text="98%好评" FontSize="{Binding Source={StaticResource Size},Path=px[16]}" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Label Text="1.3万+条评价" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Label Text="98%好评" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     </StackLayout>
                                 </Grid>
 

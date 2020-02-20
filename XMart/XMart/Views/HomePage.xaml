@@ -10,7 +10,7 @@
 
     <ContentPage.Resources>
         <Style x:Key="SectionTitle" TargetType="Label">
-            <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[28]}"/>
+            <Setter Property="FontSize" Value="24"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="Margin" Value="5,0"/>
@@ -81,7 +81,7 @@
                                     <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
                                     <Setter Property="HorizontalTextAlignment" Value="Center"/>
                                     <Setter Property="VerticalTextAlignment" Value="Center"/>
-                                    <Setter Property="FontSize" Value="{Binding Source={StaticResource Size},Path=px[18]}"/>
+                                    <Setter Property="FontSize" Value="18"/>
                                 </Style>
                             </Grid.Resources>
 
@@ -119,8 +119,8 @@
                                 <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
                             </Frame>
 
-                            <Label Grid.Row="0" Grid.Column="1" Text="订单一" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" VerticalOptions="Center"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="{Binding Source={StaticResource Size},Path=px[18]}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="订单一" FontSize="22" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="18"/>
                         </Grid>
                         <Grid HeightRequest="60" Margin="5,0">
                             <Grid.RowDefinitions>
@@ -136,8 +136,8 @@
                                 <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
                             </Frame>
 
-                            <Label Grid.Row="0" Grid.Column="1" Text="订单二" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" VerticalOptions="Center"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="{Binding Source={StaticResource Size},Path=px[18]}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="订单二" FontSize="22" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="18"/>
                         </Grid>
                         <Grid HeightRequest="60" Margin="5,0">
                             <Grid.RowDefinitions>
@@ -153,8 +153,8 @@
                                 <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
                             </Frame>
 
-                            <Label Grid.Row="0" Grid.Column="1" Text="订单三" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" VerticalOptions="Center"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="{Binding Source={StaticResource Size},Path=px[18]}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="订单三" FontSize="22" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="18"/>
                         </Grid>
                     </StackLayout>
 
@@ -168,8 +168,8 @@
                                         <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="{Binding Source={StaticResource Size},Path=px[24]}">
+                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="20">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥"/>
@@ -198,8 +198,8 @@
                                         <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="{Binding Source={StaticResource Size},Path=px[24]}">
+                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="20">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥"/>
@@ -228,8 +228,8 @@
                                         <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="{Binding Source={StaticResource Size},Path=px[24]}">
+                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="20">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥"/>
@@ -258,8 +258,8 @@
                                         <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="{Binding Source={StaticResource Size},Path=px[24]}" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="{Binding Source={StaticResource Size},Path=px[24]}">
+                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="20">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥"/>

@@ -16,7 +16,7 @@
             </Grid.RowDefinitions>
 
             <!--头部-->
-            <Label Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" FontSize="{Binding Source={StaticResource Size},Path=px[28]}">
+            <Label Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" FontSize="24">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="购物车"/>
@@ -29,7 +29,7 @@
 
             <Button Grid.Row="0" x:Name="AllCheckedButton" Text="全选" TextColor="White" BackgroundColor="{Binding AllCheckedButton_Color}" 
                         HeightRequest="30" WidthRequest="50" CornerRadius="15" Padding="0" Margin="10,0" HorizontalOptions="End" VerticalOptions="EndAndExpand"
-                    FontSize="{Binding Source={StaticResource Size},Path=px[20]}"
+                    FontSize="18"
                         Clicked="AllCheckedButton_Clicked"/>
 
             <!--购物车商品列表-->
@@ -83,17 +83,17 @@
                 <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
 
-                <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="{Binding Source={StaticResource Size},Path=px[24]}"/>
-                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="{Binding Source={StaticResource Size},Path=px[24]}">
+                <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="22"/>
+                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="22">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="￥" TextColor="Red"/>
-                            <Span Text="{Binding TotalSelectedPrice}" TextColor="Red" FontSize="{Binding Source={StaticResource Size},Path=px[28]}" FontAttributes="Bold"/>
+                            <Span Text="{Binding TotalSelectedPrice}" TextColor="Red" FontSize="24" FontAttributes="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="{Binding Source={StaticResource Size},Path=px[24]}">
+                <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="22">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="已选:"/>
@@ -104,7 +104,7 @@
 
                 <Button x:Name="OrderButton" Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
                         HorizontalOptions="End" VerticalOptions="Center" Clicked="OrderButton_Clicked"
-                        FontSize="{Binding Source={StaticResource Size},Path=px[24]}"/>
+                        FontSize="22"/>
 
             </StackLayout>
 
