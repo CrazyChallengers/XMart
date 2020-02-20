@@ -72,6 +72,7 @@
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
 
+                    <!--
                     <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
                         <Label Text="客户" Style="{DynamicResource LabelStyle}" WidthRequest="150">
                             <Label.Behaviors>
@@ -99,7 +100,11 @@
                                 </DataTrigger>
                             </Label.Triggers>
                         </Label>
-                    </StackLayout>
+                    </StackLayout>-->
+
+                    <Picker Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" HeightRequest="50" WidthRequest="200" HorizontalOptions="CenterAndExpand" 
+                            ItemsSource="{Binding IdentityList}"  SelectedIndex="{Binding SelectedIdentityIndex}"
+                            FontSize="{Binding Source={StaticResource Size},Path=px[24]}"/>
 
                     <Frame Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
                         <controls:MyEntry Placeholder="手机号" Text="{Binding Tel}" Keyboard="Telephone" Style="{DynamicResource EntryStyle}"/>
@@ -111,18 +116,19 @@
                     </Frame>-->
 
                     <Frame Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3">
-                        <controls:MyEntry Placeholder="密码" Text="{Binding Pwd}" IsPassword="True" MaxLength="16" Style="{DynamicResource EntryStyle}"/>
+                        <controls:MyEntry Placeholder="密码(6-12位)" Text="{Binding Pwd}" IsPassword="True" MaxLength="12" Style="{DynamicResource EntryStyle}"/>
                     </Frame>
 
+                    <!--
                     <Frame Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
                         <controls:MyEntry Placeholder="确认密码" Text="{Binding SecondPwd}" IsPassword="True" MaxLength="16" Style="{DynamicResource EntryStyle}"/>
-                    </Frame>
+                    </Frame>-->
 
-                    <Frame  Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3">
+                    <Frame  Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3">
                         <controls:MyEntry Placeholder="邀请码" Text="{Binding InvitePhone}" Keyboard="Telephone" Style="{DynamicResource EntryStyle}"/>
                     </Frame>
 
-                    <StackLayout Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+                    <StackLayout Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
                         <Frame WidthRequest="140">
                             <controls:MyEntry Placeholder="验证码"  Text="{Binding AuthCode}" Keyboard="Numeric" MaxLength="6" Style="{DynamicResource EntryStyle}"/>
                         </Frame>
