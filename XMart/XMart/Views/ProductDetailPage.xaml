@@ -41,13 +41,15 @@
                             <ColumnDefinition Width="60"/>
                             <ColumnDefinition Width="60"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start">
+                        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Start">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="￥" FontSize="Large"/>
-                                    <Span Text="{Binding Product.tprice}" FontSize="24"/>
-                                    <Span Text="." FontSize="Large"/>
-                                    <Span Text="00" FontSize="Large"/>
+                                    <Span Text="会员价" FontSize="12" TextColor="Red"/>
+                                    <Span Text="￥" FontSize="22" TextColor="Red"/>
+                                    <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="Red"/>
+                                    <Span Text=" 原价" FontSize="12" TextColor="Gray"/>
+                                    <Span Text="￥" FontSize="18" TextColor="Gray"/>
+                                    <Span Text="{Binding Product.salePrice}" FontSize="18" TextColor="Gray"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>

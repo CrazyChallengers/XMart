@@ -6,7 +6,7 @@
              x:Class="XMart.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="MainColor">#FFCC00</Color>
+            <Color x:Key="MainColor">#353f48</Color>
 
             <util:ScreenHelper x:Key="Size"></util:ScreenHelper>
             <!--style-->
@@ -23,7 +23,7 @@
             <Style x:Key="SearchEntry" TargetType="controls:MyEntry">
                 <Setter Property="WidthRequest" Value="250"/>
                 <Setter Property="PlaceholderColor" Value="LightGray"/>
-                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="TextColor" Value="White"/>
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
                 <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>

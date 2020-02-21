@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             VerticalOptions="CenterAndExpand"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.DesignerView">
+    <ContentView.Resources>
+        <Style x:Key="CommonLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="ViewCellLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="CommonImage" TargetType="Image">
+            <Setter Property="HeightRequest"  Value="50"/>
+            <Setter Property="WidthRequest"  Value="50"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+        </Style>
+    </ContentView.Resources>
+    
+  <ContentView.Content>
+        <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand">
+            <Frame HeightRequest="128" WidthRequest="128" Padding="0" CornerRadius="64" 
+                   HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                   IsClippedToBounds="True">
+                    <ff:CachedImage Source="{Binding UserAvatar}" />
+            </Frame>
+
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <Label  x:Name="UserNameLabel" Text="{Binding UserName}" FontSize="24" FontAttributes="Bold"
+                           TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                <Label x:Name="CompanyLabel" Text="{Binding UserType}" FontSize="22"
+                           TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                <Label x:Name="EmpNoLabel" FontSize="22" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <FormattedString.Spans>
+                                <Span Text="No."/>
+                                <Span Text="{Binding UserId}"/>
+                            </FormattedString.Spans>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </StackLayout>
+
+            <Frame HasShadow="False" Padding="5" CornerRadius="20" Margin="5" VerticalOptions="EndAndExpand">
+                <Grid HeightRequest="60" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                    <Label Grid.Row="1" Grid.Column="0" Text="今日收益" Style="{DynamicResource CommonLabel}"/>
+
+                    <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="总收益" Style="{DynamicResource CommonLabel}"/>
+
+                    <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                    <Label Grid.Row="1" Grid.Column="2" Text="可提现" Style="{DynamicResource CommonLabel}"/>
+
+                    <Label Grid.Row="0" Grid.Column="3" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                    <Label Grid.Row="1" Grid.Column="3" Text="我的客户" Style="{DynamicResource CommonLabel}"/>
+                </Grid>
+            </Frame>
+
+            <Frame HasShadow="False" Padding="5" CornerRadius="20" Margin="5" VerticalOptions="EndAndExpand">
+                <Grid HeightRequest="60" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                    <Label Grid.Row="1" Grid.Column="0" Text="我的订单" Style="{DynamicResource CommonLabel}"/>
+
+                    <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                    <Label Grid.Row="1" Grid.Column="1" Text="我的收藏" Style="{DynamicResource CommonLabel}"/>
+
+                    <Label Grid.Row="0" Grid.Column="2" Text="《···》" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                    <Label Grid.Row="1" Grid.Column="2" Text="修改个人资料" Style="{DynamicResource CommonLabel}"/>
+
+                </Grid>
+            </Frame>
+
+            <!--
+                    <Frame HasShadow="False" Padding="5" CornerRadius="20" Margin="5">
+                        <Grid HeightRequest="80">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="积分" Style="{DynamicResource CommonLabel}"/>
+
+                            <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="优惠券" Style="{DynamicResource CommonLabel}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                            <Label Grid.Row="1" Grid.Column="2" Text="关注" Style="{DynamicResource CommonLabel}"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame HasShadow="False" Padding="5" CornerRadius="20" Margin="5">
+                        <Grid HeightRequest="80">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                            <Label Grid.Row="1" Grid.Column="0" Text="我的收藏" Style="{DynamicResource CommonLabel}"/>
+
+                            <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="商品" Style="{DynamicResource CommonLabel}"/>
+
+                            <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                            <Label Grid.Row="1" Grid.Column="2" Text="专题" Style="{DynamicResource CommonLabel}"/>
+
+                            <Label Grid.Row="0" Grid.Column="3" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
+                            <Label Grid.Row="1" Grid.Column="3" Text="话题" Style="{DynamicResource CommonLabel}"/>
+                        </Grid>
+                    </Frame>
+
+                    <Frame HasShadow="False" Padding="0" CornerRadius="20" Margin="5">
+                        <StackLayout HeightRequest="300">
+                            <TableView Intent="Menu" VerticalOptions="Center">
+                                <TableSection>
+                                    <ViewCell x:Name="TrackVC" Tapped="TrackVC_Tapped">
+                                        <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="15,0">
+                                            <Image Source="Resource/drawable/category_gray.png" HeightRequest="36" WidthRequest="36"/>
+                                            <Label Text="我的足迹" Style="{StaticResource ViewCellLabel}"/>
+                                            <Label Text="10" Style="{StaticResource ViewCellLabel}" HorizontalOptions="EndAndExpand"/>
+                                        </StackLayout>
+                                    </ViewCell>
+
+                                    <ViewCell x:Name="EvaluationVC" Tapped="EvaluationVC_Tapped">
+                                        <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="15,0">
+                                            <Image Source="Resource/drawable/category_gray.png" HeightRequest="36" WidthRequest="36"/>
+                                            <Label Text="我的评价" Style="{StaticResource ViewCellLabel}"/>
+                                            <Label Text="10" Style="{StaticResource ViewCellLabel}" HorizontalOptions="EndAndExpand"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                    <ViewCell x:Name="AdressManageVC" Tapped="AdressManageVC_Tapped">
+                                        <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="15,0">
+                                            <Image Source="Resource/drawable/category_gray.png" HeightRequest="36" WidthRequest="36"/>
+                                            <Label Text="地址管理" Style="{StaticResource ViewCellLabel}"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </TableSection>
+
+                                <TableSection>
+                                    <ViewCell x:Name="MememberVC" Tapped="MememberVC_Tapped">
+                                        <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="15,0">
+                                            <Image Source="Resource/drawable/category_gray.png" HeightRequest="36" WidthRequest="36"/>
+                                            <Label Text="我的会员" Style="{StaticResource ViewCellLabel}"/>
+                                            <Label Text="黄金会员" Style="{StaticResource ViewCellLabel}" HorizontalOptions="EndAndExpand"/>
+                                        </StackLayout>
+                                    </ViewCell>
+
+                                    <ViewCell x:Name="ServiceVC" Tapped="ServiceVC_Tapped">
+                                        <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="15,0">
+                                            <Image Source="Resource/drawable/category_gray.png" HeightRequest="36" WidthRequest="36"/>
+                                            <Label Text="服务中心" Style="{StaticResource ViewCellLabel}"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                    <ViewCell x:Name="SettingVC" Tapped="SettingVC_Tapped">
+                                        <StackLayout Orientation="Horizontal" HeightRequest="50" Margin="15,0">
+                                            <Image Source="Resource/drawable/category_gray.png" HeightRequest="36" WidthRequest="36"/>
+                                            <Label Text="系统设置" Style="{StaticResource ViewCellLabel}"/>
+                                        </StackLayout>
+                                    </ViewCell>
+                                </TableSection>
+                            </TableView>
+                        </StackLayout>
+                    </Frame>
+                </StackLayout>
+            </ScrollView>-->
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

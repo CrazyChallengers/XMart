@@ -4,6 +4,7 @@ using Xamarin.Forms.Xaml;
 using XMart.ViewModels;
 using XMart.Services;
 using XMart.ResponseData;
+using XMart.Util;
 
 namespace XMart.Views
 {
@@ -27,10 +28,10 @@ namespace XMart.Views
         /// </summary>
         private async void InitCart()
         {
-            CartItemListRD cartItemListRD = await _restService.GetCartItemList("1");
+            CartItemListRD cartItemListRD = await _restService.GetCartItemList(GlobalVariables.LoggedUser.id.ToString());
 
-            cartViewModel.ItemList = cartItemListRD.data;
-            cartViewModel.ItemNumber = cartItemListRD.data.Count().ToString();
+            cartViewModel.ItemList = cartItemListRD.result;
+            cartViewModel.ItemNumber = cartItemListRD.result.Count().ToString();
         }
 
         /// <summary>
@@ -58,9 +59,9 @@ namespace XMart.Views
             int number = 0;
             foreach (var item in cartViewModel.ItemList)
             {
-                if (item.IsChecked)
+                if (item._checked == "1")
                 {
-                    totalPrice += (item.price * item.quantity);
+                    totalPrice += (item.memberPrice * item.);
                     number += item.quantity;
                 }
             }

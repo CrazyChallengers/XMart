@@ -18,12 +18,24 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid x:Name="MainGrid">
-            <ScrollView>
+        <Grid x:Name="MainGrid" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <!--头部-->
+            <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" Margin="5,35,5,5" HorizontalOptions="Fill" BackgroundColor="{StaticResource MainColor}">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
+                    <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
+                </StackLayout>
+            </Frame>
+            
+            <ScrollView Grid.Row="1">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                    <StackLayout HeightRequest="80"/>
                     <!--轮播图-->
-                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="150" Margin="5,0">
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="200" Margin="5,0">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselList}"
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
@@ -398,14 +410,6 @@
                 </StackLayout>
             </ScrollView>
             
-            <!--头部-->
-            <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" Margin="5,35" VerticalOptions="StartAndExpand" HorizontalOptions="Fill">
-                <StackLayout Orientation="Horizontal">
-                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
-                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
-                    <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
-                </StackLayout>
-            </Frame>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
