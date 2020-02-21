@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using XMart.Views;
-using Xamarin.Forms;
-using Plugin.Toast;
+﻿using Plugin.Toast;
 using Plugin.Toast.Abstractions;
+using System;
+using System.IO;
+using Xamarin.Forms;
 using XMart.Models;
 using XMart.ResponseData;
 using XMart.Services;
-using System.IO;
+using XMart.Views;
+using XMart.Util;
 
 namespace XMart.ViewModels
 {
@@ -194,6 +193,8 @@ namespace XMart.ViewModels
             if (loginRD.result.message == null)
             {
                 CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
+
+                GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
 
                 MainPage mainPage = new MainPage();
                 await Application.Current.MainPage.Navigation.PushModalAsync(mainPage);

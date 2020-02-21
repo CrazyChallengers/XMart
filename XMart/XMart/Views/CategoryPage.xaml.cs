@@ -106,5 +106,10 @@ namespace XMart.Views
             ProductListPage productListPage = new ProductListPage(subCategoryInfo);
             Navigation.PushModalAsync(productListPage);
         }
+
+        private void MessageButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

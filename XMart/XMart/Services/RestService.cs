@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using XMart.ResponseData;
 using Newtonsoft.Json;
 using XMart.Models;
+using XMart.Util;
 
 namespace XMart.Services
 {
@@ -44,9 +45,10 @@ namespace XMart.Services
         /// <returns></returns>
         public async Task<CartItemListRD> GetCartItemList(string memberId)
         {
-            string url = rootUrl + "/cart/list/" + memberId;
+            string url = rootUrl + "/member/cartList";
+            string httpContent = "userId=" + GlobalVariables.LoggedUser.id;
 
-            string responseBody = await GetStringDataAsync(url);
+            string responseBody = await PostAsync(url, httpContent);
 
             CartItemListRD cartItemListRD = JsonConvert.DeserializeObject<CartItemListRD>(responseBody);
 
@@ -109,11 +111,11 @@ namespace XMart.Services
         {
             string url = rootUrl3 + "/member/registerByInvite";
 
-            string httpContent = JsonConvert.SerializeObject(registerPara);
+            string httpContent = JsonConvert.SerializeObject(registerPara);  //序列化
 
             string responseBody = await PostAsync(url, httpContent);
 
-            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);   //反序列化
 
             return simpleRD;
         }

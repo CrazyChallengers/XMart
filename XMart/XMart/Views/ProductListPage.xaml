@@ -31,7 +31,7 @@
 
             <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand">
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Clicked="BackButton_Clicked" Style="{StaticResource EarImageButton}"/>
-                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300" BackgroundColor="WhiteSmoke">
+                <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" WidthRequest="300" BackgroundColor="{StaticResource MainColor}">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
                 </Frame>
                 <Picker WidthRequest="50" Title="排序" FontSize="22"/>

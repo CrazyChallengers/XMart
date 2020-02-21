@@ -30,9 +30,9 @@
 
     <ContentPage.Content>
 
-        <Grid ColumnSpacing="0">
+        <Grid ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="65"/>
+                <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -41,16 +41,14 @@
             </Grid.ColumnDefinitions>
 
             <!--顶部-->
-            <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
-                         Orientation="Horizontal" HorizontalOptions="Fill" VerticalOptions="EndAndExpand">
-                <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
-
-                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" WidthRequest="300">
-                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Style="{StaticResource SearchEntry}"/>
-                </Frame>
-
-                <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}"/>
-            </StackLayout>
+            <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BaseFrame}" 
+                   HeightRequest="40" CornerRadius="20" Margin="5,35,5,5"  HorizontalOptions="Fill" BackgroundColor="{StaticResource MainColor}">
+                <StackLayout Orientation="Horizontal">
+                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Text="{Binding Account}" Style="{StaticResource SearchEntry}"/>
+                    <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
+                </StackLayout>
+            </Frame>
 
             <!--一级分类-->
             <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseFrame}" VerticalOptions="Start">

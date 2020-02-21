@@ -2,103 +2,34 @@
 
 namespace XMart.Models
 {
-    public class CartItemInfo : BaseModel
+    public class CartItemInfo : ProductInfo
     {
-        
-        [JsonProperty("createDate")]
-        public string createDate { get; set; }   //comment
+        [JsonProperty("checked", NullValueHandling = NullValueHandling.Ignore)]
+        public string _checked { get; set; }   //comment
 
-        [JsonProperty("deleteStatus")]
-        public int deleteStatus { get; set; }    //comment
+        [JsonProperty("deliveryAddress", NullValueHandling = NullValueHandling.Ignore)]
+        public string deliveryAddress { get; set; }   //comment
 
-        [JsonProperty("id")]
-        public int id { get; set; }    //comment
+        [JsonProperty("deliveryWay", NullValueHandling = NullValueHandling.Ignore)]
+        public string deliveryWay { get; set; }   //comment
 
-        [JsonProperty("memberId")]
-        public int memberId { get; set; }    //comment
+        [JsonProperty("productNum", NullValueHandling = NullValueHandling.Ignore)]
+        public string productNum { get; set; }   //comment
 
-        [JsonProperty("memberNickName")]
-        public string memberNickName { get; set; }    //comment
+        [JsonProperty("productImg", NullValueHandling = NullValueHandling.Ignore)]
+        public string productImg { get; set; }   //comment
 
-        [JsonProperty("modifyDate")]
-        public string modifyDate { get; set; }    //comment
-
-        [JsonProperty("price")]
-        public double price { get; set; }    //comment
-
-        [JsonProperty("productAttr")]
-        public string productAttr { get; set; }    //comment
-
-        [JsonProperty("productBrand")]
-        public string productBrand { get; set; }    //comment
-
-        [JsonProperty("productCategoryId")]
-        public int productCategoryId { get; set; }    //comment
-
-        [JsonProperty("productId")]
-        public long productId { get; set; }    //comment
-
-        [JsonProperty("productName")]
-        public string productName { get; set; }    //comment
-
-        [JsonProperty("productPic")]
-        public string productPic { get; set; }    //comment
-
-        [JsonProperty("productSkuCode")]
-        public string productSkuCode { get; set; }    //comment
-
-        [JsonProperty("productSkuId")]
-        public int productSkuId { get; set; }    //comment
-
-        [JsonProperty("productSn")]
-        public string productSn { get; set; }    //comment
-
-        [JsonProperty("productSubTitle")]
-        public string productSubTitle { get; set; }    //comment
-
-        [JsonProperty("quantity")]
-        public int quantity { get; set; }    //comment
-
-        [JsonProperty("sp1")]
-        public string sp1 { get; set; }    //comment
-
-        [JsonProperty("sp2")]
-        public string sp2 { get; set; }    //comment
-
-        [JsonProperty("sp3")]
-        public string sp3 { get; set; }    //comment
-        
-        /*
-        //[JsonProperty("checked")]
-        //public string checked { get; set; }   //comment
-
-        [JsonProperty("limitNum")]
-        public int limitNum { get; set; }   //comment
-
-        [JsonProperty("productId")]
-        public int productId { get; set; }   //comment
-
-        [JsonProperty("productName")]
-        public string productName { get; set; }   //comment
-
-        [JsonProperty("productNum")]
-        public int productNum { get; set; }   //comment
-
-        [JsonProperty("salePrice")]
-        public double salePrice { get; set; }   //comment
-        */
-
-        private bool isChecked;   //comment
-
-        public bool IsChecked
-        {
-            get { return isChecked; }
-            set { SetProperty(ref isChecked, value); }
-        }
+        //private bool isChecked;   //comment
+        //
+        //public bool IsChecked
+        //{
+        //    get { return isChecked; }
+        //    set { SetProperty(ref isChecked, value); }
+        //}
 
         public CartItemInfo()
         {
-            IsChecked = false;
+            //IsChecked = false;
         }
     }
 }

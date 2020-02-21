@@ -24,14 +24,6 @@ namespace XMart.Views
         {
             InitializeComponent();
 
-            //productListVM.ProductList = new List<ProductInfo>
-            //{
-            //    new ProductInfo{productName = "产品一", subTitle="这里是产品一的简介balabala", tprice = 300.00, productImageBig="circle.png"},
-            //    new ProductInfo{productName = "产品二", subTitle="这里是产品二的简介balabala", tprice = 300.00, productImageBig="circle.png"},
-            //    new ProductInfo{productName = "产品三", subTitle="这里是产品三的简介balabala", tprice = 300.00, productImageBig="circle.png"},
-            //    new ProductInfo{productName = "产品四", subTitle="这里是产品四的简介balabala", tprice = 300.00, productImageBig="circle.png"}
-            //};
-
             BindingContext = productListVM;
 
             GetProductList(subCategoryInfo);
