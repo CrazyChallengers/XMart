@@ -28,6 +28,8 @@ namespace XMart.Droid
                 Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
             }
 
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
