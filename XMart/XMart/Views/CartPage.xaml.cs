@@ -28,7 +28,8 @@ namespace XMart.Views
         /// </summary>
         private async void InitCart()
         {
-            CartItemListRD cartItemListRD = await _restService.GetCartItemList(GlobalVariables.LoggedUser.id.ToString());
+            string memberId = GlobalVariables.LoggedUser.id.ToString();
+            CartItemListRD cartItemListRD = await _restService.GetCartItemList(memberId);
 
             cartViewModel.ItemList = cartItemListRD.result;
             cartViewModel.ItemNumber = cartItemListRD.result.Count().ToString();
@@ -61,8 +62,8 @@ namespace XMart.Views
             {
                 if (item._checked == "1")
                 {
-                    totalPrice += (item.memberPrice * item.);
-                    number += item.quantity;
+                    totalPrice += (item.memberPrice * item.productNum);
+                    number += item.productNum;
                 }
             }
 
@@ -86,10 +87,15 @@ namespace XMart.Views
             cartViewModel.AllCheckedButton_Color = cartViewModel.IsAllChecked ? Color.Crimson : Color.LightGray;
             foreach (var item in cartViewModel.ItemList)
             {
-                item.IsChecked = cartViewModel.IsAllChecked;
+                //item.IsChecked = cartViewModel.IsAllChecked;
             }
 
             OnCount();
+        }
+
+        private void ContentPage_Appearing(object sender, System.EventArgs e)
+        {
+            InitCart();
         }
     }
 }

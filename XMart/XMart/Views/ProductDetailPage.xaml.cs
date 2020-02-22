@@ -10,41 +10,23 @@ using XMart.Models;
 using XMart.ViewModels;
 using XMart.ResponseData;
 using XMart.Services;
+using Rg.Plugins.Popup.Services;
 
 namespace XMart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetailPage : ContentPage
     {
-        RestService restService = new RestService();
-        ProductDetailVM productDetailVM = new ProductDetailVM();
+        //ProductDetailVM productDetailVM;
 
         public ProductDetailPage(string productId)
         {
             InitializeComponent();
 
-            InitProductDetailPageAsync(productId);
+            //InitProductDetailPageAsync(productId);
             //productDetailVM.product = productInfo;
 
-            BindingContext = productDetailVM;
-        }
-
-        private async void InitProductDetailPageAsync(string productId)
-        {
-            try
-            {
-                ProductDetailRD productDetailRD = await restService.GetProductDetail(productId);
-
-                if (productDetailRD.result != null)
-                {
-                    productDetailVM.Product = productDetailRD.result;
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
+            BindingContext = new ProductDetailVM(productId);
         }
 
         private void CarouselItem_Tapped(object sender, EventArgs e)
@@ -59,7 +41,7 @@ namespace XMart.Views
 
         private void BuyButton_Clicked(object sender, EventArgs e)
         {
-
+            
         }
     }
 }

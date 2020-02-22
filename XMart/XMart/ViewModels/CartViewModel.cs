@@ -1,13 +1,13 @@
 ﻿using System.Collections.Generic;
 using Xamarin.Forms;
 using XMart.Models;
+using XMart.Util;
 
 namespace XMart.ViewModels
 {
     public class CartViewModel : BaseViewModel
     {
         private List<CartItemInfo> itemList;   //商品列表
-
         public List<CartItemInfo> ItemList
         {
             get { return itemList; }
@@ -15,7 +15,6 @@ namespace XMart.ViewModels
         }
 
         private string totalSelectedPrice;   //所有已选产品总价
-
         public string TotalSelectedPrice
         {
             get { return totalSelectedPrice; }
@@ -23,7 +22,6 @@ namespace XMart.ViewModels
         }
 
         private string itemNumber;   //购物车商品数量
-
         public string ItemNumber
         {
             get { return itemNumber; }
@@ -31,7 +29,6 @@ namespace XMart.ViewModels
         }
 
         private bool isAllChecked;   //是否全选
-
         public bool IsAllChecked
         {
             get { return isAllChecked; }
@@ -39,12 +36,12 @@ namespace XMart.ViewModels
         }
 
         private int checkedNumber;   //选择数量
-
         public int CheckedNumber
         {
             get { return checkedNumber; }
             set { SetProperty(ref checkedNumber, value); }
         }
+
 
         private Color allCheckedButton_Color;   //comment
 

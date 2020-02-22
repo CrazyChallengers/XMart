@@ -22,70 +22,8 @@ namespace XMart.Services
         {
 
         }
-        
-        /// <summary>
-        /// 获取首页相关内容信息
-        /// </summary>
-        /// <returns></returns>
-        public async Task<HomeContentRD> GetHomeContent()
-        {
-            string url = rootUrl3 + "/goods/home";
 
-            string responseBody = await GetStringDataAsync(url);
-
-            HomeContentRD homeContentRD = JsonConvert.DeserializeObject<HomeContentRD>(responseBody);
-
-            return homeContentRD;
-        }
-
-        /// <summary>
-        /// 获取购物车商品列表
-        /// </summary>
-        /// <param name="memberId">用户Id</param>
-        /// <returns></returns>
-        public async Task<CartItemListRD> GetCartItemList(string memberId)
-        {
-            string url = rootUrl + "/member/cartList";
-            string httpContent = "userId=" + GlobalVariables.LoggedUser.id;
-
-            string responseBody = await PostAsync(url, httpContent);
-
-            CartItemListRD cartItemListRD = JsonConvert.DeserializeObject<CartItemListRD>(responseBody);
-
-            return cartItemListRD;
-        }
-
-        /// <summary>
-        /// 获取分类列表
-        /// </summary>
-        /// <returns></returns>
-        public async Task<CategoryRD> GetCategories()
-        {
-            string url = rootUrl3 + "/goods/SearchAllItemCat";
-
-            string responseBody = await GetStringDataAsync(url);
-
-            CategoryRD categoryRD = JsonConvert.DeserializeObject<CategoryRD>(responseBody);
-
-            return categoryRD;
-        }
-
-        public async Task<ProductListRD> GetProductList(int page, int size, string sort, long cid, int priceGt, int priceLte)
-        {
-            string url = rootUrl3 + "/goods/allGoods?page=" + page.ToString()
-                + "&size=" + size.ToString()
-                + "&sort=" + sort
-                + "&cid=" + cid.ToString()
-                + "&priceGt=" + priceGt.ToString()
-                + "&priceLte=" + priceLte.ToString();
-
-            string responseBody = await GetStringDataAsync(url);
-
-            ProductListRD productListRD = JsonConvert.DeserializeObject<ProductListRD>(responseBody);
-
-            return productListRD;
-        }
-
+        #region 会员注册登录
         /// <summary>
         /// 发送验证码 ok
         /// </summary>
@@ -156,6 +94,96 @@ namespace XMart.Services
 
             return loginRD;
         }
+        #endregion
+
+        #region 购物车
+        /// <summary>
+        /// 获取购物车商品列表
+        /// </summary>
+        /// <param name="memberId">用户Id</param>
+        /// <returns></returns>
+        public async Task<CartItemListRD> GetCartItemList(string memberId)
+        {
+            string url = rootUrl3 + "/member/cartList";
+            string httpContent = "{\"userId\":" + memberId + "}";
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            CartItemListRD cartItemListRD = JsonConvert.DeserializeObject<CartItemListRD>(responseBody);
+
+            return cartItemListRD;
+        }
+
+        public async Task<SimpleRD> AddToCart(string memberId, string productId, string num)
+        {
+            string url = rootUrl3 + "/member/addCart";
+            string httpContent = "{\"userId\":" + memberId 
+                + ", \"productId\":" + productId + ", \"productNum\":" + num + "}";
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);
+
+            return simpleRD;
+        }
+
+        #endregion
+
+        /// <summary>
+        /// 获取首页相关内容信息
+        /// </summary>
+        /// <returns></returns>
+        public async Task<HomeContentRD> GetHomeContent()
+        {
+            string url = rootUrl3 + "/goods/home";
+
+            string responseBody = await GetStringDataAsync(url);
+
+            HomeContentRD homeContentRD = JsonConvert.DeserializeObject<HomeContentRD>(responseBody);
+
+            return homeContentRD;
+        }
+
+        /// <summary>
+        /// 获取分类列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task<CategoryRD> GetCategories()
+        {
+            string url = rootUrl3 + "/goods/SearchAllItemCat";
+
+            string responseBody = await GetStringDataAsync(url);
+
+            CategoryRD categoryRD = JsonConvert.DeserializeObject<CategoryRD>(responseBody);
+
+            return categoryRD;
+        }
+
+        /// <summary>
+        /// 获取商品列表
+        /// </summary>
+        /// <param name="page"></param>
+        /// <param name="size"></param>
+        /// <param name="sort"></param>
+        /// <param name="cid"></param>
+        /// <param name="priceGt"></param>
+        /// <param name="priceLte"></param>
+        /// <returns></returns>
+        public async Task<ProductListRD> GetProductList(int page, int size, string sort, long cid, int priceGt, int priceLte)
+        {
+            string url = rootUrl3 + "/goods/allGoods?page=" + page.ToString()
+                + "&size=" + size.ToString()
+                + "&sort=" + sort
+                + "&cid=" + cid.ToString()
+                + "&priceGt=" + priceGt.ToString()
+                + "&priceLte=" + priceLte.ToString();
+
+            string responseBody = await GetStringDataAsync(url);
+
+            ProductListRD productListRD = JsonConvert.DeserializeObject<ProductListRD>(responseBody);
+
+            return productListRD;
+        }
 
         /// <summary>
         /// 获取商品详情
@@ -169,6 +197,8 @@ namespace XMart.Services
             ProductDetailRD productDetailRD = JsonConvert.DeserializeObject<ProductDetailRD>(responseBody);
             return productDetailRD;
         }
+
+
 
         #region
         /// <summary>

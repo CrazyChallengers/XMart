@@ -5,7 +5,8 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="XMart.Views.CartPage"
              Icon="Resource/drawable/cart.png"
-             Title="购物车">
+             Title="购物车"
+              Appearing="ContentPage_Appearing">
     
     <ContentPage.Content>
         <Grid>
@@ -37,7 +38,7 @@
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ItemList,Mode=TwoWay}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
-                            <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}">
+                            <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
                                 <Grid RowSpacing="0">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
@@ -52,24 +53,52 @@
                                         <ColumnDefinition Width="30"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productPic}"/>
+                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
                                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="Medium"/>
-                                    <Picker Grid.Row="2" Grid.Column="1" Title="规格......"/>
-                                    <!--<Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>-->
+                                    <Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
+                                    <!--<Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>
                                     <Label Grid.Row="3" Grid.Column="1" FontSize="Large" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥"/>
-                                                <Span Text="{Binding price}"/>
+                                                <Span Text="{Binding memberPrice}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>-->
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="会员价" FontSize="12"/>
+                                                <Span Text="￥" FontSize="22"/>
+                                                <Span Text="{Binding memberPrice}" FontSize="26"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
+                                    <Label Grid.Row="3" Grid.Column="1" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text=" 原价" FontSize="12"/>
+                                                <Span Text="￥" FontSize="18"/>
+                                                <Span Text="{Binding salePrice}" FontSize="18"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text=" 原价" FontSize="12"/>
+                                                <Span Text="￥" FontSize="22"/>
+                                                <Span Text="{Binding salePrice}" FontSize="26"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
                                     <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
                                                             x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
-                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding quantity}"/>
+                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
                                     <CheckBox Grid.Row="0" Grid.Column="3" x:Name="SingleCheckBox" Color="Crimson" 
-                                              VerticalOptions="Start" IsChecked="{Binding IsChecked,Mode=TwoWay}" CheckedChanged="SingleCheckBox_CheckedChanged"/>
+                                              VerticalOptions="Start" IsChecked="{Binding Checked,Mode=TwoWay}" CheckedChanged="SingleCheckBox_CheckedChanged"/>
                                 </Grid>
                             </Frame>
                         </DataTemplate>

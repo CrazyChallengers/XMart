@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using XMart.Util;
 
 namespace XMart.Models
 {
@@ -14,7 +15,7 @@ namespace XMart.Models
         public string deliveryWay { get; set; }   //comment
 
         [JsonProperty("productNum", NullValueHandling = NullValueHandling.Ignore)]
-        public string productNum { get; set; }   //comment
+        public int productNum { get; set; }   //comment
 
         [JsonProperty("productImg", NullValueHandling = NullValueHandling.Ignore)]
         public string productImg { get; set; }   //comment
@@ -27,9 +28,17 @@ namespace XMart.Models
         //    set { SetProperty(ref isChecked, value); }
         //}
 
+        public bool MemberPriceVisible { get; set; }
+        public bool CusPriceVisible { get; set; }
+
+        public bool Checked { get; set; }
+
         public CartItemInfo()
         {
-            //IsChecked = false;
+            Checked = _checked == "1" ? true : false;
+
+            MemberPriceVisible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+            CusPriceVisible = !MemberPriceVisible;
         }
     }
 }

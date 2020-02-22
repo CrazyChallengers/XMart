@@ -26,7 +26,6 @@ namespace XMart.Views
 
             BindingContext = categoryViewModel;
 
-            //ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
         }
 
         /// <summary>
@@ -35,9 +34,6 @@ namespace XMart.Views
         private async void InitCategories()
         {
             CategoryRD categoryRD = await _restService.GetCategories();
-
-            //categoryViewModel.ParentCategoryList = categoryRD.result.parents;
-            //subCategoryList = categoryRD.data.categories;
 
             categoryList = categoryRD.result;
 
@@ -50,15 +46,11 @@ namespace XMart.Views
                     temp.Add(item);
                 }
             }
-            /*
-            for (int i = 0; i < 20; i++)
-            {
-                SubCategoryInfo sub = new SubCategoryInfo { id = i, name = "类别1-" + i, parentId = 1 };
-                temp.Add(sub);
-            }*/
+
             categoryViewModel.ParentCategoryList = temp;
 
             ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
+            GetSubCategories(0);
         }
 
         /// <summary>
@@ -72,23 +64,22 @@ namespace XMart.Views
 
             int index = ParentStack.Children.IndexOf(label);
 
+            GetSubCategories(index);
+        }
+
+        private void GetSubCategories(int index)
+        {
             int selectedParentId = categoryViewModel.ParentCategoryList[index].id;
 
             List<Category> temp = new List<Category>();
-           
+
             foreach (var item in categoryList)
             {
                 if (item.parentId == selectedParentId)
                 {
                     temp.Add(item);
                 }
-            } 
-            /*
-            for (int i = 0; i < 20; i++)
-            {
-                SubCategoryInfo sub = new SubCategoryInfo { id = i, name = "类别"+ selectedParentId + "-" + i, parentId = 1 };
-                temp.Add(sub);
-            }*/
+            }
             categoryViewModel.SubCategoryList = temp;
         }
 

@@ -97,19 +97,17 @@
                        HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
                 <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="AddToCartBtn" Text="加入购物车" HeightRequest="40" 
-                        CornerRadius="20" Margin="5,0" BackgroundColor="Crimson" TextColor="White"
-                        VerticalOptions="Center" Clicked="AddToCartBtn_Clicked"
-                        FontSize="18"/>
+                        CornerRadius="20" Margin="5,0" BackgroundColor="Crimson" TextColor="White" VerticalOptions="Center" FontSize="18"
+                        Command="{Binding AddToCartCommand}"/>
 
                 <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="立即购买" HeightRequest="40" 
-                        CornerRadius="20" Margin="5,0" BackgroundColor="{StaticResource MainColor}" TextColor="White"
-                        VerticalOptions="Center" Clicked="BuyButton_Clicked"
-                        FontSize="18"/>
+                        CornerRadius="20" Margin="5,0" BackgroundColor="{StaticResource MainColor}" TextColor="White" VerticalOptions="Center" FontSize="18"
+                        Clicked="BuyButton_Clicked"/>
             </Grid>
 
             <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Gray"
                      HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="StartAndExpand"
-                     HorizontalOptions="StartAndExpand" Margin="20,40"/>
+                     HorizontalOptions="StartAndExpand" Margin="20,40" Command="{Binding BackCommand}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

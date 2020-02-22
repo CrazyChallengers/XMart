@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:controls="clr-namespace:XMart.Controls"
+                 mc:Ignorable="d"
+                 x:Class="XMart.Views.AddToCartView">
+    
+    <popup:PopupPage.Animation>
+        <controls:UserAnimation/>
+    </popup:PopupPage.Animation>
+    
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+        <Frame BackgroundColor="White" HeightRequest="400" Padding="5" Style="{StaticResource BaseFrame}">
+            <StackLayout Spacing="0" >
+                <ff:CachedImage Source="{Binding Product.productImageBig}" HeightRequest="150" WidthRequest="150"/>
+                <Label Text="{Binding Product.productName}" FontSize="20"/>
+                <Label >
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="会员价" FontSize="12" TextColor="Red"/>
+                            <Span Text="￥" FontSize="22" TextColor="Red"/>
+                            <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="Red"/>
+                            <Span Text=" 原价" FontSize="12" TextColor="Gray"/>
+                            <Span Text="￥" FontSize="18" TextColor="Gray"/>
+                            <Span Text="{Binding Product.salePrice}" FontSize="18" TextColor="Gray"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <controls:NumericUpDown x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="150"
+                                        HorizontalOptions="CenterAndExpand" Value="{Binding ProductNum}" />
+                <Button Text="添加到购物车" Command="{Binding AddToCartCommand}" VerticalOptions="EndAndExpand" BackgroundColor="Crimson" TextColor="White"/>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+    
+</popup:PopupPage>
