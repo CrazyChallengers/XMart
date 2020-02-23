@@ -18,6 +18,8 @@
             <StackLayout Spacing="0" >
                 <ff:CachedImage Source="{Binding Product.productImageBig}" HeightRequest="150" WidthRequest="150"/>
                 <Label Text="{Binding Product.productName}" FontSize="20"/>
+                
+                <!--
                 <Label >
                     <Label.FormattedText>
                         <FormattedString>
@@ -29,7 +31,36 @@
                             <Span Text="{Binding Product.salePrice}" FontSize="18" TextColor="Gray"/>
                         </FormattedString>
                     </Label.FormattedText>
+                </Label>-->
+
+                <Label TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="会员价" FontSize="12"/>
+                            <Span Text="￥" FontSize="22"/>
+                            <Span Text="{Binding Product.memberPrice}" FontSize="26"/>
+                        </FormattedString>
+                    </Label.FormattedText>
                 </Label>
+                <Label TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text=" 原价" FontSize="12"/>
+                            <Span Text="￥" FontSize="18"/>
+                            <Span Text="{Binding Product.salePrice}" FontSize="18"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text=" 原价" FontSize="12"/>
+                            <Span Text="￥" FontSize="22"/>
+                            <Span Text="{Binding Product.salePrice}" FontSize="26"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
                 <controls:NumericUpDown x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="150"
                                         HorizontalOptions="CenterAndExpand" Value="{Binding ProductNum}" />
                 <Button Text="添加到购物车" Command="{Binding AddToCartCommand}" VerticalOptions="EndAndExpand" BackgroundColor="Crimson" TextColor="White"/>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using XMart.Util;
 
 namespace XMart.Models
 {
@@ -22,5 +23,14 @@ namespace XMart.Models
         [JsonProperty("productImageBig")]
         public string productImageBig { get; set; }   //Comment
 
+
+        public bool MemberPriceVisible { get; set; }
+        public bool CusPriceVisible { get; set; }
+
+        public ProductListItem()
+        {
+            CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
+            MemberPriceVisible = !CusPriceVisible;
+        }
     }
 }

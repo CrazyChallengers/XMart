@@ -35,10 +35,9 @@ namespace XMart.Models
 
         public CartItemInfo()
         {
-            Checked = _checked == "1" ? true : false;
-
-            MemberPriceVisible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
-            CusPriceVisible = !MemberPriceVisible;
+            Checked = _checked == "1";
+            CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
+            MemberPriceVisible = !CusPriceVisible;
         }
     }
 }
