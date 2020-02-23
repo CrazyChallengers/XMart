@@ -59,20 +59,53 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="140"/>
                                         <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImageBig}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding productName}" FontSize="22" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Text="{Binding subTitle}" FontSize="18"/>
-                                    <Label Grid.Row="2" Grid.Column="1" FontSize="22" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="22" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="18"/>
+                                    <!--<Label Grid.Row="2" Grid.Column="1" FontSize="22" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥"/>
                                                 <Span Text="{Binding salePrice}"/>
                                             </FormattedString>
                                         </Label.FormattedText>
+                                    </Label>-->
+                                    
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="Red" 
+                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="会员价" FontSize="12"/>
+                                                <Span Text="￥" FontSize="22"/>
+                                                <Span Text="{Binding memberPrice}" FontSize="26"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
                                     </Label>
-                                    <StackLayout Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+                                    <Label Grid.Row="2" Grid.Column="2" TextColor="Gray" 
+                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="原价" FontSize="12"/>
+                                                <Span Text="￥" FontSize="18"/>
+                                                <Span Text="{Binding salePrice}" FontSize="18"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="Red" 
+                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="原价" FontSize="12"/>
+                                                <Span Text="￥" FontSize="22"/>
+                                                <Span Text="{Binding salePrice}" FontSize="26"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <StackLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                                         <Label Text="1.3万+条评价" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                         <Label Text="98%好评" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     </StackLayout>

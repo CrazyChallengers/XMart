@@ -22,6 +22,20 @@ namespace XMart.ViewModels
             set { SetProperty(ref product, value); }
         }
 
+        private bool memberPriceVisible;   //Comment
+        public bool MemberPriceVisible
+        {
+            get { return memberPriceVisible; }
+            set { SetProperty(ref memberPriceVisible, value); }
+        }
+
+        private bool cusPriceVisile;   //Comment
+        public bool CusPriceVisible
+        {
+            get { return cusPriceVisile; }
+            set { SetProperty(ref cusPriceVisile, value); }
+        }
+
         public Command BackCommand { get; set; }
         public Command AddToCartCommand { get; set; }
         public Command BuyCommand { get; set; }
@@ -29,6 +43,9 @@ namespace XMart.ViewModels
 
         public ProductDetailVM(string productId)
         {
+            CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
+            MemberPriceVisible = !CusPriceVisible;
+
             BackCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PopModalAsync();

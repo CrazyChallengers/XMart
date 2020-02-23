@@ -27,11 +27,28 @@ namespace XMart.ViewModels
 			set { SetProperty(ref productNum, value); }
 		}
 
-		public Command AddToCartCommand { get; set; }
+        private bool memberPriceVisible;   //Comment
+        public bool MemberPriceVisible
+        {
+            get { return memberPriceVisible; }
+            set { SetProperty(ref memberPriceVisible, value); }
+        }
+
+        private bool cusPriceVisile;   //Comment
+        public bool CusPriceVisible
+        {
+            get { return cusPriceVisile; }
+            set { SetProperty(ref cusPriceVisile, value); }
+        }
+
+        public Command AddToCartCommand { get; set; }
 
 		public AddToCartViewVM(ProductInfo productInfo)
 		{
             Product = productInfo;
+
+            CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
+            MemberPriceVisible = !CusPriceVisible;
 
             ProductNum = 1;
 
