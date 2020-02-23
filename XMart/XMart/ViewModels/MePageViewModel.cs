@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using XMart.Util;
+using XMart.Views;
+using Xamarin.Forms;
 
 namespace XMart.ViewModels
 {
@@ -42,7 +44,7 @@ namespace XMart.ViewModels
 			set { SetProperty(ref visible, value); }
 		}
 
-
+		public Command<string> NavigateCommand { get; set; }
 
 		public MePageViewModel()
 		{
@@ -51,6 +53,15 @@ namespace XMart.ViewModels
 			UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
 			UserAvatar = GlobalVariables.LoggedUser.file;
 			Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+
+			NavigateCommand = new Command<string>((pageName) =>
+			{
+				Type type = Type.GetType(pageName);
+				Page page = (Page)Activator.CreateInstance(type);
+				Application.Current.MainPage.Navigation.PushModalAsync(page);
+			}, (pageName) => { return true; });
+
+
 		}
 
 	}

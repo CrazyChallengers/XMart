@@ -38,6 +38,7 @@
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="Aspect" Value="AspectFit"/>
             </Style>
+            
 
         </ResourceDictionary>
 

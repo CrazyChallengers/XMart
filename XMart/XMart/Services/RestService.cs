@@ -129,6 +129,80 @@ namespace XMart.Services
 
         #endregion
 
+        #region 收货地址
+        /// <summary>
+        /// 获取收货地址列表
+        /// </summary>
+        /// <param name="memberId"></param>
+        /// <returns></returns>
+        public async Task<AddressRD> GetAddressListById(string memberId)
+        {
+            string url = rootUrl3 + "/member/addressList";
+
+            string httpContent = "{\"userId\":" + memberId + "}";
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            AddressRD addressRD = JsonConvert.DeserializeObject<AddressRD>(responseBody);   //反序列化
+
+            return addressRD;
+        }
+
+        /// <summary>
+        /// 添加收获地址
+        /// </summary>
+        /// <param name="addressInfo"></param>
+        /// <returns></returns>
+        public async Task<SimpleRD> AddAddress(AddressInfo addressInfo)
+        {
+            string url = rootUrl3 + "/member/addAddress";
+
+            string httpContent = JsonConvert.SerializeObject(addressInfo);
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);   //反序列化
+
+            return simpleRD;
+        }
+
+        /// <summary>
+        /// 修改收获地址
+        /// </summary>
+        /// <param name="addressInfo"></param>
+        /// <returns></returns>
+        public async Task<SimpleRD> UpdateAddress(AddressInfo addressInfo)
+        {
+            string url = rootUrl3 + "/member/updateAddress";
+
+            string httpContent = JsonConvert.SerializeObject(addressInfo);
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);   //反序列化
+
+            return simpleRD;
+        }
+
+        /// <summary>
+        /// 删除收货地址
+        /// </summary>
+        /// <param name="addressInfo"></param>
+        /// <returns></returns>
+        public async Task<SimpleRD> DeleteAddressById(long addressId)
+        {
+            string url = rootUrl3 + "/member/delAddress";
+
+            string httpContent = "{\"addressId\":" + addressId + "}";
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);   //反序列化
+
+            return simpleRD;
+        }
+        #endregion
+
         /// <summary>
         /// 获取首页相关内容信息
         /// </summary>
@@ -197,7 +271,6 @@ namespace XMart.Services
             ProductDetailRD productDetailRD = JsonConvert.DeserializeObject<ProductDetailRD>(responseBody);
             return productDetailRD;
         }
-
 
 
         #region
