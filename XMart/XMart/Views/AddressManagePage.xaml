@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.AddressManagePage">
+
+    <ContentPage.Resources>
+        <Style x:Key="UserNameStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+        </Style>
+        <Style x:Key="PhoneStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+        </Style>
+        <Style x:Key="AddressStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="LineBreakMode" Value="CharacterWrap"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                    <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
+                    <Label Text="我的收货地址" TextColor="Black" FontSize="24" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    <Button WidthRequest="60" Text="新增" FontSize="22" Command="{Binding AddAddressCommand}" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" VerticalOptions="Fill" Margin="5,0">
+                    <Label Text="无收货地址" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
+                    <ListView x:Name="list" ItemsSource="{Binding AddressList}" VerticalOptions="Center" RowHeight="80"
+                                  IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsRefreshing}" RefreshControlColor="{StaticResource MainColor}" RefreshCommand="{Binding RefreshCommand}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding userName}" Style="{DynamicResource UserNameStyle}"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding tel}" Style="{DynamicResource PhoneStyle}"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding isDefault}"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding streetName}" Style="{DynamicResource AddressStyle}"/>
+                                        <Button Grid.Row="1" Grid.Column="2" Text="编辑" Command="{Binding EditCommand}" CommandParameter="{Binding addressId}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                                  Command="{Binding EditCommand}" 
+                                                                  CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
+                        </ListView.Behaviors>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.EditAddressPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                    <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
+                    <Label Text="编辑收货地址" TextColor="Black" FontSize="24" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                    <Button WidthRequest="60" Text="保存" FontSize="22" HorizontalOptions="EndAndExpand" Command="{Binding AddOrUpdateAddressCommand}"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" Margin="5,0" HeightRequest="500">
+                    <TableView Intent="Settings" HeightRequest="300" VerticalOptions="Start">
+                        <TableRoot>
+                            <TableSection>
+                                <EntryCell Label="收货人姓名" Text="{Binding UserName}"/>
+
+                                <EntryCell Label="电话号码" Text="{Binding Tel}"/>
+
+                                <EntryCell Label="地址" Text="{Binding StreetName}"/>
+
+                                <SwitchCell Text="是否默认" On="{Binding IsDefault}"/>
+
+                            </TableSection>
+                        </TableRoot>
+                    </TableView>
+
+                    <Button Text="删除该地址" Command="{Binding DeleteCommand}" VerticalOptions="Start" HorizontalOptions="Start" WidthRequest="100" HeightRequest="50"/>
+                    <Button Text="确认删除" Command="{Binding DeleteAddressCommand}" IsVisible="{Binding Visible}" WidthRequest="100" HeightRequest="50"
+                            TextColor="White" BackgroundColor="Crimson" VerticalOptions="Start" HorizontalOptions="Start" />
+                    <Button Text="取消" Command="{Binding DeleteCommand}" IsVisible="{Binding Visible}" WidthRequest="100" HeightRequest="50"
+                            VerticalOptions="Start" HorizontalOptions="Start"/>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
