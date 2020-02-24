@@ -23,7 +23,6 @@ namespace XMart.Models
         [JsonProperty("productImageBig")]
         public string productImageBig { get; set; }   //Comment
 
-
         public bool MemberPriceVisible { get; set; }
         public bool CusPriceVisible { get; set; }
 

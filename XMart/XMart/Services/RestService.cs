@@ -149,7 +149,7 @@ namespace XMart.Services
         }
 
         /// <summary>
-        /// 添加收获地址
+        /// 添加收货地址
         /// </summary>
         /// <param name="addressInfo"></param>
         /// <returns></returns>
@@ -272,6 +272,51 @@ namespace XMart.Services
             return productDetailRD;
         }
 
+        /// <summary>
+        /// 模糊搜索
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="sequence"></param>
+        /// <param name="page"></param>
+        /// <param name="size"></param>
+        /// <param name="sort"></param>
+        /// <param name="priceGt"></param>
+        /// <param name="priceLte"></param>
+        /// <returns></returns>
+        public async Task<ProductListRD> FuzzySearch(string index, int sequence, int page, int size, string sort, int priceGt, int priceLte)
+        {
+            string url = rootUrl3 + "/goods/SearchLike?page=" + page.ToString()
+                + "&index=" + index
+                + "&size=" + size.ToString()
+                + "&sort=" + sort
+                + "&sequence=" + sequence.ToString()
+                + "&priceGt=" + priceGt.ToString()
+                + "&priceLte=" + priceLte.ToString();
+
+            string responseBody = await GetStringDataAsync(url);
+
+            ProductListRD productListRD = JsonConvert.DeserializeObject<ProductListRD>(responseBody);
+
+            return productListRD;
+        }
+
+        /// <summary>
+        /// 提交订单
+        /// </summary>
+        /// <param name="orderPara"></param>
+        /// <returns></returns>
+        public async Task<StupidRD> Order(OrderPara orderPara)
+        {
+            string url = rootUrl3 + "/member/addOrder";
+
+            string httpContent = JsonConvert.SerializeObject(orderPara);  //序列化
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            StupidRD stupidRD = JsonConvert.DeserializeObject<StupidRD>(responseBody);   //反序列化
+
+            return stupidRD;
+        }
 
         #region
         /// <summary>

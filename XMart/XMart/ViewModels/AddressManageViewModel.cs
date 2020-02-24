@@ -78,7 +78,6 @@ namespace XMart.ViewModels
                 InitAddressList();
                 IsRefreshing = false;
             }, () => { return true; });
-
         }
 
         /// <summary>

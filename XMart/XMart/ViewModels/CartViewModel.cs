@@ -2,6 +2,8 @@
 using Xamarin.Forms;
 using XMart.Models;
 using XMart.Util;
+using XMart.Views;
+using Xamarin.Forms;
 
 namespace XMart.ViewModels
 {
@@ -42,14 +44,14 @@ namespace XMart.ViewModels
             set { SetProperty(ref checkedNumber, value); }
         }
 
-
         private Color allCheckedButton_Color;   //comment
-
         public Color AllCheckedButton_Color
         {
             get { return allCheckedButton_Color; }
             set { SetProperty(ref allCheckedButton_Color, value); }
         }
+
+        public Command OrderCommand { get; set; }
 
         public CartViewModel()
         {
@@ -59,6 +61,23 @@ namespace XMart.ViewModels
             CheckedNumber = 0;
             IsAllChecked = false;
             allCheckedButton_Color = Color.LightGray;
+
+            OrderCommand = new Command(() =>
+            {
+                List<ProductInfo> productList = new List<ProductInfo>();
+
+                foreach (var item in ItemList)
+                {
+                    if (item.Checked)
+                    {
+                        productList.Add(item);
+                    }
+                }
+
+                OrderingPage orderingPage = new OrderingPage(productList);
+                Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);
+            }, () => { return true; });
+
         }
     }
 }
