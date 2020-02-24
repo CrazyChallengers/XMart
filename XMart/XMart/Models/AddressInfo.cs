@@ -26,6 +26,5 @@ namespace XMart.Models
         [JsonProperty("isDefault")]
         public bool isDefault { get; set; }   //Comment
 
-        private Command EditCommand { get; set; }
     }
 }

@@ -59,7 +59,6 @@
                                         <Label Grid.Row="0" Grid.Column="1" Text="{Binding tel}" Style="{DynamicResource PhoneStyle}"/>
                                         <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding isDefault}"/>
                                         <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding streetName}" Style="{DynamicResource AddressStyle}"/>
-                                        <Button Grid.Row="1" Grid.Column="2" Text="编辑" Command="{Binding EditCommand}" CommandParameter="{Binding addressId}"/>
                                     </Grid>
                                 </ViewCell>
                             </DataTemplate>

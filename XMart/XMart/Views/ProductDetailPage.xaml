@@ -56,7 +56,8 @@
                         </Label>-->
 
                         <Label Grid.Row="0" Grid.Column="0" TextColor="Red" 
-                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                               VerticalOptions="Center" HorizontalOptions="Start" 
+                               IsVisible="{Binding MemberPriceVisible}">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="会员价" FontSize="12"/>
@@ -66,7 +67,8 @@
                             </Label.FormattedText>
                         </Label>
                         <Label Grid.Row="1" Grid.Column="0" TextColor="Gray" 
-                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                               VerticalOptions="Center" HorizontalOptions="Start" 
+                               IsVisible="{Binding MemberPriceVisible}">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="原价" FontSize="12"/>
@@ -76,7 +78,8 @@
                             </Label.FormattedText>
                         </Label>
                         <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" TextColor="Red" 
-                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+                               VerticalOptions="Center" HorizontalOptions="Start" 
+                               IsVisible="{Binding CusPriceVisible}">
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="原价" FontSize="12"/>
@@ -134,7 +137,7 @@
 
                 <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="立即购买" HeightRequest="40" 
                         CornerRadius="20" Margin="5,0" BackgroundColor="{StaticResource MainColor}" TextColor="White" VerticalOptions="Center" FontSize="18"
-                        Clicked="BuyButton_Clicked"/>
+                        Command="{Binding BuyCommand}"/>
             </Grid>
 
             <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Gray"

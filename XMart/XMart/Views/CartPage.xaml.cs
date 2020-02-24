@@ -71,16 +71,6 @@ namespace XMart.Views
             cartViewModel.CheckedNumber = number;
         }
 
-        /// <summary>
-        /// 结算按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void OrderButton_Clicked(object sender, System.EventArgs e)
-        {
-
-        }
-
         private void AllCheckedButton_Clicked(object sender, System.EventArgs e)
         {
             cartViewModel.IsAllChecked = !cartViewModel.IsAllChecked;

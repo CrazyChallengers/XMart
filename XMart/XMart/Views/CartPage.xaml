@@ -29,9 +29,8 @@
             </Label>
 
             <Button Grid.Row="0" x:Name="AllCheckedButton" Text="全选" TextColor="White" BackgroundColor="{Binding AllCheckedButton_Color}" 
-                        HeightRequest="30" WidthRequest="50" CornerRadius="15" Padding="0" Margin="10,0" HorizontalOptions="End" VerticalOptions="EndAndExpand"
-                    FontSize="18"
-                        Clicked="AllCheckedButton_Clicked"/>
+                    HeightRequest="30" WidthRequest="50" CornerRadius="15" Padding="0" Margin="10,0" FontSize="18"
+                    HorizontalOptions="End" VerticalOptions="EndAndExpand" Clicked="AllCheckedButton_Clicked"/>
 
             <!--购物车商品列表-->
             <ScrollView Grid.Row="1" Orientation="Vertical">
@@ -132,8 +131,7 @@
                 </Label>
 
                 <Button x:Name="OrderButton" Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
-                        HorizontalOptions="End" VerticalOptions="Center" Clicked="OrderButton_Clicked"
-                        FontSize="22"/>
+                        HorizontalOptions="End" VerticalOptions="Center" FontSize="22" Command="{Binding OrderCommand}"/>
 
             </StackLayout>
 

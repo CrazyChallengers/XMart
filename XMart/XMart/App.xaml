@@ -29,6 +29,7 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
                 <Setter Property="FontSize" Value="24"/>
                 <Setter Property="MaxLength" Value="16"/>
+                <Setter Property="ReturnType" Value="Search"/>
             </Style>
             <Style x:Key="EarImageButton" TargetType="ImageButton">
                 <Setter Property="WidthRequest" Value="30"/>

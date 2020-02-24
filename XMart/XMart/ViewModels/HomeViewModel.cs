@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XMart.Models;
+using XMart.Views;
 
 namespace XMart.ViewModels
 {
@@ -52,7 +53,6 @@ namespace XMart.ViewModels
         */
 
         private List<HomePanelContent> carouselList;   //comment
-
         public List<HomePanelContent> CarouselList
         {
             get { return carouselList; }
@@ -60,7 +60,6 @@ namespace XMart.ViewModels
         }
 
         private List<HomePanelContent> hotProductList;   //comment
-
         public List<HomePanelContent> HotProductList
         {
             get { return hotProductList; }
@@ -68,7 +67,6 @@ namespace XMart.ViewModels
         }
 
         private List<HomePanelContent> officialChoiceList;   //comment
-
         public List<HomePanelContent> OfficialChoiceList
         {
             get { return officialChoiceList; }
@@ -76,7 +74,6 @@ namespace XMart.ViewModels
         }
 
         private List<HomePanelContent> goodBrandList;   //comment
-
         public List<HomePanelContent> GoodBrandList
         {
             get { return goodBrandList; }
@@ -84,18 +81,34 @@ namespace XMart.ViewModels
         }
 
         private List<HomePanelContent> brandChoiceList;   //comment
-
         public List<HomePanelContent> BrandChoiceList
         {
             get { return brandChoiceList; }
             set { SetProperty(ref brandChoiceList, value); }
         }
 
+        private string index;   //Comment
+        public string Index
+        {
+            get { return index; }
+            set { SetProperty(ref index, value); }
+        }
+        
         public ICommand ItemTapCommand { set; get; }
+        public Command SearchCommand { get; set; }
 
         public HomeViewModel()
         {
             Title = "首页";
+
+            SearchCommand = new Command(() =>
+            {
+                ProductListPage productListPage = new ProductListPage(Index);
+                Index = "";
+
+                Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
+            }, () => { return true; });
+
         }
     }
 }

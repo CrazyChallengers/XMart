@@ -3,13 +3,171 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:XMart.Controls"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
              x:Class="XMart.Views.OrderingPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="65"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
+                <Label Text="确认订单" TextColor="Black" FontSize="24" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+            </StackLayout>
+
+            <ScrollView Grid.Row="1">
+                <StackLayout VerticalOptions="Start">
+                    <Grid Margin="5" BackgroundColor="LightGray">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="50"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding UserName}" FontSize="24"/>
+                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Tel}" FontSize="24"/>
+                        <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding IsDefault}"/>
+                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding StreetName}" FontSize="18"/>
+                        <Button Grid.Row="1" Grid.Column="2" Text="编辑" Command="{Binding AddressManageCommand}"/>
+                    </Grid>
+                    <!--<ListView x:Name="list" RowHeight="80" ItemsSource="{Binding AddressList}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                            <ColumnDefinition Width="50"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding userName}"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding tel}"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding isDefault}"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding streetName}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                              Command="{Binding EditCommand}" 
+                                                              CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
+                        </ListView.Behaviors>
+                    </ListView>-->
+
+                    <Picker HeightRequest="50" Title="支付类型" 
+                            ItemsSource="{Binding PaymentTypeList}" 
+                            SelectedIndex="{Binding SelectedTypeIndex}"/>
+
+                    <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ProductList,Mode=TwoWay}" Orientation="Vertical" BackgroundColor="LightGray">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
+                                    <Grid RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="40"/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="100"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="30"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="Medium"/>
+                                        <Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
+                                        
+                                        <Label Grid.Row="2" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="会员价" FontSize="12"/>
+                                                    <Span Text="￥" FontSize="22"/>
+                                                    <Span Text="{Binding memberPrice}" FontSize="26"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Grid.Row="3" Grid.Column="1" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="原价" FontSize="12"/>
+                                                    <Span Text="￥" FontSize="18"/>
+                                                    <Span Text="{Binding salePrice}" FontSize="18"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="原价" FontSize="12"/>
+                                                    <Span Text="￥" FontSize="22"/>
+                                                    <Span Text="{Binding salePrice}" FontSize="26"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
+                                                            x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
+                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                </StackLayout>
+            </ScrollView>
+
+            <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10,0">
+                <!--
+                <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
+                          IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
+
+                <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="22"/>
+                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="22">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="￥" TextColor="Red"/>
+                            <Span Text="{Binding TotalSelectedPrice}" TextColor="Red" FontSize="24" FontAttributes="Bold"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="22">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="共"/>
+                            <Span Text="{Binding ItemNum}"/>
+                            <Span Text="件"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Button x:Name="OrderButton" Text="提交订单" HeightRequest="40" WidthRequest="150" 
+                        CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
+                        HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                        Command="{Binding OrderCommand}"/>
+
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using XMart.Models;
 using XMart.ResponseData;
 using XMart.Services;
+using XMart.Views;
 
 namespace XMart.ViewModels
 {
@@ -23,6 +24,15 @@ namespace XMart.ViewModels
             get { return subCategoryList; }
             set { SetProperty(ref subCategoryList, value); }
         }
+
+        private string index;   //Comment
+        public string Index
+        {
+            get { return index; }
+            set { SetProperty(ref index, value); }
+        }
+
+        public Command SearchCommand { get; set; }
 
         //public Command<int> ParentTappedCommand { get; private set; }
         //public Command SubTappedCommand { get; private set; }
@@ -53,6 +63,15 @@ namespace XMart.ViewModels
 
             }, () => { return true; });
             */
+
+            SearchCommand = new Command(() =>
+            {
+                ProductListPage productListPage = new ProductListPage(Index);
+                Index = "";
+
+                Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
+            }, () => { return true; });
+
         }
         /*
         /// <summary>
