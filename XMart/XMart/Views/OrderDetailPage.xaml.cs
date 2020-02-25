@@ -6,15 +6,26 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XMart.ViewModels;
+using XMart.Models;
 
 namespace XMart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderDetailPage : ContentPage
     {
-        public OrderDetailPage()
+        public OrderDetailPage(long orderId)
         {
             InitializeComponent();
+
+            BindingContext = new OrderDetailViewModel(orderId);
+        }
+
+        public OrderDetailPage(OrderDetail orderDetail)
+        {
+            InitializeComponent();
+
+            BindingContext = new OrderDetailViewModel(orderDetail);
         }
     }
 }

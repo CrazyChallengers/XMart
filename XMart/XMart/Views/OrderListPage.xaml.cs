@@ -7,22 +7,17 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.ViewModels;
-using XMart.Models;
 
 namespace XMart.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class OrderingPage : ContentPage
+    public partial class OrderListPage : ContentPage
     {
-        OrderingViewModel orderingViewModel;
-
-        public OrderingPage(List<CartItemInfo> productList)
+        public OrderListPage()
         {
             InitializeComponent();
 
-            orderingViewModel = new OrderingViewModel(productList);
-
-            BindingContext = orderingViewModel;
+            BindingContext = new OrderListViewModel();
         }
     }
 }

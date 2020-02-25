@@ -3,7 +3,6 @@ using Xamarin.Forms;
 using XMart.Models;
 using XMart.Util;
 using XMart.Views;
-using Xamarin.Forms;
 
 namespace XMart.ViewModels
 {
@@ -64,7 +63,7 @@ namespace XMart.ViewModels
 
             OrderCommand = new Command(() =>
             {
-                List<ProductInfo> productList = new List<ProductInfo>();
+                List<CartItemInfo> productList = new List<CartItemInfo>();
 
                 foreach (var item in ItemList)
                 {

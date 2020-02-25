@@ -10,7 +10,6 @@ using Plugin.Toast;
 using Plugin.Toast.Abstractions;
 using Rg.Plugins.Popup.Services;
 using XMart.Views;
-using Xamarin.Forms;
 
 namespace XMart.ViewModels
 {
@@ -61,8 +60,14 @@ namespace XMart.ViewModels
 
             BuyCommand = new Command(() =>
             {
-                List<ProductInfo> productList = new List<ProductInfo>();
-                productList.Add(Product);
+                List<CartItemInfo> productList = new List<CartItemInfo>();
+
+                CartItemInfo cartItemInfo = new CartItemInfo();
+                Tools.AutoMapping<ProductInfo, CartItemInfo>(Product, cartItemInfo);
+                cartItemInfo.productNum = 1;
+                cartItemInfo.productImg = Product.productImageBig;
+
+                productList.Add(cartItemInfo);
 
                 OrderingPage orderingPage = new OrderingPage(productList);
                 Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);

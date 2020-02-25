@@ -96,6 +96,7 @@ namespace XMart.ViewModels
         
         public ICommand ItemTapCommand { set; get; }
         public Command SearchCommand { get; set; }
+        public Command<string> NavigateCommand { get; set; }
 
         public HomeViewModel()
         {
@@ -109,6 +110,12 @@ namespace XMart.ViewModels
                 Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
             }, () => { return true; });
 
+            NavigateCommand = new Command<string>((pageName) =>
+            {
+                Type type = Type.GetType(pageName);
+                Page page = (Page)Activator.CreateInstance(type);
+                Application.Current.MainPage.Navigation.PushModalAsync(page);
+            }, (pageName) => { return true; });
         }
     }
 }

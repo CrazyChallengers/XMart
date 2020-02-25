@@ -4,6 +4,7 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:controls="clr-namespace:XMart.Controls"
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             xmlns:views="clr-namespace:XMart.Views"
              x:Class="XMart.Views.HomePage"
              Icon="Resource/drawable/home.png"
              Title="首页">
@@ -71,23 +72,6 @@
                                     <Setter Property="WidthRequest" Value="40"/>
                                     <Setter Property="HeightRequest" Value="40"/>
                                     <Setter Property="BackgroundColor" Value="Transparent"/>
-                                    <!--<Setter Property="VisualStateManager.VisualStateGroups">
-                <VisualStateGroupList>
-                    <VisualStateGroup x:Name="CommonStates">
-                        <VisualState x:Name="Normal">
-                            <VisualState.Setters>
-                                <Setter Property="Scale" Value="1" />
-                            </VisualState.Setters>
-                        </VisualState>
-
-                        <VisualState x:Name="Pressed">
-                            <VisualState.Setters>
-                                <Setter Property="Scale" Value="0.9" />
-                            </VisualState.Setters>
-                        </VisualState>
-                    </VisualStateGroup>
-                </VisualStateGroupList>
-            </Setter>-->
                                 </Style>
                                 <Style TargetType="Label">
                                     <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
@@ -98,7 +82,9 @@
                                 </Style>
                             </Grid.Resources>
 
-                            <ImageButton Grid.Row="0" Grid.Column="0" Source="order_red.png" />
+                            <ImageButton Grid.Row="0" Grid.Column="0" Source="order_red.png" 
+                                         Command="{Binding NavigateCommand}" 
+                                         CommandParameter="XMart.Views.OrderListPage"/>
                             <Label Grid.Row="1" Grid.Column="0" Text="我的订单"/>
 
                             <ImageButton Grid.Row="0" Grid.Column="1" Source="pay.png"/>
@@ -117,58 +103,28 @@
                     </Frame>
                     
                     <Label Text="最近订单" Style="{DynamicResource SectionTitle}"/>
-                    <StackLayout Orientation="Vertical">
-                        <Grid HeightRequest="60" Margin="5,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                    <StackLayout Orientation="Vertical" BindableLayout.ItemsSource="{Binding OrderList}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid HeightRequest="60" Margin="5,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="80"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill" VerticalOptions="Fill">
-                                <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
-                            </Frame>
+                                    <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill" VerticalOptions="Fill">
+                                        <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
+                                    </Frame>
 
-                            <Label Grid.Row="0" Grid.Column="1" Text="订单一" FontSize="22" VerticalOptions="Center"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="18"/>
-                        </Grid>
-                        <Grid HeightRequest="60" Margin="5,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill" VerticalOptions="Fill">
-                                <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
-                            </Frame>
-
-                            <Label Grid.Row="0" Grid.Column="1" Text="订单二" FontSize="22" VerticalOptions="Center"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="18"/>
-                        </Grid>
-                        <Grid HeightRequest="60" Margin="5,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <Frame Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill" VerticalOptions="Fill">
-                                <ff:CachedImage Source="circle.png" Aspect="AspectFit"/>
-                            </Frame>
-
-                            <Label Grid.Row="0" Grid.Column="1" Text="订单三" FontSize="22" VerticalOptions="Center"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="18"/>
-                        </Grid>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="订单一" FontSize="22" VerticalOptions="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Text="【成都市】快件已到达 成都转运中心" VerticalOptions="Center" FontSize="18"/>
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
                     </StackLayout>
 
                     <!--热门商品-->

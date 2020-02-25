@@ -8,6 +8,17 @@
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
              x:Class="XMart.Views.OrderingPage">
+
+    <ContentPage.Resources>
+        <Style x:Key="SectionStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
@@ -23,57 +34,35 @@
 
             <ScrollView Grid.Row="1">
                 <StackLayout VerticalOptions="Start">
-                    <Grid Margin="5" BackgroundColor="LightGray">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="1*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="50"/>
-                        </Grid.ColumnDefinitions>
+                    <Label Text="收货地址" Style="{DynamicResource SectionStyle}"/>
+                    <Frame Padding="10" Margin="5" CornerRadius="10" IsClippedToBounds="True" BackgroundColor="LightGray">
+                        <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="50"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding UserName}" FontSize="24"/>
-                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding Tel}" FontSize="24"/>
-                        <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding IsDefault}"/>
-                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding StreetName}" FontSize="18"/>
-                        <Button Grid.Row="1" Grid.Column="2" Text="编辑" Command="{Binding AddressManageCommand}"/>
-                    </Grid>
-                    <!--<ListView x:Name="list" RowHeight="80" ItemsSource="{Binding AddressList}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="50"/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding userName}"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding tel}"/>
-                                        <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding isDefault}"/>
-                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding streetName}"/>
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="ItemSelected" 
-                                                              Command="{Binding EditCommand}" 
-                                                              CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
-                        </ListView.Behaviors>
-                    </ListView>-->
-
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding UserName}" FontSize="28" VerticalOptions="Center"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Tel}" FontSize="24" VerticalOptions="Center"/>
+                            <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding IsDefault}"
+                                   VerticalOptions="Center" HorizontalOptions="Center"/>
+                            <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding StreetName}" FontSize="18"
+                                   VerticalOptions="Center" VerticalTextAlignment="Center" LineBreakMode="CharacterWrap"/>
+                            <Button Grid.Row="1" Grid.Column="2" Text="编辑" Command="{Binding AddressManageCommand}" />
+                        </Grid>
+                    </Frame>
+                    
+                    <Label Text="支付类型" Style="{DynamicResource SectionStyle}"/>
                     <Picker HeightRequest="50" Title="支付类型" 
                             ItemsSource="{Binding PaymentTypeList}" 
                             SelectedIndex="{Binding SelectedTypeIndex}"/>
 
+                    <Label Text="商品列表" Style="{DynamicResource SectionStyle}"/>
                     <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ProductList,Mode=TwoWay}" Orientation="Vertical" BackgroundColor="LightGray">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
@@ -93,8 +82,8 @@
                                         </Grid.ColumnDefinitions>
 
                                         <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="Medium"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="24" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="20"/>
                                         <Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
                                         
                                         <Label Grid.Row="2" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
@@ -125,9 +114,14 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                        <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
-                                                            x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
-                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
+                                        <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="x" FontSize="20"/>
+                                                    <Span Text="{Binding productNum}" FontSize="24"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
                                     </Grid>
                                 </Frame>
                             </DataTemplate>
