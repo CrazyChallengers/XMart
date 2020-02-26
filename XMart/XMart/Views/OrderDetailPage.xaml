@@ -85,7 +85,7 @@
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="订单状态："/>
-                                    <Span Text="{Binding Order.orderStatus}"/>
+                                    <Span Text="{Binding OrderStatus}"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
@@ -203,13 +203,14 @@
                     </Label>
 
                     <Button Text="取消订单" HeightRequest="40" WidthRequest="100" 
-                        CornerRadius="20" BackgroundColor="LightGray" TextColor="White"
-                        HorizontalOptions="End" VerticalOptions="Center" FontSize="22"/>
+                            CornerRadius="20" BackgroundColor="LightGray" TextColor="White"
+                            HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                            Command="{Binding CancelCommand}"/>
 
                     <Button x:Name="OrderButton" Text="支付" HeightRequest="40" WidthRequest="100" 
-                        CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
-                        HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
-                        Command="{Binding OrderCommand}"/>
+                            CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
+                            HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                            Command="{Binding OrderCommand}"/>
 
                 </StackLayout>
             </Grid>

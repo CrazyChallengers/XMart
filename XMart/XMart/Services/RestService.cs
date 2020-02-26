@@ -256,6 +256,24 @@ namespace XMart.Services
             return orderListRD;
         }
 
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        /// <param name="orderDetail"></param>
+        /// <returns></returns>
+        public async Task<SimpleRD> CancelOrder(OrderDetail orderDetail)
+        {
+            string url = rootUrl3 + "/member/cancelOrder";
+
+            string httpContent = JsonConvert.SerializeObject(orderDetail);  //序列化
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);   //反序列化
+
+            return simpleRD;
+        }
+
         #endregion
 
         /// <summary>

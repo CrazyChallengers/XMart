@@ -33,8 +33,16 @@ namespace XMart.ViewModels
             set { SetProperty(ref itemNum, value); }
         }
 
+        private string orderStatus;   //Comment
+        public string OrderStatus
+        {
+            get { return orderStatus; }
+            set { SetProperty(ref orderStatus, value); }
+        }
 
+        RestService _restService = new RestService();
 
+        public Command CancelCommand { get; set; }
         public Command HomeCommand { get; set; }
         public Command BackCommand { get; set; }
 
@@ -51,11 +59,29 @@ namespace XMart.ViewModels
                     break;
             }
 
+            switch (Order.orderStatus)
+            {
+                case "0": OrderStatus = "未付款"; break;
+                case "1": OrderStatus = "已付款"; break;
+                case "2": OrderStatus = "未发货"; break;
+                case "3": OrderStatus = "已发货"; break;
+                case "4": OrderStatus = "交易成功"; break;
+                case "5": OrderStatus = "交易关闭"; break;
+                case "6": OrderStatus = "交易失败"; break;
+                default:
+                    break;
+            }
+
             ItemNum = 0;
             foreach (var item in Order.goodsList)
             {
                 ItemNum += item.productNum;
             }
+
+            CancelCommand = new Command(() =>
+            {
+                CancelOrder();
+            }, () => { return true; });
 
             HomeCommand = new Command(() =>
             {
@@ -81,11 +107,29 @@ namespace XMart.ViewModels
                     break;
             }
 
+            switch (Order.orderStatus)
+            {
+                case "0": OrderStatus = "未付款"; break;
+                case "1": OrderStatus = "已付款"; break;
+                case "2": OrderStatus = "未发货"; break;
+                case "3": OrderStatus = "已发货"; break;
+                case "4": OrderStatus = "交易成功"; break;
+                case "5": OrderStatus = "交易关闭"; break;
+                case "6": OrderStatus = "交易失败"; break;
+                default:
+                    break;
+            }
+
             ItemNum = 0;
             foreach (var item in Order.goodsList)
             {
                 ItemNum += item.productNum;
             }
+
+            CancelCommand = new Command(() =>
+            {
+                CancelOrder();
+            }, () => { return true; });
 
             HomeCommand = new Command(() =>
             {
@@ -100,6 +144,30 @@ namespace XMart.ViewModels
         }
 
         /// <summary>
+        /// 取消订单
+        /// </summary>
+        private async void CancelOrder()
+        {
+            try
+            {
+                SimpleRD simpleRD = await _restService.CancelOrder(Order);
+
+                if (simpleRD.success)
+                {
+                    CrossToastPopUp.Current.ShowToastSuccess("该订单已关闭！", ToastLength.Long);
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError("该订单取消失败！请联系客服人员！", ToastLength.Long);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// 获取订单详细信息
         /// </summary>
         /// <param name="orderId"></param>
@@ -107,7 +175,6 @@ namespace XMart.ViewModels
         {
             try
             {
-                RestService _restService = new RestService();
                 OrderDetailRD orderDetailRD = await _restService.GetOrderDetailByOrderId(orderId);
 
                 if (orderDetailRD.success)
