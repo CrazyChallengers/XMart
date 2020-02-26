@@ -3,13 +3,217 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="XMart.Views.OrderDetailPage">
+    
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <Grid RowSpacing="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="50"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand">
+                    <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
+                    <Label Text="订单详情" TextColor="Black" FontSize="24" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+
+                <ScrollView Grid.Row="1">
+                    <StackLayout VerticalOptions="Start">
+                        <Label Text="收货地址" />
+                        <Frame Padding="10" Margin="5" CornerRadius="10" IsClippedToBounds="True" BackgroundColor="LightGray">
+                            <Grid RowSpacing="0" ColumnSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1*"/>
+                                    <ColumnDefinition Width="2*"/>
+                                    <ColumnDefinition Width="50"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Order.addressInfo.userName}" FontSize="28" VerticalOptions="Center"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Order.addressInfo.tel}" FontSize="24" VerticalOptions="Center"/>
+                                <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding Order.addressInfo.isDefault}"
+                                   VerticalOptions="Center" HorizontalOptions="Center"/>
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Order.addressInfo.streetName}" FontSize="18"
+                                   VerticalOptions="Center" VerticalTextAlignment="Center" LineBreakMode="CharacterWrap"/>
+                            </Grid>
+                        </Frame>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="订单编号："/>
+                                    <Span Text="{Binding Order.orderId}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="订单创建时间："/>
+                                    <Span Text="{Binding Order.createDate}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="订单关闭时间："/>
+                                    <Span Text="{Binding Order.closeDate}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="订单完成时间："/>
+                                    <Span Text="{Binding Order.finishDate}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="订单状态："/>
+                                    <Span Text="{Binding OrderStatus}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="支付时间："/>
+                                    <Span Text="{Binding Order.payDate}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="支付类型："/>
+                                    <Span Text="{Binding PaymentType}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+
+                        <Label Text="商品列表"/>
+                        <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding Order.goodsList,Mode=TwoWay}" Orientation="Vertical" BackgroundColor="LightGray">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
+                                        <Grid RowSpacing="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="40"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="30"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
+                                            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="24" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="20"/>
+                                            <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Text="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
+
+                                            <Label Grid.Row="2" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="会员价" FontSize="12"/>
+                                                        <Span Text="￥" FontSize="22"/>
+                                                        <Span Text="{Binding memberPrice}" FontSize="26"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label Grid.Row="3" Grid.Column="1" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="原价" FontSize="12"/>
+                                                        <Span Text="￥" FontSize="18"/>
+                                                        <Span Text="{Binding salePrice}" FontSize="18"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="原价" FontSize="12"/>
+                                                        <Span Text="￥" FontSize="22"/>
+                                                        <Span Text="{Binding salePrice}" FontSize="26"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="x" FontSize="20"/>
+                                                        <Span Text="{Binding productNum}" FontSize="24"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
+                    </StackLayout>
+                </ScrollView>
+
+                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10,0">
+                    <!--
+                <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
+                          IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
+
+                    <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="22"/>
+                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="22">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="￥" TextColor="Red"/>
+                                <Span Text="{Binding Order.orderTotal}" TextColor="Red" FontSize="24" FontAttributes="Bold"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="22">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="共"/>
+                                <Span Text="{Binding ItemNum}"/>
+                                <Span Text="件"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Button Text="取消订单" HeightRequest="40" WidthRequest="100" 
+                            CornerRadius="20" BackgroundColor="LightGray" TextColor="White"
+                            HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                            Command="{Binding CancelCommand}"/>
+
+                    <Button x:Name="OrderButton" Text="支付" HeightRequest="40" WidthRequest="100" 
+                            CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
+                            HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                            Command="{Binding OrderCommand}"/>
+
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

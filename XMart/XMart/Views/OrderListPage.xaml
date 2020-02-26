@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.OrderListPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
+                    <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
+                    <Label Text="订单管理" TextColor="Black" FontSize="24" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+                </StackLayout>
+
+                <StackLayout Grid.Row="2" VerticalOptions="Fill" Margin="5,0">
+                    <Label Text="无订单" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
+                    <ListView x:Name="list" ItemsSource="{Binding OrderList}" VerticalOptions="Center" RowHeight="80"
+                              IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsRefreshing}" RefreshControlColor="{StaticResource MainColor}" RefreshCommand="{Binding RefreshCommand}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="1*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding orderId}"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding addressInfo.userName}"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding addressInfo.streetName}"/>
+                                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding createDate}"/>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                        <ListView.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                              Command="{Binding EditCommand}" 
+                                                              CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
+                        </ListView.Behaviors>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

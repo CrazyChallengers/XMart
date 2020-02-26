@@ -11,7 +11,7 @@ namespace XMart.Models
         public long addressId { get; set; }   //Comment
 
         [JsonProperty("goodsList")]
-        public List<ProductInfo> goodsList { get; set; }   //Comment
+        public List<CartItemInfo> goodsList { get; set; }   //Comment
 
         [JsonProperty("orderTotal")]
         public long orderTotal { get; set; }   //Comment

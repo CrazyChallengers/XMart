@@ -42,8 +42,8 @@ namespace XMart.ViewModels
             set { SetProperty(ref streetName, value); }
         }
 
-        private List<ProductInfo> productList;   //Comment
-        public List<ProductInfo> ProductList
+        private List<CartItemInfo> productList;   //Comment
+        public List<CartItemInfo> ProductList
         {
             get { return productList; }
             set { SetProperty(ref productList, value); }
@@ -82,7 +82,7 @@ namespace XMart.ViewModels
         public Command AddressManageCommand { get; set; }
         public Command BackCommand { get; set; }
 
-        public OrderingViewModel(List<ProductInfo> _productList)
+        public OrderingViewModel(List<CartItemInfo> _productList)
         {
             InitAddress();
 
@@ -94,11 +94,12 @@ namespace XMart.ViewModels
             SelectedTypeIndex = 0;
 
             ProductList = _productList;
-            ItemNum = ProductList.Count;
+            ItemNum = 0;
 
             foreach (var item in ProductList)
             {
-                TotalSelectedPrice = item.memberPrice;
+                TotalSelectedPrice += item.memberPrice*item.productNum;
+                ItemNum += item.productNum;
             }
 
             OrderCommand = new Command(() =>
@@ -143,6 +144,9 @@ namespace XMart.ViewModels
                 if (stupidRD.result != 0)
                 {
                     CrossToastPopUp.Current.ShowToastSuccess("提交订单成功！请及时支付！", ToastLength.Long);
+
+                    OrderDetailPage orderDetailPage = new OrderDetailPage(stupidRD.result);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
                 }
                 else
                 {

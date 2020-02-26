@@ -14,7 +14,6 @@ namespace XMart.Services
     public class RestService
     {
         HttpClient _client = new HttpClient();
-        string rootUrl = "http://118.24.96.42:8082";    //旧
         string rootUrl2 = "http://118.24.96.42:8083";    //新
         string rootUrl3 = "http://120.26.3.153:7777";    //更新
         
@@ -203,6 +202,80 @@ namespace XMart.Services
         }
         #endregion
 
+        #region 订单
+
+        /// <summary>
+        /// 提交订单
+        /// </summary>
+        /// <param name="orderPara"></param>
+        /// <returns></returns>
+        public async Task<StupidRD> Order(OrderPara orderPara)
+        {
+            string url = rootUrl3 + "/member/addOrder";
+
+            string httpContent = JsonConvert.SerializeObject(orderPara);  //序列化
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            StupidRD stupidRD = JsonConvert.DeserializeObject<StupidRD>(responseBody);   //反序列化
+
+            return stupidRD;
+        }
+
+        /// <summary>
+        /// 根据订单编号获取订单详情信息
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public async Task<OrderDetailRD> GetOrderDetailByOrderId(long orderId)
+        {
+            string url = rootUrl3 + "/member/orderDetail?orderId=" + orderId.ToString();
+
+            string responseBody = await GetStringDataAsync(url);
+
+            OrderDetailRD orderDetailRD = JsonConvert.DeserializeObject<OrderDetailRD>(responseBody);
+
+            return orderDetailRD;
+        }
+
+        /// <summary>
+        /// 根据用户id获取订单列表
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public async Task<OrderListRD> GetOrderListById(int userId, int page, int size)
+        {
+            string url = rootUrl3 + "/member/orderList?userId=" + userId.ToString() 
+                + "&page=" + page.ToString() 
+                + "&size=" + size.ToString();
+
+            string responseBody = await GetStringDataAsync(url);
+
+            OrderListRD orderListRD = JsonConvert.DeserializeObject<OrderListRD>(responseBody);
+
+            return orderListRD;
+        }
+
+        /// <summary>
+        /// 取消订单
+        /// </summary>
+        /// <param name="orderDetail"></param>
+        /// <returns></returns>
+        public async Task<SimpleRD> CancelOrder(OrderDetail orderDetail)
+        {
+            string url = rootUrl3 + "/member/cancelOrder";
+
+            string httpContent = JsonConvert.SerializeObject(orderDetail);  //序列化
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            SimpleRD simpleRD = JsonConvert.DeserializeObject<SimpleRD>(responseBody);   //反序列化
+
+            return simpleRD;
+        }
+
+        #endregion
+
         /// <summary>
         /// 获取首页相关内容信息
         /// </summary>
@@ -298,24 +371,6 @@ namespace XMart.Services
             ProductListRD productListRD = JsonConvert.DeserializeObject<ProductListRD>(responseBody);
 
             return productListRD;
-        }
-
-        /// <summary>
-        /// 提交订单
-        /// </summary>
-        /// <param name="orderPara"></param>
-        /// <returns></returns>
-        public async Task<StupidRD> Order(OrderPara orderPara)
-        {
-            string url = rootUrl3 + "/member/addOrder";
-
-            string httpContent = JsonConvert.SerializeObject(orderPara);  //序列化
-
-            string responseBody = await PostAsync(url, httpContent);
-
-            StupidRD stupidRD = JsonConvert.DeserializeObject<StupidRD>(responseBody);   //反序列化
-
-            return stupidRD;
         }
 
         #region
