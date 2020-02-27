@@ -214,7 +214,13 @@
     <AndroidResource Include="Resources\drawable\service2.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\close_eye.png" />
+    <AndroidResource Include="Resources\drawable\backgroud.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\wechat.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\closed_eye.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\open_eye.png" />

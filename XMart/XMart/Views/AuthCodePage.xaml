@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.AuthCodePage">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="StartAndExpand" Margin="30,100">
+            <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="White"
+                     HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="StartAndExpand"
+                     HorizontalOptions="StartAndExpand" Margin="20,40,20,100" Command="{Binding BackCommand}"/>
+            <Label Text="输入验证码" FontSize="22" TextColor="Black" FontAttributes="Bold"/>
+            <Label FontSize="16" TextColor="Gray">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="已经发送验证码到"/>
+                        <Span Text="{Binding SecretTel}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Entry Text="{Binding AuthCode}" Keyboard="Numeric" Placeholder="验证码" MaxLength="6"
+                   FontSize="54" HeightRequest="80" HorizontalTextAlignment="Center">
+                <Entry.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckInputCommand}"/>
+                </Entry.Behaviors>
+            </Entry>
+            <Label FontSize="16" TextColor="Gray">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding RemainingTime}"/>
+                        <Span Text="秒后重新获取"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Button Text="完成" TextColor="White" FontSize="18" FontAttributes="Bold" 
+                    CornerRadius="20" HorizontalOptions="Fill" HeightRequest="40" 
+                    IsEnabled="{Binding AuthCodeButtonEnable}" 
+                    BackgroundColor="{Binding AuthLoginButtonColor}" 
+                    Command="{Binding LoginCommand}"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

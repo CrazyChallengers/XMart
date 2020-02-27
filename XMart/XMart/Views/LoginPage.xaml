@@ -39,49 +39,131 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout>
-            <ff:CachedImage Source="xmart_logo2.png" VerticalOptions="EndAndExpand"/>
-            <Label Text="欢迎使用万联家具批发平台！" HorizontalOptions="CenterAndExpand" VerticalOptions="Start" FontSize="24"/>
 
-            <StackLayout VerticalOptions="EndAndExpand">
-                <Frame>
-                    <controls:MyEntry x:Name="account" Placeholder="用户名" Text="{Binding Tel}" WidthRequest="250"/>
-                </Frame>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
 
-                <Frame>
-                    <StackLayout Orientation="Horizontal">
-                        <controls:MyEntry x:Name="password" Placeholder="密码" Text="{Binding Pwd}" IsPassword="{Binding IsPassword}" WidthRequest="200"/>
-                        <ImageButton Source="{Binding EyeSource}" Command="{Binding OpenEyeCommand}" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand"/>
+            <ff:CachedImage Grid.Row="0" Grid.RowSpan="2" Source="backgroud.jpg" VerticalOptions="Fill" HorizontalOptions="Fill" Aspect="AspectFill"/>
+            <Label Grid.Row="0" Text="欢迎来到美而好家具" FontSize="32" FontAttributes="Bold" TextColor="White" Margin="30,0"
+                   HorizontalOptions="Start" VerticalOptions="CenterAndExpand" />
+
+            <Frame Grid.Row="1" Grid.RowSpan="2" CornerRadius="10" IsClippedToBounds="True" HorizontalOptions="Fill" VerticalOptions="Fill" 
+                   Margin="0" Padding="30" BorderColor="White" BackgroundColor="White" HasShadow="False">
+                <StackLayout>
+                    <StackLayout VerticalOptions="StartAndExpand" IsVisible="{Binding AuthVisible}">
+                        <Label Text="验证码登录" FontSize="22" TextColor="Black" FontAttributes="Bold"/>
+                        <Label Text="未注册的手机号验证后将自动创建美而好账号" FontSize="16" TextColor="Gray"/>
+
+                        <Entry Placeholder="手机号" HeightRequest="50" Text="{Binding Tel}">
+                            <Entry.Behaviors>
+                                <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckPhoneCommand}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <!--<controls:MyEntry Placeholder="手机号" HeightRequest="25" HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Start"/>
+                        <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="Fill"/>-->
+                        <Button Text="获取验证码" TextColor="White" FontSize="18" FontAttributes="Bold" CornerRadius="20" HorizontalOptions="Fill"
+                                HeightRequest="40" IsEnabled="{Binding AuthCodeButtonEnable}" 
+                                BackgroundColor="{Binding AuthLoginButtonColor}" 
+                                Command="{Binding ToAuthPageCommand}"/>
+
+                        <Label Text="账号密码登录" TextColor="{StaticResource SkyBlue}" FontSize="16" Margin="0,10" HorizontalOptions="EndAndExpand">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding PasswordLoginPartCommand}"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                        
                     </StackLayout>
-                </Frame>
 
-                <StackLayout WidthRequest="250" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Label Text="密码忘了？" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="18">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer x:Name="FogotPwd" NumberOfTapsRequired="1" Command="{Binding FindPwdCommand}"/>
-                        </Label.GestureRecognizers>
-                    </Label>
-                    <CheckBox x:Name="RememberPwd" IsChecked="{Binding IsRememberPwd}" HorizontalOptions="EndAndExpand" Color="{StaticResource MainColor}">
-                        <CheckBox.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding RememberPwdCommand}"/>
-                        </CheckBox.Behaviors>
-                    </CheckBox>
+                    <StackLayout VerticalOptions="StartAndExpand" IsVisible="{Binding PasswordVisible}">
+                        <Label Text="账号密码登录" FontSize="22" TextColor="Black" FontAttributes="Bold"/>
 
-                    <Label Text="记住密码" HorizontalOptions="End" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="18"/>
-                </StackLayout>
+                        <controls:MyEntry Placeholder="手机号" HeightRequest="25" Margin="0,20,0,0" Text="{Binding Tel}" Keyboard="Numeric"
+                                          HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Start"/>
+                        <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="Fill"/>
 
-                <Button x:Name="LoginButton" Text="登录" BackgroundColor="{StaticResource MainColor}" TextColor="White"
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="0,20,0,0">
+                            <controls:MyEntry Placeholder="密码" HeightRequest="25" IsPassword="{Binding IsPassword}" Text="{Binding Pwd}"
+                                              HorizontalOptions="FillAndExpand" VerticalOptions="Center" HorizontalTextAlignment="Start"/>
+                            <Label Text="忘记密码？" TextColor="{StaticResource SkyBlue}" HorizontalOptions="End" VerticalOptions="CenterAndExpand" FontSize="16">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FindPwdCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <ImageButton Source="{Binding EyeSource}" Command="{Binding OpenEyeCommand}" BackgroundColor="Transparent" HorizontalOptions="End"/>
+                        </StackLayout>
+                        <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="Fill"/>
+
+                        <Button Text="登录" TextColor="White" FontSize="18" FontAttributes="Bold" CornerRadius="20" HorizontalOptions="Fill" Margin="0,10"
+                                HeightRequest="40" BackgroundColor="{StaticResource SkyBlue}" Command="{Binding LoginCommand}"/>
+
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="新用户注册" HorizontalOptions="StartAndExpand" FontSize="16" TextColor="{StaticResource SkyBlue}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ToRegisterPageCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Text="验证码登录" HorizontalOptions="EndAndExpand" FontSize="16" TextColor="{StaticResource SkyBlue}">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding AuthLoginPartCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        </StackLayout>
+                        <!--<Frame>
+                            <controls:MyEntry Placeholder="用户名" Text="{Binding Tel}" WidthRequest="250"/>
+                        </Frame>
+
+                        <Frame>
+                            <StackLayout Orientation="Horizontal">
+                                <controls:MyEntry Placeholder="密码" Text="{Binding Pwd}" IsPassword="{Binding IsPassword}" WidthRequest="200"/>
+                                <ImageButton Source="{Binding EyeSource}" Command="{Binding OpenEyeCommand}" BackgroundColor="Transparent" HorizontalOptions="CenterAndExpand"/>
+                            </StackLayout>
+                        </Frame>
+
+                        <StackLayout WidthRequest="250" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <Label Text="密码忘了？" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" FontSize="18">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FindPwdCommand}"/>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <CheckBox IsChecked="{Binding IsRememberPwd}" HorizontalOptions="EndAndExpand" Color="{StaticResource MainColor}">
+                                <CheckBox.Behaviors>
+                                    <behaviors:EventToCommandBehavior EventName="CheckedChanged" Command="{Binding RememberPwdCommand}"/>
+                                </CheckBox.Behaviors>
+                            </CheckBox>
+
+                            <Label Text="记住密码" HorizontalOptions="End" VerticalOptions="CenterAndExpand" TextColor="Black" FontSize="18"/>
+                        </StackLayout>
+
+                        <Button Text="登录" BackgroundColor="{StaticResource MainColor}" TextColor="White"
                         Command="{Binding LoginCommand}"/>
-                <Button x:Name="RegisterButton" Text="注册" BackgroundColor="Transparent" Command="{Binding ToRegisterPageCommand}"/>
-            </StackLayout>
+                        <Button Text="注册" BackgroundColor="Transparent" Command="{Binding ToRegisterPageCommand}"/>-->
+                    </StackLayout>
 
-            <StackLayout HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <Label Text="西南交通大学人工智能研究院" FontSize="16" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                <Label Text="四川大学工业互联网研究院" FontSize="16" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-                <Label Text="成都万云互联科技有限公司" FontSize="16" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
-            </StackLayout>
+                    <StackLayout VerticalOptions="EndAndExpand" Spacing="20">
+                        <Label Text="其他登录方式" FontSize="16" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                        <ImageButton Source="wechat.png" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"
+                                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        <Label FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="登录即代表您已经同意"/>
+                                    <Span Text="《美而好用户服务协议》" TextColor="{StaticResource LightBlue}"/>
+                                    <Span Text="和"/>
+                                    <Span Text="《隐私政策》" TextColor="{StaticResource LightBlue}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                    </StackLayout>
+
+                </StackLayout>
+            </Frame>
             
-        </StackLayout>
+        </Grid>
+        
 
     </ContentPage.Content>
 

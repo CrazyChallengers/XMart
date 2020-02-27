@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.Views;
+using XMart.Util;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XMart
@@ -19,6 +20,7 @@ namespace XMart
             HotReloader.Current.Run(this);
             #endif
             */
+
             MainPage = new LoginPage();
         }
 
