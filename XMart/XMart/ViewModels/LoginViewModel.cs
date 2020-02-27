@@ -48,7 +48,33 @@ namespace XMart.ViewModels
             set { SetProperty(ref isPassword, value); }
         }
 
+        private bool authVisible;   //Comment
+        public bool AuthVisible
+        {
+            get { return authVisible; }
+            set { SetProperty(ref authVisible, value); }
+        }
 
+        private bool passwordVisible;   //Comment
+        public bool PasswordVisible
+        {
+            get { return passwordVisible; }
+            set { SetProperty(ref passwordVisible, value); }
+        }
+
+        private string authLoginButtonColor;   //Comment
+        public string AuthLoginButtonColor
+        {
+            get { return authLoginButtonColor; }
+            set { SetProperty(ref authLoginButtonColor, value); }
+        }
+
+        private bool authCodeButtonEnable;   //Comment
+        public bool AuthCodeButtonEnable
+        {
+            get { return authCodeButtonEnable; }
+            set { SetProperty(ref authCodeButtonEnable, value); }
+        }
 
         private RestService _restService = new RestService();
         string fileName;
@@ -58,11 +84,19 @@ namespace XMart.ViewModels
         public Command RememberPwdCommand { get; private set; }   //记住密码
         public Command FindPwdCommand { get; private set; }   //跳转到找回密码页面
         public Command OpenEyeCommand { get; private set; }
+        public Command CheckPhoneCommand { get; set; }
+        public Command ToAuthPageCommand { get; set; }
+        public Command PasswordLoginPartCommand { get; set; }
+        public Command AuthLoginPartCommand { get; set; }
 
         public LoginViewModel()
         {
             IsPassword = true;
-            EyeSource = "Resource/drawable/close_eye.png";
+            EyeSource = "Resource/drawable/closed_eye.png";
+            AuthLoginButtonColor = "#83d7f9";
+            AuthCodeButtonEnable = false;
+            AuthVisible = true;
+            PasswordVisible = false;
             //初始化，检查是否存在已记住的密码
             fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
 
@@ -136,9 +170,43 @@ namespace XMart.ViewModels
                 else
                 {
                     IsPassword = true;
-                    EyeSource = "Resource/drawable/close_eye.png";
+                    EyeSource = "Resource/drawable/closed_eye.png";
                 }
             }, () => { return true; });
+
+            CheckPhoneCommand = new Command(() =>
+            {
+                if (Tools.IsPhoneNumber(Tel))
+                {
+                    AuthLoginButtonColor = "#01acf2";
+                    AuthCodeButtonEnable = true;
+                }
+                else
+                {
+                    AuthLoginButtonColor = "#83d7f9";
+                    AuthCodeButtonEnable = false;
+                }
+            }, () => { return true; });
+
+            ToAuthPageCommand = new Command(() =>
+            {
+                AuthCodePage authCodePage = new AuthCodePage(Tel);
+
+                Application.Current.MainPage.Navigation.PushModalAsync(authCodePage);
+            }, () => { return true; });
+
+            PasswordLoginPartCommand = new Command(() =>
+            {
+                AuthVisible = false;
+                PasswordVisible = true;
+            }, () => { return true; });
+
+            AuthLoginPartCommand = new Command(() =>
+            {
+                AuthVisible = true;
+                PasswordVisible = false;
+            }, () => { return true; });
+
 
         }
 

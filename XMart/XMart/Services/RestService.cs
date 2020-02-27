@@ -93,6 +93,24 @@ namespace XMart.Services
 
             return loginRD;
         }
+
+        /// <summary>
+        /// 验证码登录
+        /// </summary>
+        /// <param name="loginPara"></param>
+        /// <returns></returns>
+        public async Task<LoginRD> LoginByAuthCode(LoginPara loginPara)
+        {
+            string url = rootUrl3 + "/member/loginByAuthCode";
+
+            string httpContent = JsonConvert.SerializeObject(loginPara);
+
+            string responseBody = await PostAsync(url, httpContent);
+
+            LoginRD loginRD = JsonConvert.DeserializeObject<LoginRD>(responseBody);
+
+            return loginRD;
+        }
         #endregion
 
         #region 购物车
@@ -276,6 +294,7 @@ namespace XMart.Services
 
         #endregion
 
+        #region 商品
         /// <summary>
         /// 获取首页相关内容信息
         /// </summary>
@@ -373,7 +392,9 @@ namespace XMart.Services
             return productListRD;
         }
 
-        #region
+        #endregion
+
+        #region 
         /// <summary>
         /// 截取字符串，处理网站返回值
         /// </summary>
