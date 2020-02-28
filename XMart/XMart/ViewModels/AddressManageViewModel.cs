@@ -42,7 +42,10 @@ namespace XMart.ViewModels
 
         public AddressManageViewModel()
         {
-            InitAddressList();
+            if (GlobalVariables.IsLogged)
+            {
+                InitAddressList();
+            }
 
             EditCommand = new Command<AddressInfo>((address) =>
             {

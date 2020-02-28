@@ -47,14 +47,17 @@ namespace XMart.ViewModels
 		{
             Product = productInfo;
 
-            CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
-            MemberPriceVisible = !CusPriceVisible;
+            //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
+            //MemberPriceVisible = !CusPriceVisible;
 
             ProductNum = 1;
 
             AddToCartCommand = new Command(() =>
 			{
-                AddToCartAsync();
+                if (GlobalVariables.IsLogged)
+                {
+                    AddToCartAsync();
+                }
             }, () => { return true; });
 		}
 
