@@ -36,7 +36,10 @@ namespace XMart.ViewModels
 				Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
 			}, (orderDetail) => { return true; });
 
-			InitOrderList();
+			if (GlobalVariables.IsLogged)
+			{
+				InitOrderList();
+			}
 		}
 
 		private async void InitOrderList()

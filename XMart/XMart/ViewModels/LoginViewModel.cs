@@ -8,6 +8,8 @@ using XMart.ResponseData;
 using XMart.Services;
 using XMart.Views;
 using XMart.Util;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace XMart.ViewModels
 {
@@ -81,7 +83,7 @@ namespace XMart.ViewModels
 
         public Command ToRegisterPageCommand { get; private set; }   //跳转到注册页面
         public Command LoginCommand { get; private set; }   //登录按钮
-        public Command RememberPwdCommand { get; private set; }   //记住密码
+        //public Command RememberPwdCommand { get; private set; }   //记住密码
         public Command FindPwdCommand { get; private set; }   //跳转到找回密码页面
         public Command OpenEyeCommand { get; private set; }
         public Command CheckPhoneCommand { get; set; }
@@ -102,20 +104,33 @@ namespace XMart.ViewModels
 
             if (File.Exists(fileName))
             {
-                string[] text = File.ReadAllLines(fileName);
-                string check = text[0].Substring(6);
-                string tel = text[1].Substring(8);
-                string pwd = text[2].Substring(9);
+                string text = File.ReadAllText(fileName);
+                JObject log = (JObject)JsonConvert.DeserializeObject(text);
 
-                if (check == "Checked")
+                string loginTime = log["LoginTime"].ToString();
+                DateTime lastLoginTime = DateTime.Parse(loginTime);
+                DateTime nowTime = DateTime.UtcNow;
+                TimeSpan span = nowTime.Subtract(lastLoginTime);
+                int dayDiff = span.Days + 1;
+
+                if (dayDiff <= 30)
                 {
-                    Tel = tel;
-                    Pwd = pwd;
-                    IsRememberPwd = true;
+                    //Tel = tel;
+                    //Pwd = pwd;
+                    //IsRememberPwd = true;
+
+                    //OnLogin();
+
+                    GlobalVariables.LoggedUser = JsonConvert.DeserializeObject<UserInfo>(log["UserInfo"].ToString());
+                    GlobalVariables.IsLogged = true;
+
+                    MainPage mainPage = new MainPage();
+                    Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
                 }
                 else
                 {
                     //input pwd
+                    //GlobalVariables.IsLogged = false;
                 }
             }
 
@@ -132,6 +147,7 @@ namespace XMart.ViewModels
                 }
             }, () => { return true; });
 
+            /*
             RememberPwdCommand = new Command(() =>
             {
                 string text = "";
@@ -140,7 +156,10 @@ namespace XMart.ViewModels
                 {
                     if (IsRememberPwd)
                     {
-                        text = "State:Checked\n" + "Account:" + Tel + "\n" + "Password:" + Pwd;
+                        text = "State:Checked\n"
+                        + "Account:" + Tel
+                        + "\nPassword:" + Pwd
+                        + "\nLoginTime:" + DateTime.UtcNow;
                         File.WriteAllText(fileName, text);
                     }
                     else
@@ -154,7 +173,7 @@ namespace XMart.ViewModels
                     //await DisplayAlert("错误", "请输入账号及密码！", "OK");
                 }
             }, () => { return true; });
-
+            */
             FindPwdCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PushModalAsync(new ResetPwdPage());
@@ -263,6 +282,12 @@ namespace XMart.ViewModels
                 CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
 
                 GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
+                GlobalVariables.IsLogged = true;
+
+                JObject log = new JObject();
+                log.Add("LoginTime", DateTime.UtcNow);
+                log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
+                File.WriteAllText(fileName, log.ToString());
 
                 MainPage mainPage = new MainPage();
                 await Application.Current.MainPage.Navigation.PushModalAsync(mainPage);

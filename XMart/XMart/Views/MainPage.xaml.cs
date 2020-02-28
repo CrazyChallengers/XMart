@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XMart.Views;
+using XMart.Util;
 
 namespace XMart.Views
 {
@@ -13,6 +15,15 @@ namespace XMart.Views
         public MainPage()
         {
             InitializeComponent();
+
+            if (GlobalVariables.IsLogged)
+            {
+                Children.Add(new MePage());
+            }
+            else
+            {
+                Children.Add(new LoginPage());
+            }
         }
 
         /// <summary>

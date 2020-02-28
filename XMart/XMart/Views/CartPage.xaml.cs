@@ -28,11 +28,14 @@ namespace XMart.Views
         /// </summary>
         private async void InitCart()
         {
-            string memberId = GlobalVariables.LoggedUser.id.ToString();
-            CartItemListRD cartItemListRD = await _restService.GetCartItemList(memberId);
+            if (GlobalVariables.IsLogged)
+            {
+                string memberId = GlobalVariables.LoggedUser.id.ToString();
+                CartItemListRD cartItemListRD = await _restService.GetCartItemList(memberId);
 
-            cartViewModel.ItemList = cartItemListRD.result;
-            cartViewModel.ItemNumber = cartItemListRD.result.Count().ToString();
+                cartViewModel.ItemList = cartItemListRD.result;
+                cartViewModel.ItemNumber = cartItemListRD.result.Count().ToString();
+            }
         }
 
         /// <summary>

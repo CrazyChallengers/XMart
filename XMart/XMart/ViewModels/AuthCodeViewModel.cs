@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 using XMart.Models;
 using XMart.Views;
 using Xamarin.Forms;
+using System.IO;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace XMart.ViewModels
 {
@@ -71,6 +74,7 @@ namespace XMart.ViewModels
             LoginCommand = new Command(() =>
             {
                 OnLogin();
+
             }, () => { return true; });
 
             CheckInputCommand = new Command(() =>
@@ -137,6 +141,14 @@ namespace XMart.ViewModels
                 CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
 
                 GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
+                GlobalVariables.IsLogged = true;
+
+                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+                JObject log = new JObject();
+                log.Add("LoginTime", DateTime.UtcNow);
+                log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
+                //string text = "State:Checked\n" + "Account:" + Tel + "\nPassword:" + loginRD.result + "\nLoginTime:" + DateTime.UtcNow;
+                File.WriteAllText(fileName, log.ToString());
 
                 MainPage mainPage = new MainPage();
                 await Application.Current.MainPage.Navigation.PushModalAsync(mainPage);

@@ -13,6 +13,6 @@
     <views:HomePage/>
     <views:CategoryPage/>
     <views:CartPage/>
-    <views:MePage/>
+    <!--<views:MePage/>-->
 
 </TabbedPage>

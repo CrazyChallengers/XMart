@@ -28,8 +28,8 @@ namespace XMart.Models
 
         public ProductListItem()
         {
-            CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
-            MemberPriceVisible = !CusPriceVisible;
+            //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
+            //MemberPriceVisible = !CusPriceVisible;
         }
     }
 }
