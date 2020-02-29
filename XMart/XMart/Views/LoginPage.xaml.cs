@@ -14,13 +14,11 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class LoginPage : ContentPage
 	{
-        LoginViewModel loginViewModel = new LoginViewModel();
-
         public LoginPage()
 		{
 			InitializeComponent ();
 
-            BindingContext = loginViewModel;
+            BindingContext = new LoginViewModel();
         }
 
     }

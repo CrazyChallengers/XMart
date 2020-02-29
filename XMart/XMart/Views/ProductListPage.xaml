@@ -30,12 +30,13 @@
             </Grid.RowDefinitions>
 
             <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
-                <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" WidthRequest="300" BackgroundColor="{StaticResource MainColor}">
+                <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" 
+                             HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"
+                             HorizontalOptions="CenterAndExpand"/>
+                <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" WidthRequest="300" CornerRadius="20" Padding="20,0" BackgroundColor="{StaticResource MainColor}">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Style="{StaticResource SearchEntry}"
-                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}" TextColor="White"/>
                 </Frame>
-                <Picker WidthRequest="50" Title="排序" FontSize="22"/>
             </StackLayout>
 
             <StackLayout Grid.Row="1" Orientation="Horizontal">
@@ -74,32 +75,19 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>-->
-                                    
-                                    <Label Grid.Row="2" Grid.Column="1" TextColor="Red" 
+
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" 
                                VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="会员价" FontSize="12"/>
                                                 <Span Text="￥" FontSize="22"/>
                                                 <Span Text="{Binding memberPrice}" FontSize="26"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label Grid.Row="2" Grid.Column="2" TextColor="Gray" 
-                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                    <Label Grid.Row="2" Grid.Column="2" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="原价" FontSize="12"/>
-                                                <Span Text="￥" FontSize="18"/>
-                                                <Span Text="{Binding salePrice}" FontSize="18"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label Grid.Row="2" Grid.Column="1" TextColor="Red" 
-                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="原价" FontSize="12"/>
                                                 <Span Text="￥" FontSize="22"/>
                                                 <Span Text="{Binding salePrice}" FontSize="26"/>
                                             </FormattedString>

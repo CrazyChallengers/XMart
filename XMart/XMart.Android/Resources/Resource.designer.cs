@@ -7325,34 +7325,37 @@ namespace XMart.Droid
 			public const int Prev = 2131165516;
 			
 			// aapt resource value: 0x7F07014D
-			public const int service = 2131165517;
+			public const int search = 2131165517;
 			
 			// aapt resource value: 0x7F07014E
-			public const int service2 = 2131165518;
+			public const int service = 2131165518;
 			
 			// aapt resource value: 0x7F07014F
-			public const int splashscreen = 2131165519;
+			public const int service2 = 2131165519;
 			
 			// aapt resource value: 0x7F070150
-			public const int start = 2131165520;
+			public const int splashscreen = 2131165520;
 			
 			// aapt resource value: 0x7F070151
-			public const int tooltip_frame_dark = 2131165521;
+			public const int start = 2131165521;
 			
 			// aapt resource value: 0x7F070152
-			public const int tooltip_frame_light = 2131165522;
+			public const int tooltip_frame_dark = 2131165522;
 			
 			// aapt resource value: 0x7F070153
-			public const int Up = 2131165523;
+			public const int tooltip_frame_light = 2131165523;
 			
 			// aapt resource value: 0x7F070154
-			public const int wechat = 2131165524;
+			public const int Up = 2131165524;
 			
 			// aapt resource value: 0x7F070155
-			public const int xmart_logo = 2131165525;
+			public const int wechat = 2131165525;
 			
 			// aapt resource value: 0x7F070156
-			public const int xmart_logo2 = 2131165526;
+			public const int xmart_logo = 2131165526;
+			
+			// aapt resource value: 0x7F070157
+			public const int xmart_logo2 = 2131165527;
 			
 			static Drawable()
 			{

@@ -44,7 +44,7 @@ namespace XMart.ViewModels
         public ProductDetailVM(string productId)
         {
             //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
-            //MemberPriceVisible = !CusPriceVisible;
+            MemberPriceVisible = GlobalVariables.IsLogged;
 
             BackCommand = new Command(() =>
             {

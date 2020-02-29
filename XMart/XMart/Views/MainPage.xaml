@@ -3,10 +3,9 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            android:TabbedPage.BarItemColor="LightGray"
-            android:TabbedPage.BarSelectedItemColor="{StaticResource MainColor}"
+            android:TabbedPage.BarItemColor="{StaticResource DeepBlue}"
+            android:TabbedPage.BarSelectedItemColor="{StaticResource SkyBlue}"
             android:TabbedPage.IsSwipePagingEnabled="True"
-            xmlns:local="clr-namespace:XMart"
             xmlns:views="clr-namespace:XMart.Views"
             x:Class="XMart.Views.MainPage">
 

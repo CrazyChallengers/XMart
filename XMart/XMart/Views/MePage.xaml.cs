@@ -9,14 +9,11 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MePage : ContentPage
 	{
-        MePageViewModel mePageViewModel = new MePageViewModel();
-
-		public MePage ()
+		public MePage()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 
-            BindingContext = mePageViewModel;
-
+            BindingContext = new MePageViewModel();
 		}
 
     }

@@ -15,7 +15,7 @@
             </Grid.RowDefinitions>
 
             <ScrollView Grid.Row="0">
-                <StackLayout>
+                <StackLayout BackgroundColor="WhiteSmoke" Spacing="10">
                     <!--
                 <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding AdvertiseList}"
                                     ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
@@ -31,83 +31,64 @@
                 </cv:CarouselViewControl>-->
                     <ff:CachedImage Source="{Binding Product.productImageBig}" HeightRequest="300"/>
 
-                    <Grid HeightRequest="60" RowSpacing="0">
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition Width="60"/>
-                        </Grid.ColumnDefinitions>
-                        <!--
-                        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Start">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="会员价" FontSize="12" TextColor="Red"/>
-                                    <Span Text="￥" FontSize="22" TextColor="Red"/>
-                                    <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="Red"/>
-                                    <Span Text=" 原价" FontSize="12" TextColor="Gray"/>
-                                    <Span Text="￥" FontSize="18" TextColor="Gray"/>
-                                    <Span Text="{Binding Product.salePrice}" FontSize="18" TextColor="Gray"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>-->
+                    <StackLayout BackgroundColor="White" Orientation="Vertical" Padding="10">
+                        <Grid HeightRequest="60" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Label Grid.Row="0" Grid.Column="0" TextColor="Red" 
-                               VerticalOptions="Center" HorizontalOptions="Start" 
-                               IsVisible="{Binding MemberPriceVisible}">
+                            <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="￥" FontSize="14" TextColor="{StaticResource SkyBlue}" />
+                                        <Span Text="{Binding Product.salePrice}" FontSize="26" TextColor="{StaticResource SkyBlue}" />
+                                        <Span Text="  会员价￥" FontSize="14" TextColor="{StaticResource ThickPink}" />
+                                        <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="{StaticResource ThickPink}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="降价通知" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+
+                            <ImageButton Grid.Row="0" Grid.Column="2" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                            <Label Grid.Row="1" Grid.Column="2" Text="1.1万" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                        </Grid>
+
+                        <Label VerticalOptions="Center" VerticalTextAlignment="Center">
                             <Label.FormattedText>
                                 <FormattedString>
-                                    <Span Text="会员价" FontSize="12"/>
-                                    <Span Text="￥" FontSize="22"/>
-                                    <Span Text="{Binding Product.memberPrice}" FontSize="26"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
-                        <Label Grid.Row="1" Grid.Column="0" TextColor="Gray" 
-                               VerticalOptions="Center" HorizontalOptions="Start" 
-                               IsVisible="{Binding MemberPriceVisible}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="原价" FontSize="12"/>
-                                    <Span Text="￥" FontSize="18"/>
-                                    <Span Text="{Binding Product.salePrice}" FontSize="18"/>
+                                    <Span Text="热卖" TextColor="Crimson" FontSize="12"/>
+                                    <Span Text="{Binding Product.productName}" TextColor="Black" FontAttributes="Bold" FontSize="22"/>
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" TextColor="Red" 
-                               VerticalOptions="Center" HorizontalOptions="Start" 
-                               IsVisible="{Binding CusPriceVisible}">
-                            <Label.FormattedText>
-                                <FormattedString>
-                                    <Span Text="原价" FontSize="12"/>
-                                    <Span Text="￥" FontSize="22"/>
-                                    <Span Text="{Binding Product.salePrice}" FontSize="26"/>
-                                </FormattedString>
-                            </Label.FormattedText>
-                        </Label>
+                        <Label Text="{Binding Product.subTitle}" FontSize="18"/>
+                    </StackLayout>
 
-                        <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                        <Label Grid.Row="1" Grid.Column="1" Text="降价通知" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                    <StackLayout BackgroundColor="White" Padding="10">
+                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                    </StackLayout>
 
-                        <ImageButton Grid.Row="0" Grid.Column="2" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                        <Label Grid.Row="1" Grid.Column="2" Text="1.1万" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
-                    </Grid>
-
-                    <Label VerticalOptions="Center" VerticalTextAlignment="Center">
-                        <Label.FormattedText>
-                            <FormattedString>
-                                <Span Text="热卖" BackgroundColor="Red" TextColor="White" FontSize="16"/>
-                                <Span Text="{Binding Product.productName}" TextColor="Black" FontAttributes="Bold" FontSize="22"/>
-                            </FormattedString>
-                        </Label.FormattedText>
-                    </Label>
-                    <Label Text="{Binding Product.subTitle}" FontSize="18"/>
-
-                    <BoxView HeightRequest="600" BackgroundColor="LightCyan"/>
-
+                    <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"
+                                 BindableLayout.ItemsSource="{Binding Product.productImageSmall}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <ff:CachedImage Source="{Binding .}" HeightRequest="300" Aspect="AspectFit" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"/>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
                 </StackLayout>
             </ScrollView>
 
@@ -127,17 +108,18 @@
                 <Label Grid.Row="1" Grid.Column="0" Text="联系客服" FontSize="16" 
                        HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                <Label Grid.Row="1" Grid.Column="1" Text="购物车" FontSize="16" 
+                <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"
+                             Command="{Binding AddToCartCommand}"/>
+                <Label Grid.Row="1" Grid.Column="1" Text="加购物车" FontSize="16" 
                        HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="AddToCartBtn" Text="加入购物车" HeightRequest="40" 
-                        CornerRadius="20" Margin="5,0" BackgroundColor="Crimson" TextColor="White" VerticalOptions="Center" FontSize="18"
-                        Command="{Binding AddToCartCommand}"/>
-
-                <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="立即购买" HeightRequest="40" 
-                        CornerRadius="20" Margin="5,0" BackgroundColor="{StaticResource MainColor}" TextColor="White" VerticalOptions="Center" FontSize="18"
+                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="AddToCartBtn" Text="采购" 
+                        BackgroundColor="{StaticResource ThickPink}" TextColor="White" FontSize="18"
                         Command="{Binding BuyCommand}"/>
+
+                <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="推荐"
+                        BackgroundColor="{StaticResource LightPink}" TextColor="White" FontSize="18"
+                        />
             </Grid>
 
             <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Gray"

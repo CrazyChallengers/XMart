@@ -60,8 +60,6 @@ namespace XMart.ViewModels
 				Page page = (Page)Activator.CreateInstance(type);
 				Application.Current.MainPage.Navigation.PushModalAsync(page);
 			}, (pageName) => { return true; });
-
-
 		}
 
 	}
