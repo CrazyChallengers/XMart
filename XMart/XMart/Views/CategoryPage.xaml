@@ -30,29 +30,24 @@
 
     <ContentPage.Content>
 
-        <Grid ColumnSpacing="0" RowSpacing="0">
+        <Grid ColumnSpacing="0" RowSpacing="0" BackgroundColor="{StaticResource MainColor}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
             <!--顶部-->
-            <Frame Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Style="{StaticResource BaseFrame}" 
-                   HeightRequest="40" CornerRadius="20" Margin="5,35,5,5"  HorizontalOptions="Fill" BackgroundColor="{StaticResource MainColor}">
+            <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" 
+                   HeightRequest="40" CornerRadius="20" Margin="5,35,5,5" Padding="20,0" HorizontalOptions="Fill">
                 <StackLayout Orientation="Horizontal">
-                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
-                    <controls:MyEntry x:Name="SearchEntry" Placeholder="原料更便宜啦~质量更好、价格低" Style="{StaticResource SearchEntry}"
+                    <ImageButton x:Name="CustomerServiceButton" Source="search.png" Style="{StaticResource EarImageButton}"/>
+                    <controls:MyEntry x:Name="SearchEntry" Placeholder="真皮沙发" Style="{StaticResource SearchEntry}"
                                       Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}" />
-                    <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
                 </StackLayout>
             </Frame>
 
-            <!--一级分类-->
-            <Frame Grid.Row="1" Grid.Column="0" Style="{StaticResource BaseFrame}" VerticalOptions="Start">
+            <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="White" Spacing="0">
+                <!--一级分类-->
                 <ScrollView BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
                     <StackLayout x:Name="ParentStack" BindableLayout.ItemsSource="{Binding ParentCategoryList}" Orientation="Vertical">
                         <BindableLayout.ItemTemplate>
@@ -69,35 +64,36 @@
                                         </DataTrigger>
                                     </Label.Triggers>
                                     <Label.GestureRecognizers>
-                                            <TapGestureRecognizer x:Name="ParentGR" NumberOfTapsRequired="1" Tapped="ParentGR_Tapped"/>
+                                        <TapGestureRecognizer x:Name="ParentGR" NumberOfTapsRequired="1" Tapped="ParentGR_Tapped"/>
                                     </Label.GestureRecognizers>
                                 </Label>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
                 </ScrollView>
-            </Frame>
+
+                <!--二级分类-->
+                <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                    <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Center">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
+                                    <Frame CornerRadius="5" Style="{StaticResource BaseFrame}" BackgroundColor="AntiqueWhite">
+                                        <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
+                                    </Frame>
+                                    <Label Text="{Binding name}" Style="{DynamicResource SubLabel}" FontSize="22"/>
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="CategorySelected" NumberOfTapsRequired="1" Tapped="SubTGR_Tapped"/>
+                                    </StackLayout.GestureRecognizers>
+                                </StackLayout>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </ScrollView>
+
+            </StackLayout>
             
-            <!--二级分类-->
-            <ScrollView Grid.Row="1" Grid.Column="1" Orientation="Vertical">
-                <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Center">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
-                                <Frame CornerRadius="5" Style="{StaticResource BaseFrame}" BackgroundColor="AntiqueWhite">
-                                    <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
-                                </Frame>
-                                <Label Text="{Binding name}" Style="{DynamicResource SubLabel}" FontSize="22"/>
-
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer x:Name="CategorySelected" NumberOfTapsRequired="1" Tapped="SubTGR_Tapped"/>
-                                </StackLayout.GestureRecognizers>
-                            </StackLayout>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
-                </FlexLayout>
-            </ScrollView>
-
         </Grid>
     </ContentPage.Content>
 </ContentPage>

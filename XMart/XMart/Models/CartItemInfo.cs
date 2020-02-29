@@ -37,7 +37,7 @@ namespace XMart.Models
         {
             Checked = _checked == "1";
             //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
-            //MemberPriceVisible = !CusPriceVisible;
+            MemberPriceVisible = GlobalVariables.IsLogged;
         }
     }
 }

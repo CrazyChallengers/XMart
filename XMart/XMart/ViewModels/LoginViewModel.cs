@@ -83,7 +83,6 @@ namespace XMart.ViewModels
 
         public Command ToRegisterPageCommand { get; private set; }   //跳转到注册页面
         public Command LoginCommand { get; private set; }   //登录按钮
-        //public Command RememberPwdCommand { get; private set; }   //记住密码
         public Command FindPwdCommand { get; private set; }   //跳转到找回密码页面
         public Command OpenEyeCommand { get; private set; }
         public Command CheckPhoneCommand { get; set; }
@@ -99,40 +98,6 @@ namespace XMart.ViewModels
             AuthCodeButtonEnable = false;
             AuthVisible = true;
             PasswordVisible = false;
-            //初始化，检查是否存在已记住的密码
-            fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
-
-            if (File.Exists(fileName))
-            {
-                string text = File.ReadAllText(fileName);
-                JObject log = (JObject)JsonConvert.DeserializeObject(text);
-
-                string loginTime = log["LoginTime"].ToString();
-                DateTime lastLoginTime = DateTime.Parse(loginTime);
-                DateTime nowTime = DateTime.UtcNow;
-                TimeSpan span = nowTime.Subtract(lastLoginTime);
-                int dayDiff = span.Days + 1;
-
-                if (dayDiff <= 30)
-                {
-                    //Tel = tel;
-                    //Pwd = pwd;
-                    //IsRememberPwd = true;
-
-                    //OnLogin();
-
-                    GlobalVariables.LoggedUser = JsonConvert.DeserializeObject<UserInfo>(log["UserInfo"].ToString());
-                    GlobalVariables.IsLogged = true;
-
-                    MainPage mainPage = new MainPage();
-                    Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
-                }
-                else
-                {
-                    //input pwd
-                    //GlobalVariables.IsLogged = false;
-                }
-            }
 
             ToRegisterPageCommand = new Command(() =>
             {
@@ -147,33 +112,6 @@ namespace XMart.ViewModels
                 }
             }, () => { return true; });
 
-            /*
-            RememberPwdCommand = new Command(() =>
-            {
-                string text = "";
-
-                if (!string.IsNullOrWhiteSpace(Tel) && !string.IsNullOrWhiteSpace(Pwd))
-                {
-                    if (IsRememberPwd)
-                    {
-                        text = "State:Checked\n"
-                        + "Account:" + Tel
-                        + "\nPassword:" + Pwd
-                        + "\nLoginTime:" + DateTime.UtcNow;
-                        File.WriteAllText(fileName, text);
-                    }
-                    else
-                    {
-                        text = "State:Unchecked\nAccount:\nPassword:\n";
-                        File.WriteAllText(fileName, text);
-                    }
-                }
-                else
-                {
-                    //await DisplayAlert("错误", "请输入账号及密码！", "OK");
-                }
-            }, () => { return true; });
-            */
             FindPwdCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PushModalAsync(new ResetPwdPage());
@@ -226,7 +164,6 @@ namespace XMart.ViewModels
                 PasswordVisible = false;
             }, () => { return true; });
 
-
         }
 
         /// <summary>
@@ -257,7 +194,6 @@ namespace XMart.ViewModels
         {
             LoginPara loginPara = new LoginPara
             {
-                //userName = loginViewModel.Tel,
                 userPwd = Pwd,
                 authCode = "",
                 tel = Tel
@@ -265,18 +201,6 @@ namespace XMart.ViewModels
 
             LoginRD loginRD = await _restService.Login(loginPara);
 
-            /*
-            if (loginRD.code == 200)
-            {
-                CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
-
-                MainPage mainPage = new MainPage();
-                await Navigation.PushModalAsync(mainPage);
-            }
-            else
-            {
-                CrossToastPopUp.Current.ShowToastError(loginRD.message, ToastLength.Long);
-            }*/
             if (loginRD.result.message == null)
             {
                 CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
@@ -287,6 +211,7 @@ namespace XMart.ViewModels
                 JObject log = new JObject();
                 log.Add("LoginTime", DateTime.UtcNow);
                 log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
+                fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
                 File.WriteAllText(fileName, log.ToString());
 
                 MainPage mainPage = new MainPage();

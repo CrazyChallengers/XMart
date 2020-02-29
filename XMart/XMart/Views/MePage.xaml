@@ -33,7 +33,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <StackLayout x:Name="stack" Orientation="Vertical" BackgroundColor="{StaticResource MainColor}">
+        <StackLayout Orientation="Vertical" BackgroundColor="{StaticResource MainColor}">
             <Label Text="我的" TextColor="White" FontAttributes="Bold" FontSize="24"
                    HorizontalOptions="CenterAndExpand" Margin="0,35"/>
 
@@ -44,11 +44,11 @@
             </Frame>
 
             <StackLayout HorizontalOptions="CenterAndExpand">
-                <Label  x:Name="UserNameLabel" Text="{Binding UserName}" FontSize="24" FontAttributes="Bold"
+                <Label Text="{Binding UserName}" FontSize="24" FontAttributes="Bold"
                            TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                <Label x:Name="CompanyLabel" Text="{Binding UserType}" FontSize="22"
+                <Label Text="{Binding UserType}" FontSize="22"
                            TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
-                <Label x:Name="EmpNoLabel" FontSize="22" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
+                <Label FontSize="22" TextColor="White" HorizontalOptions="CenterAndExpand" VerticalOptions="Center">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
@@ -68,25 +68,13 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <!--
-                    <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
-                    <Label Grid.Row="1" Grid.Column="0" Text="今日收益" Style="{DynamicResource CommonLabel}"/>
-
-                    <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
-                    <Label Grid.Row="1" Grid.Column="1" Text="总收益" Style="{DynamicResource CommonLabel}"/>
-
-                    <Label Grid.Row="0" Grid.Column="2" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
-                    <Label Grid.Row="1" Grid.Column="2" Text="可提现" Style="{DynamicResource CommonLabel}"/>
-
-                    <Label Grid.Row="0" Grid.Column="3" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
-                    <Label Grid.Row="1" Grid.Column="3" Text="我的客户" Style="{DynamicResource CommonLabel}"/>
--->
+                    
                     <StackLayout Grid.Column="0" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                         <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Text="今日收益" Style="{DynamicResource CommonLabel}"/>
-                        <StackLayout.GestureRecognizers>
+                        <!--<StackLayout.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding }"/>
-                        </StackLayout.GestureRecognizers>
+                        </StackLayout.GestureRecognizers>-->
                     </StackLayout>
                     <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                         <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
@@ -111,16 +99,7 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <!--
-                    <Label Grid.Row="0" Grid.Column="0" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
-                    <Label Grid.Row="1" Grid.Column="0" Text="我的订单" Style="{DynamicResource CommonLabel}"/>
-
-                    <Label Grid.Row="0" Grid.Column="1" Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
-                    <Label Grid.Row="1" Grid.Column="1" Text="我的收藏" Style="{DynamicResource CommonLabel}"/>
-
-                    <Label Grid.Row="0" Grid.Column="2" Text="《···》" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
-                    <Label Grid.Row="1" Grid.Column="2" Text="修改个人资料" Style="{DynamicResource CommonLabel}"/>
--->
+                    
                     <StackLayout Grid.Column="0" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                         <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Text="我的订单" Style="{DynamicResource CommonLabel}"/>
@@ -141,7 +120,6 @@
                     <TableView Intent="Menu">
                         <TableRoot>
                             <TableSection>
-
                                 <TextCell Text="地址管理" Detail="管理用户的所有地址"
                                           Command="{Binding NavigateCommand}"
                                           CommandParameter="XMart.Views.AddressManagePage" />

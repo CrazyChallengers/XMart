@@ -11,7 +11,8 @@
 
     <ContentPage.Resources>
         <Style x:Key="SectionTitle" TargetType="Label">
-            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="TextColor" Value="Black"/>
+            <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontAttributes" Value="Bold"/>
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="Margin" Value="5,0"/>
@@ -19,25 +20,24 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid x:Name="MainGrid" >
+        <Grid x:Name="MainGrid" BackgroundColor="{StaticResource MainColor}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <!--头部-->
-            <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" Margin="5,35,5,5" HorizontalOptions="Fill" BackgroundColor="{StaticResource MainColor}">
+            <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" Padding="20,0" Margin="5,35,5,5" HorizontalOptions="Fill">
                 <StackLayout Orientation="Horizontal">
-                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/service.png" Style="{StaticResource EarImageButton}"/>
-                    <controls:MyEntry x:Name="account" Placeholder="原料更便宜啦~质量更好、价格低" Style="{StaticResource SearchEntry}"
+                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
+                    <controls:MyEntry x:Name="account" Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
                                       Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
-                    <ImageButton x:Name="MessageButton" Source="Resource/drawable/message.png" Style="{StaticResource EarImageButton}" Clicked="MessageButton_Clicked"/>
                 </StackLayout>
             </Frame>
             
-            <ScrollView Grid.Row="1">
+            <ScrollView Grid.Row="1" BackgroundColor="White">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
                     <!--轮播图-->
-                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="200" Margin="5,0">
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="200" Margin="5">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselList}"
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
@@ -52,7 +52,7 @@
                         </cv:CarouselViewControl>
                     </Frame>
 
-                    <!--主功能矩阵-->
+                    <!--主功能矩阵
                     <Frame Style="{StaticResource BaseFrame}" Margin="5" Padding="5">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -125,17 +125,47 @@
                                 </Grid>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
-                    </StackLayout>
+                    </StackLayout>-->
 
+                    <!--找单品-->
+                    <Label Text="找单品" Style="{DynamicResource SectionTitle}"/>
+                    <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout HeightRequest="150" WidthRequest="100" Margin="5">
+                                        <Frame Style="{StaticResource BaseFrame}" HeightRequest="100" WidthRequest="100">
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
+                                        </Frame>
+                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="20">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥"/>
+                                                    <Span Text="{Binding salePrice}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+
+                                        <StackLayout.GestureRecognizers>
+                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>-->
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ItemTapped_Tapped"/>
+                                        </StackLayout.GestureRecognizers>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </ScrollView>
+                    
                     <!--热门商品-->
                     <Label Text="热门商品" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout x:Name="HotProductStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                    <StackLayout HeightRequest="150" WidthRequest="100" Margin="5">
                                         <Frame Style="{StaticResource BaseFrame}">
-                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                            <ff:CachedImage Source="{Binding picUrl}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill"/>
                                         </Frame>
                                         <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
                                         <Label TextColor="Red" FontSize="20">
@@ -165,7 +195,7 @@
                                 <DataTemplate>
                                     <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
                                         <Frame Style="{StaticResource BaseFrame}">
-                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
                                         </Frame>
                                         <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
                                         <Label TextColor="Red" FontSize="20">
@@ -195,7 +225,7 @@
                                 <DataTemplate>
                                     <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
                                         <Frame Style="{StaticResource BaseFrame}">
-                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
                                         </Frame>
                                         <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
                                         <Label TextColor="Red" FontSize="20">
@@ -225,7 +255,7 @@
                                 <DataTemplate>
                                     <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
                                         <Frame Style="{StaticResource BaseFrame}">
-                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFit"/>
+                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
                                         </Frame>
                                         <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
                                         <Label TextColor="Red" FontSize="20">

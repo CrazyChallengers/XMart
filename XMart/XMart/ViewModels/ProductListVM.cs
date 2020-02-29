@@ -60,7 +60,7 @@ namespace XMart.ViewModels
             }, () => { return true; });
         }
 
-        private async Task GetProductList(string index)
+        private async void GetProductList(string index)
         {
             int page = 1;
             int size = 20;
@@ -75,7 +75,7 @@ namespace XMart.ViewModels
             ProductList = productListRD.result.data;
         }
 
-        private async Task GetProductList(Category subCategoryInfo)
+        private async void GetProductList(Category subCategoryInfo)
         {
             int page = 1;
             int size = 20;

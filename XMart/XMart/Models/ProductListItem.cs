@@ -8,19 +8,19 @@ namespace XMart.Models
 {
     public class ProductListItem
     {
-        [JsonProperty("productId")]
+        [JsonProperty("productId", NullValueHandling = NullValueHandling.Ignore)]
         public Int64 productId { get; set; }   //Comment
 
-        [JsonProperty("salePrice")]
+        [JsonProperty("salePrice", NullValueHandling = NullValueHandling.Ignore)]
         public double salePrice { get; set; }   //Comment
 
-        [JsonProperty("productName")]
+        [JsonProperty("productName", NullValueHandling = NullValueHandling.Ignore)]
         public string productName { get; set; }   //Comment
 
-        [JsonProperty("subTitle")]
+        [JsonProperty("subTitle", NullValueHandling = NullValueHandling.Ignore)]
         public string subTitle { get; set; }   //Comment
 
-        [JsonProperty("productImageBig")]
+        [JsonProperty("productImageBig", NullValueHandling = NullValueHandling.Ignore)]
         public string productImageBig { get; set; }   //Comment
 
         public bool MemberPriceVisible { get; set; }
@@ -29,7 +29,7 @@ namespace XMart.Models
         public ProductListItem()
         {
             //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
-            //MemberPriceVisible = !CusPriceVisible;
+            MemberPriceVisible = GlobalVariables.IsLogged;
         }
     }
 }
