@@ -65,7 +65,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>-->
-                                    <Label Grid.Row="2" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="会员价" FontSize="12"/>
@@ -74,7 +74,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label Grid.Row="3" Grid.Column="1" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                    <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="原价" FontSize="12"/>
@@ -112,11 +112,11 @@
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
 
                 <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="22"/>
-                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="22">
+                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" TextColor="{StaticResource ThickPink}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="￥" TextColor="Red"/>
-                            <Span Text="{Binding TotalSelectedPrice}" TextColor="Red" FontSize="24" FontAttributes="Bold"/>
+                            <Span Text="￥" FontSize="22"/>
+                            <Span Text="{Binding TotalSelectedPrice}" FontSize="24" FontAttributes="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -130,7 +130,7 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Button x:Name="OrderButton" Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
+                <Button x:Name="OrderButton" Text="结算" HeightRequest="40" WidthRequest="80" CornerRadius="20" BackgroundColor="{StaticResource ThickPink}" TextColor="White"
                         HorizontalOptions="End" VerticalOptions="Center" FontSize="22" Command="{Binding OrderCommand}"/>
 
             </StackLayout>

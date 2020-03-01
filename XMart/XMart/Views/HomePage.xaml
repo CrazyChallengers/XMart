@@ -20,7 +20,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid x:Name="MainGrid" BackgroundColor="{StaticResource MainColor}">
+        <Grid BackgroundColor="{StaticResource MainColor}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>
@@ -28,8 +28,8 @@
             <!--头部-->
             <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" HeightRequest="40" CornerRadius="20" Padding="20,0" Margin="5,35,5,5" HorizontalOptions="Fill">
                 <StackLayout Orientation="Horizontal">
-                    <ImageButton x:Name="CustomerServiceButton" Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
-                    <controls:MyEntry x:Name="account" Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
+                    <ImageButton Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
+                    <controls:MyEntry Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
                                       Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
                 </StackLayout>
             </Frame>
@@ -133,23 +133,15 @@
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout HeightRequest="150" WidthRequest="100" Margin="5">
+                                    <StackLayout HeightRequest="120" WidthRequest="100" Margin="5">
                                         <Frame Style="{StaticResource BaseFrame}" HeightRequest="100" WidthRequest="100">
                                             <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="20">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="￥"/>
-                                                    <Span Text="{Binding salePrice}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
+                                        <Label Text="{Binding productName}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
 
                                         <StackLayout.GestureRecognizers>
                                             <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>-->
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ItemTapped_Tapped"/>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1"/>
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </DataTemplate>
@@ -163,16 +155,19 @@
                         <StackLayout x:Name="HotProductStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout HeightRequest="150" WidthRequest="100" Margin="5">
+                                    <StackLayout HeightRequest="140" WidthRequest="100" Margin="5" Spacing="0">
                                         <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="20">
+                                        <Label Text="{Binding productName}" FontSize="18" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="16">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="￥"/>
-                                                    <Span Text="{Binding salePrice}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
@@ -193,16 +188,19 @@
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding OfficialChoiceList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                    <StackLayout HeightRequest="160" WidthRequest="120" Margin="5" Spacing="0">
                                         <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="20">
+                                        <Label Text="{Binding productName}" FontSize="18" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="16">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="￥"/>
-                                                    <Span Text="{Binding salePrice}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
@@ -223,16 +221,19 @@
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding GoodBrandList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout HeightRequest="180" WidthRequest="120" Margin="5">
+                                    <StackLayout HeightRequest="160" WidthRequest="120" Margin="5" Spacing="0">
                                         <Frame Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="20" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="20">
+                                        <Label Text="{Binding productName}" FontSize="18" LineBreakMode="TailTruncation"/>
+                                        <Label TextColor="Red" FontSize="16">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="￥"/>
-                                                    <Span Text="{Binding salePrice}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
@@ -261,8 +262,11 @@
                                         <Label TextColor="Red" FontSize="20">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="￥"/>
-                                                    <Span Text="{Binding salePrice}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>

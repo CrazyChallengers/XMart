@@ -58,7 +58,7 @@
                                     </Label.Behaviors>
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ParentRadio}, Path=IsChecked}" Value="True">
-                                            <Setter Property="TextColor" Value="{StaticResource MainColor}" />
+                                            <Setter Property="TextColor" Value="{StaticResource ThickPink}" />
                                             <Setter Property="FontSize" Value="24" />
                                             <Setter Property="FontAttributes" Value="Bold"/>
                                         </DataTrigger>
@@ -74,7 +74,7 @@
 
                 <!--二级分类-->
                 <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                    <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Center">
+                    <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Start" AlignContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
