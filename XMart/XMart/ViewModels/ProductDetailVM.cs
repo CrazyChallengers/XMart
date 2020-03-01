@@ -39,6 +39,7 @@ namespace XMart.ViewModels
         public Command BackCommand { get; set; }
         public Command AddToCartCommand { get; set; }
         public Command BuyCommand { get; set; }
+        public Command ShareCommand { get; set; }
         RestService _restService = new RestService();
 
         public ProductDetailVM(string productId)
@@ -97,5 +98,7 @@ namespace XMart.ViewModels
             }
 
         }
+
+        
     }
 }

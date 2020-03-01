@@ -17,7 +17,6 @@ namespace XMart.Views
     public partial class HomePage : ContentPage
     {
         HomeViewModel homeViewModel = new HomeViewModel();
-        RestService _restService = new RestService();
         int index = 0;
 
         public HomePage()
@@ -55,6 +54,7 @@ namespace XMart.Views
         /// </summary>
         private async void InitHomePage()
         {
+            RestService _restService = new RestService();
             HomeContentRD homeContentRD = await _restService.GetHomeContent();
 
             homeViewModel.CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
@@ -63,16 +63,6 @@ namespace XMart.Views
             homeViewModel.GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
             homeViewModel.BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
 
-        }
-
-        /// <summary>
-        /// 消息按钮
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MessageButton_Clicked(object sender, EventArgs e)
-        {
-            
         }
 
         /// <summary>
