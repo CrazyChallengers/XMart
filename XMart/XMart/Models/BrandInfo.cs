@@ -7,37 +7,37 @@ namespace XMart.Models
 {
     public class BrandInfo
     {
-        [JsonProperty("bigpic")]
+        [JsonProperty("bigpic", NullValueHandling = NullValueHandling.Ignore)]
         public string bigpic { get; set; }
 
-        [JsonProperty("brandStory")]
+        [JsonProperty("brandStory", NullValueHandling = NullValueHandling.Ignore)]
         public string brandStory { get; set; }   //comment
 
-        [JsonProperty("factoryStatus")]
+        [JsonProperty("factoryStatus", NullValueHandling = NullValueHandling.Ignore)]
         public int factoryStatus { get; set; }   //comment
 
-        [JsonProperty("firstLetter")]
+        [JsonProperty("firstLetter", NullValueHandling = NullValueHandling.Ignore)]
         public string firstLetter { get; set; }   //comment
 
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public int id { get; set; }   //comment
 
-        [JsonProperty("logo")]
+        [JsonProperty("logo", NullValueHandling = NullValueHandling.Ignore)]
         public string logo { get; set; }   //comment
 
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string name { get; set; }   //comment
 
-        [JsonProperty("propductCommentCount")]
+        [JsonProperty("propductCommentCount", NullValueHandling = NullValueHandling.Ignore)]
         public int propductCommentCount { get; set; }   //comment
 
-        [JsonProperty("propductCount")]
+        [JsonProperty("propductCount", NullValueHandling = NullValueHandling.Ignore)]
         public int propductCount { get; set; }   //comment
 
-        [JsonProperty("showStatus")]
+        [JsonProperty("showStatus", NullValueHandling = NullValueHandling.Ignore)]
         public int showStatus { get; set; }   //comment
 
-        [JsonProperty("sort")]
+        [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public int sort { get; set; }   //comment
 
     }

@@ -7,10 +7,10 @@ namespace XMart.Models
 {
     public class OrderListRDResult
     {
-        [JsonProperty("total")]
+        [JsonProperty("total", NullValueHandling = NullValueHandling.Ignore)]
         public int total { get; set; }   //Comment
 
-        [JsonProperty("data")]
+        [JsonProperty("data", NullValueHandling = NullValueHandling.Ignore)]
         public List<OrderDetail> data { get; set; }   //Comment
 
     }

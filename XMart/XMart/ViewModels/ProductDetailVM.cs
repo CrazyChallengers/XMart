@@ -61,17 +61,26 @@ namespace XMart.ViewModels
 
             BuyCommand = new Command(() =>
             {
-                List<CartItemInfo> productList = new List<CartItemInfo>();
+                if (GlobalVariables.IsLogged)
+                {
+                    List<CartItemInfo> productList = new List<CartItemInfo>();
 
-                CartItemInfo cartItemInfo = new CartItemInfo();
-                Tools.AutoMapping<ProductInfo, CartItemInfo>(Product, cartItemInfo);
-                cartItemInfo.productNum = 1;
-                cartItemInfo.productImg = Product.productImageBig;
+                    CartItemInfo cartItemInfo = new CartItemInfo();
+                    Tools.AutoMapping<ProductInfo, CartItemInfo>(Product, cartItemInfo);
+                    cartItemInfo.productNum = 1;
+                    cartItemInfo.productImg = Product.productImageBig;
 
-                productList.Add(cartItemInfo);
+                    productList.Add(cartItemInfo);
 
-                OrderingPage orderingPage = new OrderingPage(productList);
-                Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);
+                    OrderingPage orderingPage = new OrderingPage(productList);
+                    Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);
+                }
+                else
+                {
+                    LoginPage loginPage = new LoginPage();
+                    Application.Current.MainPage.Navigation.PushModalAsync(loginPage);
+                }
+
             }, () => { return true; });
 
             InitProductDetailPageAsync(productId);
@@ -99,6 +108,6 @@ namespace XMart.ViewModels
 
         }
 
-        
+
     }
 }

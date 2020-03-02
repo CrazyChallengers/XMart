@@ -8,7 +8,7 @@ namespace XMart.Models
     public class ItemAttributeValues
     {
         [JsonProperty("attributeId", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 attributeId { get; set; }   //Comment
+        public long attributeId { get; set; }   //Comment
 
         [JsonProperty("attributeName", NullValueHandling = NullValueHandling.Ignore)]
         public string attributeName { get; set; }   //Comment
@@ -17,15 +17,31 @@ namespace XMart.Models
         public string attributeValue { get; set; }   //Comment
 
         [JsonProperty("deleteflag", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 deleteflag { get; set; }   //Comment
+        public long deleteflag { get; set; }   //Comment
 
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 id { get; set; }   //Comment
+        public long id { get; set; }   //Comment
 
         [JsonProperty("itemId", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 itemId { get; set; }   //Comment
+        public long itemId { get; set; }   //Comment
 
         [JsonProperty("priceAdd", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 priceAdd { get; set; }   //Comment
+        public long priceAdd { get; set; }   //Comment
+
+        [JsonProperty("mallPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public long mallPrice { get; set; }   //Comment
+
+        [JsonProperty("memberPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public long memberPrice { get; set; }   //Comment
+
+        [JsonProperty("rebate1", NullValueHandling = NullValueHandling.Ignore)]
+        public long rebate1 { get; set; }   //Comment
+
+        [JsonProperty("rebate2", NullValueHandling = NullValueHandling.Ignore)]
+        public long rebate2 { get; set; }   //Comment
+
+        [JsonProperty("buyPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public long buyPrice { get; set; }   //Comment
+
     }
 }

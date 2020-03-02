@@ -7,52 +7,52 @@ namespace XMart.Models
 {
     public class SubjectInfo
     {
-        [JsonProperty("albumPics")]
+        [JsonProperty("albumPics", NullValueHandling = NullValueHandling.Ignore)]
         public string albumPics { get; set; }   //comment
 
-        [JsonProperty("categoryId")]
+        [JsonProperty("categoryId", NullValueHandling = NullValueHandling.Ignore)]
         public int categoryId { get; set; }   //comment
 
-        [JsonProperty("categoryName")]
+        [JsonProperty("categoryName", NullValueHandling = NullValueHandling.Ignore)]
         public string categoryName { get; set; }   //comment
 
-        [JsonProperty("collectCount")]
+        [JsonProperty("collectCount", NullValueHandling = NullValueHandling.Ignore)]
         public int collectCount { get; set; }   //comment
 
-        [JsonProperty("commentCount")]
+        [JsonProperty("commentCount", NullValueHandling = NullValueHandling.Ignore)]
         public int commentCount { get; set; }   //comment
 
-        [JsonProperty("content")]
+        [JsonProperty("content", NullValueHandling = NullValueHandling.Ignore)]
         public string content { get; set; }   //comment
 
-        [JsonProperty("createTime")]
+        [JsonProperty("createTime", NullValueHandling = NullValueHandling.Ignore)]
         public string createTime { get; set; }   //comment
 
-        [JsonProperty("description")]
+        [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
         public string description { get; set; }   //comment
 
-        [JsonProperty("forwardCount")]
+        [JsonProperty("forwardCount", NullValueHandling = NullValueHandling.Ignore)]
         public int forwardCount { get; set; }   //comment
 
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public int id { get; set; }   //comment
 
-        [JsonProperty("pic")]
+        [JsonProperty("pic", NullValueHandling = NullValueHandling.Ignore)]
         public string pic { get; set; }   //comment
 
-        [JsonProperty("productCount")]
+        [JsonProperty("productCount", NullValueHandling = NullValueHandling.Ignore)]
         public int productCount { get; set; }   //comment
 
-        [JsonProperty("readCount")]
+        [JsonProperty("readCount", NullValueHandling = NullValueHandling.Ignore)]
         public int readCount { get; set; }   //comment
 
-        [JsonProperty("recommendStatus")]
+        [JsonProperty("recommendStatus", NullValueHandling = NullValueHandling.Ignore)]
         public int recommendStatus { get; set; }   //comment
 
-        [JsonProperty("showStatus")]
+        [JsonProperty("showStatus", NullValueHandling = NullValueHandling.Ignore)]
         public int showStatus { get; set; }   //comment
 
-        [JsonProperty("title")]
+        [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
         public string title { get; set; }   //comment
         
     }

@@ -7,34 +7,34 @@ namespace XMart.Models
 {
     public class Category
     {
-        [JsonProperty("created")]
+        [JsonProperty("created", NullValueHandling = NullValueHandling.Ignore)]
         public string created { get; set; }   //Comment
 
-        [JsonProperty("icon")]
+        [JsonProperty("icon", NullValueHandling = NullValueHandling.Ignore)]
         public string icon { get; set; }   //Comment
 
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public int id { get; set; }   //Comment
 
-        [JsonProperty("isParent")]
+        [JsonProperty("isParent", NullValueHandling = NullValueHandling.Ignore)]
         public bool isParent { get; set; }   //Comment
 
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string name { get; set; }   //Comment
 
-        [JsonProperty("parentId")]
+        [JsonProperty("parentId", NullValueHandling = NullValueHandling.Ignore)]
         public int parentId { get; set; }   //Comment
 
-        [JsonProperty("remark")]
+        [JsonProperty("remark", NullValueHandling = NullValueHandling.Ignore)]
         public string remark { get; set; }   //Comment
 
-        [JsonProperty("sortOrder")]
+        [JsonProperty("sortOrder", NullValueHandling = NullValueHandling.Ignore)]
         public int sortOrder { get; set; }   //Comment
 
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public int status { get; set; }   //Comment
 
-        [JsonProperty("updated")]
+        [JsonProperty("updated", NullValueHandling = NullValueHandling.Ignore)]
         public string updated { get; set; }   //Comment
 
     }

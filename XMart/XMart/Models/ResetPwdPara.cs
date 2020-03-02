@@ -7,13 +7,13 @@ namespace XMart.Models
 {
     public class ResetPwdPara
     {
-        [JsonProperty("authCode")]
+        [JsonProperty("authCode", NullValueHandling = NullValueHandling.Ignore)]
         public string authCode { get; set; }   //comment
 
-        [JsonProperty("newPwd")]
+        [JsonProperty("newPwd", NullValueHandling = NullValueHandling.Ignore)]
         public string newPwd { get; set; }   //comment
 
-        [JsonProperty("tel")]
+        [JsonProperty("tel", NullValueHandling = NullValueHandling.Ignore)]
         public string tel { get; set; }   //comment
 
     }

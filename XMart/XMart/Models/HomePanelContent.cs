@@ -10,49 +10,49 @@ namespace XMart.Models
 {
     public class HomePanelContent
     {
-        [JsonProperty("created")]
+        [JsonProperty("created", NullValueHandling = NullValueHandling.Ignore)]
         public string created { get; set; }   //comment
 
-        [JsonProperty("fullUrl")]
+        [JsonProperty("fullUrl", NullValueHandling = NullValueHandling.Ignore)]
         public string fullUrl { get; set; }   //comment
 
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public int id { get; set; }   //comment
 
-        [JsonProperty("panelId")]
+        [JsonProperty("panelId", NullValueHandling = NullValueHandling.Ignore)]
         public int panelId { get; set; }   //comment
 
-        [JsonProperty("picUrl")]
+        [JsonProperty("picUrl", NullValueHandling = NullValueHandling.Ignore)]
         public string picUrl { get; set; }   //comment
 
-        [JsonProperty("picUrl2")]
+        [JsonProperty("picUrl2", NullValueHandling = NullValueHandling.Ignore)]
         public string picUrl2 { get; set; }   //comment
 
-        [JsonProperty("picUrl3")]
+        [JsonProperty("picUrl3", NullValueHandling = NullValueHandling.Ignore)]
         public string picUrl3 { get; set; }   //comment
 
-        [JsonProperty("productId")]
+        [JsonProperty("productId", NullValueHandling = NullValueHandling.Ignore)]
         public long productId { get; set; }   //comment
 
-        [JsonProperty("productImageBig")]
+        [JsonProperty("productImageBig", NullValueHandling = NullValueHandling.Ignore)]
         public string productImageBig { get; set; }   //comment
 
-        [JsonProperty("productName")]
+        [JsonProperty("productName", NullValueHandling = NullValueHandling.Ignore)]
         public string productName { get; set; }   //comment
 
-        [JsonProperty("salePrice")]
+        [JsonProperty("salePrice", NullValueHandling = NullValueHandling.Ignore)]
         public double salePrice { get; set; }   //comment
 
-        [JsonProperty("sortOrder")]
+        [JsonProperty("sortOrder", NullValueHandling = NullValueHandling.Ignore)]
         public int sortOrder { get; set; }   //comment
 
-        [JsonProperty("subTitle")]
+        [JsonProperty("subTitle", NullValueHandling = NullValueHandling.Ignore)]
         public string subTitle { get; set; }   //comment
 
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public int type { get; set; }   //comment
 
-        [JsonProperty("updated")]
+        [JsonProperty("updated", NullValueHandling = NullValueHandling.Ignore)]
         public string updated { get; set; }   //comment
 
         public ICommand ItemTapCommand { set; get; }

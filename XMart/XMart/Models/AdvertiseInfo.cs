@@ -7,40 +7,40 @@ namespace XMart.Models
 {
     public class AdvertiseInfo
     {
-        [JsonProperty("clickCount")]
+        [JsonProperty("clickCount", NullValueHandling = NullValueHandling.Ignore)]
         public int clickCount { get; set; }
 
-        [JsonProperty("endTime")]
+        [JsonProperty("endTime", NullValueHandling = NullValueHandling.Ignore)]
         public string endTime { get; set; }
 
-        [JsonProperty("id")]
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public int id { get; set; }
 
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string name { get; set; }
 
-        [JsonProperty("note")]
+        [JsonProperty("note", NullValueHandling = NullValueHandling.Ignore)]
         public string note { get; set; }
 
-        [JsonProperty("orderCount")]
+        [JsonProperty("orderCount", NullValueHandling = NullValueHandling.Ignore)]
         public int orderCount { get; set; }
 
-        [JsonProperty("pic")]
+        [JsonProperty("pic", NullValueHandling = NullValueHandling.Ignore)]
         public string pic { get; set; }
 
-        [JsonProperty("sort")]
+        [JsonProperty("sort", NullValueHandling = NullValueHandling.Ignore)]
         public int sort { get; set; }
 
-        [JsonProperty("startTime")]
+        [JsonProperty("startTime", NullValueHandling = NullValueHandling.Ignore)]
         public string startTime { get; set; }
 
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public int status { get; set; }
 
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public int type { get; set; }
 
-        [JsonProperty("url")]
+        [JsonProperty("url", NullValueHandling = NullValueHandling.Ignore)]
         public string url { get; set; }
     }
 }

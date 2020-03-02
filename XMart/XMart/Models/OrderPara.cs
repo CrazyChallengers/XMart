@@ -7,28 +7,28 @@ namespace XMart.Models
 {
     public class OrderPara
     {
-        [JsonProperty("addressId")]
+        [JsonProperty("addressId", NullValueHandling = NullValueHandling.Ignore)]
         public long addressId { get; set; }   //Comment
 
-        [JsonProperty("goodsList")]
+        [JsonProperty("goodsList", NullValueHandling = NullValueHandling.Ignore)]
         public List<CartItemInfo> goodsList { get; set; }   //Comment
 
-        [JsonProperty("orderTotal")]
+        [JsonProperty("orderTotal", NullValueHandling = NullValueHandling.Ignore)]
         public long orderTotal { get; set; }   //Comment
 
-        [JsonProperty("paymentType")]
+        [JsonProperty("paymentType", NullValueHandling = NullValueHandling.Ignore)]
         public int paymentType { get; set; }   //Comment
 
-        [JsonProperty("streetName")]
+        [JsonProperty("streetName", NullValueHandling = NullValueHandling.Ignore)]
         public string streetName { get; set; }   //Comment
 
-        [JsonProperty("tel")]
+        [JsonProperty("tel", NullValueHandling = NullValueHandling.Ignore)]
         public string tel { get; set; }   //Comment
 
-        [JsonProperty("userId")]
+        [JsonProperty("userId", NullValueHandling = NullValueHandling.Ignore)]
         public string userId { get; set; }   //Comment
 
-        [JsonProperty("userName")]
+        [JsonProperty("userName", NullValueHandling = NullValueHandling.Ignore)]
         public string userName { get; set; }   //Comment
 
 

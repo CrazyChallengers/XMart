@@ -7,46 +7,46 @@ namespace XMart.Models
 {
     public class OrderDetail
     {
-        [JsonProperty("addressInfo")]
+        [JsonProperty("addressInfo", NullValueHandling = NullValueHandling.Ignore)]
         public AddressInfo addressInfo { get; set; }   //Comment
 
-        [JsonProperty("buyerMessage")]
+        [JsonProperty("buyerMessage", NullValueHandling = NullValueHandling.Ignore)]
         public string buyerMessage { get; set; }   //Comment
 
-        [JsonProperty("closeDate")]
+        [JsonProperty("closeDate", NullValueHandling = NullValueHandling.Ignore)]
         public string closeDate { get; set; }   //Comment
 
-        [JsonProperty("contract")]
+        [JsonProperty("contract", NullValueHandling = NullValueHandling.Ignore)]
         public string contract { get; set; }   //Comment
 
-        [JsonProperty("createDate")]
+        [JsonProperty("createDate", NullValueHandling = NullValueHandling.Ignore)]
         public string createDate { get; set; }   //Comment
 
-        [JsonProperty("deleteflag")]
+        [JsonProperty("deleteflag", NullValueHandling = NullValueHandling.Ignore)]
         public int deleteflag { get; set; }   //Comment
 
-        [JsonProperty("deliveryStatus")]
+        [JsonProperty("deliveryStatus", NullValueHandling = NullValueHandling.Ignore)]
         public int deliveryStatus { get; set; }   //Comment
 
-        [JsonProperty("finishDate")]
+        [JsonProperty("finishDate", NullValueHandling = NullValueHandling.Ignore)]
         public string finishDate { get; set; }   //Comment
 
-        [JsonProperty("goodsList")]
+        [JsonProperty("goodsList", NullValueHandling = NullValueHandling.Ignore)]
         public List<CartItemInfo> goodsList { get; set; }   //Comment
 
-        [JsonProperty("orderId")]
+        [JsonProperty("orderId", NullValueHandling = NullValueHandling.Ignore)]
         public long orderId { get; set; }   //Comment
 
-        [JsonProperty("orderStatus")]
+        [JsonProperty("orderStatus", NullValueHandling = NullValueHandling.Ignore)]
         public string orderStatus { get; set; }   //Comment
 
-        [JsonProperty("orderTotal")]
+        [JsonProperty("orderTotal", NullValueHandling = NullValueHandling.Ignore)]
         public double orderTotal { get; set; }   //Comment
 
-        [JsonProperty("payDate")]
+        [JsonProperty("payDate", NullValueHandling = NullValueHandling.Ignore)]
         public string payDate { get; set; }   //Comment
 
-        [JsonProperty("paymentType")]
+        [JsonProperty("paymentType", NullValueHandling = NullValueHandling.Ignore)]
         public int paymentType { get; set; }   //Comment
 
 
