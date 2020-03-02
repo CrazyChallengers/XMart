@@ -7,16 +7,16 @@ namespace XMart.Models
 {
     public class LoginPara
     {
-        [JsonProperty("authCode")]
+        [JsonProperty("authCode", NullValueHandling = NullValueHandling.Ignore)]
         public string authCode { get; set; }   //comment
 
-        [JsonProperty("tel")]
+        [JsonProperty("tel", NullValueHandling = NullValueHandling.Ignore)]
         public string tel { get; set; }   //comment
 
-        //[JsonProperty("userName")]
+        //[JsonProperty("userName", NullValueHandling = NullValueHandling.Ignore)]
         //public string userName { get; set; }   //comment
 
-        [JsonProperty("userPwd")]
+        [JsonProperty("userPwd", NullValueHandling = NullValueHandling.Ignore)]
         public string userPwd { get; set; }   //comment
         
     }

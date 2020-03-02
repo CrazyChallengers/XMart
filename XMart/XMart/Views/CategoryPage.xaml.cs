@@ -25,7 +25,6 @@ namespace XMart.Views
             InitCategories();
 
             BindingContext = categoryViewModel;
-
         }
 
         /// <summary>
@@ -98,9 +97,5 @@ namespace XMart.Views
             Navigation.PushModalAsync(productListPage);
         }
 
-        private void MessageButton_Clicked(object sender, EventArgs e)
-        {
-
-        }
     }
 }

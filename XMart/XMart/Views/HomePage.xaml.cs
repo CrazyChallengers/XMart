@@ -25,18 +25,7 @@ namespace XMart.Views
 
             InitHomePage();
 
-            Device.StartTimer(new TimeSpan(0, 0, 5), () =>
-            {
-                // do something every 10 seconds
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    // interact with UI elements
-                    carousel.Position = index % homeViewModel.CarouselList.Count();
-                    index += 1;
-                    index %= homeViewModel.CarouselList.Count();
-                });
-                return true; // runs again, or false to stop
-            });
+            
 
             homeViewModel.ItemTapCommand = new Command<string>(
                 execute: (string productId) => 
@@ -88,6 +77,38 @@ namespace XMart.Views
             long id = homeViewModel.HotProductList[index].productId;
             ProductDetailPage productDetailPage = new ProductDetailPage(id.ToString());
             Navigation.PushModalAsync(productDetailPage);
+        }
+
+        private new void Disappearing()
+        {
+            Device.StartTimer(new TimeSpan(0, 0, 5), () =>
+            {
+                // do something every 10 seconds
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    // interact with UI elements
+                    carousel.Position = index % homeViewModel.CarouselList.Count();
+                    index += 1;
+                    index %= homeViewModel.CarouselList.Count();
+                });
+                return false; // runs again, or false to stop
+            });
+        }
+
+        private new void Appearing()
+        {
+            Device.StartTimer(new TimeSpan(0, 0, 5), () =>
+            {
+                // do something every 10 seconds
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    // interact with UI elements
+                    carousel.Position = index % homeViewModel.CarouselList.Count();
+                    index += 1;
+                    index %= homeViewModel.CarouselList.Count();
+                });
+                return true; // runs again, or false to stop
+            });
         }
     }
 }

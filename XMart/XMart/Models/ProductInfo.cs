@@ -9,7 +9,7 @@ namespace XMart.Models
     public class ProductInfo
     {
         [JsonProperty("buyPrice", NullValueHandling = NullValueHandling.Ignore)]
-        public long buyPrice { get; set; }   //comment
+        public long buyPrice { get; set; }   //进货价
 
         [JsonProperty("color", NullValueHandling = NullValueHandling.Ignore)]
         public string color { get; set; }   //comment
@@ -48,10 +48,10 @@ namespace XMart.Models
         public string mainMaterial { get; set; }   //comment
 
         [JsonProperty("mallPrice", NullValueHandling = NullValueHandling.Ignore)]
-        public long mallPrice { get; set; }   //comment
+        public long mallPrice { get; set; }   //市场价
 
         [JsonProperty("memberPrice", NullValueHandling = NullValueHandling.Ignore)]
-        public long memberPrice { get; set; }   //comment
+        public long memberPrice { get; set; }   //会员价
 
         [JsonProperty("productId", NullValueHandling = NullValueHandling.Ignore)]
         public long productId { get; set; }   //comment
@@ -77,8 +77,8 @@ namespace XMart.Models
         [JsonProperty("series", NullValueHandling = NullValueHandling.Ignore)]
         public string series { get; set; }   //comment
 
-        [JsonProperty("sprice", NullValueHandling = NullValueHandling.Ignore)]
-        public long sprice { get; set; }   //comment
+        //[JsonProperty("sprice", NullValueHandling = NullValueHandling.Ignore)]
+        //public long sprice { get; set; }   //comment
 
         [JsonProperty("standard", NullValueHandling = NullValueHandling.Ignore)]
         public string standard { get; set; }   //comment
@@ -92,8 +92,8 @@ namespace XMart.Models
         [JsonProperty("technique", NullValueHandling = NullValueHandling.Ignore)]
         public string technique { get; set; }   //comment
 
-        [JsonProperty("tprice", NullValueHandling = NullValueHandling.Ignore)]
-        public long tprice { get; set; }   //comment
+        //[JsonProperty("tprice", NullValueHandling = NullValueHandling.Ignore)]
+        //public long tprice { get; set; }   //comment
 
         [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public string type { get; set; }   //comment

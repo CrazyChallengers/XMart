@@ -15,6 +15,10 @@ namespace XMart.Droid
     [Activity(Label = "XMart", Icon = "@mipmap/xmart", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        //微信相关
+        private readonly string appID = "wx6990f0f3818a8c7e";//申请的appid
+        private IWXAPI wxApi;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -35,12 +39,10 @@ namespace XMart.Droid
 
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
 
-            base.OnCreate(savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-
             CarouselViewRenderer.Init();
             CachedImageRenderer.Init(true);
 
+            /*
             //微信相关
             MessagingCenter.Subscribe<object>(this, "Register", d =>
             {
@@ -70,19 +72,18 @@ namespace XMart.Droid
                     Scene = SendMessageToWX.Req.WXSceneTimeline//分享到朋友圈
                 };
                 wxApi.SendReq(req);
-            });
+            });*/
+
+            base.OnCreate(savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             LoadApplication(new App());
         }
 
-        #region 微信相关
-        private readonly string appID = "wx6990f0f3818a8c7e";//申请的appid
-        private IWXAPI wxApi;
         private bool RegToWx()
         {
             wxApi = WXAPIFactory.CreateWXAPI(this, appID, true);
             return wxApi.RegisterApp(appID);
         }
-        #endregion
     }
 }
