@@ -83,6 +83,13 @@ namespace XMart.ViewModels
 
             }, () => { return true; });
 
+            ShareCommand = new Command(() =>
+            {
+                string para = "?productId=" + Product.productId + "&userId=" + GlobalVariables.LoggedUser.id;
+                MessagingCenter.Send(new object(), "Register");//首先进行注册，然后订阅注册的结果。
+                MessagingCenter.Send(new object(), "ShareToFriend", para);
+            }, () => { return true; });
+
             InitProductDetailPageAsync(productId);
         }
 

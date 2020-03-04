@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.4.5" package="com.wyhl.XMart" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28" />
-	<application android:label="XMart" android:icon="@mipmap/xmart"></application>
+	<application android:icon="@mipmap/xmart" android:label="美而好家具">
+		<activity android:name="com.alipay.sdk.app.H5PayActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind"></activity>
+		<activity android:name="com.alipay.sdk.auth.AuthActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind"></activity>
+	</application>
 </manifest>

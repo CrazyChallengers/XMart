@@ -52,6 +52,9 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AliPayClassLibrary">
+      <HintPath>..\..\..\AliPayClassLibrary\AliPayClassLibrary\bin\Release\AliPayClassLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

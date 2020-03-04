@@ -164,7 +164,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
-                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
                                                     <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
@@ -197,7 +197,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
-                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
                                                     <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
@@ -230,7 +230,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
-                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
                                                     <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
@@ -263,7 +263,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
-                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
                                                     <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
                                                     <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>

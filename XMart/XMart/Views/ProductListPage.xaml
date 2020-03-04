@@ -71,7 +71,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥"/>
-                                                <Span Text="{Binding salePrice}"/>
+                                                <Span Text="{Binding mallPrice}"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>-->
@@ -89,7 +89,7 @@
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥" FontSize="22"/>
-                                                <Span Text="{Binding salePrice}" FontSize="26"/>
+                                                <Span Text="{Binding mallPrice}" FontSize="26"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

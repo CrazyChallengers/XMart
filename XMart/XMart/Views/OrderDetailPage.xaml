@@ -132,7 +132,7 @@
                                             <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="20"/>
                                             <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Text="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
 
-                                            <Label Grid.Row="2" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                            <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <Span Text="会员价" FontSize="12"/>
@@ -141,12 +141,12 @@
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
-                                            <Label Grid.Row="3" Grid.Column="1" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                            <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <Span Text="原价" FontSize="12"/>
                                                         <Span Text="￥" FontSize="18"/>
-                                                        <Span Text="{Binding salePrice}" FontSize="18"/>
+                                                        <Span Text="{Binding mallPrice}" FontSize="18"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
@@ -155,7 +155,7 @@
                                                     <FormattedString>
                                                         <Span Text="原价" FontSize="12"/>
                                                         <Span Text="￥" FontSize="22"/>
-                                                        <Span Text="{Binding salePrice}" FontSize="26"/>
+                                                        <Span Text="{Binding mallPrice}" FontSize="26"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
@@ -207,10 +207,10 @@
                             HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
                             Command="{Binding CancelCommand}"/>
 
-                    <Button x:Name="OrderButton" Text="支付" HeightRequest="40" WidthRequest="100" 
+                    <Button Text="支付" HeightRequest="40" WidthRequest="100" 
                             CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
                             HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
-                            Command="{Binding OrderCommand}"/>
+                            Command="{Binding PayCommand}"/>
 
                 </StackLayout>
             </Grid>
