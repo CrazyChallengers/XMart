@@ -28,7 +28,7 @@
                             <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="Red"/>
                             <Span Text=" 原价" FontSize="12" TextColor="Gray"/>
                             <Span Text="￥" FontSize="18" TextColor="Gray"/>
-                            <Span Text="{Binding Product.salePrice}" FontSize="18" TextColor="Gray"/>
+                            <Span Text="{Binding Product.mallPrice}" FontSize="18" TextColor="Gray"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>-->
@@ -47,7 +47,7 @@
                         <FormattedString>
                             <Span Text=" 原价" FontSize="12"/>
                             <Span Text="￥" FontSize="18"/>
-                            <Span Text="{Binding Product.salePrice}" FontSize="18"/>
+                            <Span Text="{Binding Product.mallPrice}" FontSize="18"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -56,7 +56,7 @@
                         <FormattedString>
                             <Span Text=" 原价" FontSize="12"/>
                             <Span Text="￥" FontSize="22"/>
-                            <Span Text="{Binding Product.salePrice}" FontSize="26"/>
+                            <Span Text="{Binding Product.mallPrice}" FontSize="26"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

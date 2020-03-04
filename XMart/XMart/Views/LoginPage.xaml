@@ -146,7 +146,8 @@
                     <StackLayout VerticalOptions="EndAndExpand" Spacing="20">
                         <Label Text="其他登录方式" FontSize="16" HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
                         <ImageButton Source="wechat.png" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent"
-                                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                                     HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"
+                                     Command="{Binding WechatLoginCommand}"/>
                         <Label FontSize="12" HorizontalOptions="Center" HorizontalTextAlignment="Center">
                             <Label.FormattedText>
                                 <FormattedString>

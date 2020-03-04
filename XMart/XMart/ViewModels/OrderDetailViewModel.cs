@@ -45,6 +45,7 @@ namespace XMart.ViewModels
         public Command CancelCommand { get; set; }
         public Command HomeCommand { get; set; }
         public Command BackCommand { get; set; }
+        public Command PayCommand { get; set; }
 
         public OrderDetailViewModel(long orderId)
         {
@@ -141,6 +142,10 @@ namespace XMart.ViewModels
                 Application.Current.MainPage.Navigation.PopModalAsync();
             }, () => { return true; });
 
+            PayCommand = new Command(() =>
+            {
+                
+            }, () => { return true; });
         }
 
         /// <summary>

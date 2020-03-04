@@ -138,6 +138,10 @@ namespace XMart.ViewModels
                     userId = GlobalVariables.LoggedUser.id.ToString(),
                     userName = UserName
                 };
+                foreach (var item in orderPara.goodsList)
+                {
+                    item.salePrice = GlobalVariables.LoggedUser.userType == "0" ? item.mallPrice : item.memberPrice;
+                }
 
                 StupidRD stupidRD = await _restService.Order(orderPara);
 
@@ -145,8 +149,8 @@ namespace XMart.ViewModels
                 {
                     CrossToastPopUp.Current.ShowToastSuccess("提交订单成功！请及时支付！", ToastLength.Long);
 
-                    OrderDetailPage orderDetailPage = new OrderDetailPage(stupidRD.result);
-                    await Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
+                    //OrderDetailPage orderDetailPage = new OrderDetailPage(stupidRD.result);
+                    //await Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
                 }
                 else
                 {
@@ -160,6 +164,9 @@ namespace XMart.ViewModels
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private async void InitAddress()
         {
             try

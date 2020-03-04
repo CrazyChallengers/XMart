@@ -103,6 +103,10 @@
                     <StackLayout Grid.Column="0" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                         <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>
                         <Label Text="我的订单" Style="{DynamicResource CommonLabel}"/>
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                         CommandParameter="XMart.Views.OrderListPage"/>
+                        </StackLayout.GestureRecognizers>
                     </StackLayout>
                     <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                         <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="24" FontAttributes="Bold" TextColor="Crimson"/>

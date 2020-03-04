@@ -89,6 +89,7 @@ namespace XMart.ViewModels
         public Command ToAuthPageCommand { get; set; }
         public Command PasswordLoginPartCommand { get; set; }
         public Command AuthLoginPartCommand { get; set; }
+        public Command WechatLoginCommand { get; set; }
 
         public LoginViewModel()
         {
@@ -162,6 +163,11 @@ namespace XMart.ViewModels
             {
                 AuthVisible = true;
                 PasswordVisible = false;
+            }, () => { return true; });
+
+            WechatLoginCommand = new Command(() =>
+            {
+
             }, () => { return true; });
 
         }

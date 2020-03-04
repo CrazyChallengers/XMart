@@ -47,7 +47,7 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="￥" FontSize="14" TextColor="{StaticResource SkyBlue}" />
-                                        <Span Text="{Binding Product.salePrice}" FontSize="26" TextColor="{StaticResource SkyBlue}" />
+                                        <Span Text="{Binding Product.mallPrice}" FontSize="26" TextColor="{StaticResource SkyBlue}" />
                                         <Span Text="  会员价￥" FontSize="14" TextColor="{StaticResource ThickPink}" />
                                         <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="{StaticResource ThickPink}" />
                                     </FormattedString>
@@ -119,7 +119,7 @@
 
                 <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="推荐"
                         BackgroundColor="{StaticResource LightPink}" TextColor="White" FontSize="18"
-                        Clicked="WeChatShare_Clicked"/>
+                        Command="{Binding ShareCommand}"/>
             </Grid>
 
             <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="Gray"
