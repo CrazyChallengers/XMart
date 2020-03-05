@@ -7,6 +7,7 @@ using XMart.ResponseData;
 using XMart.Models;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
+using XMart.Views;
 
 namespace XMart.ViewModels
 {
@@ -144,7 +145,9 @@ namespace XMart.ViewModels
 
             PayCommand = new Command(() =>
             {
-                
+                //MessagingCenter.Send<object>(new object(), "Pay");
+                PayWebPage payWebPage = new PayWebPage();
+                Application.Current.MainPage.Navigation.PushModalAsync(payWebPage);
             }, () => { return true; });
         }
 

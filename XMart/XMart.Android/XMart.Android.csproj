@@ -55,6 +55,9 @@
     <Reference Include="AliPayClassLibrary">
       <HintPath>..\..\..\AliPayClassLibrary\AliPayClassLibrary\bin\Release\AliPayClassLibrary.dll</HintPath>
     </Reference>
+    <Reference Include="DemoUtilsBinding">
+      <HintPath>..\..\..\..\Source\Repos\XamarinFormsAlipaySDKSample-master\4.4\SampleApp\SampleApp\SampleApp.Android\DLLs\DemoUtilsBinding.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -70,6 +73,7 @@
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />
+    <Compile Include="WebRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
