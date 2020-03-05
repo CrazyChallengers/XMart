@@ -13,6 +13,8 @@ using System.Drawing;
 using Android.Runtime;
 using System.Threading.Tasks;
 using Java.Net;
+using Com.Alipay.Sdk.Pay.Demo.Util;
+using Com.Alipay.Sdk.App;
 
 namespace XMart.Droid
 {
@@ -53,12 +55,21 @@ namespace XMart.Droid
             //支付宝
             MessagingCenter.Subscribe<object>(this, "Pay", obj =>
             {
-                var con = getOrderInfo("test", "testbody");
-                var sign = OrderInfoUtil.Sign(con, RSA_PRIVATE);
-                sign = URLEncoder.Encode(sign, "utf-8");
-                con += "&sign=\"" + sign + "\"&" + MySignType;
-                Com.Alipay.Sdk.App.PayTask pa = new Com.Alipay.Sdk.App.PayTask(this);
-                var result = pa.Pay(con, false);
+                var appid = "12345678";
+                var rsa2 = true;
+                var para = OrderInfoUtil2_0.BuildOrderParamMap(appid, rsa2);
+                var orderParam = OrderInfoUtil2_0.BuildOrderParam(para);
+                var privateKey = "987456321";
+                var sign = OrderInfoUtil2_0.GetSign(para, privateKey, rsa2);
+                var orderInfo = orderParam + "&" + sign;
+
+                //var con = getOrderInfo("test", "testbody");
+                //var sign = OrderInfoUtil2_0.Sign(con, RSA_PRIVATE);
+                //sign = URLEncoder.Encode(sign, "utf-8");
+                //con += "&sign=\"" + sign + "\"&" + MySignType;
+
+                PayTask pay = new PayTask(this);
+                var result = pay.Pay(orderInfo, false);
                 //Logger_Info("支付宝result:" + result);
             });
 
