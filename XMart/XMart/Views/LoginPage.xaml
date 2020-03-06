@@ -75,7 +75,7 @@
                                 <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding PasswordLoginPartCommand}"/>
                             </Label.GestureRecognizers>
                         </Label>
-                        
+
                     </StackLayout>
 
                     <StackLayout VerticalOptions="StartAndExpand" IsVisible="{Binding PasswordVisible}">
@@ -162,10 +162,8 @@
 
                 </StackLayout>
             </Frame>
-            
-        </Grid>
-        
 
+        </Grid>
     </ContentPage.Content>
 
 </ContentPage>
