@@ -20,7 +20,7 @@
     </ContentPage.Resources>
 
     <ContentPage.Content>
-        <Grid BackgroundColor="{StaticResource MainColor}">
+        <Grid RowSpacing="0" BackgroundColor="{StaticResource MainColor}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition Height="*"/>

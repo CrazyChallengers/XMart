@@ -54,11 +54,17 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="降价通知" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <ImageButton Grid.Row="0" Grid.Column="1" Source="star_gray.png" 
+                                         HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                            <Label Grid.Row="1" Grid.Column="1" Text="收藏" FontSize="16" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" 
+                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                            <ImageButton Grid.Row="0" Grid.Column="2" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                            <Label Grid.Row="1" Grid.Column="2" Text="1.1万" FontSize="16" HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                            <ImageButton Grid.Row="0" Grid.Column="2" Source="good_gray.png" 
+                                         HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                            <Label Grid.Row="1" Grid.Column="2" Text="点赞" FontSize="16" 
+                                   HorizontalOptions="Center" VerticalOptions="Center" 
+                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
                         </Grid>
 
                         <Label VerticalOptions="Center" VerticalTextAlignment="Center">
@@ -104,11 +110,14 @@
                     <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <ImageButton Grid.Row="0" Grid.Column="0" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                <ImageButton Grid.Row="0" Grid.Column="0" Source="message.png" 
+                             HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
                 <Label Grid.Row="1" Grid.Column="0" Text="联系客服" FontSize="16" 
-                       HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                       HorizontalOptions="Center" VerticalOptions="Center" 
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                <ImageButton Grid.Row="0" Grid.Column="1" Source="circle.png" HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"
+                <ImageButton Grid.Row="0" Grid.Column="1" Source="add2cart.png" 
+                             HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"
                              Command="{Binding AddToCartCommand}"/>
                 <Label Grid.Row="1" Grid.Column="1" Text="加购物车" FontSize="16" 
                        HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
