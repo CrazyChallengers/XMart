@@ -12,26 +12,78 @@
     <popup:PopupPage.Animation>
         <controls:UserAnimation/>
     </popup:PopupPage.Animation>
-    
-    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
-        <Frame BackgroundColor="White" HeightRequest="400" Padding="5" Style="{StaticResource BaseFrame}">
-            <StackLayout Spacing="0" >
-                <ff:CachedImage Source="{Binding Product.productImageBig}" HeightRequest="150" WidthRequest="150"/>
+
+    <Frame BackgroundColor="White" Padding="5" VerticalOptions="End" HorizontalOptions="Fill" Style="{StaticResource BaseFrame}">
+        <Grid RowSpacing="0" HorizontalOptions="Fill" VerticalOptions="Fill">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding Product.productImageBig}"/>
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.productSubTitle}" FontSize="Medium"/>
+            <Picker Grid.Row="2" Grid.Column="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
+            <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="会员价" FontSize="12"/>
+                        <Span Text="￥" FontSize="22"/>
+                        <Span Text="{Binding Product.memberPrice}" FontSize="26"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="市场价" FontSize="12"/>
+                        <Span Text="￥" FontSize="18"/>
+                        <Span Text="{Binding Product.mallPrice}" FontSize="18"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="市场价" FontSize="12"/>
+                        <Span Text="￥" FontSize="22"/>
+                        <Span Text="{Binding Product.mallPrice}" FontSize="26"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <controls:NumericUpDown Grid.Row="3" Grid.Column="2"
+                                                            x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
+                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
+
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="添加到购物车" TextColor="White"
+                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="Crimson"
+                        Command="{Binding AddToCartCommand}"/>
+        </Grid>
+        <!--<ff:CachedImage Source="{Binding Product.productImageBig}" HeightRequest="150" WidthRequest="150"/>
                 <Label Text="{Binding Product.productName}" FontSize="20"/>
                 
-                <!--
+                
                 <Label >
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="会员价" FontSize="12" TextColor="Red"/>
                             <Span Text="￥" FontSize="22" TextColor="Red"/>
                             <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="Red"/>
-                            <Span Text=" 原价" FontSize="12" TextColor="Gray"/>
+                            <Span Text=" 市场价" FontSize="12" TextColor="Gray"/>
                             <Span Text="￥" FontSize="18" TextColor="Gray"/>
                             <Span Text="{Binding Product.mallPrice}" FontSize="18" TextColor="Gray"/>
                         </FormattedString>
                     </Label.FormattedText>
-                </Label>-->
+                </Label>
 
                 <Label TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                     <Label.FormattedText>
@@ -45,7 +97,7 @@
                 <Label TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text=" 原价" FontSize="12"/>
+                            <Span Text=" 市场价" FontSize="12"/>
                             <Span Text="￥" FontSize="18"/>
                             <Span Text="{Binding Product.mallPrice}" FontSize="18"/>
                         </FormattedString>
@@ -54,7 +106,7 @@
                 <Label TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text=" 原价" FontSize="12"/>
+                            <Span Text=" 市场价" FontSize="12"/>
                             <Span Text="￥" FontSize="22"/>
                             <Span Text="{Binding Product.mallPrice}" FontSize="26"/>
                         </FormattedString>
@@ -62,10 +114,7 @@
                 </Label>
 
                 <controls:NumericUpDown x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="150"
-                                        HorizontalOptions="CenterAndExpand" Value="{Binding ProductNum}" />
-                <Button Text="添加到购物车" Command="{Binding AddToCartCommand}" VerticalOptions="EndAndExpand" BackgroundColor="Crimson" TextColor="White"/>
-            </StackLayout>
-        </Frame>
-    </StackLayout>
-    
+                                        HorizontalOptions="CenterAndExpand" Value="{Binding ProductNum}" />-->
+    </Frame>
+
 </popup:PopupPage>

@@ -14,7 +14,7 @@
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="HorizontalOptions" Value="Start"/>
             <Setter Property="Margin" Value="5,0"/>
-            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="TextColor" Value="Gray"/>
             <Setter Property="FontAttributes" Value="Bold"/>
         </Style>
     </ContentPage.Resources>
@@ -98,7 +98,7 @@
                                         <Label Grid.Row="3" Grid.Column="1" TextColor="Gray" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="原价" FontSize="12"/>
+                                                    <Span Text="市场价" FontSize="12"/>
                                                     <Span Text="￥" FontSize="18"/>
                                                     <Span Text="{Binding mallPrice}" FontSize="18"/>
                                                 </FormattedString>
@@ -107,7 +107,7 @@
                                         <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="原价" FontSize="12"/>
+                                                    <Span Text="市场价" FontSize="12"/>
                                                     <Span Text="￥" FontSize="22"/>
                                                     <Span Text="{Binding mallPrice}" FontSize="26"/>
                                                 </FormattedString>
