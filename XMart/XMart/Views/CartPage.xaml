@@ -77,7 +77,7 @@
                                     <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="原价" FontSize="12"/>
+                                                <Span Text="市场价" FontSize="12"/>
                                                 <Span Text="￥" FontSize="18"/>
                                                 <Span Text="{Binding mallPrice}" FontSize="18"/>
                                             </FormattedString>
@@ -86,7 +86,7 @@
                                     <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="原价" FontSize="12"/>
+                                                <Span Text="市场价" FontSize="12"/>
                                                 <Span Text="￥" FontSize="22"/>
                                                 <Span Text="{Binding mallPrice}" FontSize="26"/>
                                             </FormattedString>
