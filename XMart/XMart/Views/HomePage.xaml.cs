@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XMart.Models;
 using XMart.ViewModels;
-using XMart.Services;
-using XMart.ResponseData;
-using CarouselView.FormsPlugin.Abstractions;
 
 namespace XMart.Views
 {
@@ -23,10 +16,6 @@ namespace XMart.Views
         {
             InitializeComponent();
 
-            InitHomePage();
-
-            
-
             homeViewModel.ItemTapCommand = new Command<string>(
                 execute: (string productId) => 
                 {
@@ -36,22 +25,6 @@ namespace XMart.Views
                 );
 
             BindingContext = homeViewModel;
-        }
-
-        /// <summary>
-        /// 初始化首页
-        /// </summary>
-        private async void InitHomePage()
-        {
-            RestService _restService = new RestService();
-            HomeContentRD homeContentRD = await _restService.GetHomeContent();
-
-            homeViewModel.CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
-            homeViewModel.HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
-            homeViewModel.OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
-            homeViewModel.GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
-            homeViewModel.BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
-
         }
 
         /// <summary>

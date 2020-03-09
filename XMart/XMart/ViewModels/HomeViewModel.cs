@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using XMart.Models;
+using XMart.ResponseData;
+using XMart.Services;
 using XMart.Views;
 
 namespace XMart.ViewModels
@@ -100,7 +103,7 @@ namespace XMart.ViewModels
 
         public HomeViewModel()
         {
-            Title = "首页";
+            InitHomePage();
 
             SearchCommand = new Command(() =>
             {
@@ -116,6 +119,19 @@ namespace XMart.ViewModels
                 Page page = (Page)Activator.CreateInstance(type);
                 Application.Current.MainPage.Navigation.PushModalAsync(page);
             }, (pageName) => { return true; });
+        }
+
+        private async void InitHomePage()
+        {
+            RestService _restService = new RestService();
+            HomeContentRD homeContentRD = await _restService.GetHomeContent();
+
+            CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
+            HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
+            OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
+            GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
+            BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
+
         }
     }
 }

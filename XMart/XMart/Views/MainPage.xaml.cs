@@ -15,7 +15,6 @@ namespace XMart.Views
 {
     public partial class MainPage : TabbedPage
     {
-        string fileName;
         public MainPage()
         {
             InitializeComponent();
@@ -35,7 +34,7 @@ namespace XMart.Views
         private void Init()
         {
             //初始化，检查是否存在已记住的密码
-            fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+            string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
             
             if (File.Exists(fileName))
             {
