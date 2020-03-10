@@ -126,7 +126,7 @@ namespace XMart.ViewModels
         {
             try
             {
-                RestService _restService = new RestService();
+                RestSharpService _restSharpService = new RestSharpService();
                 OrderPara orderPara = new OrderPara
                 {
                     addressId = AddressId,
@@ -143,14 +143,14 @@ namespace XMart.ViewModels
                     item.salePrice = GlobalVariables.LoggedUser.userType == "0" ? item.mallPrice : item.memberPrice;
                 }
 
-                StupidRD stupidRD = await _restService.Order(orderPara);
+                StupidRD stupidRD = await _restSharpService.Order(orderPara);
 
                 if (stupidRD.result != 0)
                 {
                     CrossToastPopUp.Current.ShowToastSuccess("提交订单成功！请及时支付！", ToastLength.Long);
 
-                    //OrderDetailPage orderDetailPage = new OrderDetailPage(stupidRD.result);
-                    //await Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
+                    OrderDetailPage orderDetailPage = new OrderDetailPage(stupidRD.result);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
                 }
                 else
                 {
@@ -171,11 +171,11 @@ namespace XMart.ViewModels
         {
             try
             {
-                RestService _restService = new RestService();
+                RestSharpService _restSharpService = new RestSharpService();
 
                 string memberId = GlobalVariables.LoggedUser.id.ToString();
 
-                AddressRD addressRD = await _restService.GetAddressListById(memberId);
+                AddressRD addressRD = await _restSharpService.GetAddressListById(memberId);
 
                 if (addressRD.result.Count != 0)
                 {

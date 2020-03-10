@@ -16,14 +16,6 @@ namespace XMart.Views
         {
             InitializeComponent();
 
-            homeViewModel.ItemTapCommand = new Command<string>(
-                execute: (string productId) => 
-                {
-                    ProductDetailPage productDetailPage = new ProductDetailPage(productId);
-                    Navigation.PushModalAsync(productDetailPage);
-                }
-                );
-
             BindingContext = homeViewModel;
         }
 

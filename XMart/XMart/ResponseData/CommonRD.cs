@@ -7,16 +7,16 @@ namespace XMart.ResponseData
 {
     public class CommonRD
     {
-        [JsonProperty("code")]
+        [JsonProperty("code", NullValueHandling = NullValueHandling.Ignore)]
         public int code { get; set; }
         
-        [JsonProperty("message")]
+        [JsonProperty("message", NullValueHandling = NullValueHandling.Ignore)]
         public string message { get; set; }
 
-        [JsonProperty("success")]
+        [JsonProperty("success", NullValueHandling = NullValueHandling.Ignore)]
         public bool success { get; set; }   //comment
 
-        [JsonProperty("timestamp")]
+        [JsonProperty("timestamp", NullValueHandling = NullValueHandling.Ignore)]
         public Int64 timestamp { get; set; }   //comment
 
     }

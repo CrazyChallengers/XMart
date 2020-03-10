@@ -119,12 +119,21 @@ namespace XMart.ViewModels
                 Page page = (Page)Activator.CreateInstance(type);
                 Application.Current.MainPage.Navigation.PushModalAsync(page);
             }, (pageName) => { return true; });
+
+
+            ItemTapCommand = new Command<string>(
+                execute: (string productId) =>
+                {
+                    ProductDetailPage productDetailPage = new ProductDetailPage(productId);
+                    Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+                }
+                );
         }
 
         private async void InitHomePage()
         {
-            RestService _restService = new RestService();
-            HomeContentRD homeContentRD = await _restService.GetHomeContent();
+            RestSharpService _restSharpService = new RestSharpService();
+            HomeContentRD homeContentRD = await _restSharpService.GetHomeContent();
 
             CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
             HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();

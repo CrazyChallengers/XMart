@@ -9,44 +9,44 @@ namespace XMart.ResponseData
 {
     public class HomeContentRD : CommonRD
     {
-        [JsonProperty("result")]
+        [JsonProperty("result", NullValueHandling = NullValueHandling.Ignore)]
         public HomeContentDataList[] result { get; set; }
     }
 
     public class HomeContentDataList
     {
-        [JsonProperty("created")]
-        public string created { get; set; }   //comment
+        [JsonProperty("created", NullValueHandling = NullValueHandling.Ignore)]
+        public long created { get; set; }   //comment
 
-        [JsonProperty("id")]
-        public int id { get; set; }   //comment
+        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+        public long id { get; set; }   //comment
 
-        [JsonProperty("limitNum")]
+        [JsonProperty("limitNum", NullValueHandling = NullValueHandling.Ignore)]
         public int limitNum { get; set; }   //comment
 
-        [JsonProperty("name")]
+        [JsonProperty("name", NullValueHandling = NullValueHandling.Ignore)]
         public string name { get; set; }   //comment
 
-        [JsonProperty("panelContents")]
+        [JsonProperty("panelContents", NullValueHandling = NullValueHandling.Ignore)]
         public HomePanelContent[] panelContents { get; set; }   //comment
 
-        [JsonProperty("position")]
+        [JsonProperty("position", NullValueHandling = NullValueHandling.Ignore)]
         public int position { get; set; }   //comment
 
-        [JsonProperty("remark")]
+        [JsonProperty("remark", NullValueHandling = NullValueHandling.Ignore)]
         public string remark { get; set; }   //comment
 
-        [JsonProperty("sortOrder")]
+        [JsonProperty("sortOrder", NullValueHandling = NullValueHandling.Ignore)]
         public int sortOrder { get; set; }   //comment
 
-        [JsonProperty("status")]
+        [JsonProperty("status", NullValueHandling = NullValueHandling.Ignore)]
         public int status { get; set; }   //comment
 
-        [JsonProperty("type")]
+        [JsonProperty("type", NullValueHandling = NullValueHandling.Ignore)]
         public int type { get; set; }   //comment
 
-        [JsonProperty("updated")]
-        public string updated { get; set; }   //comment
+        [JsonProperty("updated", NullValueHandling = NullValueHandling.Ignore)]
+        public long updated { get; set; }   //comment
 
     }
 }

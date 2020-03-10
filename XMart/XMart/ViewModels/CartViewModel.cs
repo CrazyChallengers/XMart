@@ -51,6 +51,7 @@ namespace XMart.ViewModels
         }
 
         public Command OrderCommand { get; set; }
+        public Command AllCheckCommand { get; set; }
 
         public CartViewModel()
         {
@@ -77,6 +78,38 @@ namespace XMart.ViewModels
                 Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);
             }, () => { return true; });
 
+            AllCheckCommand = new Command(() =>
+            {
+                IsAllChecked = !IsAllChecked;
+                AllCheckedButton_Color = IsAllChecked ? Color.Crimson : Color.LightGray;
+                foreach (var item in ItemList)
+                {
+                    item.Checked = IsAllChecked;
+                }
+
+                OnCount();
+            }, () => { return true; });
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnCount()
+        {
+            double totalPrice = 0;
+            int number = 0;
+            foreach (var item in ItemList)
+            {
+                if (item.Checked)
+                {
+                    totalPrice += (item.memberPrice * item.productNum);
+                    number += item.productNum;
+                }
+            }
+
+            TotalSelectedPrice = totalPrice.ToString();
+            CheckedNumber = number;
         }
     }
 }

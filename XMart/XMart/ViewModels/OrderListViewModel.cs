@@ -46,11 +46,11 @@ namespace XMart.ViewModels
 		{
 			try
 			{
-				RestService _restService = new RestService();
+				RestSharpService _restSharpService = new RestSharpService();
 				int userId = GlobalVariables.LoggedUser.id;
 				int page = 1;
 				int size = 10;
-				OrderListRD orderListRD = await _restService.GetOrderListById(userId, page, size);
+				OrderListRD orderListRD = await _restSharpService.GetOrderListById(userId, page, size);
 
 				if (orderListRD.result.data.Count != 0)
 				{

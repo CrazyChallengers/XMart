@@ -8,7 +8,7 @@ namespace XMart.ResponseData
 {
     public class ProductDetailRD : CommonRD
     {
-        [JsonProperty("result")]
+        [JsonProperty("result", NullValueHandling = NullValueHandling.Ignore)]
         public ProductInfo result { get; set; }   //comment
 
     }

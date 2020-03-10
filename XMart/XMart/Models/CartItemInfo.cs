@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using XMart.Util;
+using XMart.ViewModels;
 
 namespace XMart.Models
 {
@@ -38,6 +39,7 @@ namespace XMart.Models
             Checked = _checked == "1";
             //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
             MemberPriceVisible = GlobalVariables.IsLogged;
+
         }
     }
 }

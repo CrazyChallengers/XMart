@@ -90,11 +90,11 @@ namespace XMart.ViewModels
         {
             try
             {
-                RestService _restService = new RestService();
+                RestSharpService _restSharpService = new RestSharpService();
 
                 string memberId = GlobalVariables.LoggedUser.id.ToString();
 
-                AddressRD addressRD = await _restService.GetAddressListById(memberId);
+                AddressRD addressRD = await _restSharpService.GetAddressListById(memberId);
 
                 if (addressRD.result.Count != 0)
                 {

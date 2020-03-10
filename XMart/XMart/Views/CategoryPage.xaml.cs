@@ -14,7 +14,7 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CategoryPage : ContentPage
 	{
-        RestService _restService = new RestService();
+        RestSharpService _restSharpService = new RestSharpService();
         CategoryViewModel categoryViewModel = new CategoryViewModel();
         List<Category> categoryList = new List<Category>();
 
@@ -32,7 +32,7 @@ namespace XMart.Views
         /// </summary>
         private async void InitCategories()
         {
-            CategoryRD categoryRD = await _restService.GetCategories();
+            CategoryRD categoryRD = await _restSharpService.GetCategories();
 
             categoryList = categoryRD.result;
 
