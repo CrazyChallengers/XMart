@@ -90,7 +90,7 @@ namespace XMart.ViewModels
         public long Tick { get; set; }
         public MyTimer myTimer { get; set; }
         public List<string> IdentityList { get; set; }
-        RestService _restService = new RestService();
+        RestSharpService _restSharpService = new RestSharpService();
 
 
         public Command SendAuthCodeCommand { get; private set; }   //发送验证码
@@ -183,7 +183,7 @@ namespace XMart.ViewModels
                 return;
             }
 
-            SimpleRD simpleRD = await _restService.SendAuthCode(Tel);
+            SimpleRD simpleRD = await _restSharpService.SendAuthCode(Tel);
 
             if (simpleRD.code == 200)
             {
@@ -276,7 +276,7 @@ namespace XMart.ViewModels
 
             //registerPara.userType = IsDesignerChecked ? "1" : "0";
 
-            SimpleRD simpleRD = await _restService.Register(registerPara);
+            SimpleRD simpleRD = await _restSharpService.Register(registerPara);
 
             if (simpleRD.code == 200)
             {

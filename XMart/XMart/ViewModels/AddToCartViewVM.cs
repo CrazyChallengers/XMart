@@ -65,13 +65,13 @@ namespace XMart.ViewModels
         {
             try
             {
-                RestService _restService = new RestService();
+                RestSharpService _restSharpService = new RestSharpService();
 
                 string memberId = GlobalVariables.LoggedUser.id.ToString();
                 string productId = Product.productId.ToString();
                 string num = ProductNum.ToString();
 
-                SimpleRD simpleRD = await _restService.AddToCart(memberId, productId, num);
+                SimpleRD simpleRD = await _restSharpService.AddToCart(memberId, productId, num);
 
                 if (simpleRD.message == "success")
                 {

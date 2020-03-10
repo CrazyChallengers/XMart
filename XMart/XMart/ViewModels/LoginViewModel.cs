@@ -78,7 +78,7 @@ namespace XMart.ViewModels
             set { SetProperty(ref authCodeButtonEnable, value); }
         }
 
-        private RestService _restService = new RestService();
+        private RestSharpService _restSharpService = new RestSharpService();
         string fileName;
 
         public Command ToRegisterPageCommand { get; private set; }   //跳转到注册页面
@@ -205,7 +205,7 @@ namespace XMart.ViewModels
                 tel = Tel
             };
 
-            LoginRD loginRD = await _restService.Login(loginPara);
+            LoginRD loginRD = await _restSharpService.Login(loginPara);
 
             if (loginRD.result.message == null)
             {

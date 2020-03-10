@@ -41,7 +41,7 @@ namespace XMart.ViewModels
             set { SetProperty(ref orderStatus, value); }
         }
 
-        RestService _restService = new RestService();
+        RestSharpService _restSharpService = new RestSharpService();
 
         public Command CancelCommand { get; set; }
         public Command HomeCommand { get; set; }
@@ -158,7 +158,7 @@ namespace XMart.ViewModels
         {
             try
             {
-                SimpleRD simpleRD = await _restService.CancelOrder(Order);
+                SimpleRD simpleRD = await _restSharpService.CancelOrder(Order);
 
                 if (simpleRD.success)
                 {
@@ -183,7 +183,7 @@ namespace XMart.ViewModels
         {
             try
             {
-                OrderDetailRD orderDetailRD = await _restService.GetOrderDetailByOrderId(orderId);
+                OrderDetailRD orderDetailRD = await _restSharpService.GetOrderDetailByOrderId(orderId);
 
                 if (orderDetailRD.success)
                 {

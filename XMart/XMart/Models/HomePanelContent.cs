@@ -11,13 +11,13 @@ namespace XMart.Models
     public class HomePanelContent
     {
         [JsonProperty("created", NullValueHandling = NullValueHandling.Ignore)]
-        public string created { get; set; }   //comment
+        public long created { get; set; }   //comment
 
         [JsonProperty("fullUrl", NullValueHandling = NullValueHandling.Ignore)]
         public string fullUrl { get; set; }   //comment
 
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public int id { get; set; }   //comment
+        public long id { get; set; }   //comment
 
         [JsonProperty("panelId", NullValueHandling = NullValueHandling.Ignore)]
         public int panelId { get; set; }   //comment
@@ -53,20 +53,21 @@ namespace XMart.Models
         public int type { get; set; }   //comment
 
         [JsonProperty("updated", NullValueHandling = NullValueHandling.Ignore)]
-        public string updated { get; set; }   //comment
+        public long updated { get; set; }   //comment
 
-        public ICommand ItemTapCommand { set; get; }
+        [JsonProperty("rebate1", NullValueHandling = NullValueHandling.Ignore)]
+        public long rebate1 { get; set; }   //comment
 
-        public HomePanelContent()
-        {
-            ItemTapCommand = new Command(
-                execute: () =>
-                {
-                    ProductDetailPage productDetailPage = new ProductDetailPage(productId.ToString());
-                    //Navigation.PushModalAsync(productDetailPage);
-                    //Console.WriteLine(productId);
-                }
-                );
-        }
+        [JsonProperty("rebate2", NullValueHandling = NullValueHandling.Ignore)]
+        public long rebate2 { get; set; }   //comment
+
+        [JsonProperty("buyPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public double buyPrice { get; set; }   //comment
+
+        [JsonProperty("mallPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public double mallPrice { get; set; }   //comment
+
+        [JsonProperty("memberPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public double memberPrice { get; set; }   //comment
     }
 }

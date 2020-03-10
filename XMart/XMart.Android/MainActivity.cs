@@ -80,6 +80,7 @@ namespace XMart.Droid
                 var result = RegToWx();
                 // MessagingCenter.Send(new object(), "Registered", result);//广播注册的结果  
             });
+            /*
             //分享小程序给朋友
             MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
             {
@@ -102,8 +103,8 @@ namespace XMart.Droid
                 };
 
                 wxApi.SendReq(req);
-            });
-            /*
+            });*/
+            
             //分享文字给朋友
             MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
             {
@@ -130,7 +131,7 @@ namespace XMart.Droid
                 };
                 wxApi.SendReq(req);
             });
-            
+            /*
             //分享网页给朋友
             MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
             {

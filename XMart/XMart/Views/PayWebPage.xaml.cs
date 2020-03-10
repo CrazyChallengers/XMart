@@ -24,7 +24,6 @@ namespace XMart.Views
             {
                 Url = "http://wxpay.wxutil.com/mch/pay/h5.v2.php"
             };
-
         }
     }
 }

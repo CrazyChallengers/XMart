@@ -11,14 +11,12 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CartPage : ContentPage
     {
-        RestService _restService = new RestService();
+        RestSharpService _restSharpService = new RestSharpService();
         CartViewModel cartViewModel = new CartViewModel();
 
         public CartPage()
         {
             InitializeComponent();
-
-            //InitCart();
 
             BindingContext = cartViewModel;
         }
@@ -31,7 +29,7 @@ namespace XMart.Views
             if (GlobalVariables.IsLogged)
             {
                 string memberId = GlobalVariables.LoggedUser.id.ToString();
-                CartItemListRD cartItemListRD = await _restService.GetCartItemList(memberId);
+                CartItemListRD cartItemListRD = await _restSharpService.GetCartItemList(memberId);
 
                 cartViewModel.ItemList = cartItemListRD.result;
                 cartViewModel.ItemNumber = cartItemListRD.result.Count().ToString();
@@ -45,12 +43,6 @@ namespace XMart.Views
         /// <param name="e"></param>
         private void SingleCheckBox_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
-            if (!e.Value)
-            {
-                cartViewModel.IsAllChecked = false;
-                cartViewModel.AllCheckedButton_Color = Color.LightGray;
-            }
-
             OnCount();
         }
 
@@ -61,29 +53,22 @@ namespace XMart.Views
         {
             double totalPrice = 0;
             int number = 0;
+            bool allChecked = true;
             foreach (var item in cartViewModel.ItemList)
             {
-                if (item._checked == "1")
+                if (item.Checked)
                 {
                     totalPrice += (item.memberPrice * item.productNum);
                     number += item.productNum;
                 }
+
+                allChecked &= item.Checked;
             }
 
+            cartViewModel.IsAllChecked = allChecked;
+            cartViewModel.AllCheckedButton_Color = allChecked ? Color.Crimson : Color.LightGray;
             cartViewModel.TotalSelectedPrice = totalPrice.ToString();
             cartViewModel.CheckedNumber = number;
-        }
-
-        private void AllCheckedButton_Clicked(object sender, System.EventArgs e)
-        {
-            cartViewModel.IsAllChecked = !cartViewModel.IsAllChecked;
-            cartViewModel.AllCheckedButton_Color = cartViewModel.IsAllChecked ? Color.Crimson : Color.LightGray;
-            foreach (var item in cartViewModel.ItemList)
-            {
-                //item.IsChecked = cartViewModel.IsAllChecked;
-            }
-
-            OnCount();
         }
 
         private void ContentPage_Appearing(object sender, System.EventArgs e)

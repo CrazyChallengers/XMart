@@ -69,8 +69,8 @@ namespace XMart.ViewModels
             int priceGt = -1;
             int priceLte = -1;
 
-            RestService _restService = new RestService();
-            ProductListRD productListRD = await _restService.FuzzySearch(index, sequence, page, size, sort, priceGt, priceLte);
+            RestSharpService _restSharpService = new RestSharpService();
+            ProductListRD productListRD = await _restSharpService.FuzzySearch(index, sequence, page, size, sort, priceGt, priceLte);
 
             ProductList = productListRD.result.data;
         }
@@ -83,8 +83,8 @@ namespace XMart.ViewModels
             long cid = subCategoryInfo.id;
             int priceGt = -1;
             int priceLte = -1;
-            RestService _restService = new RestService();
-            ProductListRD productListRD = await _restService.GetProductList(page, size, sort, cid, priceGt, priceLte);
+            RestSharpService _restSharpService = new RestSharpService();
+            ProductListRD productListRD = await _restSharpService.GetProductList(page, size, sort, cid, priceGt, priceLte);
 
             ProductList = productListRD.result.data;
         }
