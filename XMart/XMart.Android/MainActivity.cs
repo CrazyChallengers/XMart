@@ -43,13 +43,16 @@ namespace XMart.Droid
             {
                 //透明状态栏                
                 Window.AddFlags(WindowManagerFlags.TranslucentStatus);
-                //透明导航栏                
-                Window.AddFlags(WindowManagerFlags.TranslucentNavigation);
+                //Window.SetStatusBarColor(Android.Graphics.Color.DeepSkyBlue);
+                //不遮挡导航栏                
+                Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
             }
 
-            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
+            //Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
 
-            CarouselViewRenderer.Init();
+            Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);   //弹出框
+
+            CarouselViewRenderer.Init();    //轮播图
             CachedImageRenderer.Init(true);
 
             //支付宝

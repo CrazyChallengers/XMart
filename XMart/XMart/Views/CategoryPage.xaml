@@ -10,6 +10,7 @@
     
     <ContentPage.Resources>
         <Style x:Key="ParentLabel" TargetType="Label">
+            <Setter Property="TextColor" Value="Black"/>
             <Setter Property="HeightRequest" Value="40"/>
             <Setter Property="WidthRequest" Value="100"/>
             <Setter Property="FontSize" Value="22"/>
@@ -30,14 +31,14 @@
 
     <ContentPage.Content>
 
-        <Grid ColumnSpacing="0" RowSpacing="0" BackgroundColor="{StaticResource MainColor}">
+        <Grid ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="80"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
             <!--顶部-->
-            <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" 
+            <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" BorderColor="{StaticResource DeepBlue}"
                    HeightRequest="40" CornerRadius="20" Margin="5,35,5,5" Padding="20,0" HorizontalOptions="Fill">
                 <StackLayout Orientation="Horizontal">
                     <ImageButton x:Name="CustomerServiceButton" Source="search.png" Style="{StaticResource EarImageButton}"/>
@@ -46,9 +47,9 @@
                 </StackLayout>
             </Frame>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal" BackgroundColor="White" Spacing="0">
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
                 <!--一级分类-->
-                <ScrollView BackgroundColor="LightYellow" Orientation="Vertical" VerticalScrollBarVisibility="Never">
+                <ScrollView Orientation="Vertical" VerticalScrollBarVisibility="Never">
                     <StackLayout x:Name="ParentStack" BindableLayout.ItemsSource="{Binding ParentCategoryList}" Orientation="Vertical">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
@@ -61,6 +62,7 @@
                                             <Setter Property="TextColor" Value="{StaticResource ThickPink}" />
                                             <Setter Property="FontSize" Value="24" />
                                             <Setter Property="FontAttributes" Value="Bold"/>
+                                            <Setter Property="BackgroundColor" Value="White"/>
                                         </DataTrigger>
                                     </Label.Triggers>
                                     <Label.GestureRecognizers>
@@ -74,7 +76,7 @@
 
                 <!--二级分类-->
                 <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                    <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" Wrap="Wrap" JustifyContent="Start" AlignContent="Start">
+                    <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" BackgroundColor="White" Wrap="Wrap" JustifyContent="Start" AlignContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
