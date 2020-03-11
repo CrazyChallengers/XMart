@@ -33,7 +33,8 @@
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" 
                              HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"
                              HorizontalOptions="CenterAndExpand"/>
-                <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" WidthRequest="300" CornerRadius="20" Padding="20,0" BackgroundColor="{StaticResource MainColor}">
+                <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" WidthRequest="300" 
+                       CornerRadius="20" Padding="20,0" BorderColor="{StaticResource DeepBlue}">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Style="{StaticResource SearchEntry}"
                                       Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}" TextColor="White"/>
                 </Frame>

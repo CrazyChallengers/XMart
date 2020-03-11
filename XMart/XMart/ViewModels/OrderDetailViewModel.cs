@@ -94,6 +94,13 @@ namespace XMart.ViewModels
             {
                 Application.Current.MainPage.Navigation.PopModalAsync();
             }, () => { return true; });
+
+            PayCommand = new Command(() =>
+            {
+                MessagingCenter.Send<object>(new object(), "Pay");
+                //PayWebPage payWebPage = new PayWebPage();
+                //Application.Current.MainPage.Navigation.PushModalAsync(payWebPage);
+            }, () => { return true; });
         }
 
         public OrderDetailViewModel(OrderDetail orderDetail)
@@ -145,9 +152,9 @@ namespace XMart.ViewModels
 
             PayCommand = new Command(() =>
             {
-                //MessagingCenter.Send<object>(new object(), "Pay");
-                PayWebPage payWebPage = new PayWebPage();
-                Application.Current.MainPage.Navigation.PushModalAsync(payWebPage);
+                MessagingCenter.Send<object>(new object(), "Pay");
+                //PayWebPage payWebPage = new PayWebPage();
+                //Application.Current.MainPage.Navigation.PushModalAsync(payWebPage);
             }, () => { return true; });
         }
 
