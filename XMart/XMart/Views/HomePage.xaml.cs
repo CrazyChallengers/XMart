@@ -27,12 +27,17 @@ namespace XMart.Views
         private void CarouselItem_Tapped(object sender, EventArgs e)
         {
             int index = carousel.Position;
-            //string url = homeViewModel.AdvertiseList[index].url;
-            string url = "http://www.baidu.com/";
+            string url = homeViewModel.CarouselList[index].fullUrl;
+            //string url = "http://www.baidu.com/";
             WebPage webPage = new WebPage(url);
             Navigation.PushModalAsync(webPage);
         }
 
+        /// <summary>
+        /// 热门商品之类的tap事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ItemTapped_Tapped(object sender, EventArgs e)
         {
             StackLayout stackLayout = sender as StackLayout;
@@ -74,6 +79,22 @@ namespace XMart.Views
                 });
                 return true; // runs again, or false to stop
             });
+        }
+
+        /// <summary>
+        /// 找单品点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            StackLayout stackLayout = sender as StackLayout;
+            //stackLayout.Children
+            int index = CatStack.Children.IndexOf(stackLayout);
+
+            long id = homeViewModel.CatList[index].id;
+            ProductListPage productListPage = new ProductListPage(id.ToString());
+            Navigation.PushModalAsync(productListPage);
         }
     }
 }

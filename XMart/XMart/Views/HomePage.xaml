@@ -117,18 +117,19 @@
                     <!--找单品-->
                     <Label Text="找单品" Style="{DynamicResource SectionTitle}"/>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                        <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
+                        <StackLayout x:Name="CatStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding CatList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
                                     <StackLayout HeightRequest="120" WidthRequest="100" Margin="5">
-                                        <Frame Style="{StaticResource BaseFrame}" HeightRequest="100" WidthRequest="100">
-                                            <ff:CachedImage Source="{Binding picUrl}" Aspect="AspectFill"/>
+                                        <Frame Style="{StaticResource BaseFrame}" HeightRequest="80" WidthRequest="80">
+                                            <ff:CachedImage Source="{Binding icon}" Aspect="AspectFill"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="16" LineBreakMode="TailTruncation" HorizontalOptions="Center"/>
+                                        <Label Text="{Binding name}" FontSize="16" LineBreakMode="TailTruncation" 
+                                               HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
 
                                         <StackLayout.GestureRecognizers>
-                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>-->
-                                            <TapGestureRecognizer NumberOfTapsRequired="1"/>
+                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FuckCommand}" CommandParameter="{Binding productId}"/>-->
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </DataTemplate>
