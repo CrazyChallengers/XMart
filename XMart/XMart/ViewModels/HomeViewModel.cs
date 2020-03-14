@@ -62,6 +62,13 @@ namespace XMart.ViewModels
             set { SetProperty(ref carouselList, value); }
         }
 
+        private List<Category> catList;   //Comment
+        public List<Category> CatList
+        {
+            get { return catList; }
+            set { SetProperty(ref catList, value); }
+        }
+
         private List<HomePanelContent> hotProductList;   //comment
         public List<HomePanelContent> HotProductList
         {
@@ -135,12 +142,71 @@ namespace XMart.ViewModels
             RestSharpService _restSharpService = new RestSharpService();
             HomeContentRD homeContentRD = await _restSharpService.GetHomeContent();
 
-            CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
+            //CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
             HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
             OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
             GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
             BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
 
+            CarouselList = new List<HomePanelContent>
+            {
+                new HomePanelContent
+                {
+                    picUrl = "sanye.png",
+                    fullUrl = "http://www.sanecn.com/"
+                },
+                new HomePanelContent
+                {
+                    picUrl = "bianselong.jpg",
+                    fullUrl = "http://www.cdbsljs.com/"
+                }
+            };
+
+            CatList = new List<Category>
+            {
+                new Category
+                {
+                    id = 1247,
+                    name = "软体沙发",
+                    icon = "star_yellow.png"
+                },
+                new Category
+                {
+                    id = 1248,
+                    name = "实木家具",
+                    icon = "star_yellow.png"
+                },
+                new Category
+                {
+                    id = 1252,
+                    name = "餐桌",
+                    icon = "star_yellow.png"
+                },
+                new Category
+                {
+                    id = 1256,
+                    name = "书柜",
+                    icon = "star_yellow.png"
+                },
+                new Category
+                {
+                    id = 1256,
+                    name = "书桌",
+                    icon = "star_yellow.png"
+                },
+                new Category
+                {
+                    id = 1268,
+                    name = "茶几",
+                    icon = "star_yellow.png"
+                },
+                new Category
+                {
+                    id = 1278,
+                    name = "鞋柜",
+                    icon = "star_yellow.png"
+                }
+            };
         }
     }
 }

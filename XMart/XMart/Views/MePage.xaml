@@ -125,7 +125,7 @@
                 </StackLayout>
             </Grid>
 
-            <Frame Grid.Row="4" Grid.RowSpan="2" Padding="5" CornerRadius="20" Margin="5">
+            <Frame Grid.Row="4" Grid.RowSpan="2" Padding="5" CornerRadius="20" Margin="5" BorderColor="LightGray" HasShadow="False">
                 <StackLayout HeightRequest="300">
                     <TableView Intent="Menu" RowHeight="50">
                         <TableRoot>
