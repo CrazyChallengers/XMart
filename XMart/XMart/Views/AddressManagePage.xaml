@@ -21,56 +21,58 @@
             <Setter Property="LineBreakMode" Value="CharacterWrap"/>
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
-        <StackLayout>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-                <StackLayout Grid.Row="1" Orientation="Horizontal">
-                    <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
-                    <Label Text="我的收货地址" TextColor="Black" FontSize="24" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
-                    <Button WidthRequest="60" Text="新增" FontSize="22" Command="{Binding AddAddressCommand}" HorizontalOptions="EndAndExpand"/>
-                </StackLayout>
+            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
+                <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
+                <Label Text="我的收货地址" TextColor="Black" FontSize="24" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                <Button WidthRequest="60" Text="新增" FontSize="18" BackgroundColor="Transparent" Command="{Binding AddAddressCommand}"/>
+            </StackLayout>
 
-                <StackLayout Grid.Row="2" VerticalOptions="Fill" Margin="5,0">
-                    <Label Text="无收货地址" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
-                    <ListView x:Name="list" ItemsSource="{Binding AddressList}" VerticalOptions="Center" RowHeight="80"
-                                  IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsRefreshing}" RefreshControlColor="{StaticResource MainColor}" RefreshCommand="{Binding RefreshCommand}">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Grid>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition/>
-                                            <RowDefinition/>
-                                        </Grid.RowDefinitions>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="1*"/>
-                                            <ColumnDefinition Width="2*"/>
-                                            <ColumnDefinition Width="50"/>
-                                        </Grid.ColumnDefinitions>
+            <StackLayout Grid.Row="2" VerticalOptions="Fill">
+                <Label Text="无收货地址" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
+                <ListView x:Name="list" ItemsSource="{Binding AddressList}" 
+                          VerticalOptions="Center" RowHeight="80" 
+                          IsPullToRefreshEnabled="True" 
+                          IsRefreshing="{Binding IsRefreshing}" 
+                          RefreshControlColor="{StaticResource MainColor}" 
+                          RefreshCommand="{Binding RefreshCommand}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid BackgroundColor="White" Padding="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="1*"/>
+                                        <ColumnDefinition Width="2*"/>
+                                        <ColumnDefinition Width="50"/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding userName}" Style="{DynamicResource UserNameStyle}"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding tel}" Style="{DynamicResource PhoneStyle}"/>
-                                        <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding isDefault}"/>
-                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding streetName}" Style="{DynamicResource AddressStyle}"/>
-                                    </Grid>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                        <ListView.Behaviors>
-                            <behaviors:EventToCommandBehavior EventName="ItemSelected" 
-                                                                  Command="{Binding EditCommand}" 
-                                                                  CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
-                        </ListView.Behaviors>
-                    </ListView>
-                </StackLayout>
-            </Grid>
-        </StackLayout>
+                                    <Label Grid.Row="0" Grid.Column="0" Text="{Binding userName}" Style="{DynamicResource UserNameStyle}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Text="{Binding tel}" Style="{DynamicResource PhoneStyle}"/>
+                                    <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding isDefault}"/>
+                                    <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding streetName}" Style="{DynamicResource AddressStyle}"/>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.Behaviors>
+                        <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                          Command="{Binding EditCommand}" 
+                                                          CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
+                    </ListView.Behaviors>
+                </ListView>
+            </StackLayout>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

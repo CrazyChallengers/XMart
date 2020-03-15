@@ -13,7 +13,7 @@
             <Setter Property="TextColor" Value="Black"/>
             <Setter Property="HeightRequest" Value="40"/>
             <Setter Property="WidthRequest" Value="100"/>
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontSize" Value="20"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -21,7 +21,7 @@
         </Style>
         <Style x:Key="SubLabel" TargetType="Label">
             <Setter Property="HeightRequest" Value="50"/>
-            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Start"/>
             <Setter Property="VerticalTextAlignment" Value="Center"/>
@@ -38,12 +38,13 @@
             </Grid.RowDefinitions>
 
             <!--顶部-->
-            <Frame Grid.Row="0" Style="{StaticResource BaseFrame}" BorderColor="{StaticResource DeepBlue}"
-                   HeightRequest="40" CornerRadius="20" Margin="5,35,5,5" Padding="20,0" HorizontalOptions="Fill">
-                <StackLayout Orientation="Horizontal">
-                    <ImageButton x:Name="CustomerServiceButton" Source="search.png" Style="{StaticResource EarImageButton}"/>
-                    <controls:MyEntry x:Name="SearchEntry" Placeholder="真皮沙发" Style="{StaticResource SearchEntry}"
-                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}" />
+            <Frame Style="{StaticResource BaseFrame}" BorderColor="{StaticResource DeepBlue}" HeightRequest="40" 
+                   CornerRadius="20" Padding="20,0,10,0" Margin="5,35,5,5" HorizontalOptions="Fill" VerticalOptions="Start">
+                <StackLayout Orientation="Horizontal" Spacing="0">
+                    <ImageButton Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
+                    <controls:MyEntry Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
+                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                    <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="40" FontSize="18" Padding="0" Command="{Binding SearchCommand}"/>
                 </StackLayout>
             </Frame>
 
@@ -80,10 +81,10 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
-                                    <Frame CornerRadius="5" Style="{StaticResource BaseFrame}" BackgroundColor="AntiqueWhite">
-                                        <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}"/>
+                                    <Frame CornerRadius="5" Style="{StaticResource BaseFrame}" BackgroundColor="White">
+                                        <ff:CachedImage HeightRequest="90" WidthRequest="90" Source="{Binding icon}" Aspect="AspectFill"/>
                                     </Frame>
-                                    <Label Text="{Binding name}" Style="{DynamicResource SubLabel}" FontSize="22"/>
+                                    <Label Text="{Binding name}" Style="{DynamicResource SubLabel}"/>
 
                                     <StackLayout.GestureRecognizers>
                                         <TapGestureRecognizer x:Name="CategorySelected" NumberOfTapsRequired="1" Tapped="SubTGR_Tapped"/>

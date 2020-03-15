@@ -14,17 +14,23 @@
             <Setter Property="TextColor" Value="Black"/>
             <Setter Property="FontSize" Value="22"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="HorizontalOptions" Value="Start"/>
-            <Setter Property="Margin" Value="5,0"/>
+            <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+        </Style>
+        <Style x:Key="MoreStyle" TargetType="Label">
+            <Setter Property="TextColor" Value="LightGray"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
         </Style>
     </ContentPage.Resources>
 
     <ContentPage.Content>
         <Grid>
             <ScrollView>
-                <StackLayout Orientation="Vertical" HorizontalOptions="Center">
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center" Spacing="0">
                     <!--轮播图-->
-                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="200" Margin="5,80,5,0">
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="200" Margin="5,80,5,0" CornerRadius="0">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselList}"
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
@@ -115,12 +121,15 @@
                     </StackLayout>-->
 
                     <!--找单品-->
-                    <Label Text="找单品" Style="{DynamicResource SectionTitle}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="5,10,5,0" HorizontalOptions="Fill">
+                        <Label Text="找单品" Style="{DynamicResource SectionTitle}"/>
+                        <Label Text="查看全部>" Style="{DynamicResource MoreStyle}"/>
+                    </StackLayout>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout x:Name="CatStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding CatList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout HeightRequest="120" WidthRequest="100" Margin="5">
+                                    <StackLayout WidthRequest="100" Margin="5" Spacing="0">
                                         <Frame Style="{StaticResource BaseFrame}" HeightRequest="80" WidthRequest="80">
                                             <ff:CachedImage Source="{Binding icon}" Aspect="AspectFill"/>
                                         </Frame>
@@ -138,7 +147,10 @@
                     </ScrollView>
                     
                     <!--热门商品-->
-                    <Label Text="热门商品" Style="{DynamicResource SectionTitle}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="5,10,5,0" HorizontalOptions="Fill">
+                        <Label Text="热门商品" Style="{DynamicResource SectionTitle}"/>
+                        <Label Text="查看全部>" Style="{DynamicResource MoreStyle}"/>
+                    </StackLayout>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout x:Name="HotProductStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
@@ -171,7 +183,10 @@
                     </ScrollView>
 
                     <!--官方精选-->
-                    <Label Text="官方精选" Style="{DynamicResource SectionTitle}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="5,0" HorizontalOptions="Fill">
+                        <Label Text="官方精选" Style="{DynamicResource SectionTitle}"/>
+                        <Label Text="查看全部>" Style="{DynamicResource MoreStyle}"/>
+                    </StackLayout>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding OfficialChoiceList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
@@ -204,7 +219,10 @@
                     </ScrollView>
 
                     <!--品牌周边-->
-                    <Label Text="品牌周边" Style="{DynamicResource SectionTitle}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="5,0" HorizontalOptions="Fill">
+                        <Label Text="品牌周边" Style="{DynamicResource SectionTitle}"/>
+                        <Label Text="查看全部>" Style="{DynamicResource MoreStyle}"/>
+                    </StackLayout>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding GoodBrandList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
@@ -237,7 +255,10 @@
                     </ScrollView>
 
                     <!--品牌精选-->
-                    <Label Text="品牌精选" Style="{DynamicResource SectionTitle}"/>
+                    <StackLayout Orientation="Horizontal" Spacing="0" Margin="5,0" HorizontalOptions="Fill">
+                        <Label Text="品牌精选" Style="{DynamicResource SectionTitle}"/>
+                        <Label Text="查看全部>" Style="{DynamicResource MoreStyle}"/>
+                    </StackLayout>
                     <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                         <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding BrandChoiceList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
@@ -391,11 +412,12 @@
 
             <!--头部-->
             <Frame Style="{StaticResource BaseFrame}" BorderColor="{StaticResource DeepBlue}" HeightRequest="40" 
-                   CornerRadius="20" Padding="20,0" Margin="5,35,5,5" HorizontalOptions="Fill" VerticalOptions="Start">
-                <StackLayout Orientation="Horizontal">
+                   CornerRadius="20" Padding="20,0,10,0" Margin="5,35,5,5" HorizontalOptions="Fill" VerticalOptions="Start">
+                <StackLayout Orientation="Horizontal" Spacing="0">
                     <ImageButton Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
                     <controls:MyEntry Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
                                       Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                    <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="40" FontSize="18" Padding="0" Command="{Binding SearchCommand}"/>
                 </StackLayout>
             </Frame>
         </Grid>

@@ -44,7 +44,15 @@
                 <Setter Property="BackgroundColor" Value="Transparent"/>
                 <Setter Property="Aspect" Value="AspectFit"/>
             </Style>
-            
+            <Style x:Key="BackButton" TargetType="ImageButton">
+                <Setter Property="WidthRequest" Value="30"/>
+                <Setter Property="HeightRequest" Value="30"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="Aspect" Value="AspectFit"/>
+                <Setter Property="Margin" Value="15,0"/>
+            </Style>
 
         </ResourceDictionary>
 
