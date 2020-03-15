@@ -51,7 +51,7 @@ namespace XMart.ViewModels
 			UserName = GlobalVariables.LoggedUser.username;
 			UserId = GlobalVariables.LoggedUser.id.ToString();
 			UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
-			UserAvatar = GlobalVariables.LoggedUser.file;
+			UserAvatar = GlobalVariables.LoggedUser.file == null ? "star_yellow.png" : GlobalVariables.LoggedUser.file;
 			Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
 
 			NavigateCommand = new Command<string>((pageName) =>

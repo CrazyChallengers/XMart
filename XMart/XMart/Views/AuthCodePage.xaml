@@ -7,10 +7,9 @@
              mc:Ignorable="d"
              x:Class="XMart.Views.AuthCodePage">
     <ContentPage.Content>
-        <StackLayout VerticalOptions="StartAndExpand" Margin="30,100">
-            <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="White"
-                     HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="StartAndExpand"
-                     HorizontalOptions="StartAndExpand" Margin="20,40,20,100" Command="{Binding BackCommand}"/>
+        <StackLayout VerticalOptions="StartAndExpand" Margin="30,35">
+            <ImageButton x:Name="BackButton" Source="back_gray.png" Style="{StaticResource BackButton}" Command="{Binding BackCommand}" 
+                         HorizontalOptions="Start" Margin="0,0,0,50"/>
             <Label Text="输入验证码" FontSize="22" TextColor="Black" FontAttributes="Bold"/>
             <Label FontSize="16" TextColor="Gray">
                 <Label.FormattedText>

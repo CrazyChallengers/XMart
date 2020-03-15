@@ -23,6 +23,18 @@ namespace XMart.Models
         [JsonProperty("productImageBig", NullValueHandling = NullValueHandling.Ignore)]
         public string productImageBig { get; set; }   //Comment
 
+        [JsonProperty("mallPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public long mallPrice { get; set; }   //市场价
+
+        [JsonProperty("memberPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public long memberPrice { get; set; }   //会员价
+
+        [JsonProperty("rebate1", NullValueHandling = NullValueHandling.Ignore)]
+        public long rebate1 { get; set; }   //comment
+
+        [JsonProperty("rebate2", NullValueHandling = NullValueHandling.Ignore)]
+        public long rebate2 { get; set; }   //comment
+
         public bool MemberPriceVisible { get; set; }
         public bool CusPriceVisible { get; set; }
 
