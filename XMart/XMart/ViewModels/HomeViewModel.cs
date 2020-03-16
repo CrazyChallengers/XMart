@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Plugin.Toast;
+using Plugin.Toast.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -107,6 +109,7 @@ namespace XMart.ViewModels
         public ICommand ItemTapCommand { set; get; }
         public Command SearchCommand { get; set; }
         public Command<string> NavigateCommand { get; set; }
+        public Command MoreCatCommand { get; set; }
 
         public HomeViewModel()
         {
@@ -114,10 +117,17 @@ namespace XMart.ViewModels
 
             SearchCommand = new Command(() =>
             {
-                ProductListPage productListPage = new ProductListPage(Index);
-                Index = "";
+                if (string.IsNullOrEmpty(Index))
+                {
+                    CrossToastPopUp.Current.ShowToastWarning("请输入关键词", ToastLength.Short);
+                }
+                else
+                {
+                    ProductListPage productListPage = new ProductListPage(Index);
+                    Index = "";
 
-                Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
+                    Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
+                }
             }, () => { return true; });
 
             NavigateCommand = new Command<string>((pageName) =>
@@ -127,7 +137,6 @@ namespace XMart.ViewModels
                 Application.Current.MainPage.Navigation.PushModalAsync(page);
             }, (pageName) => { return true; });
 
-
             ItemTapCommand = new Command<string>(
                 execute: (string productId) =>
                 {
@@ -135,12 +144,20 @@ namespace XMart.ViewModels
                     Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
                 }
                 );
+
+            MoreCatCommand = new Command(() =>
+            {
+                FindMorePage findMorePage = new FindMorePage();
+                Application.Current.MainPage.Navigation.PushModalAsync(findMorePage);
+            }, () => { return true; });
+
         }
 
         private async void InitHomePage()
         {
             RestSharpService _restSharpService = new RestSharpService();
             HomeContentRD homeContentRD = await _restSharpService.GetHomeContent();
+            CategoryRD categoryRD = await _restSharpService.GetCategories();
 
             //CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
             HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
@@ -162,51 +179,15 @@ namespace XMart.ViewModels
                 }
             };
 
-            CatList = new List<Category>
+            List<Category> temp = new List<Category>();
+            foreach (var item in categoryRD.result)
             {
-                new Category
+                if (!item.isParent)
                 {
-                    id = 1247,
-                    name = "软体沙发",
-                    icon = "star_yellow.png"
-                },
-                new Category
-                {
-                    id = 1248,
-                    name = "实木家具",
-                    icon = "star_yellow.png"
-                },
-                new Category
-                {
-                    id = 1252,
-                    name = "餐桌",
-                    icon = "star_yellow.png"
-                },
-                new Category
-                {
-                    id = 1256,
-                    name = "书柜",
-                    icon = "star_yellow.png"
-                },
-                new Category
-                {
-                    id = 1256,
-                    name = "书桌",
-                    icon = "star_yellow.png"
-                },
-                new Category
-                {
-                    id = 1268,
-                    name = "茶几",
-                    icon = "star_yellow.png"
-                },
-                new Category
-                {
-                    id = 1278,
-                    name = "鞋柜",
-                    icon = "star_yellow.png"
+                    temp.Add(item);
                 }
-            };
+            }
+            CatList = temp.GetRange(0, 10);
         }
     }
 }

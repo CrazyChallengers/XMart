@@ -22,17 +22,16 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="65"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand">
-                <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource EarImageButton}"/>
-                <Label Text="确认订单" TextColor="Black" FontSize="24" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
-            </StackLayout>
+            <ImageButton Grid.Row="1" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+            <Label Grid.Row="1" Text="确认订单" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-            <ScrollView Grid.Row="1">
+            <ScrollView Grid.Row="2">
                 <StackLayout VerticalOptions="Start">
                     <Label Text="收货地址" Style="{DynamicResource SectionStyle}"/>
                     <Frame Padding="10" Margin="5" CornerRadius="10" IsClippedToBounds="True" BackgroundColor="LightGray">
@@ -58,7 +57,7 @@
                     </Frame>
                     
                     <Label Text="支付类型" Style="{DynamicResource SectionStyle}"/>
-                    <Picker HeightRequest="50" Title="支付类型" 
+                    <Picker HeightRequest="50" Title="支付类型" FontSize="22"
                             ItemsSource="{Binding PaymentTypeList}" 
                             SelectedIndex="{Binding SelectedTypeIndex}"/>
 
@@ -82,8 +81,8 @@
                                         </Grid.ColumnDefinitions>
 
                                         <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
-                                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="24" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="20"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="18"/>
                                         <Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
                                         
                                         <Label Grid.Row="2" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
@@ -131,7 +130,7 @@
                 </StackLayout>
             </ScrollView>
 
-            <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10,0">
+            <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="10,0">
                 <!--
                 <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
@@ -157,7 +156,7 @@
                 </Label>
 
                 <Button x:Name="OrderButton" Text="提交订单" HeightRequest="40" WidthRequest="150" 
-                        CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
+                        CornerRadius="20" BackgroundColor="Crimson" TextColor="White" Padding="0"
                         HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
                         Command="{Binding OrderCommand}"/>
 

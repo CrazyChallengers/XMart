@@ -22,31 +22,32 @@
     </ContentPage.Resources>
     
     <ContentPage.Content>
-        <Grid>
+        <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="65"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
+            <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" HorizontalOptions="FillAndExpand"
                        CornerRadius="20" Padding="20,0" BorderColor="{StaticResource DeepBlue}">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Style="{StaticResource SearchEntry}"
-                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}" TextColor="White"/>
+                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
                 </Frame>
                 <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="60" FontSize="18" Command="{Binding SearchCommand}"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal">
+            <StackLayout Grid.Row="2" Orientation="Horizontal">
                 <Button Text="物流" Style="{DynamicResource ButtonStyle}"/>
                 <Button Text="新品" Style="{DynamicResource ButtonStyle}"/>
                 <Button Text="品牌" Style="{DynamicResource ButtonStyle}"/>
                 <Button Text="分类" Style="{DynamicResource ButtonStyle}"/>
             </StackLayout>
 
-            <ScrollView Grid.Row="2" Orientation="Vertical">
+            <ScrollView Grid.Row="3" Orientation="Vertical">
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ProductList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>

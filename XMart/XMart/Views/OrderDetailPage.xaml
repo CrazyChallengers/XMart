@@ -21,18 +21,16 @@
         <ScrollView>
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="40"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
+                
+                <ImageButton Grid.Row="1" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+                <Label Grid.Row="1" Text="订单详情" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-                <ImageButton Grid.Row="0" Source="back_gray.png" 
-                             HorizontalOptions="Start" VerticalOptions="End" Margin="20,0"
-                             Command="{Binding BackCommand}" 
-                             Style="{StaticResource EarImageButton}"/>
-                <Label Grid.Row="0" Text="订单详情" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="End"/>
-
-                    <ScrollView Grid.Row="1">
+                <ScrollView Grid.Row="2">
                     <StackLayout VerticalOptions="Start">
                         <Label Text="收货地址" Style="{DynamicResource SectionStyle}"/>
                         <Frame Padding="10" Margin="5" CornerRadius="10" IsClippedToBounds="True" BackgroundColor="Orange">
@@ -144,8 +142,8 @@
                                             </Grid.ColumnDefinitions>
 
                                             <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
-                                            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="24" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="20"/>
+                                            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="18"/>
                                             <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Text="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
 
                                             <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
@@ -193,7 +191,7 @@
                     </StackLayout>
                 </ScrollView>
 
-                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10,0">
+                <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="10,0">
                     <!--
                 <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
@@ -218,12 +216,12 @@
                         </Label.FormattedText>
                     </Label>
 
-                    <Button Text="取消订单" HeightRequest="40" WidthRequest="100" 
+                    <Button Text="取消订单" HeightRequest="40" WidthRequest="100" Padding="0"
                             CornerRadius="20" BackgroundColor="LightGray" TextColor="White"
                             HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
                             Command="{Binding CancelCommand}"/>
 
-                    <Button Text="支付" HeightRequest="40" WidthRequest="100" 
+                    <Button Text="支付" HeightRequest="40" WidthRequest="100" Padding="0"
                             CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
                             HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
                             Command="{Binding PayCommand}"/>

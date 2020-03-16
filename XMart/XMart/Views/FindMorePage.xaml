@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:tb="clr-namespace:Xam.Plugin.TabView;assembly=Xam.Plugin.TabView"
+             xmlns:controls="clr-namespace:XMart.Controls"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.FindMorePage">
+
+    <ContentPage.Resources>
+        <Style x:Key="SubLabel" TargetType="Label">
+            <Setter Property="HeightRequest" Value="50"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Start"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
+                <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
+                <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" HorizontalOptions="FillAndExpand"
+                       CornerRadius="20" Padding="20,0" BorderColor="{StaticResource DeepBlue}">
+                    <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Style="{StaticResource SearchEntry}"
+                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                </Frame>
+                <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="60" FontSize="18" Command="{Binding SearchCommand}"/>
+            </StackLayout>
+
+            <tb:TabViewControl Grid.Row="2" VerticalOptions="FillAndExpand" 
+                               HeaderTabTextColor="Gray" HeaderSelectionUnderlineColor="{StaticResource SkyBlue}" HeaderBackgroundColor="Transparent">
+                <tb:TabViewControl.ItemSource>
+                    <tb:TabItem HeaderText="找单品" HeaderTabTextFontSize="20">
+                        <!--二级分类-->
+                        <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand">
+                            <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" 
+                                        Wrap="Wrap" JustifyContent="SpaceBetween" AlignContent="Start">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+                                        <Frame HeightRequest="120" WidthRequest="120" Margin="5,10" CornerRadius="5" Style="{StaticResource BaseFrame}" 
+                                               BackgroundColor="White" HasShadow="True">
+                                            <StackLayout Orientation="Vertical" Spacing="0">
+                                                <ff:CachedImage HeightRequest="90" WidthRequest="120" Source="{Binding icon}" Aspect="AspectFill"/>
+                                                <Label Text="{Binding name}" Style="{DynamicResource SubLabel}"/>
+                                            </StackLayout>
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer x:Name="CategorySelected" NumberOfTapsRequired="1" Tapped="CategorySelected_Tapped"/>
+                                            </Frame.GestureRecognizers>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </ScrollView>
+                    </tb:TabItem>
+
+                    <tb:TabItem HeaderText="找品牌" HeaderTabTextFontSize="20">
+                        <StackLayout Spacing="0">
+                            <ScrollView x:Name="CommentScrollView" VerticalOptions="FillAndExpand">
+                                <StackLayout VerticalOptions="FillAndExpand">
+                                    
+                                </StackLayout>
+                            </ScrollView>
+                        </StackLayout>
+                    </tb:TabItem>
+
+                </tb:TabViewControl.ItemSource>
+            </tb:TabViewControl>
+        </Grid>
+
+        
+    </ContentPage.Content>
+</ContentPage>

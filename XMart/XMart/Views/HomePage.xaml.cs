@@ -3,6 +3,7 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.ViewModels;
+using XMart.Models;
 
 namespace XMart.Views
 {
@@ -92,8 +93,8 @@ namespace XMart.Views
             //stackLayout.Children
             int index = CatStack.Children.IndexOf(stackLayout);
 
-            long id = homeViewModel.CatList[index].id;
-            ProductListPage productListPage = new ProductListPage(id.ToString());
+            Category category = homeViewModel.CatList[index];
+            ProductListPage productListPage = new ProductListPage(category);
             Navigation.PushModalAsync(productListPage);
         }
     }

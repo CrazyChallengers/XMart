@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="35"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -20,7 +20,10 @@
             <StackLayout Grid.Row="2" VerticalOptions="Fill">
                 <Label Text="无订单" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
                 <ListView x:Name="list" ItemsSource="{Binding OrderList}" VerticalOptions="Center" RowHeight="80"
-                              IsPullToRefreshEnabled="True" IsRefreshing="{Binding IsRefreshing}" RefreshControlColor="{StaticResource MainColor}" RefreshCommand="{Binding RefreshCommand}">
+                          IsPullToRefreshEnabled="True" 
+                          IsRefreshing="{Binding IsRefreshing}" 
+                          RefreshControlColor="{StaticResource MainColor}" 
+                          RefreshCommand="{Binding RefreshCommand}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
@@ -45,8 +48,8 @@
                     </ListView.ItemTemplate>
                     <ListView.Behaviors>
                         <behaviors:EventToCommandBehavior EventName="ItemSelected" 
-                                                              Command="{Binding EditCommand}" 
-                                                              CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
+                                                          Command="{Binding EditCommand}" 
+                                                          CommandParameter="{Binding Source={x:Reference list},Path=SelectedItem}"/>
                     </ListView.Behaviors>
                 </ListView>
             </StackLayout>

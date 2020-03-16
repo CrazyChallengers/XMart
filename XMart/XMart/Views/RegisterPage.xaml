@@ -138,7 +138,7 @@
                     
                 </Grid>
 
-                <Button x:Name="RegisterButton" Text="确定注册" VerticalOptions="StartAndExpand" Command="{Binding RegisterCommand}"/>
+                <Button x:Name="RegisterButton" Text="确定注册" VerticalOptions="StartAndExpand" TextColor="White" Padding="0" Command="{Binding RegisterCommand}"/>
             </StackLayout>
 
             <ImageButton x:Name="BackButton" Source="back.png" BackgroundColor="White"

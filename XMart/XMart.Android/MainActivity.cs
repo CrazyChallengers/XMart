@@ -18,7 +18,8 @@ using Com.Alipay.Sdk.App;
 
 namespace XMart.Droid
 {
-    [Activity(Label = "美而好家具", Icon = "@mipmap/xmart", Theme = "@style/MainTheme", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(MainLauncher = true, Label = "美而好家具", Icon = "@mipmap/xmart", Theme = "@style/MainTheme", 
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         //微信相关

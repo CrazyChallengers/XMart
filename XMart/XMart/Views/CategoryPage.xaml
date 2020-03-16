@@ -77,7 +77,8 @@
 
                 <!--二级分类-->
                 <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand">
-                    <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" BackgroundColor="White" Wrap="Wrap" JustifyContent="Start" AlignContent="Start">
+                    <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" BackgroundColor="White"
+                                Wrap="Wrap" JustifyContent="SpaceBetween" AlignContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">
