@@ -6,6 +6,8 @@ using XMart.Models;
 using XMart.ResponseData;
 using XMart.Services;
 using Xamarin.Forms;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace XMart.ViewModels
 {
@@ -34,7 +36,14 @@ namespace XMart.ViewModels
 
             SearchCommand = new Command(() =>
             {
-                GetProductList(Index);
+                if (string.IsNullOrEmpty(Index))
+                {
+                    CrossToastPopUp.Current.ShowToastWarning("请输入关键词", ToastLength.Short);
+                }
+                else
+                {
+                    GetProductList(Index);
+                }
             }, () => { return true; });
 
             BackCommand = new Command(() =>
@@ -51,7 +60,14 @@ namespace XMart.ViewModels
 
             SearchCommand = new Command(() =>
             {
-                GetProductList(Index);
+                if (string.IsNullOrEmpty(Index))
+                {
+                    CrossToastPopUp.Current.ShowToastWarning("请输入关键词", ToastLength.Short);
+                }
+                else
+                {
+                    GetProductList(Index);
+                }
             }, () => { return true; });
 
             BackCommand = new Command(() =>

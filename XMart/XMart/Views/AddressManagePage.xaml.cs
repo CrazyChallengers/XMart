@@ -21,5 +21,10 @@ namespace XMart.Views
 
             BindingContext = addressManageViewModel;
         }
+
+        protected override void OnDisappearing()
+        {
+            list.SelectedItem = -1;
+        }
     }
 }

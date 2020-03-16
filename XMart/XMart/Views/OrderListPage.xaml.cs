@@ -19,5 +19,10 @@ namespace XMart.Views
 
             BindingContext = new OrderListViewModel();
         }
+
+        protected override void OnDisappearing()
+        {
+            list.SelectedItem = -1;
+        }
     }
 }

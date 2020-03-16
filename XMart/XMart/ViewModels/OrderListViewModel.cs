@@ -26,7 +26,15 @@ namespace XMart.ViewModels
 			set { SetProperty(ref visible, value); }
 		}
 
+		private bool isRefreshing;   //Comment
+		public bool IsRefreshing
+		{
+			get { return isRefreshing; }
+			set { SetProperty(ref isRefreshing, value); }
+		}
+
 		public Command<OrderDetail> EditCommand { get; set; }
+		public Command RefreshCommand { get; set; }
 
 		public OrderListViewModel()
 		{
@@ -35,6 +43,12 @@ namespace XMart.ViewModels
 				OrderDetailPage orderDetailPage = new OrderDetailPage(orderDetail);
 				Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
 			}, (orderDetail) => { return true; });
+
+			RefreshCommand = new Command(() =>
+			{
+				InitOrderList();
+				IsRefreshing = false;
+			}, () => { return true; });
 
 			if (GlobalVariables.IsLogged)
 			{

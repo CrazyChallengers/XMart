@@ -103,7 +103,7 @@ namespace XMart.ViewModels
             {
                 myTimer = new MyTimer { EndDate = DateTime.Now.Add(new TimeSpan(900000000)) };
                 LoadAsync();
-                CrossToastPopUp.Current.ShowToastSuccess(simpleRD.message + "，请注意查收！", ToastLength.Long);
+                CrossToastPopUp.Current.ShowToastSuccess("请注意查收短信！", ToastLength.Long);
             }
             else
             {
@@ -138,7 +138,7 @@ namespace XMart.ViewModels
             }*/
             if (loginRD.result.message == null)
             {
-                CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
+                CrossToastPopUp.Current.ShowToastSuccess("欢迎您登录美而好家具！", ToastLength.Long);
 
                 GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
                 GlobalVariables.IsLogged = true;

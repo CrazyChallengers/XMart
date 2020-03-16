@@ -1,25 +1,16 @@
-﻿using System;
+﻿using Plugin.Toast;
+using Plugin.Toast.Abstractions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
 using XMart.Models;
-using XMart.ResponseData;
-using XMart.Services;
 using XMart.Views;
-using Plugin.Toast;
-using Plugin.Toast.Abstractions;
 
 namespace XMart.ViewModels
 {
-    public class CategoryViewModel : BaseViewModel
+    public class FindMoreViewModel : BaseViewModel
     {
-        private List<Category> parentCategoryList;   //一级目录
-        public List<Category> ParentCategoryList
-        {
-            get { return parentCategoryList; }
-            set { SetProperty(ref parentCategoryList, value); }
-        }
-
         private List<Category> subCategoryList;   //二级目录
         public List<Category> SubCategoryList
         {
@@ -36,7 +27,7 @@ namespace XMart.ViewModels
 
         public Command SearchCommand { get; set; }
 
-        public CategoryViewModel()
+        public FindMoreViewModel()
         {
             SearchCommand = new Command(() =>
             {
@@ -52,8 +43,6 @@ namespace XMart.ViewModels
                     Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
                 }
             }, () => { return true; });
-
         }
-
     }
 }
