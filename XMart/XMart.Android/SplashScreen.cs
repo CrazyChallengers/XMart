@@ -5,7 +5,7 @@ using Android.OS;
 
 namespace XMart.Droid
 {
-    [Activity(MainLauncher = false, NoHistory = true, Theme = "@style/Theme.Splash", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(MainLauncher = true, NoHistory = true, Theme = "@style/Theme.Splash", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class SplashScreen : Activity
     {
         protected override void OnCreate(Bundle bundle)

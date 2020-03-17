@@ -25,6 +25,7 @@ namespace XMart.Views
             //productDetailVM.product = productInfo;
 
             BindingContext = new ProductDetailVM(productId);
+
         }
 
         private async void WeChatShare_Clicked(object sender, EventArgs e)

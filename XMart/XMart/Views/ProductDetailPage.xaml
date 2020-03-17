@@ -48,8 +48,9 @@
                                     <FormattedString>
                                         <Span Text="￥" FontSize="14" TextColor="{StaticResource SkyBlue}" />
                                         <Span Text="{Binding Product.mallPrice}" FontSize="26" TextColor="{StaticResource SkyBlue}" />
-                                        <Span Text="  会员价￥" FontSize="14" TextColor="{StaticResource ThickPink}" />
+                                        <Span Text="  ￥" FontSize="14" TextColor="{StaticResource ThickPink}" />
                                         <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="{StaticResource ThickPink}" />
+                                        <Span Text="会员价" FontSize="14" TextColor="{StaticResource ThickPink}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -80,11 +81,62 @@
 
                     <StackLayout BackgroundColor="White" Padding="10">
                         <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
-                        <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="产品编号："/>
+                                    <Span Text="{Binding Product.productId}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="品牌系列："/>
+                                    <Span Text="{Binding Product.series}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="风格："/>
+                                    <Span Text="{Binding Product.style}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="主要材质："/>
+                                    <Span Text="{Binding Product.mainMaterial}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="颜色："/>
+                                    <Span Text="{Binding Product.color}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="单位："/>
+                                    <Span Text="{Binding Product.unit}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="其他："/>
+                                    <Span Text="{Binding Product.detail}"/>
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
                     </StackLayout>
 
                     <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"

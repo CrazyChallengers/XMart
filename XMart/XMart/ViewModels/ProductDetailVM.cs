@@ -40,7 +40,6 @@ namespace XMart.ViewModels
         public Command AddToCartCommand { get; set; }
         public Command BuyCommand { get; set; }
         public Command ShareCommand { get; set; }
-        RestSharpService _restSharpService = new RestSharpService();
 
         public ProductDetailVM(string productId)
         {
@@ -101,6 +100,7 @@ namespace XMart.ViewModels
         {
             try
             {
+                RestSharpService _restSharpService = new RestSharpService();
                 ProductDetailRD productDetailRD = await _restSharpService.GetProductDetail(productId);
 
                 if (productDetailRD.result != null)

@@ -32,7 +32,7 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" HorizontalOptions="FillAndExpand"
-                       CornerRadius="20" Padding="20,0" BorderColor="{StaticResource DeepBlue}">
+                       CornerRadius="20" Padding="20,0" BorderColor="LightGray">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Style="{StaticResource SearchEntry}"
                                       Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
                 </Frame>
@@ -46,7 +46,7 @@
                         <!--二级分类-->
                         <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand">
                             <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" 
-                                        Wrap="Wrap" JustifyContent="SpaceBetween" AlignContent="Start">
+                                        Wrap="Wrap" JustifyContent="SpaceAround" AlignContent="Start">
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate>
                                         <Frame HeightRequest="120" WidthRequest="120" Margin="5,10" CornerRadius="5" Style="{StaticResource BaseFrame}" 

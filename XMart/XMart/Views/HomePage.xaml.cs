@@ -50,7 +50,7 @@ namespace XMart.Views
             Navigation.PushModalAsync(productDetailPage);
         }
 
-        private new void Disappearing()
+        protected override void OnDisappearing()
         {
             Device.StartTimer(new TimeSpan(0, 0, 5), () =>
             {
@@ -66,7 +66,7 @@ namespace XMart.Views
             });
         }
 
-        private new void Appearing()
+        protected override void OnAppearing()
         {
             Device.StartTimer(new TimeSpan(0, 0, 5), () =>
             {
