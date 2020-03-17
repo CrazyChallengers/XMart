@@ -38,7 +38,7 @@
             </Grid.RowDefinitions>
 
             <!--顶部-->
-            <Frame Style="{StaticResource BaseFrame}" BorderColor="{StaticResource DeepBlue}" HeightRequest="40" 
+            <Frame Style="{StaticResource BaseFrame}" BorderColor="LightGray" HeightRequest="40" 
                    CornerRadius="20" Padding="20,0,10,0" Margin="5,35,5,5" HorizontalOptions="Fill" VerticalOptions="Start">
                 <StackLayout Orientation="Horizontal" Spacing="0">
                     <ImageButton Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
@@ -78,7 +78,7 @@
                 <!--二级分类-->
                 <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand">
                     <FlexLayout x:Name="SubStack" BindableLayout.ItemsSource="{Binding SubCategoryList}" BackgroundColor="White"
-                                Wrap="Wrap" JustifyContent="SpaceBetween" AlignContent="Start">
+                                Wrap="Wrap" JustifyContent="SpaceAround" AlignContent="Start">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout HeightRequest="120" Margin="5" Orientation="Vertical">

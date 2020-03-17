@@ -33,7 +33,7 @@
             <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" HorizontalOptions="FillAndExpand"
-                       CornerRadius="20" Padding="20,0" BorderColor="{StaticResource DeepBlue}">
+                       CornerRadius="20" Padding="20,0" BorderColor="LightGray">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Style="{StaticResource SearchEntry}"
                                       Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
                 </Frame>
@@ -57,19 +57,20 @@
                                         <RowDefinition/>
                                         <RowDefinition/>
                                         <RowDefinition/>
-                                        <RowDefinition/>
                                     </Grid.RowDefinitions>
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="140"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="4*"/>
+                                        <ColumnDefinition Width="6*"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImageBig}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="16"/>
+                                    <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding productImageBig}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="18" TextColor="Black" 
+                                           VerticalOptions="Center" VerticalTextAlignment="Center" LineBreakMode="CharacterWrap"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="16" LineBreakMode="CharacterWrap"/>
 
-                                    <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start">
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource SkyBlue}" 
+                                           VerticalOptions="Center" HorizontalOptions="Start">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="￥" FontSize="22"/>
@@ -77,19 +78,18 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label Grid.Row="2" Grid.Column="2" TextColor="{StaticResource ThickPink}" 
-                                           VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="￥" FontSize="22"/>
-                                                <Span Text="{Binding memberPrice}" FontSize="26"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-
-                                    <StackLayout Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
-                                        <Label Text="1.3万+条评价" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                        <Label Text="98%好评" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <StackLayout Grid.Row="2" Grid.Column="2" Orientation="Horizontal" IsVisible="{Binding MemberPriceVisible}">
+                                        <Label TextColor="{StaticResource ThickPink}" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥" FontSize="22"/>
+                                                    <Span Text="{Binding memberPrice}" FontSize="26"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Frame BorderColor="{StaticResource ThickPink}" Padding="0" HasShadow="False" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Label Text="会员价" TextColor="{StaticResource ThickPink}" Margin="0" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                        </Frame>
                                     </StackLayout>
                                 </Grid>
 

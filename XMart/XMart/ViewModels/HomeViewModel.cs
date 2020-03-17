@@ -161,9 +161,9 @@ namespace XMart.ViewModels
 
             //CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
             HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
-            OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
-            GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
-            BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
+            //OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
+            //GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
+            //BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
 
             CarouselList = new List<HomePanelContent>
             {

@@ -5,7 +5,7 @@
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              x:Class="XMart.Views.MePage"
              Icon="Resource/drawable/me.png"
-             Title="我的">
+             Title="个人中心">
 
     <ContentPage.Resources>
         <Style x:Key="CommonLabel" TargetType="Label">
@@ -42,8 +42,8 @@
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
-            <Label Grid.Row="1" Text="我的" TextColor="Black" FontAttributes="Bold" FontSize="24"
+
+            <Label Grid.Row="1" Text="个人中心" TextColor="Black" FontAttributes="Bold" FontSize="24"
                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
 
             <StackLayout Grid.Row="2" Orientation="Horizontal">
