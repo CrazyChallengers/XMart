@@ -131,30 +131,43 @@
                                             <Grid.RowDefinitions>
                                                 <RowDefinition/>
                                                 <RowDefinition/>
-                                                <RowDefinition Height="40"/>
+                                                <RowDefinition/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="140"/>
                                                 <ColumnDefinition Width="*"/>
                                                 <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="30"/>
                                             </Grid.ColumnDefinitions>
 
                                             <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
-                                            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="18"/>
-                                            <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Text="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
-
-                                            <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" 
+                                                   FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="18"
+                                                   VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                            
+                                            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14"
+                                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="会员价" FontSize="12"/>
-                                                        <Span Text="￥" FontSize="22"/>
-                                                        <Span Text="{Binding memberPrice}" FontSize="26"/>
+                                                        <Span Text="品牌："/>
+                                                        <Span Text="{Binding series}"/>
+                                                        <Span Text="主要材质："/>
+                                                        <Span Text="{Binding mainMaterial}"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>
+                                            
+                                            <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="售价" FontSize="12"/>
+                                                        <Span Text="￥" FontSize="22"/>
+                                                        <Span Text="{Binding salePrice}" FontSize="26"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <!--
                                             <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                                 <Label.FormattedText>
                                                     <FormattedString>
@@ -172,13 +185,14 @@
                                                         <Span Text="{Binding mallPrice}" FontSize="26"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
-                                            </Label>
+                                            </Label>-->
 
                                             <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <Span Text="x" FontSize="20"/>
                                                         <Span Text="{Binding productNum}" FontSize="24"/>
+                                                        <Span Text="{Binding unit}" FontSize="16"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
                                             </Label>

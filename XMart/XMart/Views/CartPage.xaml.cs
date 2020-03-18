@@ -5,6 +5,8 @@ using XMart.ViewModels;
 using XMart.Services;
 using XMart.ResponseData;
 using XMart.Util;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace XMart.Views
 {
@@ -74,6 +76,30 @@ namespace XMart.Views
         private void ContentPage_Appearing(object sender, System.EventArgs e)
         {
             InitCart();
+        }
+
+        private async void TwoTapped_TappedAsync(object sender, System.EventArgs e)
+        {
+            string action = await DisplayActionSheet("选择操作", "取消", null, "删除", "修改");
+
+            if (action == "删除")
+            {
+                Frame frame = sender as Frame;
+                int index = ItemStack.Children.IndexOf(frame);
+
+                StupidRD stupidRD = await _restSharpService.DeleteItemInCart(cartViewModel.ItemList[index]);
+
+                if (stupidRD.success)
+                {
+                    CrossToastPopUp.Current.ShowToastSuccess("删除成功！", ToastLength.Short);
+
+                    InitCart();
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError("删除失败！", ToastLength.Short);
+                }
+            }
         }
     }
 }

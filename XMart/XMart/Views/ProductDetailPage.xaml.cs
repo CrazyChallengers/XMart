@@ -17,6 +17,8 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductDetailPage : ContentPage
     {
+        ProductDetailVM productDetailVM;
+
         public ProductDetailPage(string productId)
         {
             InitializeComponent();
@@ -24,8 +26,12 @@ namespace XMart.Views
             //InitProductDetailPageAsync(productId);
             //productDetailVM.product = productInfo;
 
-            BindingContext = new ProductDetailVM(productId);
+            productDetailVM = new ProductDetailVM(productId);
+            //var htmlSource = new HtmlWebViewSource();
+            //htmlSource.Html = @"<html><body>" + productDetailVM.Product.detail + "</body></html>";
+            //webView.Source = htmlSource;
 
+            BindingContext = productDetailVM;
         }
 
         private async void WeChatShare_Clicked(object sender, EventArgs e)

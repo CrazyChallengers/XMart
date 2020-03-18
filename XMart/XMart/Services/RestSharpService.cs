@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using XMart.Models;
 using XMart.ResponseData;
+using XMart.Util;
 
 namespace XMart.Services
 {
@@ -108,6 +109,18 @@ namespace XMart.Services
             return simpleRD;
         }
 
+        public async Task<StupidRD> DeleteItemInCart(CartItemInfo cartItemInfo)
+        {
+            string url = "/member/cartDel";
+            string json = "{\"userId\":" + GlobalVariables.LoggedUser.id 
+                + ",\"checked\":\"" + cartItemInfo.Checked
+                + "\",\"productId\":" + cartItemInfo.productId
+                + ",\"attributesValues\":\"" + cartItemInfo.attributesValues
+                + "\"}";
+
+            StupidRD stupidRD = await RestSharpHelper<StupidRD>.PostAsync(url, json);
+            return stupidRD;
+        }
         #endregion
 
         #region 收货地址
@@ -175,12 +188,12 @@ namespace XMart.Services
         /// </summary>
         /// <param name="orderPara"></param>
         /// <returns></returns>
-        public async Task<StupidRD> Order(OrderPara orderPara)
+        public StupidRD Order(OrderPara orderPara)
         {
             string url = "/member/addOrder";
             string json = JsonConvert.SerializeObject(orderPara);  //序列化
 
-            StupidRD stupidRD = await RestSharpHelper<StupidRD>.PostAsync(url, json);
+            StupidRD stupidRD = RestSharpHelper<StupidRD>.Post(url, json);
             return stupidRD;
         }
 
@@ -189,11 +202,11 @@ namespace XMart.Services
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public async Task<OrderDetailRD> GetOrderDetailByOrderId(long orderId)
+        public OrderDetailRD GetOrderDetailByOrderId(long orderId)
         {
             string url = "/member/orderDetail?orderId=" + orderId.ToString();
 
-            OrderDetailRD orderDetailRD = await RestSharpHelper<OrderDetailRD>.GetAsync(url);
+            OrderDetailRD orderDetailRD = RestSharpHelper<OrderDetailRD>.Get(url);
             return orderDetailRD;
         }
 

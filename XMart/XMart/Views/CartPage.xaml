@@ -55,10 +55,12 @@
                                     </Grid.ColumnDefinitions>
 
                                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
-                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productSubTitle}" FontSize="Medium"/>
-                                    <Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
-                                    <!--<Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>
+                                    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" 
+                                           FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="Medium"
+                                           VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                    <!--<Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Grid.Row="1" Grid.Column="2" Text="{Binding Source={x:Reference NumberStepper}, Path=Value}"/>
                                     <Label Grid.Row="3" Grid.Column="1" FontSize="Large" TextColor="Red" VerticalOptions="Center" VerticalTextAlignment="Center">
                                         <Label.FormattedText>
                                             <FormattedString>
@@ -102,6 +104,10 @@
                                               VerticalOptions="Start" IsChecked="{Binding Checked,Mode=TwoWay}" CheckedChanged="SingleCheckBox_CheckedChanged"/>
 
                                 </Grid>
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer x:Name="TwoTapped" NumberOfTapsRequired="2" Tapped="TwoTapped_TappedAsync"/>
+                                </Frame.GestureRecognizers>
                             </Frame>
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
