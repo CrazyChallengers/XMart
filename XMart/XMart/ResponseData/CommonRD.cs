@@ -17,7 +17,7 @@ namespace XMart.ResponseData
         public bool success { get; set; }   //comment
 
         [JsonProperty("timestamp", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 timestamp { get; set; }   //comment
+        public long timestamp { get; set; }   //comment
 
     }
 }

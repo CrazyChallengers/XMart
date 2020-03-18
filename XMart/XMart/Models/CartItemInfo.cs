@@ -21,6 +21,9 @@ namespace XMart.Models
         [JsonProperty("productImg", NullValueHandling = NullValueHandling.Ignore)]
         public string productImg { get; set; }   //comment
 
+        [JsonProperty("attributesValues", NullValueHandling = NullValueHandling.Ignore)]
+        public string attributesValues { get; set; }   //comment
+
         //private bool isChecked;   //comment
         //
         //public bool IsChecked
@@ -28,10 +31,11 @@ namespace XMart.Models
         //    get { return isChecked; }
         //    set { SetProperty(ref isChecked, value); }
         //}
-
+        [JsonIgnore]
         public bool MemberPriceVisible { get; set; }
+        [JsonIgnore]
         public bool CusPriceVisible { get; set; }
-
+        [JsonIgnore]
         public bool Checked { get; set; }
 
         public CartItemInfo()

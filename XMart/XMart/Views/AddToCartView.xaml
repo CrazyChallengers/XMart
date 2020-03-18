@@ -23,16 +23,17 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding Product.productImageBig}"/>
-            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.productName}" FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.productSubTitle}" FontSize="Medium"/>
-            <Picker Grid.Row="2" Grid.Column="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
-            <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+            <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.productName}" 
+                   FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.subTitle}" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+            <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" 
+                   VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="会员价" FontSize="12"/>
@@ -64,7 +65,7 @@
                                                             x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
                                                             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
 
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="添加到购物车" TextColor="White"
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="添加到购物车" TextColor="White" CornerRadius="10"
                         VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="Crimson"
                         Command="{Binding AddToCartCommand}"/>
         </Grid>

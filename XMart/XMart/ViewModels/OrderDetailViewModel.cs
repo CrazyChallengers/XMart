@@ -186,11 +186,11 @@ namespace XMart.ViewModels
         /// 获取订单详细信息
         /// </summary>
         /// <param name="orderId"></param>
-        private async void InitOrderDetailPage(long orderId)
+        private void InitOrderDetailPage(long orderId)
         {
             try
             {
-                OrderDetailRD orderDetailRD = await _restSharpService.GetOrderDetailByOrderId(orderId);
+                OrderDetailRD orderDetailRD = _restSharpService.GetOrderDetailByOrderId(orderId);
 
                 if (orderDetailRD.success)
                 {

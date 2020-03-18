@@ -122,7 +122,7 @@ namespace XMart.ViewModels
         /// <summary>
         /// 提交订单
         /// </summary>
-        private async void Order()
+        private void Order()
         {
             try
             {
@@ -143,14 +143,14 @@ namespace XMart.ViewModels
                     item.salePrice = GlobalVariables.LoggedUser.userType == "0" ? item.mallPrice : item.memberPrice;
                 }
 
-                StupidRD stupidRD = await _restSharpService.Order(orderPara);
+                StupidRD stupidRD = _restSharpService.Order(orderPara);
 
                 if (stupidRD.result != 0)
                 {
                     CrossToastPopUp.Current.ShowToastSuccess("提交订单成功！请及时支付！", ToastLength.Long);
 
                     OrderDetailPage orderDetailPage = new OrderDetailPage(stupidRD.result);
-                    await Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
+                    Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
                 }
                 else
                 {

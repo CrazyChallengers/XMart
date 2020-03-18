@@ -90,6 +90,7 @@ namespace XMart.ViewModels
             }, () => { return true; });
 
             InitProductDetailPageAsync(productId);
+
         }
 
         /// <summary>
@@ -112,8 +113,6 @@ namespace XMart.ViewModels
             {
                 throw;
             }
-
         }
-
     }
 }

@@ -40,7 +40,6 @@
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="60"/>
-                                <ColumnDefinition Width="60"/>
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
@@ -57,15 +56,16 @@
 
                             <ImageButton Grid.Row="0" Grid.Column="1" Source="star_gray.png" 
                                          HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="收藏" FontSize="16" 
+                            <Label Grid.Row="1" Grid.Column="1" Text="收藏" FontSize="14" 
                                    HorizontalOptions="Center" VerticalOptions="Center" 
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
+                            <!--
                             <ImageButton Grid.Row="0" Grid.Column="2" Source="good_gray.png" 
                                          HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
                             <Label Grid.Row="1" Grid.Column="2" Text="点赞" FontSize="16" 
                                    HorizontalOptions="Center" VerticalOptions="Center" 
-                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
+                                   HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>-->
                         </Grid>
 
                         <Label VerticalOptions="Center" VerticalTextAlignment="Center">
@@ -129,16 +129,22 @@
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label>
+                        <!--<Label>
                             <Label.FormattedText>
                                 <FormattedString>
                                     <Span Text="其他："/>
                                     <Span Text="{Binding Product.detail}"/>
                                 </FormattedString>
                             </Label.FormattedText>
-                        </Label>
+                        </Label>-->
                     </StackLayout>
-
+                    
+                    <!--
+                    <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+                        <WebView x:Name="webView" Source="{Binding HtmlSource}" HeightRequest="400" WidthRequest="400" HorizontalOptions="Fill" VerticalOptions="Fill"/>
+                    </StackLayout>
+                    -->
+                    
                     <StackLayout Orientation="Vertical" BackgroundColor="White" Padding="10" VerticalOptions="FillAndExpand" HorizontalOptions="Fill"
                                  BindableLayout.ItemsSource="{Binding Product.productImageSmall}">
                         <BindableLayout.ItemTemplate>
