@@ -7,14 +7,16 @@ using FFImageLoading.Forms.Platform;
 using Com.Tencent.MM.Opensdk.Openapi;
 using Com.Tencent.MM.Opensdk.Modelbase;
 using Com.Tencent.MM.Opensdk.Modelmsg;
+using Com.Alipay.Sdk.App;
+using Com.Alipay.Sdk.Pay;
+using Com.Alipay.Sdk.Tid;
+using Com.Alipay.Android.App;
 using System;
 using Xamarin.Forms;
 using System.Drawing;
 using Android.Runtime;
 using System.Threading.Tasks;
 using Java.Net;
-using Com.Alipay.Sdk.Pay.Demo.Util;
-using Com.Alipay.Sdk.App;
 
 namespace XMart.Droid
 {
@@ -26,9 +28,10 @@ namespace XMart.Droid
         private readonly string appID = "wx6990f0f3818a8c7e";//申请的appid
         private IWXAPI wxApi;
         //支付宝相关
-        public static string PARTNER = "合作商户ID";
-        public static string SELLER = "商户收款的支付宝账号";
+        private string PARTNER = "合作商户ID";
+        private string SELLER = "商户收款的支付宝账号";
         private string RSA_PRIVATE = "商户私密";
+        private IAlixPay aliApi;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -83,6 +86,15 @@ namespace XMart.Droid
             {
                 var result = RegToWx();
                 // MessagingCenter.Send(new object(), "Registered", result);//广播注册的结果  
+            });
+
+            MessagingCenter.Subscribe<object>(this, "Login", d =>
+            {
+                // send oauth request
+                SendAuth.Req req = new SendAuth.Req();
+                req.Scope = "snsapi_userinfo";
+                req.State = "wechat_sdk_demo_test";
+                wxApi.SendReq(req);
             });
             /*
             //分享小程序给朋友
@@ -162,6 +174,7 @@ namespace XMart.Droid
             });*/
 
             base.OnCreate(savedInstanceState);
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState); // add this line to your code, it may also be called: bundle
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             LoadApplication(new App());
@@ -170,6 +183,12 @@ namespace XMart.Droid
         private bool RegToWx()
         {
             wxApi = WXAPIFactory.CreateWXAPI(this, appID, true);
+            return wxApi.RegisterApp(appID);
+        }
+
+        private bool RegToAlipay()
+        {
+            aliApi = IAlixPay.(this, appID, true);
             return wxApi.RegisterApp(appID);
         }
 
@@ -222,11 +241,11 @@ namespace XMart.Droid
             }
         }
 
-        //public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        //{
-        //    Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        //
-        //    base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        //}
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        {
+            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 }
