@@ -169,7 +169,8 @@
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <ImageButton Grid.Row="0" Grid.Column="0" Source="message.png" 
-                             HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
+                             HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"
+                             Command="{Binding CallServiceCommand}"/>
                 <Label Grid.Row="1" Grid.Column="0" Text="联系客服" FontSize="16" 
                        HorizontalOptions="Center" VerticalOptions="Center" 
                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>

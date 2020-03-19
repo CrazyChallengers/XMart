@@ -10,6 +10,7 @@ using Plugin.Toast;
 using Plugin.Toast.Abstractions;
 using Rg.Plugins.Popup.Services;
 using XMart.Views;
+using Xamarin.Essentials;
 
 namespace XMart.ViewModels
 {
@@ -40,6 +41,7 @@ namespace XMart.ViewModels
         public Command AddToCartCommand { get; set; }
         public Command BuyCommand { get; set; }
         public Command ShareCommand { get; set; }
+        public Command CallServiceCommand { get; set; }
 
         public ProductDetailVM(string productId)
         {
@@ -87,6 +89,29 @@ namespace XMart.ViewModels
                 string para = "?productId=" + Product.productId + "&userId=" + GlobalVariables.LoggedUser.id;
                 MessagingCenter.Send(new object(), "Register");//首先进行注册，然后订阅注册的结果。
                 MessagingCenter.Send(new object(), "ShareToFriend", para);
+            }, () => { return true; });
+
+            CallServiceCommand = new Command(() =>
+            {
+                try
+                {
+                    PhoneDialer.Open("18080961008");
+                }
+                catch (ArgumentNullException anEx)
+                {
+                    // Number was null or white space
+                    CrossToastPopUp.Current.ShowToastError("无联系方式", ToastLength.Short);
+                }
+                catch (FeatureNotSupportedException ex)
+                {
+                    // Phone Dialer is not supported on this device.
+                    CrossToastPopUp.Current.ShowToastError("该设备不支持拨号", ToastLength.Short);
+                }
+                catch (Exception ex)
+                {
+                    // Other error has occurred.
+                    CrossToastPopUp.Current.ShowToastError("出现其他错误", ToastLength.Short);
+                }
             }, () => { return true; });
 
             InitProductDetailPageAsync(productId);
