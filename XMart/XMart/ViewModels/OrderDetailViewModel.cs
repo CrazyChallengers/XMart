@@ -97,7 +97,7 @@ namespace XMart.ViewModels
 
             PayCommand = new Command(() =>
             {
-                MessagingCenter.Send<object>(new object(), "Pay");
+                MessagingCenter.Send(new object(), "Pay");
                 //PayWebPage payWebPage = new PayWebPage();
                 //Application.Current.MainPage.Navigation.PushModalAsync(payWebPage);
             }, () => { return true; });
@@ -152,7 +152,7 @@ namespace XMart.ViewModels
 
             PayCommand = new Command(() =>
             {
-                MessagingCenter.Send<object>(new object(), "Pay");
+                MessagingCenter.Send(new object(), "Pay");
                 //PayWebPage payWebPage = new PayWebPage();
                 //Application.Current.MainPage.Navigation.PushModalAsync(payWebPage);
             }, () => { return true; });
