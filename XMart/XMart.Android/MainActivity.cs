@@ -5,18 +5,12 @@ using Android.OS;
 using CarouselView.FormsPlugin.Android;
 using FFImageLoading.Forms.Platform;
 using Com.Tencent.MM.Opensdk.Openapi;
-using Com.Tencent.MM.Opensdk.Modelbase;
 using Com.Tencent.MM.Opensdk.Modelmsg;
 using Com.Alipay.Sdk.App;
-using Com.Alipay.Sdk.Pay;
-using Com.Alipay.Sdk.Tid;
 using Com.Alipay.Android.App;
 using System;
 using Xamarin.Forms;
-using System.Drawing;
-using Android.Runtime;
-using System.Threading.Tasks;
-using Java.Net;
+using Com.Alipay.Sdk.Pay.Demo.Util;
 
 namespace XMart.Droid
 {
@@ -63,21 +57,48 @@ namespace XMart.Droid
             MessagingCenter.Subscribe<object>(this, "Pay", obj =>
             {
                 var appid = "12345678";
-                var rsa2 = true;
+                var rsa2 = false;
                 var para = OrderInfoUtil2_0.BuildOrderParamMap(appid, rsa2);
                 var orderParam = OrderInfoUtil2_0.BuildOrderParam(para);
                 var privateKey = "987456321";
                 var sign = OrderInfoUtil2_0.GetSign(para, privateKey, rsa2);
                 var orderInfo = orderParam + "&" + sign;
-
-                //var con = getOrderInfo("test", "testbody");
-                //var sign = OrderInfoUtil2_0.Sign(con, RSA_PRIVATE);
-                //sign = URLEncoder.Encode(sign, "utf-8");
-                //con += "&sign=\"" + sign + "\"&" + MySignType;
-
+                
                 PayTask pay = new PayTask(this);
-                var result = pay.Pay(orderInfo, false);
-                //Logger_Info("支付宝result:" + result);
+                var result = pay.PayV2(orderInfo, false);
+                Console.WriteLine("支付宝result:" + result);
+                
+                /*
+                try
+                {
+                    var con = getOrderInfo("test", "testbody");
+                    var sign = OrderInfoUtil2_0.GetSign(con, RSA_PRIVATE, false);
+                    sign = URLEncoder.Encode(sign, "utf-8");
+                    con += "&sign=\"" + sign + "\"&" + MySignType;
+                    Com.Alipay.Sdk.App.PayTask pa = new Com.Alipay.Sdk.App.PayTask(this);
+                    var result = pa.Pay(con, false);
+                    Logger_Info("支付宝result:" + result);
+                }
+                catch (Exception ex)
+                {
+
+                    Logger_Info("2" + ex.Message + ex.StackTrace);
+                }
+
+                
+                string orderInfo = info;   // 订单信息
+
+                PayTask alipay = new PayTask(this);
+                JavaDictionary<string, string> result = alipay.PayV2(orderInfo, true);
+
+                Message msg = new Message();
+                msg.What = SDK_PAY_FLAG;
+                msg.Obj = result;
+                mHandler.sendMessage(msg);
+            
+                // 必须异步调用
+                //Thread payThread = new Thread(payRunnable);
+                //payThread.start();*/
             });
 
             //微信相关
@@ -94,7 +115,8 @@ namespace XMart.Droid
                 SendAuth.Req req = new SendAuth.Req();
                 req.Scope = "snsapi_userinfo";
                 req.State = "wechat_sdk_demo_test";
-                wxApi.SendReq(req);
+                bool result = wxApi.SendReq(req);
+
             });
             /*
             //分享小程序给朋友
@@ -188,14 +210,14 @@ namespace XMart.Droid
 
         private bool RegToAlipay()
         {
-            aliApi = IAlixPay.(this, appID, true);
+            //aliApi = IAlixPay.(this, appID, true);
             return wxApi.RegisterApp(appID);
         }
 
-        public string getOrderInfo(String subject, String body)
+        public string getOrderInfo(string subject, string body)
         {
             // 签约合作者身份ID
-            String orderInfo = "partner=" + "\"" + PARTNER + "\"";
+            string orderInfo = "partner=" + "\"" + PARTNER + "\"";
             // 签约卖家支付宝账号
             orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
             // 商户网站唯一订单号

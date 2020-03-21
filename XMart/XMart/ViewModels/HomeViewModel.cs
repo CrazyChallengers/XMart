@@ -176,6 +176,11 @@ namespace XMart.ViewModels
                 {
                     picUrl = "bianselong.jpg",
                     fullUrl = "http://www.cdbsljs.com/"
+                },
+                new HomePanelContent
+                {
+                    picUrl = "jiabei.jpg",
+                    fullUrl = "http://www.cdbsljs.com/"
                 }
             };
 
