@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.5.7" package="com.wyhl.XMart" android:installLocation="auto">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.5.8" package="com.wyhl.XMart" android:installLocation="auto">
 	<uses-sdk android:minSdkVersion="19" android:targetSdkVersion="28" />
-	<application android:icon="@mipmap/xmart" android:label="美而好家具">
+	<application android:label="美而好" android:icon="@mipmap/xmart">
 		<activity android:name="com.alipay.sdk.app.H5PayActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind"></activity>
 		<activity android:name="com.alipay.sdk.auth.AuthActivity" android:configChanges="orientation|keyboardHidden|navigation" android:exported="false" android:screenOrientation="behind"></activity>
 	</application>
