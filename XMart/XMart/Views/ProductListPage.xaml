@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="clr-namespace:XMart.Controls"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="XMart.Views.ProductListPage">
@@ -47,7 +48,62 @@
                 <Button Text="分类" Style="{DynamicResource ButtonStyle}"/>
             </StackLayout>
 
-            <ScrollView Grid.Row="3" Orientation="Vertical">
+            <ListView x:Name="list" Grid.Row="3" ItemsSource="{Binding ProductList}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
+                            <Grid RowSpacing="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="140"/>
+                                    <ColumnDefinition Width="4*"/>
+                                    <ColumnDefinition Width="6*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding productImageBig}"/>
+                                <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" FontSize="18" TextColor="Black" 
+                                           VerticalOptions="Center" VerticalTextAlignment="Center" LineBreakMode="CharacterWrap"/>
+                                <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="16" LineBreakMode="CharacterWrap"/>
+
+                                <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource SkyBlue}" 
+                                           VerticalOptions="Center" HorizontalOptions="Start">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="￥" FontSize="22"/>
+                                            <Span Text="{Binding mallPrice}" FontSize="26"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <StackLayout Grid.Row="2" Grid.Column="2" Orientation="Horizontal" IsVisible="{Binding MemberPriceVisible}">
+                                    <Label TextColor="{StaticResource ThickPink}" VerticalOptions="CenterAndExpand" HorizontalOptions="Start">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="￥" FontSize="22"/>
+                                                <Span Text="{Binding memberPrice}" FontSize="26"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Frame BorderColor="{StaticResource ThickPink}" Padding="0" HasShadow="False" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Label Text="会员价" TextColor="{StaticResource ThickPink}" Margin="0" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                    </Frame>
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="ItemTapped" 
+                                                      Command="{Binding TappedCommand}" 
+                                                      CommandParameter="{Binding Source=list,Path=SelectedItem}"/>
+                </ListView.Behaviors>
+            </ListView>
+<!--
+            <ScrollView x:Name="ProductListScrollView" Grid.Row="3" Orientation="Vertical">
                 <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ProductList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
@@ -100,7 +156,14 @@
                         </DataTemplate>
                     </BindableLayout.ItemTemplate>
                 </StackLayout>
-            </ScrollView>
+
+                
+                <ScrollView.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="Scrolled" 
+                                                      Command="{Binding LoadMoreCommand}" 
+                                                      CommandParameter="{Binding Source=ProductListScrollView,Path=ScrollY}"/>
+                </ScrollView.Behaviors>
+            </ScrollView>-->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.Models;
 using XMart.ViewModels;
-using XMart.Services;
-using XMart.ResponseData;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace XMart.Views
 {
@@ -24,6 +19,11 @@ namespace XMart.Views
 
             productListVM = new ProductListVM(subCategoryInfo);
             BindingContext = productListVM;
+
+            //ProductListScrollView.Scrolled += (object sender, ScrolledEventArgs e) => {
+            //    //label.Text = "Position: " + e.ScrollX + " x " + e.ScrollY;
+            //    CrossToastPopUp.Current.ShowToastWarning(e.ScrollX + "/" + e.ScrollY + "/" + ((ScrollView)sender).ContentSize, ToastLength.Short);
+            //};
         }
 
         public ProductListPage(string index)
@@ -36,12 +36,12 @@ namespace XMart.Views
 
         private void ItemFrame_Tapped(object sender, EventArgs e)
         {
-            Frame frame = sender as Frame;
-            int index = ItemStack.Children.IndexOf(frame);
-
-            ProductListItem productListItem = productListVM.ProductList[index];
-            ProductDetailPage productDetailPage = new ProductDetailPage(productListItem.productId.ToString());
-            Navigation.PushModalAsync(productDetailPage);
+            //Frame frame = sender as Frame;
+            //int index = ItemStack.Children.IndexOf(frame);
+            //
+            //ProductListItem productListItem = productListVM.ProductList[index];
+            //ProductDetailPage productDetailPage = new ProductDetailPage(productListItem.productId.ToString());
+            //Navigation.PushModalAsync(productDetailPage);
         }
     }
 }

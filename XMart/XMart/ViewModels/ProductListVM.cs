@@ -8,6 +8,7 @@ using XMart.Services;
 using Xamarin.Forms;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
+using XMart.Views;
 
 namespace XMart.ViewModels
 {
@@ -20,6 +21,13 @@ namespace XMart.ViewModels
             set { SetProperty(ref productList, value); }
         }
 
+        private int productNum;   //Comment
+        public int ProductNum
+        {
+            get { return productNum; }
+            set { SetProperty(ref productNum, value); }
+        }
+
         private string index;   //Comment
         public string Index
         {
@@ -29,6 +37,8 @@ namespace XMart.ViewModels
 
         public Command SearchCommand { get; set; }
         public Command BackCommand { get; set; }
+        public Command<ProductListItem> TappedCommand { get; set; }
+        public Command<double> LoadMoreCommand { get; set; }
 
         public ProductListVM(Category subCategoryInfo)
         {
@@ -45,6 +55,18 @@ namespace XMart.ViewModels
                     GetProductList(Index);
                 }
             }, () => { return true; });
+
+            TappedCommand = new Command<ProductListItem>((productListItem) =>
+            {
+                //ProductListItem productListItem = ProductList[id];
+                ProductDetailPage productDetailPage = new ProductDetailPage(productListItem.productId.ToString());
+                Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+            }, (productListItem) => { return true; });
+
+            LoadMoreCommand = new Command<double>((str) =>
+            {
+                CrossToastPopUp.Current.ShowToastWarning(str + "/" + ProductNum, ToastLength.Short);
+            }, (str) => { return true; });
 
             BackCommand = new Command(() =>
             {
@@ -69,6 +91,18 @@ namespace XMart.ViewModels
                     GetProductList(Index);
                 }
             }, () => { return true; });
+
+            TappedCommand = new Command<ProductListItem>((productListItem) =>
+            {
+                //ProductListItem productListItem = ProductList[id];
+                ProductDetailPage productDetailPage = new ProductDetailPage(productListItem.productId.ToString());
+                Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+            }, (productListItem) => { return true; });
+
+            LoadMoreCommand = new Command<double>((str) =>
+            {
+                CrossToastPopUp.Current.ShowToastWarning(str + "/" + ProductNum, ToastLength.Short);
+            }, (str) => { return true; });
 
             BackCommand = new Command(() =>
             {
@@ -103,6 +137,7 @@ namespace XMart.ViewModels
             ProductListRD productListRD = await _restSharpService.GetProductList(page, size, sort, cid, priceGt, priceLte);
 
             ProductList = productListRD.result.data;
+            ProductNum = productListRD.result.total;
         }
 
     }
