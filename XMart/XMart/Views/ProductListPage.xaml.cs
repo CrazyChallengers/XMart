@@ -36,12 +36,12 @@ namespace XMart.Views
 
         private void ItemFrame_Tapped(object sender, EventArgs e)
         {
-            //Frame frame = sender as Frame;
-            //int index = ItemStack.Children.IndexOf(frame);
-            //
-            //ProductListItem productListItem = productListVM.ProductList[index];
-            //ProductDetailPage productDetailPage = new ProductDetailPage(productListItem.productId.ToString());
-            //Navigation.PushModalAsync(productDetailPage);
+            Frame frame = sender as Frame;
+            int index = ItemStack.Children.IndexOf(frame);
+            
+            ProductListItem productListItem = productListVM.ProductList[index];
+            ProductDetailPage productDetailPage = new ProductDetailPage(productListItem.productId.ToString());
+            Navigation.PushModalAsync(productDetailPage);
         }
     }
 }
