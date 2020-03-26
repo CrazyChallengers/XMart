@@ -65,10 +65,10 @@
                     <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ProductList,Mode=TwoWay}" Orientation="Vertical" BackgroundColor="LightGray">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <Frame HeightRequest="140" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
+                                <Frame HeightRequest="160" CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
                                     <Grid RowSpacing="0">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition/>
+                                            <RowDefinition Height="40"/>
                                             <RowDefinition/>
                                             <RowDefinition/>
                                             <RowDefinition/>
@@ -78,23 +78,24 @@
                                             <ColumnDefinition Width="140"/>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="*"/>
-                                            <ColumnDefinition Width="30"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
+                                        <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" Source="{Binding productImg}"/>
                                         <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" 
-                                               FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="18"
+                                               FontSize="18" TextColor="Black" MaxLines="2" LineBreakMode="TailTruncation" 
+                                               VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                        <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" 
+                                               FontSize="14" MaxLines="2" LineBreakMode="TailTruncation"
                                                VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                         <!--<Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>-->
 
-                                        <Label Grid.Row="2" Grid.Column="1" FontSize="14"
+                                        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14"
                                                VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="品牌："/>
                                                     <Span Text="{Binding series}"/>
-                                                    <Span Text="主要材质："/>
+                                                    <Span Text="   主要材质："/>
                                                     <Span Text="{Binding mainMaterial}"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
@@ -126,7 +127,7 @@
                                             </Label.FormattedText>
                                         </Label>
 
-                                        <Label Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                        <Label Grid.Row="4" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="x" FontSize="20"/>
