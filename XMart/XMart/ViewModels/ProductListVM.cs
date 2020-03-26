@@ -10,6 +10,7 @@ using Plugin.Toast;
 using Plugin.Toast.Abstractions;
 using XMart.Views;
 using System.Collections.ObjectModel;
+using XMart.Util;
 
 namespace XMart.ViewModels
 {
@@ -110,6 +111,8 @@ namespace XMart.ViewModels
         public Command BackCommand { get; set; }
         //public Command<ProductListItem> TappedCommand { get; set; }
         public Command LoadMoreCommand { get; set; }
+        public Command<string> SortCommand { get; set; }
+        public Command<string> PriceRangeCommand { get; set; }
 
         public ProductListVM(Category subCategoryInfo)
         {
@@ -149,6 +152,72 @@ namespace XMart.ViewModels
                 Page++;
                 GetProductList(subCategoryInfo);
             }, () => { return true; });
+
+            SortCommand = new Command<string>((str) =>
+            {
+                switch (str)
+                {
+                    //综合排序，不排序
+                    case "0": Sort = "0"; break;
+                    //价格升序
+                    case "1": Sort = GlobalVariables.IsLogged ? "2" : "1"; break;
+                    //价格降序
+                    case "2": Sort = GlobalVariables.IsLogged ? "-2" : "-1"; break;
+                    //销量
+                    case "3": Sort = "3"; break;
+                    //不排序
+                    default: Sort = "0"; break;
+                }
+
+                ProductList.Clear();
+                ProductNum = 0;
+                GetProductList(subCategoryInfo);
+            }, (str) => { return true; });
+
+            PriceRangeCommand = new Command<string>((str) =>
+            {
+                switch (str)
+                {
+                    //重置
+                    case "0":
+                        {
+                            ProductList.Clear();
+                            ProductNum = 0;
+                            TotalProductNum = 0;
+                            Page = 1;
+                            _Size = 20;
+                            Sort = "1";
+                            Sequence = 1;
+                            PriceGt = "";
+                            PriceLte = "";
+
+                            GetProductList(subCategoryInfo);
+                        }
+                        break;
+                    //按价格区间查询
+                    case "1":
+                        {
+                            if (string.IsNullOrWhiteSpace(PriceGt) || string.IsNullOrWhiteSpace(PriceLte))
+                            {
+                                CrossToastPopUp.Current.ShowToastWarning("最低价与最高价不可为空", ToastLength.Long);
+                            }
+                            else if (int.Parse(PriceGt) > int.Parse(PriceLte))
+                            {
+                                CrossToastPopUp.Current.ShowToastWarning("最低价>最高价", ToastLength.Long);
+                            }
+                            else
+                            {
+                                ProductList.Clear();
+                                ProductNum = 0;
+                                GetProductList(subCategoryInfo);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }, (str) => { return true; });
 
             BackCommand = new Command(() =>
             {
@@ -194,6 +263,72 @@ namespace XMart.ViewModels
                 //CrossToastPopUp.Current.ShowToastWarning(str + "/" + ProductNum, ToastLength.Short);
                 Search(_index);
             }, () => { return true; });
+
+            SortCommand = new Command<string>((str) =>
+            {
+                switch (str)
+                {
+                    //综合排序，不排序
+                    case "0": Sort = "0"; break;
+                    //价格升序
+                    case "1": Sort = GlobalVariables.IsLogged ? "2" : "1"; break;
+                    //价格降序
+                    case "2": Sort = GlobalVariables.IsLogged ? "-2" : "-1"; break;
+                    //销量
+                    case "3": Sort = "3"; break;
+                    //不排序
+                    default: Sort = "0"; break;
+                }
+
+                ProductList.Clear();
+                ProductNum = 0;
+                Search(_index);
+            }, (str) => { return true; });
+
+            PriceRangeCommand = new Command<string>((str) =>
+            {
+                switch (str)
+                {
+                    //重置
+                    case "0":
+                        {
+                            ProductList.Clear();
+                            ProductNum = 0;
+                            TotalProductNum = 0;
+                            Page = 1;
+                            _Size = 20;
+                            Sort = "1";
+                            Sequence = 1;
+                            PriceGt = "";
+                            PriceLte = "";
+
+                            Search(_index);
+                        }
+                        break;
+                    //按价格区间查询
+                    case "1":
+                        {
+                            if (string.IsNullOrWhiteSpace(PriceGt) || string.IsNullOrWhiteSpace(PriceLte))
+                            {
+                                CrossToastPopUp.Current.ShowToastWarning("最低价或最高价不可为空", ToastLength.Long);
+                            }
+                            else if (int.Parse(PriceGt) > int.Parse(PriceLte))
+                            {
+                                CrossToastPopUp.Current.ShowToastWarning("最低价>最高价", ToastLength.Long);
+                            }
+                            else
+                            {
+                                ProductList.Clear();
+                                ProductNum = 0;
+                                Search(_index);
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+            }, (str) => { return true; });
 
             BackCommand = new Command(() =>
             {
@@ -310,5 +445,6 @@ namespace XMart.ViewModels
                 ButtonIsEnable = true;
             }
         }
+
     }
 }

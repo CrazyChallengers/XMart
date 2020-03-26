@@ -10,14 +10,13 @@
              x:Class="XMart.Views.ProductListPage">
 
     <ContentPage.Resources>
-        <Style x:Key="ButtonStyle" TargetType="Button">
+        <Style x:Key="LabelStyle" TargetType="Label">
             <Setter Property="WidthRequest" Value="100"/>
             <Setter Property="HeightRequest" Value="30"/>
-            <Setter Property="CornerRadius" Value="15"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
             <Setter Property="HorizontalOptions" Value="Center"/>
             <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="HorizontalTextAlignment" Value="Center"/>
+            <Setter Property="VerticalTextAlignment" Value="Center"/>
             <Setter Property="FontSize" Value="16"/>
         </Style>
         <Style x:Key="MyEntryStyle" TargetType="controls:MyEntry">
@@ -50,24 +49,80 @@
                 <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="60" FontSize="18" Command="{Binding SearchCommand}"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="2" Orientation="Horizontal">
-                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" HorizontalOptions="Center"
-                       CornerRadius="15" Padding="0" BackgroundColor="WhiteSmoke">
-                    <controls:MyEntry Text="{Binding PriceGt}" Placeholder="最低价" Style="{DynamicResource MyEntryStyle}"/>
-                </Frame>
-                <Label Text="—" VerticalOptions="Center"/>
-                <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" HorizontalOptions="Center"
-                       CornerRadius="15" Padding="0" BackgroundColor="WhiteSmoke">
-                    <controls:MyEntry Text="{Binding PriceLte}" Placeholder="最高价" Style="{DynamicResource MyEntryStyle}"/>
-                </Frame>
-                
-                <Button Text="排序" Style="{DynamicResource ButtonStyle}"/>
-                <!--
-                <Button Text="物流" Style="{DynamicResource ButtonStyle}"/>
-                <Button Text="新品" Style="{DynamicResource ButtonStyle}"/>
-                <Button Text="品牌" Style="{DynamicResource ButtonStyle}"/>
-                <Button Text="分类" Style="{DynamicResource ButtonStyle}"/>-->
-            </StackLayout>
+            <ScrollView Grid.Row="2" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <StackLayout Orientation="Horizontal" VerticalOptions="Center">
+                    <Label Text="综合排序" Style="{DynamicResource LabelStyle}">
+                        <Label.Behaviors>
+                            <behaviors:RadioBehavior x:Name="ComprehensiveRankingRadio" GroupName="SortGroup" IsChecked="True"/>
+                        </Label.Behaviors>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference ComprehensiveRankingRadio}, Path=IsChecked}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource ThickPink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SortCommand}" CommandParameter="0"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                    <Label Text="价格升序" Style="{DynamicResource LabelStyle}">
+                        <Label.Behaviors>
+                            <behaviors:RadioBehavior x:Name="PriceUpRadio" GroupName="SortGroup" />
+                        </Label.Behaviors>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference PriceUpRadio}, Path=IsChecked}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource ThickPink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SortCommand}" CommandParameter="1"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                    <Label Text="价格降序" Style="{DynamicResource LabelStyle}">
+                        <Label.Behaviors>
+                            <behaviors:RadioBehavior x:Name="PriceDownRadio" GroupName="SortGroup" />
+                        </Label.Behaviors>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference PriceDownRadio}, Path=IsChecked}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource ThickPink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SortCommand}" CommandParameter="2"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+                    
+                    <Label Text="销量" Style="{DynamicResource LabelStyle}">
+                        <Label.Behaviors>
+                            <behaviors:RadioBehavior x:Name="SalesVolumeRadio" GroupName="SortGroup" />
+                        </Label.Behaviors>
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference SalesVolumeRadio}, Path=IsChecked}" Value="True">
+                                <Setter Property="TextColor" Value="{StaticResource ThickPink}" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding SortCommand}" CommandParameter="3"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" HorizontalOptions="Center"
+                           CornerRadius="15" Padding="0" BackgroundColor="WhiteSmoke">
+                        <controls:MyEntry Text="{Binding PriceGt}" Placeholder="最低价" Style="{DynamicResource MyEntryStyle}" Keyboard="Numeric" ReturnType="Next"/>
+                    </Frame>
+                    <Label Text="—" VerticalOptions="Center"/>
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="30" HorizontalOptions="Center"
+                           CornerRadius="15" Padding="0" BackgroundColor="WhiteSmoke">
+                        <controls:MyEntry Text="{Binding PriceLte}" Placeholder="最高价" Style="{DynamicResource MyEntryStyle}" Keyboard="Numeric" ReturnType="Done"/>
+                    </Frame>
+                    <Button Text="确定" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="50"
+                            Command="{Binding PriceRangeCommand}" CommandParameter="1"/>
+                    <Button Text="全部重置" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="Center" WidthRequest="80"
+                            Command="{Binding PriceRangeCommand}" CommandParameter="0"/>
+                </StackLayout>
+            </ScrollView>
+            
 <!--
             <ListView x:Name="list" Grid.Row="3" ItemsSource="{Binding ProductList}" HasUnevenRows="True">
                 <ListView.ItemTemplate>
@@ -190,7 +245,7 @@
                 </ScrollView.Behaviors>-->
             </ScrollView>
 
-            <ActivityIndicator Grid.Row="3" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="End"/>
+            <ActivityIndicator Grid.Row="3" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
