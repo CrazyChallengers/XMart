@@ -45,17 +45,22 @@
                                     <ColumnDefinition Width="50"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Order.addressInfo.userName}" FontSize="28" VerticalOptions="Center"/>
-                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Order.addressInfo.tel}" FontSize="24" VerticalOptions="Center"/>
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Order.addressInfo.userName}" FontSize="28" TextColor="Black" VerticalOptions="Center"/>
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Order.addressInfo.tel}" FontSize="24" TextColor="Black" VerticalOptions="Center"/>
                                 <Label Grid.Row="0" Grid.Column="2" Text="默认" TextColor="Crimson" IsVisible="{Binding Order.addressInfo.isDefault}"
                                    VerticalOptions="Center" HorizontalOptions="Center"/>
-                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Order.addressInfo.streetName}" FontSize="18"
+                                <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding Order.addressInfo.streetName}" FontSize="18" TextColor="Black"
                                    VerticalOptions="Center" VerticalTextAlignment="Center" LineBreakMode="CharacterWrap"/>
                             </Grid>
                         </Frame>
 
                         <Label Text="订单详情" Style="{DynamicResource SectionStyle}"/>
                         <StackLayout Orientation="Vertical" Margin="5,0" Spacing="0">
+                            <StackLayout.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="FontSize" Value="18"/>
+                                </Style>
+                            </StackLayout.Resources>
                             <Label>
                                 <Label.FormattedText>
                                     <FormattedString>
@@ -96,7 +101,7 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="订单状态："/>
-                                        <Span Text="{Binding OrderStatus}"/>
+                                        <Span Text="{Binding Order.OrderStatus}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
@@ -114,7 +119,7 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="支付类型："/>
-                                        <Span Text="{Binding PaymentType}"/>
+                                        <Span Text="{Binding Order.PaymentType}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>

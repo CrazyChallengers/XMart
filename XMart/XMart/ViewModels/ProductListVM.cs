@@ -114,6 +114,10 @@ namespace XMart.ViewModels
         public Command<string> SortCommand { get; set; }
         public Command<string> PriceRangeCommand { get; set; }
 
+        /// <summary>
+        /// 点击分类进入商品列表
+        /// </summary>
+        /// <param name="subCategoryInfo"></param>
         public ProductListVM(Category subCategoryInfo)
         {
             ProductList = new ObservableCollection<ProductListItem>();
@@ -226,6 +230,10 @@ namespace XMart.ViewModels
 
         }
 
+        /// <summary>
+        /// 搜索进入商品列表
+        /// </summary>
+        /// <param name="_index"></param>
         public ProductListVM(string _index)
         {
             ProductList = new ObservableCollection<ProductListItem>();
@@ -401,7 +409,6 @@ namespace XMart.ViewModels
             TotalProductNum = productListRD.result.total;
             ProductNum += productListRD.result.data.Count;
 
-            List<ProductListItem> tempList = new List<ProductListItem>();
             foreach (var item in productListRD.result.data)
             {
                 ProductList.Add(item);

@@ -7,6 +7,7 @@ using XMart.ResponseData;
 using XMart.Util;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
+using System;
 
 namespace XMart.Views
 {
@@ -35,6 +36,7 @@ namespace XMart.Views
 
                 cartViewModel.ItemList = cartItemListRD.result;
                 cartViewModel.ItemNumber = cartItemListRD.result.Count().ToString();
+                OnCount();
             }
         }
 
@@ -73,12 +75,12 @@ namespace XMart.Views
             cartViewModel.CheckedNumber = number;
         }
 
-        private void ContentPage_Appearing(object sender, System.EventArgs e)
+        private void ContentPage_Appearing(object sender, EventArgs e)
         {
             InitCart();
         }
 
-        private async void TwoTapped_TappedAsync(object sender, System.EventArgs e)
+        private async void TwoTapped_TappedAsync(object sender, EventArgs e)
         {
             string action = await DisplayActionSheet("选择操作", "取消", null, "删除", "修改");
 

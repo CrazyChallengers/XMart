@@ -118,6 +118,10 @@
                 <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                     <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
                     <Label Text="我的收藏" Style="{DynamicResource CommonLabel}"/>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                         CommandParameter="XMart.Views.CollectionPage"/>
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
                 <StackLayout Grid.Column="2" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                     <Label Text="《···》" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
