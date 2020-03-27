@@ -11,6 +11,7 @@ using Plugin.Toast.Abstractions;
 using Rg.Plugins.Popup.Services;
 using XMart.Views;
 using Xamarin.Essentials;
+using Newtonsoft.Json.Linq;
 
 namespace XMart.ViewModels
 {
@@ -21,6 +22,20 @@ namespace XMart.ViewModels
         {
             get { return product; }
             set { SetProperty(ref product, value); }
+        }
+
+        private string starSource;   //Comment
+        public string StarSource
+        {
+            get { return starSource; }
+            set { SetProperty(ref starSource, value); }
+        }
+
+        private bool isCollected;   //Comment
+        public bool IsCollected
+        {
+            get { return isCollected; }
+            set { SetProperty(ref isCollected, value); }
         }
 
         private bool memberPriceVisible;   //Comment
@@ -42,6 +57,9 @@ namespace XMart.ViewModels
         public Command BuyCommand { get; set; }
         public Command ShareCommand { get; set; }
         public Command CallServiceCommand { get; set; }
+        public Command StarCommand { get; set; }
+
+        RestSharpService _restSharpService = new RestSharpService();
 
         public ProductDetailVM(string productId)
         {
@@ -114,6 +132,11 @@ namespace XMart.ViewModels
                 }
             }, () => { return true; });
 
+            StarCommand = new Command(() =>
+            {
+                Collect();
+            }, () => { return true; });
+
             InitProductDetailPageAsync(productId);
 
         }
@@ -126,12 +149,60 @@ namespace XMart.ViewModels
         {
             try
             {
-                RestSharpService _restSharpService = new RestSharpService();
                 ProductDetailRD productDetailRD = await _restSharpService.GetProductDetail(productId);
+                string judgeRD = await _restSharpService.JudgeCollection(productId);
 
                 if (productDetailRD.result != null)
                 {
                     Product = productDetailRD.result;
+
+                    var json = JObject.Parse(judgeRD);
+                    isCollected = (bool)json["success"];
+
+                    StarSource = isCollected ? "star_yellow.png" : "star_gray.png";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private async void Collect()
+        {
+            try
+            {
+                if (IsCollected)
+                {
+                    //取消收藏
+                    StupidRD stupidRD = await _restSharpService.DeleteCollection(Product.productId.ToString());
+
+                    if (stupidRD.success)
+                    {
+                        CrossToastPopUp.Current.ShowToastSuccess("取消收藏成功", ToastLength.Short);
+                        StarSource = "star_gray.png";
+                        IsCollected = false;
+                    }
+                    else
+                    {
+                        CrossToastPopUp.Current.ShowToastWarning("取消收藏失败", ToastLength.Short);
+                    }
+                }
+                else
+                {
+                    //收藏
+                    StupidRD stupidRD = await _restSharpService.AddToCollection(Product.productId.ToString());
+
+                    if (stupidRD.success)
+                    {
+                        CrossToastPopUp.Current.ShowToastSuccess("收藏成功", ToastLength.Short);
+                        StarSource = "star_yellow.png";
+                        IsCollected = true;
+                    }
+                    else
+                    {
+                        CrossToastPopUp.Current.ShowToastWarning("收藏失败", ToastLength.Short);
+                    }
                 }
             }
             catch (Exception)

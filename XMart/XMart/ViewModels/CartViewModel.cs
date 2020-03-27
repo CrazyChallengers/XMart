@@ -3,6 +3,8 @@ using Xamarin.Forms;
 using XMart.Models;
 using XMart.Util;
 using XMart.Views;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace XMart.ViewModels
 {
@@ -74,8 +76,15 @@ namespace XMart.ViewModels
                     }
                 }
 
-                OrderingPage orderingPage = new OrderingPage(productList);
-                Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);
+                if (productList.Count == 0)
+                {
+                    CrossToastPopUp.Current.ShowToastError("没有选中商品", ToastLength.Long);
+                }
+                else
+                {
+                    OrderingPage orderingPage = new OrderingPage(productList);
+                    Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);
+                }
             }, () => { return true; });
 
             AllCheckCommand = new Command(() =>

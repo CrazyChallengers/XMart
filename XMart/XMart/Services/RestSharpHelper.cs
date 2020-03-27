@@ -44,5 +44,20 @@ namespace XMart.Services
             T t = JsonConvert.DeserializeObject<T>(responsePost.Content);
             return t;
         }
+
+        public static async Task<string> GetAsyncWithoutDeserialization(string url)
+        {
+            var requestGet = new RestRequest(url, Method.GET);
+            IRestResponse responseGet = await _restClient.ExecuteAsync(requestGet);
+            return responseGet.Content; 
+        }
+
+        public static async Task<string> PostAsyncWithoutDeserialization(string url, string json)
+        {
+            var requestPost = new RestRequest(url, Method.POST);
+            requestPost.AddParameter("application/json", json, ParameterType.RequestBody);
+            IRestResponse responsePost = await _restClient.ExecuteAsync(requestPost);
+            return responsePost.Content;
+        }
     }
 }

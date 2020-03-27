@@ -49,6 +49,11 @@ namespace XMart.Models
         [JsonProperty("paymentType", NullValueHandling = NullValueHandling.Ignore)]
         public int paymentType { get; set; }   //Comment
 
+        [JsonIgnore]
+        public string OrderStatus { get; set; }
+
+        [JsonIgnore]
+        public string PaymentType { get; set; }
 
     }
 }

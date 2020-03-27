@@ -106,29 +106,29 @@ namespace XMart.ViewModels
         public OrderDetailViewModel(OrderDetail orderDetail)
         {
             Order = orderDetail;
-
+            
             switch (Order.paymentType)
             {
-                case 1: PaymentType = "立即支付"; break;
-                case 2: PaymentType = "延期一个月"; break;
-                case 3: PaymentType = "延期两个月"; break;
+                case 1: Order.PaymentType = "立即支付"; break;
+                case 2: Order.PaymentType = "延期一个月"; break;
+                case 3: Order.PaymentType = "延期两个月"; break;
                 default:
                     break;
             }
 
             switch (Order.orderStatus)
             {
-                case "0": OrderStatus = "未付款"; break;
-                case "1": OrderStatus = "已付款"; break;
-                case "2": OrderStatus = "未发货"; break;
-                case "3": OrderStatus = "已发货"; break;
-                case "4": OrderStatus = "交易成功"; break;
-                case "5": OrderStatus = "交易关闭"; break;
-                case "6": OrderStatus = "交易失败"; break;
+                case "0": Order.OrderStatus = "未付款"; break;
+                case "1": Order.OrderStatus = "已付款"; break;
+                case "2": Order.OrderStatus = "未发货"; break;
+                case "3": Order.OrderStatus = "已发货"; break;
+                case "4": Order.OrderStatus = "交易成功"; break;
+                case "5": Order.OrderStatus = "交易关闭"; break;
+                case "6": Order.OrderStatus = "交易失败"; break;
                 default:
                     break;
             }
-
+            
             ItemNum = 0;
             foreach (var item in Order.goodsList)
             {

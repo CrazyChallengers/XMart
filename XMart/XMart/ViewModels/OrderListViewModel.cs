@@ -35,6 +35,7 @@ namespace XMart.ViewModels
 
 		public Command<OrderDetail> EditCommand { get; set; }
 		public Command RefreshCommand { get; set; }
+		public Command BackCommand { get; set; }
 
 		public OrderListViewModel()
 		{
@@ -48,6 +49,11 @@ namespace XMart.ViewModels
 			{
 				InitOrderList();
 				IsRefreshing = false;
+			}, () => { return true; });
+
+			BackCommand = new Command(() =>
+			{
+				Application.Current.MainPage.Navigation.PopModalAsync();
 			}, () => { return true; });
 
 			if (GlobalVariables.IsLogged)
@@ -70,6 +76,31 @@ namespace XMart.ViewModels
 				{
 					OrderList = orderListRD.result.data;
 					Visible = false;
+
+					foreach (var item in OrderList)
+					{
+						switch (item.paymentType)
+						{
+							case 1: item.PaymentType = "立即支付"; break;
+							case 2: item.PaymentType = "延期一个月"; break;
+							case 3: item.PaymentType = "延期两个月"; break;
+							default:
+								break;
+						}
+
+						switch (item.orderStatus)
+						{
+							case "0": item.OrderStatus = "未付款"; break;
+							case "1": item.OrderStatus = "已付款"; break;
+							case "2": item.OrderStatus = "未发货"; break;
+							case "3": item.OrderStatus = "已发货"; break;
+							case "4": item.OrderStatus = "交易成功"; break;
+							case "5": item.OrderStatus = "交易关闭"; break;
+							case "6": item.OrderStatus = "交易失败"; break;
+							default:
+								break;
+						}
+					}
 				}
 				else
 				{

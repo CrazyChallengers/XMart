@@ -54,7 +54,7 @@
                                 </Label.FormattedText>
                             </Label>
 
-                            <ImageButton Grid.Row="0" Grid.Column="1" Source="star_gray.png" 
+                            <ImageButton Grid.Row="0" Grid.Column="1" Source="{Binding StarSource}" Command="{Binding StarCommand}"
                                          HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
                             <Label Grid.Row="1" Grid.Column="1" Text="收藏" FontSize="14" 
                                    HorizontalOptions="Center" VerticalOptions="Center" 

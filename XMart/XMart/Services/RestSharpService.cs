@@ -326,6 +326,56 @@ namespace XMart.Services
             return productListRD;
         }
 
+        /// <summary>
+        /// 添加收藏
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public async Task<StupidRD> AddToCollection(string productId)
+        {
+            string url = string.Format("/goods/AddCollection?userId={0}&productId={1}", GlobalVariables.LoggedUser.id, productId);
+
+            StupidRD stupidRD = await RestSharpHelper<StupidRD>.GetAsync(url);
+            return stupidRD;
+        }
+
+        /// <summary>
+        /// 获取收藏商品列表
+        /// </summary>
+        /// <returns></returns>
+        public async Task<ProductListRD> GetCollections()
+        {
+            string url = "/goods/GetCollection?userId=" + GlobalVariables.LoggedUser.id;
+
+            ProductListRD productListRD = await RestSharpHelper<ProductListRD>.GetAsync(url);
+            return productListRD;
+        }
+
+        /// <summary>
+        /// 取消收藏商品
+        /// </summary>
+        /// <returns></returns>
+        public async Task<StupidRD> DeleteCollection(string productId)
+        {
+            string url = string.Format("/goods/deleteCollection?userId={0}&productId={1}", GlobalVariables.LoggedUser.id, productId);
+
+            StupidRD stupidRD = await RestSharpHelper<StupidRD>.GetAsync(url);
+            return stupidRD;
+        }
+
+        /// <summary>
+        /// 判断某商品是否被收藏
+        /// </summary>
+        /// <param name="productId"></param>
+        /// <returns></returns>
+        public async Task<string> JudgeCollection(string productId)
+        {
+            string url = string.Format("/goods/judgeCollection?userId={0}&productId={1}", GlobalVariables.LoggedUser.id, productId);
+
+            string stupidRD = await RestSharpHelper<string>.GetAsyncWithoutDeserialization(url);
+            return stupidRD;
+        }
+
         #endregion
     }
 }

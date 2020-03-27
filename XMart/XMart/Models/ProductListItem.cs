@@ -9,10 +9,13 @@ namespace XMart.Models
     public class ProductListItem
     {
         [JsonProperty("productId", NullValueHandling = NullValueHandling.Ignore)]
-        public Int64 productId { get; set; }   //Comment
+        public long productId { get; set; }   //Comment
 
         [JsonProperty("salePrice", NullValueHandling = NullValueHandling.Ignore)]
         public double salePrice { get; set; }   //Comment
+
+        [JsonProperty("buyPrice", NullValueHandling = NullValueHandling.Ignore)]
+        public double buyPrice { get; set; }   //Comment
 
         [JsonProperty("productName", NullValueHandling = NullValueHandling.Ignore)]
         public string productName { get; set; }   //Comment
@@ -35,7 +38,9 @@ namespace XMart.Models
         [JsonProperty("rebate2", NullValueHandling = NullValueHandling.Ignore)]
         public long rebate2 { get; set; }   //comment
 
+        [JsonIgnore]
         public bool MemberPriceVisible { get; set; }
+        [JsonIgnore]
         public bool CusPriceVisible { get; set; }
 
         public ProductListItem()
