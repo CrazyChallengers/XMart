@@ -11,22 +11,21 @@ using Com.Alipay.Android.App;
 using System;
 using Xamarin.Forms;
 using Com.Alipay.Sdk.Pay.Demo.Util;
+using System.Threading;
+using Java.Net;
+using XMart.Services;
+using System.Threading.Tasks;
 
 namespace XMart.Droid
 {
-    [Activity(MainLauncher = false, Label = "美而好", Icon = "@mipmap/xmart", Theme = "@style/MainTheme", 
+    [Activity(MainLauncher = false, Label = "美而好", Icon = "@mipmap/xmart", Theme = "@style/MainTheme",
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         //微信相关
         private readonly string appID = "wx6990f0f3818a8c7e";//申请的appid
         private IWXAPI wxApi;
-        //支付宝相关
-        private string PARTNER = "合作商户ID";
-        private string SELLER = "商户收款的支付宝账号";
-        private string RSA_PRIVATE = "商户私密";
-        private IAlixPay aliApi;
-
+        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -54,20 +53,29 @@ namespace XMart.Droid
             CachedImageRenderer.Init(true);
 
             //支付宝
-            MessagingCenter.Subscribe<object>(this, "Pay", obj =>
+            MessagingCenter.Subscribe<object, string>(this, "Pay", (sender, obj) =>
             {
-                var appid = "12345678";
-                var rsa2 = false;
-                var para = OrderInfoUtil2_0.BuildOrderParamMap(appid, rsa2);
-                var orderParam = OrderInfoUtil2_0.BuildOrderParam(para);
-                var privateKey = "987456321";
-                var sign = OrderInfoUtil2_0.GetSign(para, privateKey, rsa2);
-                var orderInfo = orderParam + "&" + sign;
-                
-                PayTask pay = new PayTask(this);
-                var result = pay.PayV2(orderInfo, false);
-                Console.WriteLine("支付宝result:" + result);
-                
+                try
+                {
+                    Thread the = new Thread(new ParameterizedThreadStart(Pay));
+                    the.Start(obj);
+                }
+                catch (Exception ex)
+                {
+                }
+
+                //var appid = "2021001146672151";
+                //var rsa2 = true;
+                //var para = OrderInfoUtil2_0.BuildOrderParamMap(appid, rsa2);
+                //var orderParam = OrderInfoUtil2_0.BuildOrderParam(para);
+                //var privateKey = RSA_PRIVATE;
+                //var sign = OrderInfoUtil2_0.GetSign(para, privateKey, rsa2);
+                //var orderInfo = orderParam + "&" + sign;
+                //
+                //PayTask pay = new PayTask(this);
+                //var result = pay.PayV2(orderInfo, false);
+                //Console.WriteLine("支付宝result:" + result);
+
                 /*
                 try
                 {
@@ -142,7 +150,7 @@ namespace XMart.Droid
 
                 wxApi.SendReq(req);
             });*/
-            
+
             //分享文字给朋友
             MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
             {
@@ -208,66 +216,28 @@ namespace XMart.Droid
             return wxApi.RegisterApp(appID);
         }
 
-        private bool RegToAlipay()
-        {
-            //aliApi = IAlixPay.(this, appID, true);
-            return wxApi.RegisterApp(appID);
-        }
-
-        public string getOrderInfo(string subject, string body)
-        {
-            // 签约合作者身份ID
-            string orderInfo = "partner=" + "\"" + PARTNER + "\"";
-            // 签约卖家支付宝账号
-            orderInfo += "&seller_id=" + "\"" + SELLER + "\"";
-            // 商户网站唯一订单号
-            orderInfo += "&out_trade_no=" + "\"DJ" + DateTime.Now.ToString("yyyyMMddhhmmss") + "\"";
-            // 商品名称
-            orderInfo += "&subject=" + "\"" + subject + "\"";
-            // 商品详情
-            orderInfo += "&body=" + "\"" + body + "\"";
-            // 商品金额
-            orderInfo += "&total_fee=" + "\"" + 1 + "\"";
-            // 服务器异步通知页面路径
-            orderInfo += "&notify_url=" + "\"" + "http://111.203.248.34:89/Order/AlipayNotify"
-                    + "\"";
-            // 服务接口名称， 固定值
-            orderInfo += "&payment_type=\"1\"";
-
-            // 参数编码， 固定值
-            orderInfo += "&_input_charset=\"utf-8\"";
-
-            // 设置未付款交易的超时时间
-            // 默认30分钟，一旦超时，该笔交易就会自动被关闭。
-            // 取值范围：1m～15d。
-            // m-分钟，h-小时，d-天，1c-当天（无论交易何时创建，都在0点关闭）。
-            // 该参数数值不接受小数点，如1.5h，可转换为90m。
-            orderInfo += "&it_b_pay=\"30m\"";
-
-            // extern_token为经过快登授权获取到的alipay_open_id,带上此参数用户将使用授权的账户进行支付
-            // orderInfo += "&extern_token=" + "\"" + extern_token + "\"";
-            // 支付宝处理完请求后，当前页面跳转到商户指定页面的路径，可空
-            orderInfo += "&return_url=\"http://111.203.248.34:89/Order/AlipayNotify\"";
-
-            // 调用银行卡支付，需配置此参数，参与签名， 固定值 （需要签约《无线银行卡快捷支付》才能使用）
-            // orderInfo += "&paymethod=\"expressGateway\"";
-            return orderInfo;
-
-        }
-
-        public string MySignType
-        {
-            get
-            {
-                return "sign_type=\"RSA\"";
-            }
-        }
-
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+
+        #region 支付宝
+        private void Pay(object con)
+        {
+            try
+            {
+                PayTask pa = new PayTask(this);
+                var result = pa.Pay(con.ToString(), false);
+                //return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+        #endregion
     }
 }
+

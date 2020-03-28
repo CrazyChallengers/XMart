@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -372,10 +373,20 @@ namespace XMart.Services
         {
             string url = string.Format("/goods/judgeCollection?userId={0}&productId={1}", GlobalVariables.LoggedUser.id, productId);
 
-            string stupidRD = await RestSharpHelper<string>.GetAsyncWithoutDeserialization(url);
-            return stupidRD;
+            string str = await RestSharpHelper<string>.GetAsyncWithoutDeserialization(url);
+            return str;
         }
 
+        #endregion
+
+        #region 支付宝
+        public string GetAliPaySign(string json)
+        {
+            string url = "/AlipyController/appAliPay";
+            
+            string str = RestSharpHelper<string>.PostWithoutDeserialization(url, json);
+            return str;
+        }
         #endregion
     }
 }

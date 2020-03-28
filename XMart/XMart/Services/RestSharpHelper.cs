@@ -59,5 +59,20 @@ namespace XMart.Services
             IRestResponse responsePost = await _restClient.ExecuteAsync(requestPost);
             return responsePost.Content;
         }
+
+        public static string GetWithoutDeserialization(string url)
+        {
+            var requestGet = new RestRequest(url, Method.GET);
+            IRestResponse responseGet = _restClient.Execute(requestGet);
+            return responseGet.Content;
+        }
+
+        public static string PostWithoutDeserialization(string url, string json)
+        {
+            var requestPost = new RestRequest(url, Method.POST);
+            requestPost.AddParameter("application/json", json, ParameterType.RequestBody);
+            IRestResponse responsePost = _restClient.Execute(requestPost);
+            return responsePost.Content;
+        }
     }
 }
