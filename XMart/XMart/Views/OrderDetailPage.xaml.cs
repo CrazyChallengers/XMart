@@ -14,18 +14,21 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderDetailPage : ContentPage
     {
+        OrderDetailViewModel orderDetailViewModel;
+
         public OrderDetailPage(long orderId)
         {
             InitializeComponent();
 
-            BindingContext = new OrderDetailViewModel(orderId);
+            orderDetailViewModel = new OrderDetailViewModel(orderId);
+            BindingContext = orderDetailViewModel;
         }
 
-        public OrderDetailPage(OrderDetail orderDetail)
+        /*
+        protected override void OnAppearing()
         {
-            InitializeComponent();
-
-            BindingContext = new OrderDetailViewModel(orderDetail);
-        }
+            base.OnAppearing();
+            orderDetailViewModel.InitOrderDetailPage(orderDetailViewModel.Order.orderId);
+        }*/
     }
 }

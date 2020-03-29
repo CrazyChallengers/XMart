@@ -9,6 +9,7 @@ using Plugin.Toast;
 using Plugin.Toast.Abstractions;
 using XMart.Views;
 using Newtonsoft.Json.Linq;
+using System.Threading.Tasks;
 
 namespace XMart.ViewModels
 {
@@ -42,45 +43,41 @@ namespace XMart.ViewModels
             set { SetProperty(ref orderStatus, value); }
         }
 
+        private bool indicatorIsRunning;   //Comment
+        public bool IndicatorIsRunning
+        {
+            get { return indicatorIsRunning; }
+            set { SetProperty(ref indicatorIsRunning, value); }
+        }
+
+        private bool payBtnVisible;   //Comment
+        public bool PayBtnVisible
+        {
+            get { return payBtnVisible; }
+            set { SetProperty(ref payBtnVisible, value); }
+        }
+
+        private bool deleteBtnVisible;   //Comment
+        public bool DeleteBtnVisible
+        {
+            get { return deleteBtnVisible; }
+            set { SetProperty(ref deleteBtnVisible, value); }
+        }
+
         RestSharpService _restSharpService = new RestSharpService();
 
         public Command CancelCommand { get; set; }
         public Command HomeCommand { get; set; }
         public Command BackCommand { get; set; }
         public Command PayCommand { get; set; }
+        public Command DeleteOrderCommand { get; set; }
+        public Command DeleteCommand { get; set; }
 
         public OrderDetailViewModel(long orderId)
         {
+            DeleteBtnVisible = false;
             InitOrderDetailPage(orderId);
 
-            switch (Order.paymentType)
-            {
-                case 1: PaymentType = "立即支付";break;
-                case 2: PaymentType = "延期一个月";break;
-                case 3: PaymentType = "延期两个月";break;
-                default:
-                    break;
-            }
-
-            switch (Order.orderStatus)
-            {
-                case "0": OrderStatus = "未付款"; break;
-                case "1": OrderStatus = "已付款"; break;
-                case "2": OrderStatus = "未发货"; break;
-                case "3": OrderStatus = "已发货"; break;
-                case "4": OrderStatus = "交易成功"; break;
-                case "5": OrderStatus = "交易关闭"; break;
-                case "6": OrderStatus = "交易失败"; break;
-                default:
-                    break;
-            }
-
-            ItemNum = 0;
-            foreach (var item in Order.goodsList)
-            {
-                ItemNum += item.productNum;
-            }
-
             CancelCommand = new Command(() =>
             {
                 CancelOrder();
@@ -100,59 +97,53 @@ namespace XMart.ViewModels
             {
                 PlaceAnOrder();
             }, () => { return true; });
+
+            DeleteOrderCommand = new Command(() =>
+            {
+                DeleteOrderAsync();
+            }, () => { return true; });
+
+            DeleteCommand = new Command(() =>
+            {
+                DeleteBtnVisible = !DeleteBtnVisible;
+            }, () => { return true; });
+
+            MessagingCenter.Subscribe<object, string>(this, "PaySuccess", (sender, resultStatus) =>
+            {
+                switch (resultStatus)
+                {
+                    case "9000": CrossToastPopUp.Current.ShowToastSuccess("订单支付成功！", ToastLength.Long); break;
+                    case "8000": CrossToastPopUp.Current.ShowToastWarning("正在处理中！", ToastLength.Long); break;
+                    case "4000": CrossToastPopUp.Current.ShowToastError("订单支付失败！", ToastLength.Long); break;
+                    case "6001": CrossToastPopUp.Current.ShowToastWarning("用户中途取消！", ToastLength.Long); break;
+                    case "6002": CrossToastPopUp.Current.ShowToastError("网络连接出错！", ToastLength.Long); break;
+                    default: break;
+                }
+
+                InitOrderDetailPage(orderId);
+            });
         }
 
-        public OrderDetailViewModel(OrderDetail orderDetail)
+        private async void DeleteOrderAsync()
         {
-            Order = orderDetail;
-            
-            switch (Order.paymentType)
+            try
             {
-                case 1: Order.PaymentType = "立即支付"; break;
-                case 2: Order.PaymentType = "延期一个月"; break;
-                case 3: Order.PaymentType = "延期两个月"; break;
-                default:
-                    break;
+                StupidRD stupidRD = await _restSharpService.DeleteOrder(Order.orderId.ToString());
+
+                if (stupidRD.success)
+                {
+                    CrossToastPopUp.Current.ShowToastSuccess("删除成功！", ToastLength.Long);
+                    await Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError(stupidRD.message, ToastLength.Long);
+                }
             }
-
-            switch (Order.orderStatus)
+            catch (Exception)
             {
-                case "0": Order.OrderStatus = "未付款"; break;
-                case "1": Order.OrderStatus = "已付款"; break;
-                case "2": Order.OrderStatus = "未发货"; break;
-                case "3": Order.OrderStatus = "已发货"; break;
-                case "4": Order.OrderStatus = "交易成功"; break;
-                case "5": Order.OrderStatus = "交易关闭"; break;
-                case "6": Order.OrderStatus = "交易失败"; break;
-                default:
-                    break;
+                throw;
             }
-            
-            ItemNum = 0;
-            foreach (var item in Order.goodsList)
-            {
-                ItemNum += item.productNum;
-            }
-
-            CancelCommand = new Command(() =>
-            {
-                CancelOrder();
-            }, () => { return true; });
-
-            HomeCommand = new Command(() =>
-            {
-                //Application.Current.MainPage.Navigation.PopToRootAsync();
-            }, () => { return true; });
-
-            BackCommand = new Command(() =>
-            {
-                Application.Current.MainPage.Navigation.PopModalAsync();
-            }, () => { return true; });
-
-            PayCommand = new Command(() =>
-            {
-                PlaceAnOrder();
-            }, () => { return true; });
         }
 
         /// <summary>
@@ -183,20 +174,53 @@ namespace XMart.ViewModels
         /// 获取订单详细信息
         /// </summary>
         /// <param name="orderId"></param>
-        private void InitOrderDetailPage(long orderId)
+        public void InitOrderDetailPage(long orderId)
         {
             try
             {
+                IndicatorIsRunning = true;
+                PayBtnVisible = false;
+
                 OrderDetailRD orderDetailRD = _restSharpService.GetOrderDetailByOrderId(orderId);
 
                 if (orderDetailRD.success)
                 {
                     Order = orderDetailRD.result;
+
+                    switch (Order.paymentType)
+                    {
+                        case 1: PaymentType = "立即支付"; break;
+                        case 2: PaymentType = "延期一个月"; break;
+                        case 3: PaymentType = "延期两个月"; break;
+                        default:
+                            break;
+                    }
+
+                    switch (Order.orderStatus)
+                    {
+                        case "0": OrderStatus = "未付款"; PayBtnVisible = true; break;
+                        case "1": OrderStatus = "已付款"; break;
+                        case "2": OrderStatus = "未发货"; break;
+                        case "3": OrderStatus = "已发货"; break;
+                        case "4": OrderStatus = "交易成功"; break;
+                        case "5": OrderStatus = "交易关闭"; break;
+                        case "6": OrderStatus = "交易失败"; break;
+                        default:
+                            break;
+                    }
+
+                    ItemNum = 0;
+                    foreach (var item in Order.goodsList)
+                    {
+                        ItemNum += item.productNum;
+                    }
                 }
                 else
                 {
                     CrossToastPopUp.Current.ShowToastError(orderDetailRD.message, ToastLength.Long);
                 }
+
+                IndicatorIsRunning = false;
             }
             catch (Exception)
             {
@@ -204,6 +228,9 @@ namespace XMart.ViewModels
             }
         }
 
+        /// <summary>
+        /// 下单
+        /// </summary>
         private void PlaceAnOrder()
         {
             if (Order.orderStatus == "0")
@@ -214,8 +241,9 @@ namespace XMart.ViewModels
                     body += item.productName + "//";
                 }
 
-                string out_trade_no = "DJ" + DateTime.Now.ToString("yyyyMMddhhmmss");
-                string product_code = Order.orderId.ToString();
+                //string out_trade_no = "DJ" + DateTime.Now.ToString("yyyyMMddhhmmss");
+                string out_trade_no = Order.orderId.ToString();
+                string product_code = "QUICK_MSECURITY_PAY";
                 string subject = "美而好家具";
                 string total_amount = Order.orderTotal.ToString("0.00");
 
@@ -237,5 +265,6 @@ namespace XMart.ViewModels
                 //Application.Current.MainPage.Navigation.PushModalAsync(payWebPage);
             }
         }
+
     }
 }

@@ -406,9 +406,8 @@ namespace XMart.Services
         {
             int startIndex = content.IndexOf(startStr);
             //int endIndex = content.LastIndexOf(endStr);
-            string str = "";
 
-            str = content.Substring(startIndex, content.Length - startIndex);
+            string str = content.Substring(startIndex, content.Length - startIndex);
             str = str.Substring(0, str.LastIndexOf(endStr) + 1);
 
             return str;

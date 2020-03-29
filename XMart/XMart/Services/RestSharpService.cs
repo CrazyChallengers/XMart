@@ -240,6 +240,19 @@ namespace XMart.Services
             return simpleRD;
         }
 
+        /// <summary>
+        /// 删除订单
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public async Task<StupidRD> DeleteOrder(string orderId)
+        {
+            string url = "/member/delOrder?orderId=" + orderId;
+
+            StupidRD stupidRD = await RestSharpHelper<StupidRD>.GetAsync(url);
+            return stupidRD;
+        }
+
         #endregion
 
         #region 商品

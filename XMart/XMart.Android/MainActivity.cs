@@ -7,13 +7,14 @@ using FFImageLoading.Forms.Platform;
 using Com.Tencent.MM.Opensdk.Openapi;
 using Com.Tencent.MM.Opensdk.Modelmsg;
 using Com.Alipay.Sdk.App;
-using Com.Alipay.Android.App;
 using System;
 using Xamarin.Forms;
-using Com.Alipay.Sdk.Pay.Demo.Util;
 using System.Threading;
-using Java.Net;
-using XMart.Services;
+using System.Reflection;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 using System.Threading.Tasks;
 
 namespace XMart.Droid
@@ -25,6 +26,8 @@ namespace XMart.Droid
         //微信相关
         private readonly string appID = "wx6990f0f3818a8c7e";//申请的appid
         private IWXAPI wxApi;
+
+        private delegate string PayDelegate(string sign);
         
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -53,15 +56,25 @@ namespace XMart.Droid
             CachedImageRenderer.Init(true);
 
             //支付宝
-            MessagingCenter.Subscribe<object, string>(this, "Pay", (sender, obj) =>
+            MessagingCenter.Subscribe<object, string>(this, "Pay", (sender, sign) =>
             {
                 try
                 {
-                    Thread the = new Thread(new ParameterizedThreadStart(Pay));
-                    the.Start(obj);
+                    //Thread the = new Thread(new ParameterizedThreadStart(Pay));
+                    //the.Start(sign);
+
+                    //Task<string> task = Task.Factory.StartNew<string>(() => Pay(sign));
+                    //string taskResult = task.Result;
+
+                    PayDelegate payDelegate = new PayDelegate(Pay);
+                    IAsyncResult asyncResult = payDelegate.BeginInvoke(sign, null, null);
+                    string taskResult = payDelegate.EndInvoke(asyncResult);
+
+                    MessagingCenter.Send(new object(), "PaySuccess", taskResult);
                 }
                 catch (Exception ex)
                 {
+                    throw ex;
                 }
 
                 //var appid = "2021001146672151";
@@ -205,7 +218,7 @@ namespace XMart.Droid
 
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState); // add this line to your code, it may also be called: bundle
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
 
             LoadApplication(new App());
         }
@@ -216,7 +229,7 @@ namespace XMart.Droid
             return wxApi.RegisterApp(appID);
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -224,18 +237,45 @@ namespace XMart.Droid
         }
 
         #region 支付宝
-        private void Pay(object con)
+        private string Pay(object sign)
         {
             try
             {
-                PayTask pa = new PayTask(this);
-                var result = pa.Pay(con.ToString(), false);
-                //return result;
+                PayTask payTask = new PayTask(this);
+                var result = payTask.Pay(sign.ToString(), false);
+                string status = GetPayResultStatus(result);
+
+                //MessagingCenter.Send(new object(), "PaySuccess", status);
+
+                return status;
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
+        }
+
+        private string GetPayResultStatus(string result)
+        {
+            string[] string_array = result.Split(';');
+            JObject jObject = new JObject();
+
+            for (int i = 0; i < string_array.Length; i++)
+            {
+                string resultPart = string_array[i];
+                string key = resultPart.Split('=')[0];
+                string _value = resultPart.Split('=')[1];
+
+                int startIndex = _value.IndexOf("{");
+                //int endIndex = content.LastIndexOf(endStr);
+
+                string value = _value.Substring(startIndex + 1, _value.Length - startIndex - 1);
+                value = value.Substring(0, value.LastIndexOf("}"));
+
+                jObject.Add(key, value);
+            }
+
+            return jObject["resultStatus"].ToString();
         }
         #endregion
     }

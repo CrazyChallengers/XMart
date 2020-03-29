@@ -41,7 +41,7 @@ namespace XMart.ViewModels
 		{
 			EditCommand = new Command<OrderDetail>((orderDetail) =>
 			{
-				OrderDetailPage orderDetailPage = new OrderDetailPage(orderDetail);
+				OrderDetailPage orderDetailPage = new OrderDetailPage(orderDetail.orderId);
 				Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
 			}, (orderDetail) => { return true; });
 
