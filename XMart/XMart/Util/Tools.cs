@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Com.Alipay.Sdk.App;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
@@ -55,5 +56,6 @@ namespace XMart.Util
         {
             return type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
         }
+
     }
 }
