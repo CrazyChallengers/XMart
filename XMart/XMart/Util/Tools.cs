@@ -1,8 +1,5 @@
-﻿using Com.Alipay.Sdk.App;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Reflection;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace XMart.Util

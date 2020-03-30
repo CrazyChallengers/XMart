@@ -96,6 +96,7 @@ namespace XMart.ViewModels
             PayCommand = new Command(() =>
             {
                 PlaceAnOrder();
+                InitOrderDetailPage(orderId);
             }, () => { return true; });
 
             DeleteOrderCommand = new Command(() =>
