@@ -24,11 +24,10 @@ namespace XMart.Views
             BindingContext = orderDetailViewModel;
         }
 
-        /*
-        protected override void OnAppearing()
+        private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            base.OnAppearing();
+            //base.OnAppearing();
             orderDetailViewModel.InitOrderDetailPage(orderDetailViewModel.Order.orderId);
-        }*/
+        }
     }
 }

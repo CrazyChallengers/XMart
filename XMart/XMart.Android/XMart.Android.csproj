@@ -72,7 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MonitorValueChange.cs" />
+    <Compile Include="MyActivity.cs" />
     <Compile Include="MyEntryRenderer.cs" />
+    <Compile Include="MyThread.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SplashScreen.cs" />

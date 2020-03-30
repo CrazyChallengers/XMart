@@ -27,6 +27,20 @@ namespace XMart.Droid
         private readonly string appID = "wx6990f0f3818a8c7e";//申请的appid
         private IWXAPI wxApi;
 
+        private string status;
+        public string Status
+        {
+            get { return this.status; }
+            set
+            {
+                if (value != this.status)
+                {
+                    WhenValueChange();
+                }
+                this.status = value;
+            }
+        }
+
         private delegate string PayDelegate(string sign);
         
         protected override void OnCreate(Bundle savedInstanceState)
@@ -60,66 +74,14 @@ namespace XMart.Droid
             {
                 try
                 {
-                    //Thread the = new Thread(new ParameterizedThreadStart(Pay));
-                    //the.Start(sign);
-
-                    //Task<string> task = Task.Factory.StartNew<string>(() => Pay(sign));
-                    //string taskResult = task.Result;
-
-                    PayDelegate payDelegate = new PayDelegate(Pay);
-                    IAsyncResult asyncResult = payDelegate.BeginInvoke(sign, null, null);
-                    string taskResult = payDelegate.EndInvoke(asyncResult);
-
-                    MessagingCenter.Send(new object(), "PaySuccess", taskResult);
+                    Thread the = new Thread(new ParameterizedThreadStart(Pay));
+                    the.Start(sign);
                 }
                 catch (Exception ex)
                 {
                     throw ex;
                 }
 
-                //var appid = "2021001146672151";
-                //var rsa2 = true;
-                //var para = OrderInfoUtil2_0.BuildOrderParamMap(appid, rsa2);
-                //var orderParam = OrderInfoUtil2_0.BuildOrderParam(para);
-                //var privateKey = RSA_PRIVATE;
-                //var sign = OrderInfoUtil2_0.GetSign(para, privateKey, rsa2);
-                //var orderInfo = orderParam + "&" + sign;
-                //
-                //PayTask pay = new PayTask(this);
-                //var result = pay.PayV2(orderInfo, false);
-                //Console.WriteLine("支付宝result:" + result);
-
-                /*
-                try
-                {
-                    var con = getOrderInfo("test", "testbody");
-                    var sign = OrderInfoUtil2_0.GetSign(con, RSA_PRIVATE, false);
-                    sign = URLEncoder.Encode(sign, "utf-8");
-                    con += "&sign=\"" + sign + "\"&" + MySignType;
-                    Com.Alipay.Sdk.App.PayTask pa = new Com.Alipay.Sdk.App.PayTask(this);
-                    var result = pa.Pay(con, false);
-                    Logger_Info("支付宝result:" + result);
-                }
-                catch (Exception ex)
-                {
-
-                    Logger_Info("2" + ex.Message + ex.StackTrace);
-                }
-
-                
-                string orderInfo = info;   // 订单信息
-
-                PayTask alipay = new PayTask(this);
-                JavaDictionary<string, string> result = alipay.PayV2(orderInfo, true);
-
-                Message msg = new Message();
-                msg.What = SDK_PAY_FLAG;
-                msg.Obj = result;
-                mHandler.sendMessage(msg);
-            
-                // 必须异步调用
-                //Thread payThread = new Thread(payRunnable);
-                //payThread.start();*/
             });
 
             //微信相关
@@ -237,17 +199,35 @@ namespace XMart.Droid
         }
 
         #region 支付宝
-        private string Pay(object sign)
+        private void Pay(object sign)
         {
             try
             {
                 PayTask payTask = new PayTask(this);
-                var result = payTask.Pay(sign.ToString(), false);
-                string status = GetPayResultStatus(result);
+                var result = payTask.PayV2(sign.ToString(), true);
+                Status = result["resultStatus"];
 
-                //MessagingCenter.Send(new object(), "PaySuccess", status);
-
-                return status;
+                /*
+                Looper.Prepare();
+                //switch (status)
+                //{
+                //    case "9000": Android.Widget.Toast.MakeText(this, "订单支付成功！", Android.Widget.ToastLength.Long).Show(); break;
+                //    case "8000": Android.Widget.Toast.MakeText(this, "正在处理中！", Android.Widget.ToastLength.Long).Show(); break;
+                //    case "4000": Android.Widget.Toast.MakeText(this, "订单支付失败！", Android.Widget.ToastLength.Long).Show(); break;
+                //    case "6001": Android.Widget.Toast.MakeText(this, "用户中途取消！", Android.Widget.ToastLength.Long).Show(); break;
+                //    case "6002": Android.Widget.Toast.MakeText(this, "网络连接出错！", Android.Widget.ToastLength.Long).Show(); break;
+                //    default: break;
+                //}
+                switch (status)
+                {
+                    case "9000": CrossToastPopUp.Current.ShowToastSuccess("订单支付成功！", ToastLength.Long); break;
+                    case "8000": CrossToastPopUp.Current.ShowToastWarning("正在处理中！", ToastLength.Long); break;
+                    case "4000": CrossToastPopUp.Current.ShowToastError("订单支付失败！", ToastLength.Long); break;
+                    case "6001": CrossToastPopUp.Current.ShowToastWarning("用户中途取消！", ToastLength.Long); break;
+                    case "6002": CrossToastPopUp.Current.ShowToastError("网络连接出错！", ToastLength.Long); break;
+                    default: break;
+                }
+                Looper.Loop();*/
             }
             catch (Exception ex)
             {
@@ -255,29 +235,12 @@ namespace XMart.Droid
             }
         }
 
-        private string GetPayResultStatus(string result)
-        {
-            string[] string_array = result.Split(';');
-            JObject jObject = new JObject();
-
-            for (int i = 0; i < string_array.Length; i++)
-            {
-                string resultPart = string_array[i];
-                string key = resultPart.Split('=')[0];
-                string _value = resultPart.Split('=')[1];
-
-                int startIndex = _value.IndexOf("{");
-                //int endIndex = content.LastIndexOf(endStr);
-
-                string value = _value.Substring(startIndex + 1, _value.Length - startIndex - 1);
-                value = value.Substring(0, value.LastIndexOf("}"));
-
-                jObject.Add(key, value);
-            }
-
-            return jObject["resultStatus"].ToString();
-        }
         #endregion
+
+        private void WhenValueChange()
+        {
+            MessagingCenter.Send(new object(), "PaySuccess", Status);
+        }
     }
 }
 
