@@ -64,6 +64,13 @@ namespace XMart.ViewModels
             set { SetProperty(ref deleteBtnVisible, value); }
         }
 
+        private bool cancelButtonEnable;   //Comment
+        public bool CancelButtonEnable
+        {
+            get { return cancelButtonEnable; }
+            set { SetProperty(ref cancelButtonEnable, value); }
+        }
+
         RestSharpService _restSharpService = new RestSharpService();
 
         public Command CancelCommand { get; set; }
@@ -78,9 +85,14 @@ namespace XMart.ViewModels
             DeleteBtnVisible = false;
             InitOrderDetailPage(orderId);
 
-            CancelCommand = new Command(() =>
+            CancelCommand = new Command(async () =>
             {
-                CancelOrder();
+                string action = await Application.Current.MainPage.DisplayActionSheet("取消订单吗？", "关闭", null, "是的，我要取消该订单。", "算了，我不取消了。");
+                if (action == "是的，我要取消该订单。")
+                {
+                    CancelOrder();
+                    InitOrderDetailPage(orderId);
+                }
             }, () => { return true; });
 
             HomeCommand = new Command(() =>

@@ -29,5 +29,10 @@ namespace XMart.Views
             //base.OnAppearing();
             orderDetailViewModel.InitOrderDetailPage(orderDetailViewModel.Order.orderId);
         }
+
+        protected override void OnAppearing()
+        {
+            orderDetailViewModel.InitOrderDetailPage(orderDetailViewModel.Order.orderId);
+        }
     }
 }

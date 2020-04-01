@@ -33,7 +33,7 @@ namespace XMart.Droid
             get { return this.status; }
             set
             {
-                if (value != this.status)
+                if (value != this.status && !string.IsNullOrWhiteSpace(value))
                 {
                     WhenValueChange();
                 }
@@ -74,8 +74,21 @@ namespace XMart.Droid
             {
                 try
                 {
+                    //Func<string, string> test = Pay;
+                    //IAsyncResult asyncResult = test.BeginInvoke(sign, null, null);
+                    //string result = test.EndInvoke(asyncResult);
+                    //
+                    //Console.WriteLine(result);
+
                     Thread the = new Thread(new ParameterizedThreadStart(Pay));
                     the.Start(sign);
+                    //Console.WriteLine(Pay(sign));
+
+                    //Task<string> task = new Task<string>(async () => await Pay(sign));
+                    //var result = await Pay(sign);
+                    //task.Wait();
+                    //task.RunSynchronously();
+                    //Console.WriteLine(result);
                 }
                 catch (Exception ex)
                 {
@@ -101,9 +114,9 @@ namespace XMart.Droid
                 bool result = wxApi.SendReq(req);
 
             });
-            /*
+            
             //分享小程序给朋友
-            MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
+            MessagingCenter.Subscribe<object, string>(this, "ShareMiniProgramToFriend", (sender, arg) =>
             {
                 WXMiniProgramObject miniProgramObj = new WXMiniProgramObject();
                 miniProgramObj.WebpageUrl = "http://www.qq.com"; // 兼容低版本的网页链接
@@ -124,7 +137,7 @@ namespace XMart.Droid
                 };
 
                 wxApi.SendReq(req);
-            });*/
+            });
 
             //分享文字给朋友
             MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
@@ -205,8 +218,9 @@ namespace XMart.Droid
             {
                 PayTask payTask = new PayTask(this);
                 var result = payTask.PayV2(sign.ToString(), true);
-                Status = result["resultStatus"];
-
+                //Status = result["resultStatus"];
+                //Status = "";
+                //return result["resultStatus"];
                 /*
                 Looper.Prepare();
                 //switch (status)
