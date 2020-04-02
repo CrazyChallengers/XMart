@@ -24,5 +24,6 @@ namespace XMart.Views
         {
             list.SelectedItem = -1;
         }
+
     }
 }
