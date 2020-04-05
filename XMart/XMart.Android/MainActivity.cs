@@ -30,11 +30,11 @@ namespace XMart.Droid
         private string status;
         public string Status
         {
-            get { return this.status; }
+            get { return status; }
             set
             {
                 WhenValueSet();
-                this.status = value;
+                status = value;
             }
         }
 
@@ -91,9 +91,9 @@ namespace XMart.Droid
                     //Task<string> task = Task<string>.Factory.FromAsync(payDelegate.BeginInvoke, payDelegate.EndInvoke, sign, "a delegate asynchronous call");
                     //task.ContinueWith(t => MessagingCenter.Send(new object(), "PaySuccess", t.Result));
                 }
-                catch (Exception ex)
+                catch (ThreadAbortException)
                 {
-                    throw ex;
+                    MessagingCenter.Send(new object(), "PaySuccess", Status);
                 }
 
             });
@@ -219,8 +219,8 @@ namespace XMart.Droid
             {
                 PayTask payTask = new PayTask(this);
                 var result = payTask.PayV2(sign.ToString(), true);
-                Status = result["resultStatus"];
-                
+                //Status = result["resultStatus"];
+
                 /*
                 Looper.Prepare();
                 //switch (status)
@@ -244,6 +244,7 @@ namespace XMart.Droid
                 Looper.Loop();*/
 
                 //return result["resultStatus"];
+                //Thread.CurrentThread.Abort();
             }
             catch (Exception ex)
             {
@@ -253,7 +254,7 @@ namespace XMart.Droid
 
         #endregion
 
-        private void WhenValueSet()
+        public void WhenValueSet()
         {
             MessagingCenter.Send(new object(), "PaySuccess", Status);
         }

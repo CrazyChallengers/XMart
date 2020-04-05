@@ -87,8 +87,8 @@ namespace XMart.ViewModels
 
             CancelCommand = new Command(async () =>
             {
-                string action = await Application.Current.MainPage.DisplayActionSheet("取消订单吗？", "关闭", null, "是的，我要取消该订单。", "算了，我不取消了。");
-                if (action == "是的，我要取消该订单。")
+                bool action = await Application.Current.MainPage.DisplayAlert("取消订单", "您想要取消订单吗？取消后，我们将为您退回货款并拦截快递。", "是的", "算了");
+                if (action)
                 {
                     CancelOrder();
                     InitOrderDetailPage(orderId);
