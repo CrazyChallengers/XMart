@@ -24,12 +24,11 @@
     <ContentPage.Content>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             
-            <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
+            <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" HorizontalOptions="FillAndExpand"
                        CornerRadius="20" Padding="20,0" BorderColor="LightGray">
@@ -39,7 +38,7 @@
                 <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="60" FontSize="18" Command="{Binding SearchCommand}"/>
             </StackLayout>
 
-            <tb:TabViewControl Grid.Row="2" VerticalOptions="FillAndExpand" 
+            <tb:TabViewControl Grid.Row="1" VerticalOptions="FillAndExpand" 
                                HeaderTabTextColor="Gray" HeaderSelectionUnderlineColor="{StaticResource SkyBlue}" HeaderBackgroundColor="Transparent">
                 <tb:TabViewControl.ItemSource>
                     <tb:TabItem HeaderText="找单品" HeaderTabTextFontSize="20">

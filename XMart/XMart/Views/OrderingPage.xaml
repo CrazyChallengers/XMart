@@ -22,16 +22,15 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
 
-            <ImageButton Grid.Row="1" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
-            <Label Grid.Row="1" Text="确认订单" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ImageButton Grid.Row="0" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+            <Label Grid.Row="0" Text="确认订单" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-            <ScrollView Grid.Row="2">
+            <ScrollView Grid.Row="1">
                 <StackLayout VerticalOptions="Start">
                     <Label Text="收货地址" Style="{DynamicResource SectionStyle}"/>
                     <Frame Padding="10" Margin="5" CornerRadius="10" IsClippedToBounds="True" BackgroundColor="LightGray">
@@ -145,7 +144,7 @@
                 </StackLayout>
             </ScrollView>
 
-            <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="10,0">
+            <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10,0">
                 <!--
                 <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->

@@ -10,12 +10,8 @@ using Com.Alipay.Sdk.App;
 using System;
 using Xamarin.Forms;
 using System.Threading;
-using System.Reflection;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
-using System.Threading.Tasks;
 
 namespace XMart.Droid
 {
@@ -51,10 +47,11 @@ namespace XMart.Droid
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
             {
                 //透明状态栏                
-                Window.AddFlags(WindowManagerFlags.TranslucentStatus);
-                //Window.SetStatusBarColor(Android.Graphics.Color.DeepSkyBlue);
+                //Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+                Window.SetStatusBarColor(Android.Graphics.Color.LightGray);
                 //不遮挡导航栏                
                 Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
+                
             }
 
             //Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
@@ -221,7 +218,7 @@ namespace XMart.Droid
                 var result = payTask.PayV2(sign.ToString(), true);
                 //Status = result["resultStatus"];
 
-                /*
+                
                 Looper.Prepare();
                 //switch (status)
                 //{
@@ -241,7 +238,7 @@ namespace XMart.Droid
                     case "6002": CrossToastPopUp.Current.ShowToastError("网络连接出错！", ToastLength.Long); break;
                     default: break;
                 }
-                Looper.Loop();*/
+                Looper.Loop();
 
                 //return result["resultStatus"];
                 //Thread.CurrentThread.Abort();

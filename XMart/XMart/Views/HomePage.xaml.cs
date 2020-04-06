@@ -41,9 +41,9 @@ namespace XMart.Views
         /// <param name="e"></param>
         private void ItemTapped_Tapped(object sender, EventArgs e)
         {
-            StackLayout stackLayout = sender as StackLayout;
+            Grid grid = sender as Grid;
             //stackLayout.Children
-            int index = HotProductStack.Children.IndexOf(stackLayout);
+            int index = HotProductStack.Children.IndexOf(grid);
 
             long id = homeViewModel.HotProductList[index].productId;
             ProductDetailPage productDetailPage = new ProductDetailPage(id.ToString());

@@ -3,44 +3,75 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:XMart.Controls"
              mc:Ignorable="d"
              x:Class="XMart.Views.EditAddressPage">
     <ContentPage.Content>
         <StackLayout>
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
-                <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
+                <StackLayout Grid.Row="0" Orientation="Horizontal" Spacing="0">
                     <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
                     <Label Text="编辑收货地址" TextColor="Black" FontSize="24" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                     <Button WidthRequest="60" Text="保存" FontSize="18" BackgroundColor="Transparent" Command="{Binding AddOrUpdateAddressCommand}"/>
                 </StackLayout>
 
-                <StackLayout Grid.Row="2" Margin="5,0" HeightRequest="500">
-                    <TableView Intent="Settings" HeightRequest="300" VerticalOptions="Start">
+                <StackLayout Grid.Row="1" Margin="20,0" HeightRequest="500">
+                    <!--<TableView Intent="Settings" HeightRequest="300" VerticalOptions="Start">
                         <TableRoot>
                             <TableSection>
-                                <EntryCell Label="收货人姓名" Text="{Binding UserName}"/>
+                                <EntryCell Placeholder="收货人姓名" Text="{Binding UserName}"/>
 
-                                <EntryCell Label="电话号码" Text="{Binding Tel}"/>
+                                <EntryCell Placeholder="电话号码" Text="{Binding Tel}"/>
 
-                                <EntryCell Label="地址" Text="{Binding StreetName}"/>
+                                <EntryCell Placeholder="地址" Text="{Binding StreetName}"/>
 
                                 <SwitchCell Text="是否默认" On="{Binding IsDefault}"/>
 
                             </TableSection>
                         </TableRoot>
-                    </TableView>
+                    </TableView>-->
 
-                    <Button Text="删除该地址" Command="{Binding DeleteCommand}" VerticalOptions="Start" HorizontalOptions="Start" WidthRequest="100" HeightRequest="50"/>
-                    <Button Text="确认删除" Command="{Binding DeleteAddressCommand}" IsVisible="{Binding Visible}" WidthRequest="100" HeightRequest="50"
+                    <controls:MyEntry Placeholder="收货人姓名" Text="{Binding UserName}" Margin="0,10" HeightRequest="40"/>
+
+                    <controls:MyEntry Placeholder="电话号码" Text="{Binding Tel}" Margin="0,10" Keyboard="Numeric" HeightRequest="40"/>
+
+                    <controls:MyEntry Placeholder="收件地址" Text="{Binding StreetName}" Margin="0,10" HeightRequest="40"/>
+
+                    <StackLayout Orientation="Horizontal" Margin="0">
+                        <Label Text="是否设为默认地址" HorizontalOptions="Start" FontSize="18" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center"/>
+                        <Switch IsToggled="{Binding IsDefault}" OnColor="{StaticResource SkyBlue}"/>
+                    </StackLayout>
+                    
+                    <!--
+                    <Grid HeightRequest="300">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="3*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Text="收货人姓名"/>
+                        
+                    </Grid>-->
+
+                    <StackLayout Orientation="Horizontal" Margin="0">
+                        <Button Text="删除该地址" Command="{Binding DeleteCommand}" VerticalOptions="Start" HorizontalOptions="Start" WidthRequest="100" HeightRequest="30" BorderWidth="0" Padding="0"/>
+                        <Button Text="确认删除" Command="{Binding DeleteAddressCommand}" IsVisible="{Binding Visible}" WidthRequest="100" HeightRequest="30" BorderWidth="0" Padding="0"
                             TextColor="White" BackgroundColor="Crimson" VerticalOptions="Start" HorizontalOptions="Start" />
-                    <Button Text="取消" Command="{Binding DeleteCommand}" IsVisible="{Binding Visible}" WidthRequest="100" HeightRequest="50"
+                        <Button Text="取消" Command="{Binding DeleteCommand}" IsVisible="{Binding Visible}" WidthRequest="100" HeightRequest="30" BorderWidth="0" Padding="0"
                             VerticalOptions="Start" HorizontalOptions="Start"/>
+                    </StackLayout>
+                    
                 </StackLayout>
             </Grid>
         </StackLayout>

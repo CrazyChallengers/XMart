@@ -290,5 +290,8 @@
   <ItemGroup>
     <AndroidResource Include="Resources\mipmap-xxxhdpi\xmart.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\discount.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

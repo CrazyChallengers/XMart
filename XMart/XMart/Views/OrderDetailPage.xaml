@@ -21,16 +21,15 @@
         <ScrollView>
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="50"/>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="50"/>
                 </Grid.RowDefinitions>
                 
-                <ImageButton Grid.Row="1" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
-                <Label Grid.Row="1" Text="订单详情" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ImageButton Grid.Row="0" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+                <Label Grid.Row="0" Text="订单详情" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-                <ScrollView Grid.Row="2">
+                <ScrollView Grid.Row="1">
                     <StackLayout VerticalOptions="Start">
                         <Label Text="收货地址" Style="{DynamicResource SectionStyle}"/>
                         <Frame Padding="10" Margin="5" CornerRadius="10" IsClippedToBounds="True" BackgroundColor="Orange">
@@ -207,15 +206,17 @@
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
 
-                        <Button Text="删除该订单" Command="{Binding DeleteCommand}" VerticalOptions="Start" HorizontalOptions="Start" WidthRequest="100" HeightRequest="50"/>
-                        <Button Text="确认删除" Command="{Binding DeleteOrderCommand}" IsVisible="{Binding DeleteBtnVisible}" WidthRequest="100" HeightRequest="50"
-                                TextColor="Crimson" VerticalOptions="Start" HorizontalOptions="Start" />
-                        <Button Text="取消" Command="{Binding DeleteCommand}" IsVisible="{Binding DeleteBtnVisible}" WidthRequest="100" HeightRequest="50"
-                                VerticalOptions="Start" HorizontalOptions="Start"/>
+                        <StackLayout Orientation="Horizontal" Margin="5">
+                            <Button Text="删除该订单" Command="{Binding DeleteCommand}" VerticalOptions="Start" HorizontalOptions="Start" WidthRequest="100" HeightRequest="30" BorderWidth="0" Padding="0"/>
+                            <Button Text="确认删除" Command="{Binding DeleteOrderCommand}" IsVisible="{Binding DeleteBtnVisible}" WidthRequest="100" HeightRequest="30" BorderWidth="0" Padding="0"
+                            TextColor="White" BackgroundColor="Crimson" VerticalOptions="Start" HorizontalOptions="Start" />
+                            <Button Text="取消" Command="{Binding DeleteCommand}" IsVisible="{Binding DeleteBtnVisible}" WidthRequest="100" HeightRequest="30" BorderWidth="0" Padding="0"
+                            VerticalOptions="Start" HorizontalOptions="Start"/>
+                        </StackLayout>
                     </StackLayout>
                 </ScrollView>
 
-                <StackLayout Grid.Row="3" Orientation="Horizontal" Margin="10,0">
+                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="10,0">
                     <!--
                 <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
@@ -252,7 +253,7 @@
 
                 </StackLayout>
 
-                <ActivityIndicator Grid.Row="2" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="Center"/>
+                <ActivityIndicator Grid.Row="1" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="Center"/>
             </Grid>
         </ScrollView>
     </ContentPage.Content>
