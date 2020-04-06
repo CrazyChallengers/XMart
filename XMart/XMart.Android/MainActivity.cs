@@ -30,19 +30,14 @@ namespace XMart.Droid
         private string status;
         public string Status
         {
-            get { return this.status; }
+            get { return status; }
             set
             {
-                if (value != this.status)
-                {
-                    WhenValueChange();
-                }
-                this.status = value;
+                WhenValueSet();
+                status = value;
             }
         }
 
-        private delegate string PayDelegate(string sign);
-        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -74,12 +69,31 @@ namespace XMart.Droid
             {
                 try
                 {
+                    //Func<string, string> test = Pay;
+                    //IAsyncResult asyncResult = test.BeginInvoke(sign, null, null);
+                    //string result = test.EndInvoke(asyncResult);
+                    //
+                    //Console.WriteLine(result);
+                    //Status = "";
                     Thread the = new Thread(new ParameterizedThreadStart(Pay));
                     the.Start(sign);
+                    //the.Join();
+                    //Console.WriteLine(Pay(sign));
+
+                    //Task<string> task = new Task<string>(async () => await Pay(sign));
+                    //var result = await Pay(sign);
+                    //task.Wait();
+                    //task.RunSynchronously();
+                    //Console.WriteLine(result);
+
+                    //PayDelegate payDelegate = Pay;
+                    //Task<string> task = Task<string>.Factory.FromAsync(payDelegate.BeginInvoke(sign, Callback, "a delegate asynchronous call"), payDelegate.EndInvoke);
+                    //Task<string> task = Task<string>.Factory.FromAsync(payDelegate.BeginInvoke, payDelegate.EndInvoke, sign, "a delegate asynchronous call");
+                    //task.ContinueWith(t => MessagingCenter.Send(new object(), "PaySuccess", t.Result));
                 }
-                catch (Exception ex)
+                catch (ThreadAbortException)
                 {
-                    throw ex;
+                    MessagingCenter.Send(new object(), "PaySuccess", Status);
                 }
 
             });
@@ -101,9 +115,9 @@ namespace XMart.Droid
                 bool result = wxApi.SendReq(req);
 
             });
-            /*
+            
             //分享小程序给朋友
-            MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
+            MessagingCenter.Subscribe<object, string>(this, "ShareMiniProgramToFriend", (sender, arg) =>
             {
                 WXMiniProgramObject miniProgramObj = new WXMiniProgramObject();
                 miniProgramObj.WebpageUrl = "http://www.qq.com"; // 兼容低版本的网页链接
@@ -124,7 +138,7 @@ namespace XMart.Droid
                 };
 
                 wxApi.SendReq(req);
-            });*/
+            });
 
             //分享文字给朋友
             MessagingCenter.Subscribe<object, string>(this, "ShareToFriend", (sender, arg) =>
@@ -205,7 +219,7 @@ namespace XMart.Droid
             {
                 PayTask payTask = new PayTask(this);
                 var result = payTask.PayV2(sign.ToString(), true);
-                Status = result["resultStatus"];
+                //Status = result["resultStatus"];
 
                 /*
                 Looper.Prepare();
@@ -218,7 +232,7 @@ namespace XMart.Droid
                 //    case "6002": Android.Widget.Toast.MakeText(this, "网络连接出错！", Android.Widget.ToastLength.Long).Show(); break;
                 //    default: break;
                 //}
-                switch (status)
+                switch (result["resultStatus"])
                 {
                     case "9000": CrossToastPopUp.Current.ShowToastSuccess("订单支付成功！", ToastLength.Long); break;
                     case "8000": CrossToastPopUp.Current.ShowToastWarning("正在处理中！", ToastLength.Long); break;
@@ -228,6 +242,9 @@ namespace XMart.Droid
                     default: break;
                 }
                 Looper.Loop();*/
+
+                //return result["resultStatus"];
+                //Thread.CurrentThread.Abort();
             }
             catch (Exception ex)
             {
@@ -237,10 +254,11 @@ namespace XMart.Droid
 
         #endregion
 
-        private void WhenValueChange()
+        public void WhenValueSet()
         {
             MessagingCenter.Send(new object(), "PaySuccess", Status);
         }
+
     }
 }
 

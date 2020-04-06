@@ -24,5 +24,12 @@ namespace XMart.Views
 
             BindingContext = orderingViewModel;
         }
+        /*
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+
+            Application.Current.MainPage.Navigation.RemovePage(this);
+        }*/
     }
 }
