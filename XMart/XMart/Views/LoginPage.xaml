@@ -58,17 +58,16 @@
                         <Label Text="验证码登录" FontSize="22" TextColor="Black" FontAttributes="Bold"/>
                         <Label Text="未注册的手机号验证后将自动创建美而好账号" FontSize="16" TextColor="Gray"/>
 
-                        <Entry Placeholder="手机号" HeightRequest="50" Text="{Binding Tel}">
+                        <Entry Placeholder="手机号" HeightRequest="50" Text="{Binding Tel}" Keyboard="Numeric" MaxLength="11"/>
+                        <!--<Entry Placeholder="手机号" HeightRequest="50" Text="{Binding Tel}" Keyboard="Numeric" MaxLength="11">
                             <Entry.Behaviors>
                                 <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckPhoneCommand}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <!--<controls:MyEntry Placeholder="手机号" HeightRequest="25" HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Start"/>
+                        <controls:MyEntry Placeholder="手机号" HeightRequest="25" HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Start"/>
                         <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="Fill"/>-->
                         <Button Text="获取验证码" TextColor="White" FontSize="18" FontAttributes="Bold" CornerRadius="20" HorizontalOptions="Fill"
-                                HeightRequest="40" IsEnabled="{Binding AuthCodeButtonEnable}" 
-                                BackgroundColor="{Binding AuthLoginButtonColor}" 
-                                Command="{Binding ToAuthPageCommand}"/>
+                                HeightRequest="40" BackgroundColor="{StaticResource SkyBlue}" Command="{Binding ToAuthPageCommand}"/>
 
                         <Label Text="账号密码登录" TextColor="{StaticResource SkyBlue}" FontSize="16" Margin="0,10" HorizontalOptions="EndAndExpand">
                             <Label.GestureRecognizers>
@@ -82,7 +81,7 @@
                         <Label Text="账号密码登录" FontSize="22" TextColor="Black" FontAttributes="Bold"/>
 
                         <controls:MyEntry Placeholder="手机号" HeightRequest="25" Margin="0,20,0,0" Text="{Binding Tel}" Keyboard="Numeric"
-                                          HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Start"/>
+                                          HorizontalOptions="Fill" VerticalOptions="Center" HorizontalTextAlignment="Start" MaxLength="11"/>
                         <BoxView HeightRequest="1" BackgroundColor="LightGray" HorizontalOptions="Fill"/>
 
                         <StackLayout Orientation="Horizontal" HorizontalOptions="Fill" Margin="0,20,0,0">

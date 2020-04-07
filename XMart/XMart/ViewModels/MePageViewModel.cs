@@ -4,6 +4,7 @@ using System.Text;
 using XMart.Util;
 using XMart.Views;
 using Xamarin.Forms;
+using System.IO;
 
 namespace XMart.ViewModels
 {
@@ -46,6 +47,8 @@ namespace XMart.ViewModels
 
 		public Command<string> NavigateCommand { get; set; }
 
+		public Command LoginOutCommand { get; set; }
+
 		public MePageViewModel()
 		{
 			UserName = GlobalVariables.LoggedUser.username;
@@ -60,7 +63,26 @@ namespace XMart.ViewModels
 				Page page = (Page)Activator.CreateInstance(type);
 				Application.Current.MainPage.Navigation.PushModalAsync(page);
 			}, (pageName) => { return true; });
+
+			LoginOutCommand = new Command(async () =>
+			{
+				bool action = await Application.Current.MainPage.DisplayAlert("退出登录", "确定要退出登录吗？", "确定", "取消");
+				if (action)
+				{
+					LoginOut();
+				}
+			}, () => { return true; });
 		}
 
+		private	void LoginOut()
+		{
+			GlobalVariables.IsLogged = false;
+
+			string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+			File.Delete(fileName);
+
+			MainPage mainPage = new MainPage();
+			Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
+		}
 	}
 }

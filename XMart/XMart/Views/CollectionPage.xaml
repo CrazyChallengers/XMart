@@ -56,7 +56,6 @@
                                         <ColumnDefinition Width="140"/>
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="6*"/>
-                                        <ColumnDefinition Width="50"/>
                                     </Grid.ColumnDefinitions>
 
                                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding productImageBig}"/>

@@ -15,23 +15,24 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <Frame HeightRequest="24" CornerRadius="24" BackgroundColor="White" HasShadow="False" Padding="0" BorderColor="{StaticResource MainColor}">
+        <Frame HeightRequest="30" CornerRadius="15" BackgroundColor="White" HasShadow="False" Padding="0" BorderColor="{StaticResource MainColor}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                
-                <Label x:Name="MinusButton" Grid.Column="0" Text="-" Margin="12,0,0,0">
+
+                <Label x:Name="MinusButton" Grid.Column="0" Text="-" Margin="12,0,0,0" FontSize="30">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="MinusTapped" />
                     </Label.GestureRecognizers>
                 </Label>
                 
-                <controls:MyEntry x:Name="ValueText" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
-                
-                <Label x:Name="PlusButton" Grid.Column="2" Text="+" Margin="0,0,12,0">
+                <controls:MyEntry x:Name="ValueText" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center" 
+                                  Keyboard="Numeric" MaxLength="10"/>
+
+                <Label x:Name="PlusButton" Grid.Column="2" Text="+" Margin="0,0,12,0" FontSize="24">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="PlusTapped" />
                     </Label.GestureRecognizers>

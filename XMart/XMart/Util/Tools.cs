@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace XMart.Util
 {
@@ -13,9 +15,29 @@ namespace XMart.Util
         /// <returns></returns>
         public static bool IsPhoneNumber(string tel)
         {
-            string CellPhoneReg = @"^[1]+[3,4,5,7,8,9]+\d{9}$";   //手机
+            if (string.IsNullOrWhiteSpace(tel))
+            {
+                return false;
+            }
 
+            string CellPhoneReg = @"^[1]+[3,4,5,7,8,9]+\d{9}$";   //手机
             return Regex.IsMatch(tel, CellPhoneReg);
+        }
+        
+        /// <summary>
+        /// 检测是否数字
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
+        public static bool IsNumber(string num)
+        {
+            if (string.IsNullOrWhiteSpace(num))
+            {
+                return false;
+            }
+
+            string numberReg = @"^[1-9]\d*$";   //手机
+            return Regex.IsMatch(num, numberReg);
         }
 
         /// <summary>
@@ -54,5 +76,19 @@ namespace XMart.Util
             return type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
         }
 
+        /*
+        public static async Task<PermissionStatus> CheckAndRequestPermissionAsync<TPermission>()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            }
+
+            // Additionally could prompt the user to turn on in settings
+
+            return status;
+        }
+        */
     }
 }

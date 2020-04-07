@@ -12,6 +12,8 @@ using Xamarin.Forms;
 using System.Threading;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
+using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace XMart.Droid
 {
@@ -190,7 +192,7 @@ namespace XMart.Droid
             });*/
 
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState); // add this line to your code, it may also be called: bundle
+            Platform.Init(this, savedInstanceState); // add this line to your code, it may also be called: bundle
             Forms.Init(this, savedInstanceState);
 
             LoadApplication(new App());
@@ -201,13 +203,13 @@ namespace XMart.Droid
             wxApi = WXAPIFactory.CreateWXAPI(this, appID, true);
             return wxApi.RegisterApp(appID);
         }
-
+        /*
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        }*/
 
         #region 支付宝
         private void Pay(object sign)

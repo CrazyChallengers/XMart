@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using XMart.Controls;
+using XMart.Util;
 
 namespace XMart.Controls
 {
@@ -86,7 +86,7 @@ namespace XMart.Controls
         {
             base.OnPropertyChanged(propertyName);
 
-            if (propertyName == ValueProperty.PropertyName)
+            if (propertyName == ValueProperty.PropertyName && Tools.IsNumber(Value.ToString()))
                 ValueText.Text = Value.ToString();
         }
 
@@ -113,6 +113,14 @@ namespace XMart.Controls
             await element.ScaleTo(0.9, 50, Easing.Linear);
             await Task.Delay(100);
             await element.ScaleTo(1, 50, Easing.Linear);
+        }
+
+        private void ValueText_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Tools.IsNumber(Value.ToString()))
+            {
+
+            }
         }
     }
 }

@@ -158,6 +158,12 @@ namespace XMart.ViewModels
 		{
 			try
 			{
+				if (!Tools.IsPhoneNumber(Tel))
+				{
+					CrossToastPopUp.Current.ShowToastWarning("手机号格式不标准，请检查。", ToastLength.Long);
+					return;
+				}
+
 				AddressInfo addressInfo = new AddressInfo
 				{
 					addressId = AddressId,
@@ -192,6 +198,12 @@ namespace XMart.ViewModels
 		{
 			try
 			{
+				if (!Tools.IsPhoneNumber(Tel))
+				{
+					CrossToastPopUp.Current.ShowToastWarning("手机号格式不标准，请检查。", ToastLength.Long);
+					return;
+				}
+
 				AddressInfo addressInfo = new AddressInfo
 				{
 					addressId = 0,

@@ -13,6 +13,7 @@ using Xamarin.Forms;
 using System.IO;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
 
 namespace XMart.ViewModels
 {
@@ -187,5 +188,6 @@ namespace XMart.ViewModels
             //ButtonColor = Color.FromHex("FFCC00");
             UnloadAsync();
         }
+
     }
 }

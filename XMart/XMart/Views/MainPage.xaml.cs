@@ -10,6 +10,9 @@ using XMart.Util;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using XMart.Models;
+using Xamarin.Essentials;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace XMart.Views
 {
@@ -19,7 +22,7 @@ namespace XMart.Views
         {
             InitializeComponent();
 
-            Init();
+            InitAsync();
 
             if (GlobalVariables.IsLogged)
             {
@@ -31,8 +34,15 @@ namespace XMart.Views
             }
         }
 
-        private void Init()
+        private async Task InitAsync()
         {
+            var status = await CheckAndRequestPermissionAsync();
+            if (status != PermissionStatus.Granted)
+            {
+                GlobalVariables.IsLogged = false;
+                return;
+            }
+
             //初始化，检查是否存在已记住的密码
             string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
             
@@ -49,18 +59,11 @@ namespace XMart.Views
 
                 if (dayDiff <= 30)
                 {
-                    //Tel = tel;
-                    //Pwd = pwd;
-                    //IsRememberPwd = true;
-
-                    //OnLogin();
-
                     GlobalVariables.LoggedUser = JsonConvert.DeserializeObject<UserInfo>(log["UserInfo"].ToString());
                     GlobalVariables.IsLogged = true;
                 }
                 else
                 {
-                    //input pwd
                     GlobalVariables.IsLogged = false;
                 }
             }
@@ -74,5 +77,19 @@ namespace XMart.Views
         {
             return true;
         }
+
+        private async Task<PermissionStatus> CheckAndRequestPermissionAsync()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            }
+
+            // Additionally could prompt the user to turn on in settings
+
+            return status;
+        }
+
     }
 }

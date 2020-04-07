@@ -42,8 +42,10 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Text="个人中心" TextColor="Black" FontAttributes="Bold" FontSize="24"
+            <Label Grid.Row="0" Text="个人中心" TextColor="Black" FontSize="24"
                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Button Grid.Row="0" Text="退出" TextColor="Crimson" BackgroundColor="Transparent" FontSize="18"
+                   HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Command="{Binding LoginOutCommand}"/>
 
             <StackLayout Grid.Row="1" Orientation="Horizontal">
                 <Frame HeightRequest="80" WidthRequest="80" Padding="0" CornerRadius="40"

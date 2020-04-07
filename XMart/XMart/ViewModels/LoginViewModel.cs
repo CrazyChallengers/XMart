@@ -10,6 +10,8 @@ using XMart.Views;
 using XMart.Util;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace XMart.ViewModels
 {
@@ -71,21 +73,12 @@ namespace XMart.ViewModels
             set { SetProperty(ref authLoginButtonColor, value); }
         }
 
-        private bool authCodeButtonEnable;   //Comment
-        public bool AuthCodeButtonEnable
-        {
-            get { return authCodeButtonEnable; }
-            set { SetProperty(ref authCodeButtonEnable, value); }
-        }
-
         private RestSharpService _restSharpService = new RestSharpService();
-        string fileName;
 
         public Command ToRegisterPageCommand { get; private set; }   //跳转到注册页面
         public Command LoginCommand { get; private set; }   //登录按钮
         public Command FindPwdCommand { get; private set; }   //跳转到找回密码页面
         public Command OpenEyeCommand { get; private set; }
-        public Command CheckPhoneCommand { get; set; }
         public Command ToAuthPageCommand { get; set; }
         public Command PasswordLoginPartCommand { get; set; }
         public Command AuthLoginPartCommand { get; set; }
@@ -96,7 +89,6 @@ namespace XMart.ViewModels
             IsPassword = true;
             EyeSource = "Resource/drawable/closed_eye.png";
             AuthLoginButtonColor = "#83d7f9";
-            AuthCodeButtonEnable = false;
             AuthVisible = true;
             PasswordVisible = false;
 
@@ -132,25 +124,17 @@ namespace XMart.ViewModels
                 }
             }, () => { return true; });
 
-            CheckPhoneCommand = new Command(() =>
+            ToAuthPageCommand = new Command(() =>
             {
                 if (Tools.IsPhoneNumber(Tel))
                 {
-                    AuthLoginButtonColor = "#01acf2";
-                    AuthCodeButtonEnable = true;
+                    AuthCodePage authCodePage = new AuthCodePage(Tel);
+                    Application.Current.MainPage.Navigation.PushModalAsync(authCodePage);
                 }
                 else
                 {
-                    AuthLoginButtonColor = "#83d7f9";
-                    AuthCodeButtonEnable = false;
+                    CrossToastPopUp.Current.ShowToastWarning("手机号格式不标准，请检查。", ToastLength.Long);
                 }
-            }, () => { return true; });
-
-            ToAuthPageCommand = new Command(() =>
-            {
-                AuthCodePage authCodePage = new AuthCodePage(Tel);
-
-                Application.Current.MainPage.Navigation.PushModalAsync(authCodePage);
             }, () => { return true; });
 
             PasswordLoginPartCommand = new Command(() =>
@@ -218,7 +202,7 @@ namespace XMart.ViewModels
                 JObject log = new JObject();
                 log.Add("LoginTime", DateTime.UtcNow);
                 log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
-                fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
                 File.WriteAllText(fileName, log.ToString());
 
                 MainPage mainPage = new MainPage();
