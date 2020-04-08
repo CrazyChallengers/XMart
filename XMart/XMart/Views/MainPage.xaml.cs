@@ -22,22 +22,24 @@ namespace XMart.Views
         {
             InitializeComponent();
 
-            InitAsync();
+            Init();
 
-            if (GlobalVariables.IsLogged)
-            {
-                Children.Add(new MePage());
-            }
-            else
-            {
-                Children.Add(new LoginPage());
-            }
         }
 
-        private async Task InitAsync()
+        private void Init()
         {
-            var status = await CheckAndRequestPermissionAsync();
-            if (status != PermissionStatus.Granted)
+            if (!Tools.IsNetConnective())
+            {
+                CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                return;
+            }
+            //NetErrorPage.IsVisible = false;
+            Children.Remove(NetErrorPage);
+            Children.Add(new HomePage());
+            Children.Add(new CategoryPage());
+
+            var status = CheckAndRequestPermissionAsync();
+            if (status.Result != PermissionStatus.Granted)
             {
                 GlobalVariables.IsLogged = false;
                 return;
@@ -45,7 +47,6 @@ namespace XMart.Views
 
             //初始化，检查是否存在已记住的密码
             string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
-            
             if (File.Exists(fileName))
             {
                 string text = File.ReadAllText(fileName);
@@ -61,10 +62,14 @@ namespace XMart.Views
                 {
                     GlobalVariables.LoggedUser = JsonConvert.DeserializeObject<UserInfo>(log["UserInfo"].ToString());
                     GlobalVariables.IsLogged = true;
+                    Children.Add(new CartPage());
+                    Children.Add(new MePage());
                 }
                 else
                 {
                     GlobalVariables.IsLogged = false;
+                    Children.Add(new CartPage());
+                    Children.Add(new LoginPage());
                 }
             }
         }
@@ -91,5 +96,9 @@ namespace XMart.Views
             return status;
         }
 
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Init();
+        }
     }
 }

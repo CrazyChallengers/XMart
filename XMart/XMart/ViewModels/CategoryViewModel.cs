@@ -27,30 +27,42 @@ namespace XMart.ViewModels
             set { SetProperty(ref subCategoryList, value); }
         }
 
-        private string index;   //Comment
-        public string Index
+        private string searchString;   //Comment
+        public string SearchString
         {
-            get { return index; }
-            set { SetProperty(ref index, value); }
+            get { return searchString; }
+            set { SetProperty(ref searchString, value); }
         }
 
         public Command SearchCommand { get; set; }
+        public Command ReloadCommand { get; set; }
 
         public CategoryViewModel()
         {
+            ParentCategoryList = new List<Category>();
+
+            SubCategoryList = new List<Category>();
+
+            SearchString = "";
+
             SearchCommand = new Command(() =>
             {
-                if (string.IsNullOrEmpty(Index))
+                if (string.IsNullOrEmpty(SearchString))
                 {
                     CrossToastPopUp.Current.ShowToastWarning("请输入关键词", ToastLength.Short);
                 }
                 else
                 {
-                    ProductListPage productListPage = new ProductListPage(Index);
-                    Index = "";
+                    ProductListPage productListPage = new ProductListPage(SearchString);
+                    SearchString = "";
 
                     Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
                 }
+            }, () => { return true; });
+
+            ReloadCommand = new Command(() =>
+            {
+
             }, () => { return true; });
 
         }

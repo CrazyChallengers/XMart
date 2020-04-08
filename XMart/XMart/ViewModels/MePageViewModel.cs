@@ -46,16 +46,18 @@ namespace XMart.ViewModels
 		}
 
 		public Command<string> NavigateCommand { get; set; }
-
 		public Command LoginOutCommand { get; set; }
+		public Command ReloadCommand { get; set; }
 
 		public MePageViewModel()
 		{
-			UserName = GlobalVariables.LoggedUser.username;
-			UserId = GlobalVariables.LoggedUser.id.ToString();
-			UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
-			UserAvatar = GlobalVariables.LoggedUser.file == null ? "star_yellow.png" : GlobalVariables.LoggedUser.file;
-			Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+			UserName = string.Empty;
+			UserType = string.Empty;
+			UserId = string.Empty;
+			UserAvatar = string.Empty;
+			Visible = false;
+
+			InitMePage();
 
 			NavigateCommand = new Command<string>((pageName) =>
 			{
@@ -72,6 +74,27 @@ namespace XMart.ViewModels
 					LoginOut();
 				}
 			}, () => { return true; });
+
+			ReloadCommand = new Command(() =>
+			{
+				InitMePage();
+			}, () => { return true; });
+		}
+
+		private void InitMePage()
+		{
+			try
+			{
+				UserName = GlobalVariables.LoggedUser.username;
+				UserId = GlobalVariables.LoggedUser.id.ToString();
+				UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
+				UserAvatar = GlobalVariables.LoggedUser.file == null ? "star_yellow.png" : GlobalVariables.LoggedUser.file;
+				Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 
 		private	void LoginOut()

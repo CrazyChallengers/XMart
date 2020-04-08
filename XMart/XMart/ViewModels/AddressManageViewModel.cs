@@ -9,13 +9,14 @@ using Plugin.Toast;
 using Plugin.Toast.Abstractions;
 using Xamarin.Forms;
 using XMart.Views;
+using System.Collections.ObjectModel;
 
 namespace XMart.ViewModels
 {
     public class AddressManageViewModel : BaseViewModel
     {
-        private List<AddressInfo> addressList;   //Comment
-        public List<AddressInfo> AddressList
+        private ObservableCollection<AddressInfo> addressList;   //Comment
+        public ObservableCollection<AddressInfo> AddressList
         {
             get { return addressList; }
             set { SetProperty(ref addressList, value); }
@@ -42,6 +43,8 @@ namespace XMart.ViewModels
 
         public AddressManageViewModel()
         {
+            AddressList = new ObservableCollection<AddressInfo>();
+
             if (GlobalVariables.IsLogged)
             {
                 InitAddressList();
@@ -90,6 +93,12 @@ namespace XMart.ViewModels
         {
             try
             {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
                 RestSharpService _restSharpService = new RestSharpService();
 
                 string memberId = GlobalVariables.LoggedUser.id.ToString();
@@ -98,7 +107,7 @@ namespace XMart.ViewModels
 
                 if (addressRD.result.Count != 0)
                 {
-                    AddressList = addressRD.result;
+                    AddressList = new ObservableCollection<AddressInfo>(addressRD.result);
                     Visible = false;
                 }
                 else

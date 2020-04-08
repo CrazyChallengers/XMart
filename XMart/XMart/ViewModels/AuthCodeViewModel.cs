@@ -55,7 +55,6 @@ namespace XMart.ViewModels
         }
 
         private string Tel { get; set; }
-        public long Tick { get; set; }
         public MyTimer myTimer { get; set; }
         RestSharpService _restSharpService = new RestSharpService();
 
@@ -98,18 +97,33 @@ namespace XMart.ViewModels
         /// </summary>
         private async void SendAuthCode()
         {
-            SimpleRD simpleRD = await _restSharpService.SendAuthCode(Tel);
+            try
+            {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
 
-            if (simpleRD.code == 200)
-            {
-                myTimer = new MyTimer { EndDate = DateTime.Now.Add(new TimeSpan(900000000)) };
-                LoadAsync();
-                CrossToastPopUp.Current.ShowToastSuccess("请注意查收短信！", ToastLength.Long);
+                SimpleRD simpleRD = await _restSharpService.SendAuthCode(Tel);
+
+                if (simpleRD.code == 200)
+                {
+                    myTimer = new MyTimer { EndDate = DateTime.Now.Add(new TimeSpan(900000000)) };
+                    LoadAsync();
+                    CrossToastPopUp.Current.ShowToastSuccess("请注意查收短信！", ToastLength.Long);
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError(simpleRD.message, ToastLength.Long);
+                }
             }
-            else
+            catch (Exception)
             {
-                CrossToastPopUp.Current.ShowToastError(simpleRD.message, ToastLength.Long);
+
+                throw;
             }
+            
         }
 
         /// <summary>
@@ -117,46 +131,60 @@ namespace XMart.ViewModels
         /// </summary>
         private async void OnLogin()
         {
-            LoginPara loginPara = new LoginPara
+            try
             {
-                authCode = AuthCode,
-                tel = Tel
-            };
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
 
-            LoginRD loginRD = await _restSharpService.LoginByAuthCode(loginPara);
+                LoginPara loginPara = new LoginPara
+                {
+                    authCode = AuthCode,
+                    tel = Tel
+                };
 
-            /*
-            if (loginRD.code == 200)
-            {
-                CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
+                LoginRD loginRD = await _restSharpService.LoginByAuthCode(loginPara);
 
-                MainPage mainPage = new MainPage();
-                await Navigation.PushModalAsync(mainPage);
+                /*
+                if (loginRD.code == 200)
+                {
+                    CrossToastPopUp.Current.ShowToastSuccess(loginRD.message, ToastLength.Long);
+
+                    MainPage mainPage = new MainPage();
+                    await Navigation.PushModalAsync(mainPage);
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError(loginRD.message, ToastLength.Long);
+                }*/
+                if (loginRD.result.message == null)
+                {
+                    CrossToastPopUp.Current.ShowToastSuccess("欢迎您登录美而好家具！", ToastLength.Long);
+
+                    GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
+                    GlobalVariables.IsLogged = true;
+
+                    string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+                    JObject log = new JObject();
+                    log.Add("LoginTime", DateTime.UtcNow);
+                    log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
+                    //string text = "State:Checked\n" + "Account:" + Tel + "\nPassword:" + loginRD.result + "\nLoginTime:" + DateTime.UtcNow;
+                    File.WriteAllText(fileName, log.ToString());
+
+                    MainPage mainPage = new MainPage();
+                    await Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError(loginRD.result.message, ToastLength.Long);
+                }
             }
-            else
+            catch (Exception)
             {
-                CrossToastPopUp.Current.ShowToastError(loginRD.message, ToastLength.Long);
-            }*/
-            if (loginRD.result.message == null)
-            {
-                CrossToastPopUp.Current.ShowToastSuccess("欢迎您登录美而好家具！", ToastLength.Long);
 
-                GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
-                GlobalVariables.IsLogged = true;
-
-                string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
-                JObject log = new JObject();
-                log.Add("LoginTime", DateTime.UtcNow);
-                log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
-                //string text = "State:Checked\n" + "Account:" + Tel + "\nPassword:" + loginRD.result + "\nLoginTime:" + DateTime.UtcNow;
-                File.WriteAllText(fileName, log.ToString());
-
-                MainPage mainPage = new MainPage();
-                await Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
-            }
-            else
-            {
-                CrossToastPopUp.Current.ShowToastError(loginRD.result.message, ToastLength.Long);
+                throw;
             }
         }
 

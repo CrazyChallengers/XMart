@@ -4,6 +4,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.ViewModels;
 using XMart.Models;
+using System.Threading;
 
 namespace XMart.Views
 {
@@ -18,8 +19,25 @@ namespace XMart.Views
             InitializeComponent();
 
             BindingContext = homeViewModel;
-        }
 
+            /*
+            if (homeViewModel.CarouselList.Count()>0)
+            {
+                Device.StartTimer(new TimeSpan(0, 0, 5), () =>
+                {
+                    // do something every 10 seconds
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        // interact with UI elements
+                        carousel.Position = index % homeViewModel.CarouselList.Count();
+                        index += 1;
+                        index %= homeViewModel.CarouselList.Count();
+                    });
+                    return true; // runs again, or false to stop
+                });
+            }*/
+        }
+        /*
         /// <summary>
         /// 轮播图选择事件
         /// </summary>
@@ -50,38 +68,6 @@ namespace XMart.Views
             Navigation.PushModalAsync(productDetailPage);
         }
 
-        protected override void OnDisappearing()
-        {
-            Device.StartTimer(new TimeSpan(0, 0, 5), () =>
-            {
-                // do something every 10 seconds
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    // interact with UI elements
-                    carousel.Position = index % homeViewModel.CarouselList.Count();
-                    index += 1;
-                    index %= homeViewModel.CarouselList.Count();
-                });
-                return false; // runs again, or false to stop
-            });
-        }
-
-        protected override void OnAppearing()
-        {
-            Device.StartTimer(new TimeSpan(0, 0, 5), () =>
-            {
-                // do something every 10 seconds
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    // interact with UI elements
-                    carousel.Position = index % homeViewModel.CarouselList.Count();
-                    index += 1;
-                    index %= homeViewModel.CarouselList.Count();
-                });
-                return true; // runs again, or false to stop
-            });
-        }
-
         /// <summary>
         /// 找单品点击事件
         /// </summary>
@@ -97,5 +83,30 @@ namespace XMart.Views
             ProductListPage productListPage = new ProductListPage(category);
             Navigation.PushModalAsync(productListPage);
         }
+
+        protected override void OnDisappearing()
+        {
+
+        }
+        
+        protected override void OnAppearing()
+        {
+            if (!homeViewModel.NetErrorVisible)
+            {
+                Device.StartTimer(new TimeSpan(0, 0, 5), () =>
+                {
+                    // do something every 10 seconds
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        // interact with UI elements
+                        carousel.Position = index % homeViewModel.CarouselList.Count();
+                        index += 1;
+                        index %= homeViewModel.CarouselList.Count();
+                    });
+                    return true; // runs again, or false to stop
+                });
+            }
+        }*/
+
     }
 }

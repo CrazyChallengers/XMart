@@ -9,6 +9,8 @@ using XMart.Models;
 using XMart.ResponseData;
 using XMart.Services;
 using XMart.Views;
+using XMart.Util;
+using System.Threading;
 
 namespace XMart.ViewModels
 {
@@ -98,14 +100,16 @@ namespace XMart.ViewModels
             set { SetProperty(ref brandChoiceList, value); }
         }
 
-        private string index;   //Comment
-        public string Index
+        private string searchString;   //Comment
+        public string SearchString
         {
-            get { return index; }
-            set { SetProperty(ref index, value); }
+            get { return searchString; }
+            set { SetProperty(ref searchString, value); }
         }
-        
-        public ICommand ItemTapCommand { set; get; }
+
+        public Command<long> ItemTapCommand { set; get; }
+        public Command<int> FindMoreCommand { get; set; }
+        public Command<int> CarouselTappedCommand { get; set; }
         public Command SearchCommand { get; set; }
         public Command<string> NavigateCommand { get; set; }
         public Command MoreCatCommand { get; set; }
@@ -114,17 +118,38 @@ namespace XMart.ViewModels
         {
             InitHomePage();
 
+            //TimerCallback timerDelegate = new TimerCallback(Tick);
+            //timer = new Timer(timerDelegate, null, 0, 5000); //5秒执行一次Tick方法
+
+            CarouselTappedCommand = new Command<int>((position) =>
+            {
+                string url = CarouselList[position].fullUrl;
+                WebPage webPage = new WebPage(url);
+                Application.Current.MainPage.Navigation.PushModalAsync(webPage);
+            }, (position) => { return true; });
+
+            FindMoreCommand = new Command<int>((id) =>
+            {
+                foreach (var item in CatList)
+                {
+                    if (item.id == id)
+                    {
+                        ProductListPage productListPage = new ProductListPage(item);
+                        Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
+                    }
+                }
+            }, (id) => { return true; });
+
             SearchCommand = new Command(() =>
             {
-                if (string.IsNullOrEmpty(Index))
+                if (string.IsNullOrEmpty(SearchString))
                 {
                     CrossToastPopUp.Current.ShowToastWarning("请输入关键词", ToastLength.Short);
                 }
                 else
                 {
-                    ProductListPage productListPage = new ProductListPage(Index);
-                    Index = "";
-
+                    ProductListPage productListPage = new ProductListPage(SearchString);
+                    SearchString = "";
                     Application.Current.MainPage.Navigation.PushModalAsync(productListPage);
                 }
             }, () => { return true; });
@@ -136,13 +161,11 @@ namespace XMart.ViewModels
                 Application.Current.MainPage.Navigation.PushModalAsync(page);
             }, (pageName) => { return true; });
 
-            ItemTapCommand = new Command<string>(
-                execute: (string productId) =>
-                {
-                    ProductDetailPage productDetailPage = new ProductDetailPage(productId);
-                    Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
-                }
-                );
+            ItemTapCommand = new Command<long>((id) =>
+            {
+                ProductDetailPage productDetailPage = new ProductDetailPage(id.ToString());
+                Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+            }, (id) => { return true; });
 
             MoreCatCommand = new Command(() =>
             {
@@ -154,44 +177,59 @@ namespace XMart.ViewModels
 
         private async void InitHomePage()
         {
-            RestSharpService _restSharpService = new RestSharpService();
-            HomeContentRD homeContentRD = await _restSharpService.GetHomeContent();
-            CategoryRD categoryRD = await _restSharpService.GetCategories();
-
-            //CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
-            HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
-            //OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
-            //GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
-            //BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
-
-            CarouselList = new List<HomePanelContent>
+            try
             {
-                new HomePanelContent
+                if (!Tools.IsNetConnective())
                 {
-                    picUrl = "sanye.png",
-                    fullUrl = "http://www.sanecn.com/"
-                },
-                new HomePanelContent
-                {
-                    picUrl = "bianselong.jpg",
-                    fullUrl = "http://www.cdbsljs.com/"
-                },
-                new HomePanelContent
-                {
-                    picUrl = "jiabei.jpg",
-                    fullUrl = "http://www.cdbsljs.com/"
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
                 }
-            };
 
-            List<Category> temp = new List<Category>();
-            foreach (var item in categoryRD.result)
-            {
-                if (!item.isParent)
+                RestSharpService _restSharpService = new RestSharpService();
+                HomeContentRD homeContentRD = await _restSharpService.GetHomeContent();
+                CategoryRD categoryRD = await _restSharpService.GetCategories();
+
+                //CarouselList = homeContentRD.result[0].panelContents.ToList<HomePanelContent>();
+                HotProductList = homeContentRD.result[1].panelContents.ToList<HomePanelContent>();
+                //OfficialChoiceList = homeContentRD.result[2].panelContents.ToList<HomePanelContent>();
+                //GoodBrandList = homeContentRD.result[3].panelContents.ToList<HomePanelContent>();
+                //BrandChoiceList = homeContentRD.result[4].panelContents.ToList<HomePanelContent>();
+
+                CarouselList = new List<HomePanelContent>
                 {
-                    temp.Add(item);
+                    new HomePanelContent
+                    {
+                        picUrl = "sanye.png",
+                        fullUrl = "http://www.sanecn.com/"
+                    },
+                    new HomePanelContent
+                    {
+                        picUrl = "bianselong.jpg",
+                        fullUrl = "http://www.cdbsljs.com/"
+                    },
+                    new HomePanelContent
+                    {
+                        picUrl = "jiabei.jpg",
+                        fullUrl = "http://www.cdbsljs.com/"
+                    }
+                };
+
+                List<Category> temp = new List<Category>();
+                foreach (var item in categoryRD.result)
+                {
+                    if (!item.isParent)
+                    {
+                        temp.Add(item);
+                    }
                 }
+                CatList = temp.GetRange(0, 10);
+
             }
-            CatList = temp.GetRange(0, 10);
+            catch (Exception)
+            {
+                throw;
+            }
         }
+
     }
 }

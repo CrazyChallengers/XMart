@@ -43,7 +43,7 @@
                 <StackLayout Orientation="Horizontal" Spacing="0">
                     <ImageButton Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
                     <controls:MyEntry Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
-                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                                      Text="{Binding SearchString}" ReturnCommand="{Binding SearchCommand}"/>
                     <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="40" FontSize="18" Padding="0" Command="{Binding SearchCommand}"/>
                 </StackLayout>
             </Frame>
@@ -97,7 +97,7 @@
                 </ScrollView>
 
             </StackLayout>
-            
+
         </Grid>
     </ContentPage.Content>
 </ContentPage>

@@ -123,12 +123,14 @@ namespace XMart.ViewModels
             ProductList = new ObservableCollection<ProductListItem>();
             ProductNum = 0;
             TotalProductNum = 0;
+            SearchString = string.Empty;
             Page = 1;
             _Size = 20;
             Sort = "1";
             Sequence = 1;
             PriceGt = "";
             PriceLte = "";
+
             GetProductList(subCategoryInfo);
 
             SearchCommand = new Command(() =>
@@ -243,6 +245,8 @@ namespace XMart.ViewModels
             _Size = 20;
             Sort = "1";
             Sequence = 1;
+            PriceGt = "";
+            PriceLte = "";
 
             SearchString = _index;
             Search(SearchString);
@@ -346,30 +350,45 @@ namespace XMart.ViewModels
 
         private async void Search(string searchString)
         {
-            IndicatorIsRunning = true;
-            //int page = 1;
-            //int size = 20;
-            //string sort = "1";
-            //int sequence = 1;
-            //int priceGt = -1;
-            //int priceLte = -1;
-            int gt = string.IsNullOrEmpty(PriceGt) ? -1 : int.Parse(PriceGt);
-            int lte = string.IsNullOrEmpty(PriceLte) ? -1 : int.Parse(PriceLte);
-
-            RestSharpService _restSharpService = new RestSharpService();
-            ProductListRD productListRD = await _restSharpService.FuzzySearch(searchString, sequence, page, size, sort, gt, lte);
-
-            TotalProductNum = productListRD.result.total;
-            ProductNum += productListRD.result.data.Count;
-
-            List<ProductListItem> tempList = new List<ProductListItem>();
-            foreach (var item in productListRD.result.data)
+            try
             {
-                ProductList.Add(item);
-            }
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
 
-            ChangeButtonText();
-            IndicatorIsRunning = false;
+                IndicatorIsRunning = true;
+                //int page = 1;
+                //int size = 20;
+                //string sort = "1";
+                //int sequence = 1;
+                //int priceGt = -1;
+                //int priceLte = -1;
+                int gt = string.IsNullOrEmpty(PriceGt) ? -1 : int.Parse(PriceGt);
+                int lte = string.IsNullOrEmpty(PriceLte) ? -1 : int.Parse(PriceLte);
+
+                RestSharpService _restSharpService = new RestSharpService();
+                ProductListRD productListRD = await _restSharpService.FuzzySearch(searchString, sequence, page, size, sort, gt, lte);
+
+                TotalProductNum = productListRD.result.total;
+                ProductNum += productListRD.result.data.Count;
+
+                List<ProductListItem> tempList = new List<ProductListItem>();
+                foreach (var item in productListRD.result.data)
+                {
+                    ProductList.Add(item);
+                }
+
+                ChangeButtonText();
+                IndicatorIsRunning = false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
         private async void Search(string searchString, int page, int size, string sort, int sequence, string priceGt, string priceLte)
@@ -393,29 +412,43 @@ namespace XMart.ViewModels
 
         private async void GetProductList(Category subCategoryInfo)
         {
-            IndicatorIsRunning = true;
-            //int page = 1;
-            //int size = 20;
-            //string sort = "1";
-            long cid = subCategoryInfo.id;
-            //int priceGt = -1;
-            //int priceLte = -1;
-            int gt = string.IsNullOrEmpty(PriceGt) ? -1 : int.Parse(PriceGt);
-            int lte = string.IsNullOrEmpty(PriceLte) ? -1 : int.Parse(PriceLte);
-
-            RestSharpService _restSharpService = new RestSharpService();
-            ProductListRD productListRD = await _restSharpService.GetProductList(page, size, sort, cid, gt, lte);
-
-            TotalProductNum = productListRD.result.total;
-            ProductNum += productListRD.result.data.Count;
-
-            foreach (var item in productListRD.result.data)
+            try
             {
-                ProductList.Add(item);
-            }
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
 
-            ChangeButtonText();
-            IndicatorIsRunning = false;
+                IndicatorIsRunning = true;
+                //int page = 1;
+                //int size = 20;
+                //string sort = "1";
+                long cid = subCategoryInfo.id;
+                //int priceGt = -1;
+                //int priceLte = -1;
+                int gt = string.IsNullOrEmpty(PriceGt) ? -1 : int.Parse(PriceGt);
+                int lte = string.IsNullOrEmpty(PriceLte) ? -1 : int.Parse(PriceLte);
+
+                RestSharpService _restSharpService = new RestSharpService();
+                ProductListRD productListRD = await _restSharpService.GetProductList(page, size, sort, cid, gt, lte);
+
+                TotalProductNum = productListRD.result.total;
+                ProductNum += productListRD.result.data.Count;
+
+                foreach (var item in productListRD.result.data)
+                {
+                    ProductList.Add(item);
+                }
+
+                ChangeButtonText();
+                IndicatorIsRunning = false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private async void GetProductList(Category subCategoryInfo, int page, int size, string sort, string priceGt, string priceLte)

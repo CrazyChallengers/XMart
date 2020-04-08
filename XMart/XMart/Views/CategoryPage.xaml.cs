@@ -8,6 +8,8 @@ using XMart.Services;
 using XMart.ResponseData;
 using XMart.Models;
 using XMart.Behaviors;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace XMart.Views
 {
@@ -31,25 +33,38 @@ namespace XMart.Views
         /// </summary>
         private async void InitCategories()
         {
-            RestSharpService _restSharpService = new RestSharpService();
-            CategoryRD categoryRD = await _restSharpService.GetCategories();
-
-            categoryList = categoryRD.result;
-
-            List<Category> temp = new List<Category>();
-            
-            foreach (var item in categoryList)
+            try
             {
-                if (item.isParent)
+                if (!Tools.IsNetConnective())
                 {
-                    temp.Add(item);
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
                 }
+
+                RestSharpService _restSharpService = new RestSharpService();
+                CategoryRD categoryRD = await _restSharpService.GetCategories();
+
+                categoryList = categoryRD.result;
+
+                List<Category> temp = new List<Category>();
+
+                foreach (var item in categoryList)
+                {
+                    if (item.isParent)
+                    {
+                        temp.Add(item);
+                    }
+                }
+
+                categoryViewModel.ParentCategoryList = temp;
+
+                ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
+                GetSubCategories(0);
             }
-
-            categoryViewModel.ParentCategoryList = temp;
-
-            ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
-            GetSubCategories(0);
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -66,6 +81,10 @@ namespace XMart.Views
             GetSubCategories(index);
         }
 
+        /// <summary>
+        /// 获取二级目录
+        /// </summary>
+        /// <param name="index"></param>
         private void GetSubCategories(int index)
         {
             int selectedParentId = categoryViewModel.ParentCategoryList[index].id;
@@ -95,6 +114,11 @@ namespace XMart.Views
             Category subCategoryInfo = categoryViewModel.SubCategoryList[index];
             ProductListPage productListPage = new ProductListPage(subCategoryInfo);
             Navigation.PushModalAsync(productListPage);
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            InitCategories();
         }
 
     }

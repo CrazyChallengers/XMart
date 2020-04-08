@@ -66,6 +66,11 @@ namespace XMart.ViewModels
             //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
             MemberPriceVisible = GlobalVariables.IsLogged;
 
+            Product = new ProductInfo();
+            StarSource = "star_gray.png";
+            IsCollected = false;
+            CusPriceVisible = false;
+
             BackCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PopModalAsync();
@@ -149,6 +154,12 @@ namespace XMart.ViewModels
         {
             try
             {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
                 ProductDetailRD productDetailRD = await _restSharpService.GetProductDetail(productId);
                 string judgeRD = await _restSharpService.JudgeCollection(productId);
 
@@ -168,10 +179,19 @@ namespace XMart.ViewModels
             }
         }
 
+        /// <summary>
+        /// 收藏
+        /// </summary>
         private async void Collect()
         {
             try
             {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
                 if (IsCollected)
                 {
                     //取消收藏

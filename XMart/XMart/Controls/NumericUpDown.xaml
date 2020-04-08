@@ -15,20 +15,21 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <Frame HeightRequest="30" CornerRadius="15" BackgroundColor="White" HasShadow="False" Padding="0" BorderColor="{StaticResource MainColor}">
-            <Grid>
+        <Frame HeightRequest="25" WidthRequest="100" CornerRadius="15" BackgroundColor="White" HasShadow="False" Padding="0" BorderColor="LightGray">
+            <Grid ColumnSpacing="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="1*" />
                 </Grid.ColumnDefinitions>
 
+                <!--
                 <Label x:Name="MinusButton" Grid.Column="0" Text="-" Margin="12,0,0,0" FontSize="30">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="MinusTapped" />
                     </Label.GestureRecognizers>
                 </Label>
-                
+
                 <controls:MyEntry x:Name="ValueText" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center" 
                                   Keyboard="Numeric" MaxLength="10"/>
 
@@ -36,7 +37,14 @@
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Tapped="PlusTapped" />
                     </Label.GestureRecognizers>
-                </Label>
+                </Label>-->
+
+                <ImageButton x:Name="MinusButton" Grid.Column="0" Source="minus.png" Margin="0" Clicked="MinusTapped" BackgroundColor="Transparent" Padding="0"/>
+
+                <controls:MyEntry x:Name="ValueText" Grid.Column="1" HorizontalTextAlignment="Center" VerticalOptions="Center" HorizontalOptions="Fill" Keyboard="Numeric" MaxLength="10" FontSize="24"/>
+
+                <ImageButton x:Name="PlusButton" Grid.Column="2" Source="plus.png" Margin="0" Clicked="PlusTapped" BackgroundColor="Transparent" Padding="0"/>
+
             </Grid>
         </Frame>
     </ContentView.Content>

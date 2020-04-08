@@ -7,11 +7,21 @@
             android:TabbedPage.BarSelectedItemColor="{StaticResource SkyBlue}"
             android:TabbedPage.IsSwipePagingEnabled="True"
             xmlns:views="clr-namespace:XMart.Views"
+            xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
             x:Class="XMart.Views.MainPage">
 
-    <views:HomePage/>
+    <!--<views:HomePage/>
     <views:CategoryPage/>
     <views:CartPage/>
-    <!--<views:MePage/>-->
+    <views:MePage/>-->
 
+    <ContentPage x:Name="NetErrorPage">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ff:CachedImage Source="NetworkError.png" HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+            <Label Text="网络请求出错" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Label Text="请检查网络连接" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Button Text="重新加载" Clicked="Button_Clicked" HorizontalOptions="Center" VerticalOptions="StartAndExpand"/>
+        </StackLayout>
+    </ContentPage>
+    
 </TabbedPage>

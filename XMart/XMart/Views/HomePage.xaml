@@ -7,6 +7,7 @@
              xmlns:views="clr-namespace:XMart.Views"
              x:Class="XMart.Views.HomePage"
              Icon="Resource/drawable/home.png"
+             x:Name="homePage"
              Title="首页">
 
     <ContentPage.Resources>
@@ -36,7 +37,9 @@
                                 <DataTemplate>
                                     <ff:CachedImage Source="{Binding picUrl}" BackgroundColor="Transparent" Aspect="AspectFill">
                                         <ff:CachedImage.GestureRecognizers>
-                                            <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1" Tapped="CarouselItem_Tapped"/>
+                                            <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1"
+                                                                  Command="{Binding Path=BindingContext.CarouselTappedCommand, Source={x:Reference Name=homePage}}"
+                                                                  CommandParameter="{Binding Path=Position,Source={x:Reference carousel}}"/>
                                         </ff:CachedImage.GestureRecognizers>
                                     </ff:CachedImage>
                                 </DataTemplate>
@@ -65,15 +68,15 @@
                                                HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
 
                                         <StackLayout.GestureRecognizers>
-                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FuckCommand}" CommandParameter="{Binding productId}"/>-->
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.FindMoreCommand, Source={x:Reference Name=homePage}}"
+                                                                  CommandParameter="{Binding id}"/>
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
                     </ScrollView>
-                    
+
                     <!--热门商品-->
                     <StackLayout Orientation="Horizontal" Spacing="0" Margin="5,15,5,0" HorizontalOptions="Fill">
                         <Label Text="热门商品" Style="{DynamicResource SectionTitle}"/>
@@ -116,10 +119,11 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        
+
                                         <Grid.GestureRecognizers>
-                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>-->
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ItemTapped_Tapped"/>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                  Command="{Binding Path=BindingContext.ItemTapCommand, Source={x:Reference Name=homePage}}" 
+                                                                  CommandParameter="{Binding productId}"/>
                                         </Grid.GestureRecognizers>
                                     </Grid>
                                 </DataTemplate>
@@ -361,7 +365,7 @@
                 <StackLayout Orientation="Horizontal" Spacing="0">
                     <ImageButton Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
                     <controls:MyEntry Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
-                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                                      Text="{Binding SearchString}" ReturnCommand="{Binding SearchCommand}"/>
                     <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="40" FontSize="18" Padding="0" Command="{Binding SearchCommand}"/>
                 </StackLayout>
             </Frame>

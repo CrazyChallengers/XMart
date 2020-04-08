@@ -76,6 +76,18 @@ namespace XMart.Util
             return type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
         }
 
+        /// <summary>
+        /// 检测是否连接互联网
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsNetConnective()
+        {
+            var current = Connectivity.NetworkAccess;
+
+            return current == NetworkAccess.Internet;
+            
+        }
+
         /*
         public static async Task<PermissionStatus> CheckAndRequestPermissionAsync<TPermission>()
         {
