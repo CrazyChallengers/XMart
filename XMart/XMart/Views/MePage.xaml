@@ -35,18 +35,19 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="1" Text="个人中心" TextColor="Black" FontAttributes="Bold" FontSize="24"
+            <Label Grid.Row="0" Text="个人中心" TextColor="Black" FontSize="24"
                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Button Grid.Row="0" Text="退出" TextColor="Crimson" BackgroundColor="Transparent" FontSize="18"
+                   HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Command="{Binding LoginOutCommand}"/>
 
-            <StackLayout Grid.Row="2" Orientation="Horizontal">
+            <StackLayout Grid.Row="1" Orientation="Horizontal">
                 <Frame HeightRequest="80" WidthRequest="80" Padding="0" CornerRadius="40"
                        HorizontalOptions="Start" VerticalOptions="CenterAndExpand" Margin="20,0,0,0"
                    BorderColor="White" IsClippedToBounds="True">
@@ -70,37 +71,37 @@
                     </Label>
                 </StackLayout>
             </StackLayout>
-            
-            <Grid Grid.Row="3" HeightRequest="60" RowSpacing="0" Margin="5" IsVisible="{Binding Visible}">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
 
-                        <StackLayout Grid.Column="0" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
-                            <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="今日收益" Style="{DynamicResource CommonLabel}"/>
-                            <!--<StackLayout.GestureRecognizers>
+            <Grid Grid.Row="2" HeightRequest="60" RowSpacing="0" Margin="5" IsVisible="{Binding Visible}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <StackLayout Grid.Column="0" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
+                    <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
+                    <Label Text="今日收益" Style="{DynamicResource CommonLabel}"/>
+                    <!--<StackLayout.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding }"/>
                         </StackLayout.GestureRecognizers>-->
-                        </StackLayout>
-                        <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
-                            <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="总收益" Style="{DynamicResource CommonLabel}"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="2" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
-                            <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="可提现" Style="{DynamicResource CommonLabel}"/>
-                        </StackLayout>
-                        <StackLayout Grid.Column="3" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
-                            <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
-                            <Label Text="我的客户" Style="{DynamicResource CommonLabel}"/>
-                        </StackLayout>
-                    </Grid>
+                </StackLayout>
+                <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
+                    <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
+                    <Label Text="总收益" Style="{DynamicResource CommonLabel}"/>
+                </StackLayout>
+                <StackLayout Grid.Column="2" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
+                    <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
+                    <Label Text="可提现" Style="{DynamicResource CommonLabel}"/>
+                </StackLayout>
+                <StackLayout Grid.Column="3" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
+                    <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
+                    <Label Text="我的客户" Style="{DynamicResource CommonLabel}"/>
+                </StackLayout>
+            </Grid>
 
-            <Grid Grid.Row="4" HeightRequest="60" RowSpacing="0" Margin="5" >
+            <Grid Grid.Row="3" HeightRequest="60" RowSpacing="0" Margin="5" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -129,7 +130,7 @@
                 </StackLayout>
             </Grid>
 
-            <Frame Grid.Row="5" Grid.RowSpan="2" Padding="5" CornerRadius="20" Margin="5" BorderColor="LightGray" HasShadow="False">
+            <Frame Grid.Row="4" Grid.RowSpan="2" Padding="5" CornerRadius="20" Margin="5" BorderColor="LightGray" HasShadow="False">
                 <StackLayout HeightRequest="300">
                     <TableView Intent="Menu" RowHeight="50">
                         <TableRoot>
@@ -138,7 +139,7 @@
                                            TextColor="Black" DetailColor="LightGray"
                                            Command="{Binding NavigateCommand}"
                                            CommandParameter="XMart.Views.AddressManagePage" />
-                                
+
                                 <ImageCell Text="赚钱教程" Detail="在美而好家具App赚钱" ImageSource="money.png"
                                            TextColor="Black" DetailColor="LightGray"
                                            Command="{Binding NavigateCommand}"
@@ -161,6 +162,6 @@
             </Frame>
 
         </Grid>
-        
+
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Plugin.Toast;
+using Plugin.Toast.Abstractions;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Xamarin.Forms;
 using XMart.Models;
@@ -12,8 +15,8 @@ namespace XMart.ViewModels
 {
     public class OrderListViewModel : BaseViewModel
     {
-		private List<OrderDetail> orderList;   //Comment
-		public List<OrderDetail> OrderList
+		private ObservableCollection<OrderDetail> orderList;   //Comment
+		public ObservableCollection<OrderDetail> OrderList
 		{
 			get { return orderList; }
 			set { SetProperty(ref orderList, value); }
@@ -39,6 +42,8 @@ namespace XMart.ViewModels
 
 		public OrderListViewModel()
 		{
+			OrderList = new ObservableCollection<OrderDetail>();
+
 			EditCommand = new Command<OrderDetail>((orderDetail) =>
 			{
 				OrderDetailPage orderDetailPage = new OrderDetailPage(orderDetail.orderId);
@@ -66,6 +71,12 @@ namespace XMart.ViewModels
 		{
 			try
 			{
+				if (!Tools.IsNetConnective())
+				{
+					CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+					return;
+				}
+
 				RestSharpService _restSharpService = new RestSharpService();
 				int userId = GlobalVariables.LoggedUser.id;
 				int page = 1;
@@ -74,7 +85,7 @@ namespace XMart.ViewModels
 
 				if (orderListRD.result.data.Count != 0)
 				{
-					OrderList = orderListRD.result.data;
+					OrderList = new ObservableCollection<OrderDetail>(orderListRD.result.data);
 					Visible = false;
 
 					foreach (var item in OrderList)

@@ -10,6 +10,9 @@ using XMart.Util;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using XMart.Models;
+using Xamarin.Essentials;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
 
 namespace XMart.Views
 {
@@ -21,21 +24,29 @@ namespace XMart.Views
 
             Init();
 
-            if (GlobalVariables.IsLogged)
-            {
-                Children.Add(new MePage());
-            }
-            else
-            {
-                Children.Add(new LoginPage());
-            }
         }
 
         private void Init()
         {
+            if (!Tools.IsNetConnective())
+            {
+                CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                return;
+            }
+            //NetErrorPage.IsVisible = false;
+            Children.Remove(NetErrorPage);
+            Children.Add(new HomePage());
+            Children.Add(new CategoryPage());
+
+            var status = CheckAndRequestPermissionAsync();
+            if (status.Result != PermissionStatus.Granted)
+            {
+                GlobalVariables.IsLogged = false;
+                return;
+            }
+
             //初始化，检查是否存在已记住的密码
             string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
-            
             if (File.Exists(fileName))
             {
                 string text = File.ReadAllText(fileName);
@@ -49,19 +60,16 @@ namespace XMart.Views
 
                 if (dayDiff <= 30)
                 {
-                    //Tel = tel;
-                    //Pwd = pwd;
-                    //IsRememberPwd = true;
-
-                    //OnLogin();
-
                     GlobalVariables.LoggedUser = JsonConvert.DeserializeObject<UserInfo>(log["UserInfo"].ToString());
                     GlobalVariables.IsLogged = true;
+                    Children.Add(new CartPage());
+                    Children.Add(new MePage());
                 }
                 else
                 {
-                    //input pwd
                     GlobalVariables.IsLogged = false;
+                    Children.Add(new CartPage());
+                    Children.Add(new LoginPage());
                 }
             }
         }
@@ -73,6 +81,24 @@ namespace XMart.Views
         protected override bool OnBackButtonPressed()
         {
             return true;
+        }
+
+        private async Task<PermissionStatus> CheckAndRequestPermissionAsync()
+        {
+            var status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+            if (status != PermissionStatus.Granted)
+            {
+                status = await Permissions.RequestAsync<Permissions.StorageWrite>();
+            }
+
+            // Additionally could prompt the user to turn on in settings
+
+            return status;
+        }
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            Init();
         }
     }
 }

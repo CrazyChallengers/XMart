@@ -7,6 +7,7 @@
              xmlns:views="clr-namespace:XMart.Views"
              x:Class="XMart.Views.HomePage"
              Icon="Resource/drawable/home.png"
+             x:Name="homePage"
              Title="首页">
 
     <ContentPage.Resources>
@@ -29,14 +30,16 @@
             <ScrollView>
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center" Spacing="0">
                     <!--轮播图-->
-                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="200" Margin="5,80,5,0" CornerRadius="0">
+                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="200" Margin="5,50,5,0" CornerRadius="0">
                         <cv:CarouselViewControl x:Name="carousel" ItemsSource="{Binding CarouselList}"
                                                 ShowArrows="False" ShowIndicators="True" Orientation="Horizontal">
                             <cv:CarouselViewControl.ItemTemplate>
                                 <DataTemplate>
                                     <ff:CachedImage Source="{Binding picUrl}" BackgroundColor="Transparent" Aspect="AspectFill">
                                         <ff:CachedImage.GestureRecognizers>
-                                            <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1" Tapped="CarouselItem_Tapped"/>
+                                            <TapGestureRecognizer x:Name="CarouselItem" NumberOfTapsRequired="1"
+                                                                  Command="{Binding Path=BindingContext.CarouselTappedCommand, Source={x:Reference Name=homePage}}"
+                                                                  CommandParameter="{Binding Path=Position,Source={x:Reference carousel}}"/>
                                         </ff:CachedImage.GestureRecognizers>
                                     </ff:CachedImage>
                                 </DataTemplate>
@@ -65,15 +68,15 @@
                                                HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
 
                                         <StackLayout.GestureRecognizers>
-                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding FuckCommand}" CommandParameter="{Binding productId}"/>-->
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="TapGestureRecognizer_Tapped"/>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.FindMoreCommand, Source={x:Reference Name=homePage}}"
+                                                                  CommandParameter="{Binding id}"/>
                                         </StackLayout.GestureRecognizers>
                                     </StackLayout>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
                     </ScrollView>
-                    
+
                     <!--热门商品-->
                     <StackLayout Orientation="Horizontal" Spacing="0" Margin="5,15,5,0" HorizontalOptions="Fill">
                         <Label Text="热门商品" Style="{DynamicResource SectionTitle}"/>
@@ -87,28 +90,42 @@
                         <StackLayout x:Name="HotProductStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout WidthRequest="80" Margin="5" Spacing="0">
-                                        <Frame Style="{StaticResource BaseFrame}">
+                                    <Grid WidthRequest="80" Margin="5" RowSpacing="0">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="80"/>
+                                            <RowDefinition Height="18"/>
+                                            <RowDefinition Height="18"/>
+                                            <RowDefinition Height="18"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Frame Grid.Row="0" Style="{StaticResource BaseFrame}">
                                             <ff:CachedImage Source="{Binding picUrl}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill"/>
                                         </Frame>
-                                        <Label Text="{Binding productName}" FontSize="16" LineBreakMode="TailTruncation"/>
-                                        <Label TextColor="Red" FontSize="16">
+                                        <ff:CachedImage Grid.Row="0" Source="discount.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Start"/>
+                                        <Label Grid.Row="1" Text="{Binding productName}" FontSize="16" LineBreakMode="TailTruncation"/>
+                                        <Label Grid.Row="2" FontSize="18" FontAttributes="Bold">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
+                                                    <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label Grid.Row="3" FontSize="16">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
                                                     <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
-                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
-                                                    <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
-                                                    <Span Text="折" TextColor="{StaticResource ThickPink}" FontAttributes="Italic"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
 
-                                        <StackLayout.GestureRecognizers>
-                                            <!--<TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding ItemTapCommand}" CommandParameter="{Binding productId}"/>-->
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" Tapped="ItemTapped_Tapped"/>
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                                                  Command="{Binding Path=BindingContext.ItemTapCommand, Source={x:Reference Name=homePage}}" 
+                                                                  CommandParameter="{Binding productId}"/>
+                                        </Grid.GestureRecognizers>
+                                    </Grid>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
@@ -344,11 +361,11 @@
 
             <!--头部-->
             <Frame Style="{StaticResource BaseFrame}" BorderColor="LightGray" HeightRequest="40" 
-                   CornerRadius="20" Padding="20,0,10,0" Margin="5,35,5,5" HorizontalOptions="Fill" VerticalOptions="Start">
+                   CornerRadius="20" Padding="20,0,10,0" Margin="5" HorizontalOptions="Fill" VerticalOptions="Start">
                 <StackLayout Orientation="Horizontal" Spacing="0">
                     <ImageButton Source="Resource/drawable/search.png" Style="{StaticResource EarImageButton}"/>
                     <controls:MyEntry Placeholder="立体装置画" Style="{StaticResource SearchEntry}"
-                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                                      Text="{Binding SearchString}" ReturnCommand="{Binding SearchCommand}"/>
                     <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="40" FontSize="18" Padding="0" Command="{Binding SearchCommand}"/>
                 </StackLayout>
             </Frame>

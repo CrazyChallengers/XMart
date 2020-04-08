@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using XMart.Models;
 using XMart.ResponseData;
 using XMart.Util;
@@ -401,5 +402,15 @@ namespace XMart.Services
             return str;
         }
         #endregion
+
+        /// <summary>
+        /// 检测是否连接互联网
+        /// </summary>
+        /// <returns></returns>
+        private bool IsNetConnective()
+        {
+            var current = Connectivity.NetworkAccess;
+            return current == NetworkAccess.Internet;
+        }
     }
 }

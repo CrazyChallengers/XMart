@@ -11,15 +11,14 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ImageButton Grid.Row="1" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
-            <Label Grid.Row="1" Text="订单管理" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ImageButton Grid.Row="0" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+            <Label Grid.Row="0" Text="订单管理" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
 
-            <StackLayout Grid.Row="2" VerticalOptions="Fill">
+            <StackLayout Grid.Row="1" VerticalOptions="Fill">
                 <Label Text="无订单" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
                 <ListView x:Name="list" ItemsSource="{Binding OrderList}" VerticalOptions="Center"
                           IsPullToRefreshEnabled="True" HasUnevenRows="True"

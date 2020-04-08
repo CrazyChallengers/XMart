@@ -6,6 +6,9 @@ using XMart.Models;
 using XMart.Services;
 using XMart.ResponseData;
 using Xamarin.Forms;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
+using XMart.Util;
 
 namespace XMart.ViewModels
 {
@@ -34,10 +37,10 @@ namespace XMart.ViewModels
 
         public Command BackCommand { get; set; }
 
-        RestSharpService _restSharpService = new RestSharpService();
-
         public CollectionViewModel()
         {
+            ProductList = new ObservableCollection<ProductListItem>();
+
             BackCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PopModalAsync();
@@ -50,9 +53,15 @@ namespace XMart.ViewModels
         {
             try
             {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
+                RestSharpService _restSharpService = new RestSharpService();
                 ProductListRD productListRD = await _restSharpService.GetCollections();
 
-                ProductList = new ObservableCollection<ProductListItem>();
                 if (productListRD.result.total > 0)
                 {
                     foreach (var item in productListRD.result.data)

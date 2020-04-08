@@ -24,25 +24,24 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ImageButton Grid.Row="1" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
-            <Label Grid.Row="1" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center">
+            <ImageButton Grid.Row="0" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+            <Label Grid.Row="0" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="我的收藏（"/>
                         <Span Text="{Binding ProductNum}"/>
-                        <Span Text=")"/>
+                        <Span Text="）"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
 
-            <Label Grid.Row="2" Text="没有收藏商品，快去逛一逛吧" FontSize="18" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}" />
+            <Label Grid.Row="1" Text="没有收藏商品，快去逛一逛吧" FontSize="18" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}" />
 
-            <ScrollView Grid.Row="2" Orientation="Vertical">
+            <ScrollView Grid.Row="1" Orientation="Vertical">
                 <StackLayout x:Name="CollectionItemStack" BindableLayout.ItemsSource="{Binding ProductList}" Orientation="Vertical">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
@@ -57,7 +56,6 @@
                                         <ColumnDefinition Width="140"/>
                                         <ColumnDefinition Width="4*"/>
                                         <ColumnDefinition Width="6*"/>
-                                        <ColumnDefinition Width="50"/>
                                     </Grid.ColumnDefinitions>
 
                                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="3" Source="{Binding productImageBig}"/>

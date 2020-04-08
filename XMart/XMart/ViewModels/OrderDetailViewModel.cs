@@ -10,6 +10,7 @@ using Plugin.Toast.Abstractions;
 using XMart.Views;
 using Newtonsoft.Json.Linq;
 using System.Threading.Tasks;
+using XMart.Util;
 
 namespace XMart.ViewModels
 {
@@ -82,6 +83,8 @@ namespace XMart.ViewModels
 
         public OrderDetailViewModel(long orderId)
         {
+            Order = new OrderDetail();
+
             DeleteBtnVisible = false;
             InitOrderDetailPage(orderId);
 
@@ -166,6 +169,12 @@ namespace XMart.ViewModels
         {
             try
             {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
                 SimpleRD simpleRD = await _restSharpService.CancelOrder(Order);
 
                 if (simpleRD.success)
@@ -191,6 +200,12 @@ namespace XMart.ViewModels
         {
             try
             {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
                 IndicatorIsRunning = true;
                 PayBtnVisible = false;
 

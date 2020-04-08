@@ -10,11 +10,9 @@ using Com.Alipay.Sdk.App;
 using System;
 using Xamarin.Forms;
 using System.Threading;
-using System.Reflection;
-using System.Collections.Generic;
-using Newtonsoft.Json.Linq;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
+using Xamarin.Essentials;
 using System.Threading.Tasks;
 
 namespace XMart.Droid
@@ -51,10 +49,11 @@ namespace XMart.Droid
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
             {
                 //透明状态栏                
-                Window.AddFlags(WindowManagerFlags.TranslucentStatus);
-                //Window.SetStatusBarColor(Android.Graphics.Color.DeepSkyBlue);
+                //Window.AddFlags(WindowManagerFlags.TranslucentStatus);
+                Window.SetStatusBarColor(Android.Graphics.Color.LightGray);
                 //不遮挡导航栏                
                 Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
+                
             }
 
             //Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
@@ -193,7 +192,7 @@ namespace XMart.Droid
             });*/
 
             base.OnCreate(savedInstanceState);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState); // add this line to your code, it may also be called: bundle
+            Platform.Init(this, savedInstanceState); // add this line to your code, it may also be called: bundle
             Forms.Init(this, savedInstanceState);
 
             LoadApplication(new App());
@@ -204,13 +203,13 @@ namespace XMart.Droid
             wxApi = WXAPIFactory.CreateWXAPI(this, appID, true);
             return wxApi.RegisterApp(appID);
         }
-
+        /*
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
+        }*/
 
         #region 支付宝
         private void Pay(object sign)
@@ -221,7 +220,7 @@ namespace XMart.Droid
                 var result = payTask.PayV2(sign.ToString(), true);
                 //Status = result["resultStatus"];
 
-                /*
+                
                 Looper.Prepare();
                 //switch (status)
                 //{
@@ -241,7 +240,7 @@ namespace XMart.Droid
                     case "6002": CrossToastPopUp.Current.ShowToastError("网络连接出错！", ToastLength.Long); break;
                     default: break;
                 }
-                Looper.Loop();*/
+                Looper.Loop();
 
                 //return result["resultStatus"];
                 //Thread.CurrentThread.Abort();

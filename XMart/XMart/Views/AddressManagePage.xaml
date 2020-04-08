@@ -25,18 +25,17 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal" Spacing="0">
+            <StackLayout Grid.Row="0" Orientation="Horizontal" Spacing="0">
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
                 <Label Text="我的收货地址" TextColor="Black" FontSize="24" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                 <Button WidthRequest="60" Text="新增" FontSize="18" BackgroundColor="Transparent" Command="{Binding AddAddressCommand}"/>
             </StackLayout>
 
-            <StackLayout Grid.Row="2" VerticalOptions="Fill">
+            <StackLayout Grid.Row="1" VerticalOptions="Fill">
                 <Label Text="无收货地址" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
                 <ListView x:Name="list" ItemsSource="{Binding AddressList}" 
                           VerticalOptions="Center" RowHeight="80" 

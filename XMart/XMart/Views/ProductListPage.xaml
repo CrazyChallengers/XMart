@@ -33,13 +33,12 @@
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="35"/>
-                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <StackLayout Grid.Row="1" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
+            <StackLayout Grid.Row="0" Orientation="Horizontal" VerticalOptions="EndAndExpand" Spacing="0">
                 <ImageButton x:Name="BackButton" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}"/>
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" HorizontalOptions="FillAndExpand"
                        CornerRadius="20" Padding="20,0" BorderColor="LightGray">
@@ -49,7 +48,7 @@
                 <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="60" FontSize="18" Command="{Binding SearchCommand}"/>
             </StackLayout>
 
-            <ScrollView Grid.Row="2" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+            <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
                 <StackLayout Orientation="Horizontal" VerticalOptions="Center">
                     <Label Text="综合排序" Style="{DynamicResource LabelStyle}">
                         <Label.Behaviors>
@@ -179,7 +178,7 @@
                 </ListView.Behaviors>
             </ListView>
 -->
-            <ScrollView x:Name="ProductListScrollView" Grid.Row="3" Orientation="Vertical">
+            <ScrollView x:Name="ProductListScrollView" Grid.Row="2" Orientation="Vertical">
                 <StackLayout Orientation="Vertical">
                     <StackLayout x:Name="ItemStack" BindableLayout.ItemsSource="{Binding ProductList}" Orientation="Vertical">
                         <BindableLayout.ItemTemplate>
@@ -245,7 +244,7 @@
                 </ScrollView.Behaviors>-->
             </ScrollView>
 
-            <ActivityIndicator Grid.Row="3" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ActivityIndicator Grid.Row="2" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

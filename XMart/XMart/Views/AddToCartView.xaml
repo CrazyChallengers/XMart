@@ -61,9 +61,8 @@
                 </Label.FormattedText>
             </Label>
 
-            <controls:NumericUpDown Grid.Row="3" Grid.Column="2"
-                                                            x:Name="NumberStepper" Minimum="1" Step="1" WidthRequest="80"
-                                                            HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
+            <controls:NumericUpDown Grid.Row="3" Grid.Column="2" x:Name="NumberStepper" Minimum="1" Step="1"
+                                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
 
             <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="添加到购物车" TextColor="White" CornerRadius="10"
                         VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="Crimson"

@@ -4,6 +4,7 @@ using System.Text;
 using XMart.Util;
 using XMart.Views;
 using Xamarin.Forms;
+using System.IO;
 
 namespace XMart.ViewModels
 {
@@ -45,14 +46,18 @@ namespace XMart.ViewModels
 		}
 
 		public Command<string> NavigateCommand { get; set; }
+		public Command LoginOutCommand { get; set; }
+		public Command ReloadCommand { get; set; }
 
 		public MePageViewModel()
 		{
-			UserName = GlobalVariables.LoggedUser.username;
-			UserId = GlobalVariables.LoggedUser.id.ToString();
-			UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
-			UserAvatar = GlobalVariables.LoggedUser.file == null ? "star_yellow.png" : GlobalVariables.LoggedUser.file;
-			Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+			UserName = string.Empty;
+			UserType = string.Empty;
+			UserId = string.Empty;
+			UserAvatar = string.Empty;
+			Visible = false;
+
+			InitMePage();
 
 			NavigateCommand = new Command<string>((pageName) =>
 			{
@@ -60,7 +65,47 @@ namespace XMart.ViewModels
 				Page page = (Page)Activator.CreateInstance(type);
 				Application.Current.MainPage.Navigation.PushModalAsync(page);
 			}, (pageName) => { return true; });
+
+			LoginOutCommand = new Command(async () =>
+			{
+				bool action = await Application.Current.MainPage.DisplayAlert("退出登录", "确定要退出登录吗？", "确定", "取消");
+				if (action)
+				{
+					LoginOut();
+				}
+			}, () => { return true; });
+
+			ReloadCommand = new Command(() =>
+			{
+				InitMePage();
+			}, () => { return true; });
 		}
 
+		private void InitMePage()
+		{
+			try
+			{
+				UserName = GlobalVariables.LoggedUser.username;
+				UserId = GlobalVariables.LoggedUser.id.ToString();
+				UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
+				UserAvatar = GlobalVariables.LoggedUser.file == null ? "star_yellow.png" : GlobalVariables.LoggedUser.file;
+				Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+			}
+			catch (Exception)
+			{
+				throw;
+			}
+		}
+
+		private	void LoginOut()
+		{
+			GlobalVariables.IsLogged = false;
+
+			string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+			File.Delete(fileName);
+
+			MainPage mainPage = new MainPage();
+			Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
+		}
 	}
 }

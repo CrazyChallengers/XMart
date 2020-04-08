@@ -264,29 +264,44 @@ namespace XMart.ViewModels
         /// </summary>
         private async void OnRegister()
         {
-            RegisterPara registerPara = new RegisterPara
+            try
             {
-                authCode = AuthCode,
-                tel = Tel,
-                userPwd = Pwd,
-                //userName = registerViewModel.UserName,
-                invitePhone = InvitePhone,
-                userType = SelectedIdentityIndex.ToString()
-            };
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
 
-            //registerPara.userType = IsDesignerChecked ? "1" : "0";
+                RegisterPara registerPara = new RegisterPara
+                {
+                    authCode = AuthCode,
+                    tel = Tel,
+                    userPwd = Pwd,
+                    //userName = registerViewModel.UserName,
+                    invitePhone = InvitePhone,
+                    userType = SelectedIdentityIndex.ToString()
+                };
 
-            SimpleRD simpleRD = await _restSharpService.Register(registerPara);
+                //registerPara.userType = IsDesignerChecked ? "1" : "0";
 
-            if (simpleRD.code == 200)
-            {
-                CrossToastPopUp.Current.ShowToastSuccess("注册成功！请返回登录页面！", ToastLength.Long);
-                //Application.Current.MainPage.Navigation.PopModalAsync();
+                SimpleRD simpleRD = await _restSharpService.Register(registerPara);
+
+                if (simpleRD.code == 200)
+                {
+                    CrossToastPopUp.Current.ShowToastSuccess("注册成功！请返回登录页面！", ToastLength.Long);
+                    //Application.Current.MainPage.Navigation.PopModalAsync();
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError("注册失败！请联系管理员！", ToastLength.Long);
+                }
             }
-            else
+            catch (Exception)
             {
-                CrossToastPopUp.Current.ShowToastError("注册失败！请联系管理员！", ToastLength.Long);
+
+                throw;
             }
+
         }
     }
 }

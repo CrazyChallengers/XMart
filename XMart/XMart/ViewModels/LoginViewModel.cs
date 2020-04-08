@@ -10,6 +10,8 @@ using XMart.Views;
 using XMart.Util;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
+using Xamarin.Essentials;
+using System.Threading.Tasks;
 
 namespace XMart.ViewModels
 {
@@ -71,21 +73,10 @@ namespace XMart.ViewModels
             set { SetProperty(ref authLoginButtonColor, value); }
         }
 
-        private bool authCodeButtonEnable;   //Comment
-        public bool AuthCodeButtonEnable
-        {
-            get { return authCodeButtonEnable; }
-            set { SetProperty(ref authCodeButtonEnable, value); }
-        }
-
-        private RestSharpService _restSharpService = new RestSharpService();
-        string fileName;
-
         public Command ToRegisterPageCommand { get; private set; }   //跳转到注册页面
         public Command LoginCommand { get; private set; }   //登录按钮
         public Command FindPwdCommand { get; private set; }   //跳转到找回密码页面
         public Command OpenEyeCommand { get; private set; }
-        public Command CheckPhoneCommand { get; set; }
         public Command ToAuthPageCommand { get; set; }
         public Command PasswordLoginPartCommand { get; set; }
         public Command AuthLoginPartCommand { get; set; }
@@ -96,7 +87,6 @@ namespace XMart.ViewModels
             IsPassword = true;
             EyeSource = "Resource/drawable/closed_eye.png";
             AuthLoginButtonColor = "#83d7f9";
-            AuthCodeButtonEnable = false;
             AuthVisible = true;
             PasswordVisible = false;
 
@@ -132,25 +122,17 @@ namespace XMart.ViewModels
                 }
             }, () => { return true; });
 
-            CheckPhoneCommand = new Command(() =>
+            ToAuthPageCommand = new Command(() =>
             {
                 if (Tools.IsPhoneNumber(Tel))
                 {
-                    AuthLoginButtonColor = "#01acf2";
-                    AuthCodeButtonEnable = true;
+                    AuthCodePage authCodePage = new AuthCodePage(Tel);
+                    Application.Current.MainPage.Navigation.PushModalAsync(authCodePage);
                 }
                 else
                 {
-                    AuthLoginButtonColor = "#83d7f9";
-                    AuthCodeButtonEnable = false;
+                    CrossToastPopUp.Current.ShowToastWarning("手机号格式不标准，请检查。", ToastLength.Long);
                 }
-            }, () => { return true; });
-
-            ToAuthPageCommand = new Command(() =>
-            {
-                AuthCodePage authCodePage = new AuthCodePage(Tel);
-
-                Application.Current.MainPage.Navigation.PushModalAsync(authCodePage);
             }, () => { return true; });
 
             PasswordLoginPartCommand = new Command(() =>
@@ -199,36 +181,50 @@ namespace XMart.ViewModels
         /// </summary>
         private async void OnLogin()
         {
-            LoginPara loginPara = new LoginPara
+            try
             {
-                userPwd = Pwd,
-                authCode = "",
-                tel = Tel
-            };
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
 
-            LoginRD loginRD = await _restSharpService.Login(loginPara);
+                LoginPara loginPara = new LoginPara
+                {
+                    userPwd = Pwd,
+                    authCode = "",
+                    tel = Tel
+                };
 
-            if (loginRD.result.message == null)
-            {
-                CrossToastPopUp.Current.ShowToastSuccess("欢迎您登录美而好家具！", ToastLength.Long);
+                RestSharpService _restSharpService = new RestSharpService();
+                LoginRD loginRD = await _restSharpService.Login(loginPara);
 
-                GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
-                GlobalVariables.IsLogged = true;
+                if (loginRD.result.message == null)
+                {
+                    CrossToastPopUp.Current.ShowToastSuccess("欢迎您登录美而好家具！", ToastLength.Long);
 
-                JObject log = new JObject();
-                log.Add("LoginTime", DateTime.UtcNow);
-                log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
-                fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
-                File.WriteAllText(fileName, log.ToString());
+                    GlobalVariables.LoggedUser = loginRD.result;   //将登录用户的信息保存成全局静态变量
+                    GlobalVariables.IsLogged = true;
 
-                MainPage mainPage = new MainPage();
-                await Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
+                    JObject log = new JObject();
+                    log.Add("LoginTime", DateTime.UtcNow);
+                    log.Add("UserInfo", JsonConvert.SerializeObject(loginRD.result));
+                    string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
+                    File.WriteAllText(fileName, log.ToString());
+
+                    MainPage mainPage = new MainPage();
+                    await Application.Current.MainPage.Navigation.PushModalAsync(mainPage);
+                }
+                else
+                {
+                    CrossToastPopUp.Current.ShowToastError(loginRD.result.message, ToastLength.Long);
+                }
             }
-            else
+            catch (Exception)
             {
-                CrossToastPopUp.Current.ShowToastError(loginRD.result.message, ToastLength.Long);
+
+                throw;
             }
         }
-
     }
 }
