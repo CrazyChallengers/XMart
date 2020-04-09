@@ -19,11 +19,12 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Entry Text="{Binding AuthCode}" Keyboard="Numeric" Placeholder="验证码" MaxLength="6"
+            <Entry x:Name="AuthCodeEntry" Text="{Binding AuthCode}" Keyboard="Numeric" Placeholder="验证码" MaxLength="6"
                    FontSize="54" HeightRequest="80" HorizontalTextAlignment="Center">
+                <!--
                 <Entry.Behaviors>
                     <behaviors:EventToCommandBehavior EventName="TextChanged" Command="{Binding CheckInputCommand}"/>
-                </Entry.Behaviors>
+                </Entry.Behaviors>-->
             </Entry>
             <Label FontSize="16" TextColor="Gray">
                 <Label.FormattedText>
@@ -34,10 +35,15 @@
                 </Label.FormattedText>
             </Label>
             <Button Text="完成" TextColor="White" FontSize="18" FontAttributes="Bold" 
-                    CornerRadius="20" HorizontalOptions="Fill" HeightRequest="40" 
-                    IsEnabled="{Binding AuthCodeButtonEnable}" 
-                    BackgroundColor="{Binding AuthLoginButtonColor}" 
-                    Command="{Binding LoginCommand}"/>
+                    CornerRadius="20" HorizontalOptions="Fill" HeightRequest="40" IsEnabled="False"
+                    BackgroundColor="{StaticResource SkyBlue}" 
+                    Command="{Binding LoginCommand}">
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference AuthCodeEntry}, Path=Text.Length}" Value="6">
+                        <Setter Property="IsEnabled" Value="True" />
+                    </DataTrigger>
+                </Button.Triggers>
+            </Button>
 
         </StackLayout>
     </ContentPage.Content>
