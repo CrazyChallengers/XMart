@@ -37,6 +37,9 @@ namespace XMart.Models
         [JsonProperty("updated", NullValueHandling = NullValueHandling.Ignore)]
         public string updated { get; set; }   //Comment
 
+        //[JsonIgnore]
+        //public bool Checked { get; set; }
+
     }
 
 }

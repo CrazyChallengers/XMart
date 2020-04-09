@@ -13,11 +13,13 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AddressManagePage : ContentPage
     {
-        AddressManageViewModel addressManageViewModel = new AddressManageViewModel();
+        AddressManageViewModel addressManageViewModel;
 
         public AddressManagePage()
         {
             InitializeComponent();
+
+            addressManageViewModel = new AddressManageViewModel();
 
             BindingContext = addressManageViewModel;
         }

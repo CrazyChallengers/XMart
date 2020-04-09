@@ -42,10 +42,13 @@ namespace XMart.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             Resources.DisplayMetrics.ScaledDensity = 2;//告诉android不要把自己大小单位缩放
-            //Resources.DisplayMetrics.Density = 1;
+            //double systemDensity = DeviceDisplay.MainDisplayInfo.Density;
+            //Resources.DisplayMetrics.Density = (float)systemDensity / 2.55F;
+            //var temp = Resources.DisplayMetrics;
+            //var device = DeviceDisplay.MainDisplayInfo;
             App.ScreenWidth = Resources.DisplayMetrics.WidthPixels;
             App.ScreenHeight = Resources.DisplayMetrics.HeightPixels;
-
+            
             if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat)
             {
                 //透明状态栏                
@@ -53,13 +56,9 @@ namespace XMart.Droid
                 Window.SetStatusBarColor(Android.Graphics.Color.LightGray);
                 //不遮挡导航栏                
                 Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
-                
             }
 
-            //Window.AddFlags(WindowManagerFlags.ForceNotFullscreen);
-
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);   //弹出框
-
             CarouselViewRenderer.Init();    //轮播图
             CachedImageRenderer.Init(true);
 

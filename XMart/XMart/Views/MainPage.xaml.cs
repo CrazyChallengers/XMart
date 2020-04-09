@@ -22,28 +22,28 @@ namespace XMart.Views
         {
             InitializeComponent();
 
-            Init();
+            InitAsync();
 
         }
 
-        private void Init()
+        private void InitAsync()
         {
             if (!Tools.IsNetConnective())
             {
                 CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
                 return;
             }
+
+            //var status = CheckAndRequestPermissionAsync();
+            //if (status.Result != PermissionStatus.Granted)
+            //{
+            //    GlobalVariables.IsLogged = false;
+            //}
+
             //NetErrorPage.IsVisible = false;
             Children.Remove(NetErrorPage);
             Children.Add(new HomePage());
             Children.Add(new CategoryPage());
-
-            var status = CheckAndRequestPermissionAsync();
-            if (status.Result != PermissionStatus.Granted)
-            {
-                GlobalVariables.IsLogged = false;
-                return;
-            }
 
             //初始化，检查是否存在已记住的密码
             string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
@@ -62,15 +62,22 @@ namespace XMart.Views
                 {
                     GlobalVariables.LoggedUser = JsonConvert.DeserializeObject<UserInfo>(log["UserInfo"].ToString());
                     GlobalVariables.IsLogged = true;
-                    Children.Add(new CartPage());
-                    Children.Add(new MePage());
                 }
                 else
                 {
                     GlobalVariables.IsLogged = false;
-                    Children.Add(new CartPage());
-                    Children.Add(new LoginPage());
                 }
+            }
+
+            if (GlobalVariables.IsLogged)
+            {
+                Children.Add(new CartPage());
+                Children.Add(new MePage());
+            }
+            else
+            {
+                Children.Add(new CartPage());
+                Children.Add(new LoginPage());
             }
         }
 
@@ -98,7 +105,7 @@ namespace XMart.Views
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Init();
+            InitAsync();
         }
     }
 }

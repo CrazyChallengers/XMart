@@ -24,20 +24,5 @@ namespace XMart.Views
             BindingContext = collectionViewModel;
         }
 
-        private void ItemFrame_Tapped(object sender, EventArgs e)
-        {
-            Frame frame = sender as Frame;
-            int index = CollectionItemStack.Children.IndexOf(frame);
-
-            ProductListItem productListItem = collectionViewModel.ProductList[index];
-            ProductDetailPage productDetailPage = new ProductDetailPage(productListItem.productId.ToString());
-            Navigation.PushModalAsync(productDetailPage);
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            collectionViewModel.Init();
-        }
     }
 }

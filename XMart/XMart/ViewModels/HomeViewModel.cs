@@ -142,6 +142,12 @@ namespace XMart.ViewModels
 
             SearchCommand = new Command(() =>
             {
+                if (!Tools.IsNetConnective())
+                {
+                    CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
                 if (string.IsNullOrEmpty(SearchString))
                 {
                     CrossToastPopUp.Current.ShowToastWarning("请输入关键词", ToastLength.Short);

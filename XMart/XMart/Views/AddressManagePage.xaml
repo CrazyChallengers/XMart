@@ -9,6 +9,8 @@
 
     <ContentPage.Resources>
         <Style x:Key="UserNameStyle" TargetType="Label">
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="{StaticResource ThickPink}"/>
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
         </Style>
@@ -36,17 +38,17 @@
             </StackLayout>
 
             <StackLayout Grid.Row="1" VerticalOptions="Fill">
-                <Label Text="无收货地址" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
-                <ListView x:Name="list" ItemsSource="{Binding AddressList}" 
-                          VerticalOptions="Center" RowHeight="80" 
-                          IsPullToRefreshEnabled="True" 
+                <Label Text="无收货地址" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}" />
+                <ListView x:Name="list" ItemsSource="{Binding AddressList}"
+                          VerticalOptions="Center" HasUnevenRows="True"
+                          IsPullToRefreshEnabled="True"
                           IsRefreshing="{Binding IsRefreshing}" 
                           RefreshControlColor="{StaticResource MainColor}" 
                           RefreshCommand="{Binding RefreshCommand}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid BackgroundColor="White" Padding="5">
+                                <Grid BackgroundColor="White" Margin="0,5" Padding="5">
                                     <Grid.RowDefinitions>
                                         <RowDefinition/>
                                         <RowDefinition/>

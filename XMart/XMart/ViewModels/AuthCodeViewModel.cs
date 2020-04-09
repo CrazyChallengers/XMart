@@ -65,6 +65,7 @@ namespace XMart.ViewModels
         public AuthCodeViewModel(string tel)
         {
             Tel = tel;
+            AuthCode = string.Empty;
             SecretTel = Tel.Substring(0, 3) + "****" + Tel.Substring(7, 4);
             AuthCodeButtonEnable = false;
             AuthLoginButtonColor = "#83d7f9";
@@ -136,6 +137,12 @@ namespace XMart.ViewModels
                 if (!Tools.IsNetConnective())
                 {
                     CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
+                if (AuthCode.Length != 6)
+                {
+                    CrossToastPopUp.Current.ShowToastError("请输入6位验证码", ToastLength.Long);
                     return;
                 }
 
