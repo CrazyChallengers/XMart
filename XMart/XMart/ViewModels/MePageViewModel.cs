@@ -5,6 +5,10 @@ using XMart.Util;
 using XMart.Views;
 using Xamarin.Forms;
 using System.IO;
+using Plugin.Toast;
+using Plugin.Toast.Abstractions;
+using XMart.Services;
+using XMart.ResponseData;
 
 namespace XMart.ViewModels
 {
@@ -43,6 +47,20 @@ namespace XMart.ViewModels
 		{
 			get { return visible; }
 			set { SetProperty(ref visible, value); }
+		}
+
+		private int orderNumber;   //Comment
+		public int OrderNumber
+		{
+			get { return orderNumber; }
+			set { SetProperty(ref orderNumber, value); }
+		}
+
+		private int collectionNumber;   //Comment
+		public int CollectionNumber
+		{
+			get { return collectionNumber; }
+			set { SetProperty(ref collectionNumber, value); }
 		}
 
 		public Command<string> NavigateCommand { get; set; }
@@ -90,6 +108,15 @@ namespace XMart.ViewModels
 				UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
 				UserAvatar = GlobalVariables.LoggedUser.file == null ? "star_yellow.png" : GlobalVariables.LoggedUser.file;
 				Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+
+				//if (!Tools.IsNetConnective())
+				//{
+				//	CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+				//	return;
+				//}
+				//
+				//RestSharpService _restSharpService = new RestSharpService();
+				//OrderListRD orderListRD = await _restSharpService.GetOrderListById(order)
 			}
 			catch (Exception)
 			{

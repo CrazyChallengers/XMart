@@ -9,6 +9,7 @@ using Xamarin.Forms;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
 using XMart.Util;
+using XMart.Views;
 
 namespace XMart.ViewModels
 {
@@ -35,18 +36,38 @@ namespace XMart.ViewModels
             set { SetProperty(ref visible, value); }
         }
 
+        private bool indicatorIsRunning;   //Comment
+        public bool IndicatorIsRunning
+        {
+            get { return indicatorIsRunning; }
+            set { SetProperty(ref indicatorIsRunning, value); }
+        }
+
         public Command BackCommand { get; set; }
+        public Command<long> TappedCommand { get; set; }
+        public Command RefreshCommand { get; set; }
 
         public CollectionViewModel()
         {
             ProductList = new ObservableCollection<ProductListItem>();
+
+            Init();
 
             BackCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PopModalAsync();
             }, () => { return true; });
 
-            Init();
+            TappedCommand = new Command<long>((productId) =>
+            {
+                ProductDetailPage productDetailPage = new ProductDetailPage(productId.ToString());
+                Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+            }, (productId) => { return true; });
+
+            RefreshCommand = new Command(() =>
+            {
+                Init();
+            }, () => { return true; });
         }
 
         public async void Init()
@@ -58,6 +79,8 @@ namespace XMart.ViewModels
                     CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
                     return;
                 }
+                IndicatorIsRunning = true;
+                ProductList.Clear();
 
                 RestSharpService _restSharpService = new RestSharpService();
                 ProductListRD productListRD = await _restSharpService.GetCollections();
@@ -75,6 +98,7 @@ namespace XMart.ViewModels
                 {
                     Visible = true;
                 }
+                IndicatorIsRunning = false;
             }
             catch (Exception)
             {

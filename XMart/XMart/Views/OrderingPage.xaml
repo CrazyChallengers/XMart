@@ -169,7 +169,7 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Button x:Name="OrderButton" Text="提交订单" HeightRequest="40" WidthRequest="150" 
+                <Button x:Name="OrderButton" Text="提交订单" HeightRequest="40" WidthRequest="100" 
                         CornerRadius="20" BackgroundColor="Crimson" TextColor="White" Padding="0"
                         HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
                         Command="{Binding OrderCommand}"/>

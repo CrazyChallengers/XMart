@@ -16,16 +16,19 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CategoryPage : ContentPage
 	{
-        CategoryViewModel categoryViewModel = new CategoryViewModel();
-        List<Category> categoryList = new List<Category>();
+        CategoryViewModel categoryViewModel;
 
 		public CategoryPage ()
 		{
 			InitializeComponent ();
 
-            InitCategories();
+            categoryViewModel = new CategoryViewModel();
 
             BindingContext = categoryViewModel;
+
+            InitCategories();
+            //ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
+            //categoryViewModel.GetSubCategories(categoryViewModel.ParentCategoryList[0].id);
         }
 
         /// <summary>
@@ -44,22 +47,18 @@ namespace XMart.Views
                 RestSharpService _restSharpService = new RestSharpService();
                 CategoryRD categoryRD = await _restSharpService.GetCategories();
 
-                categoryList = categoryRD.result;
+                categoryViewModel.categoryList = categoryRD.result;
 
-                List<Category> temp = new List<Category>();
-
-                foreach (var item in categoryList)
+                foreach (var item in categoryViewModel.categoryList)
                 {
                     if (item.isParent)
                     {
-                        temp.Add(item);
+                        categoryViewModel.ParentCategoryList.Add(item);
                     }
                 }
 
-                categoryViewModel.ParentCategoryList = temp;
-
                 ParentStack.Children[0].Behaviors[0].SetValue(RadioBehavior.IsCheckedProperty, true);
-                GetSubCategories(0);
+                categoryViewModel.GetSubCategories(categoryViewModel.ParentCategoryList[0].id);
             }
             catch (Exception)
             {
@@ -67,6 +66,7 @@ namespace XMart.Views
             }
         }
 
+        /*
         /// <summary>
         /// 一级目录点击事件
         /// </summary>
@@ -115,11 +115,6 @@ namespace XMart.Views
             ProductListPage productListPage = new ProductListPage(subCategoryInfo);
             Navigation.PushModalAsync(productListPage);
         }
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            InitCategories();
-        }
-
+        */
     }
 }

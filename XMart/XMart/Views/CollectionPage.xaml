@@ -7,7 +7,8 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:controls="clr-namespace:XMart.Controls"
              mc:Ignorable="d"
-             x:Class="XMart.Views.CollectionPage">
+             x:Class="XMart.Views.CollectionPage"
+             x:Name="collectionPage">
     
     <ContentPage.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">
@@ -38,6 +39,9 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
+            <ImageButton Grid.Row="0" Source="refresh.png" BackgroundColor="Transparent" 
+                         HeightRequest="30" WidthRequest="30" Padding="0" Margin="10,0"
+                         HorizontalOptions="End" VerticalOptions="CenterAndExpand" Command="{Binding RefreshCommand}"/>
 
             <Label Grid.Row="1" Text="没有收藏商品，快去逛一逛吧" FontSize="18" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}" />
 
@@ -88,7 +92,9 @@
                                 </Grid>
 
                                 <Frame.GestureRecognizers>
-                                    <TapGestureRecognizer x:Name="ItemFrame" NumberOfTapsRequired="1" Tapped="ItemFrame_Tapped"/>
+                                    <TapGestureRecognizer x:Name="ItemFrame" NumberOfTapsRequired="1"
+                                                          Command="{Binding Path=BindingContext.TappedCommand,Source={x:Reference collectionPage}}"
+                                                          CommandParameter="{Binding productId}"/>
                                 </Frame.GestureRecognizers>
                             </Frame>
                         </DataTemplate>
@@ -102,6 +108,8 @@
                                                       CommandParameter="{Binding Source=ProductListScrollView,Path=ScrollY}"/>
                 </ScrollView.Behaviors>-->
             </ScrollView>
+
+            <ActivityIndicator Grid.Row="1" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="Center"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>
