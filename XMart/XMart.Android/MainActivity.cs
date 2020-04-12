@@ -21,6 +21,8 @@ namespace XMart.Droid
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        internal static MainActivity Instance { get; private set; }
+
         //微信相关
         private readonly string appID = "wx6990f0f3818a8c7e";//申请的appid
         private IWXAPI wxApi;
@@ -191,6 +193,7 @@ namespace XMart.Droid
             });*/
 
             base.OnCreate(savedInstanceState);
+            Instance = this;
             Platform.Init(this, savedInstanceState); // add this line to your code, it may also be called: bundle
             Forms.Init(this, savedInstanceState);
 

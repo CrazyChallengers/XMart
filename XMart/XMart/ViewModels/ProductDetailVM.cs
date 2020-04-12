@@ -58,6 +58,7 @@ namespace XMart.ViewModels
         public Command ShareCommand { get; set; }
         public Command CallServiceCommand { get; set; }
         public Command StarCommand { get; set; }
+        public Command SpeakCommand { get; set; }
 
         RestSharpService _restSharpService = new RestSharpService();
 
@@ -142,6 +143,18 @@ namespace XMart.ViewModels
                 Collect();
             }, () => { return true; });
 
+            SpeakCommand = new Command(() =>
+            {
+                if (GlobalVariables.IsLogged)
+                {
+                    DependencyService.Get<ITextToSpeech>().Speak(Product.productName + " 市场价" + Product.mallPrice + "元 会员价" + Product.memberPrice + "元");
+                }
+                else
+                {
+                    DependencyService.Get<ITextToSpeech>().Speak(Product.productName + " 市场价" + Product.mallPrice + "元");
+                }
+            }, () => { return true; });
+
             InitProductDetailPageAsync(productId);
 
         }
@@ -161,15 +174,22 @@ namespace XMart.ViewModels
                 }
 
                 ProductDetailRD productDetailRD = await _restSharpService.GetProductDetail(productId);
-                string judgeRD = await _restSharpService.JudgeCollection(productId);
+
+                if (GlobalVariables.IsLogged)
+                {
+                    string judgeRD = await _restSharpService.JudgeCollection(productId);
+
+                    var json = JObject.Parse(judgeRD);
+                    isCollected = (bool)json["success"];
+                }
+                else
+                {
+                    isCollected = false;
+                }
 
                 if (productDetailRD.result != null)
                 {
                     Product = productDetailRD.result;
-
-                    var json = JObject.Parse(judgeRD);
-                    isCollected = (bool)json["success"];
-
                     StarSource = isCollected ? "star_yellow.png" : "star_gray.png";
                 }
             }
@@ -189,6 +209,13 @@ namespace XMart.ViewModels
                 if (!Tools.IsNetConnective())
                 {
                     CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
+                    return;
+                }
+
+                if (!GlobalVariables.IsLogged)
+                {
+                    LoginPage loginPage = new LoginPage();
+                    await Application.Current.MainPage.Navigation.PushModalAsync(loginPage);
                     return;
                 }
 

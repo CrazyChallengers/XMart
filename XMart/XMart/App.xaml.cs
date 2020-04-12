@@ -3,6 +3,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XMart.Views;
 using XMart.Util;
+using XMart.Services;
+using System.IO;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace XMart
@@ -11,6 +13,21 @@ namespace XMart
     {
         public static double ScreenWidth;
         public static double ScreenHeight;
+
+        private static LocalDatabaseHelper database;   //Comment
+        public static LocalDatabaseHelper Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new LocalDatabaseHelper(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "XMartSQLite.db3"));
+                }
+                return database;
+            }
+        }
+
+
 
         public App()
         {
