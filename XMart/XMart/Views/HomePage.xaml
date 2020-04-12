@@ -60,18 +60,24 @@
                         <StackLayout x:Name="CatStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding CatList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <StackLayout WidthRequest="80" Margin="5" Spacing="0">
-                                        <Frame Style="{StaticResource BaseFrame}" HeightRequest="80" WidthRequest="80">
-                                            <ff:CachedImage Source="{Binding icon}" Aspect="AspectFill"/>
-                                        </Frame>
-                                        <Label Text="{Binding name}" FontSize="16" LineBreakMode="TailTruncation" 
-                                               HorizontalOptions="Center" HorizontalTextAlignment="Center"/>
+                                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="130" WidthRequest="100" Margin="5">
+                                        <Grid WidthRequest="100" RowSpacing="0" Margin="0">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="100"/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            
+                                            <ff:CachedImage Grid.Row="0" Source="{Binding icon}" Aspect="AspectFill"/>
 
-                                        <StackLayout.GestureRecognizers>
+                                            <Label Grid.Row="1" Text="{Binding name}" FontSize="16" LineBreakMode="TailTruncation" 
+                                                   HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center"/>
+                                        </Grid>
+
+                                        <Frame.GestureRecognizers>
                                             <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding Path=BindingContext.FindMoreCommand, Source={x:Reference Name=homePage}}"
-                                                                  CommandParameter="{Binding id}"/>
-                                        </StackLayout.GestureRecognizers>
-                                    </StackLayout>
+                                                                      CommandParameter="{Binding id}"/>
+                                        </Frame.GestureRecognizers>
+                                    </Frame>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
@@ -90,19 +96,19 @@
                         <StackLayout x:Name="HotProductStack" Orientation="Horizontal" BindableLayout.ItemsSource="{Binding HotProductList}" Spacing="0">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid WidthRequest="80" Margin="5" RowSpacing="0">
+                                    <Frame Style="{StaticResource BaseFrame}" HeightRequest="180" WidthRequest="120" Margin="5">
+                                        <Grid WidthRequest="120" RowSpacing="0">
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="80"/>
-                                            <RowDefinition Height="18"/>
-                                            <RowDefinition Height="18"/>
-                                            <RowDefinition Height="18"/>
+                                            <RowDefinition Height="120"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
 
-                                        <Frame Grid.Row="0" Style="{StaticResource BaseFrame}">
-                                            <ff:CachedImage Source="{Binding picUrl}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill"/>
-                                        </Frame>
+                                        <ff:CachedImage Grid.Row="0" Source="{Binding picUrl}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill"/>
+                                        
                                         <ff:CachedImage Grid.Row="0" Source="discount.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Start"/>
-                                        <Label Grid.Row="1" Text="{Binding productName}" FontSize="16" LineBreakMode="TailTruncation"/>
+                                        <Label Grid.Row="1" Text="{Binding productName}" TextColor="Black" FontSize="16" LineBreakMode="TailTruncation"/>
                                         <Label Grid.Row="2" FontSize="18" FontAttributes="Bold">
                                             <Label.FormattedText>
                                                 <FormattedString>
@@ -126,6 +132,7 @@
                                                                   CommandParameter="{Binding productId}"/>
                                         </Grid.GestureRecognizers>
                                     </Grid>
+                                    </Frame>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>
                         </StackLayout>

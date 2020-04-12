@@ -68,6 +68,10 @@ namespace XMart.Views
                     GlobalVariables.IsLogged = false;
                 }
             }
+            else
+            {
+                GlobalVariables.IsLogged = false;
+            }
 
             if (GlobalVariables.IsLogged)
             {
