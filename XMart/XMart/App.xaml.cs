@@ -27,8 +27,6 @@ namespace XMart
             }
         }
 
-
-
         public App()
         {
             InitializeComponent();

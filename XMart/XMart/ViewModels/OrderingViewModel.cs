@@ -150,7 +150,7 @@ namespace XMart.ViewModels
                 };
                 foreach (var item in orderPara.goodsList)
                 {
-                    item.salePrice = GlobalVariables.LoggedUser.userType == "0" ? item.mallPrice : item.memberPrice;
+                    item.salePrice = item.memberPrice;
                 }
 
                 StupidRD stupidRD = _restSharpService.Order(orderPara);

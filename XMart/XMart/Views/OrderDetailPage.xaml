@@ -221,8 +221,8 @@
                 <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
 
-                    <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="22"/>
-                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="22">
+                    <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="18"/>
+                    <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="20">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="￥" TextColor="Red"/>
@@ -231,7 +231,7 @@
                         </Label.FormattedText>
                     </Label>
 
-                    <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="22">
+                    <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="18">
                         <Label.FormattedText>
                             <FormattedString>
                                 <Span Text="共"/>
@@ -241,14 +241,14 @@
                         </Label.FormattedText>
                     </Label>
 
-                    <Button Text="取消订单" HeightRequest="40" WidthRequest="100" Padding="0"
-                            CornerRadius="20" BackgroundColor="LightGray"
-                            HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                    <Button Text="取消订单" HeightRequest="30" WidthRequest="80" Padding="0"
+                            CornerRadius="15" BackgroundColor="LightGray"
+                            HorizontalOptions="End" VerticalOptions="Center" FontSize="18"
                             Command="{Binding CancelCommand}"/>
 
-                    <Button Text="支付" HeightRequest="40" WidthRequest="100" Padding="0"
-                            CornerRadius="20" BackgroundColor="Crimson" TextColor="White"
-                            HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                    <Button Text="支付" HeightRequest="30" WidthRequest="80" Padding="0"
+                            CornerRadius="15" BackgroundColor="Crimson" TextColor="White"
+                            HorizontalOptions="End" VerticalOptions="Center" FontSize="18"
                             Command="{Binding PayCommand}" IsVisible="{Binding PayBtnVisible}"/>
 
                 </StackLayout>
