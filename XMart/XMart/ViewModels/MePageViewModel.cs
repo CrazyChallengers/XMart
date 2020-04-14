@@ -42,11 +42,18 @@ namespace XMart.ViewModels
 			set { SetProperty(ref userAvatar, value); }
 		}
 
-		private bool visible;   //Comment
-		public bool Visible
+		private bool designerVisible;   //Comment
+		public bool DesignerVisible
 		{
-			get { return visible; }
-			set { SetProperty(ref visible, value); }
+			get { return designerVisible; }
+			set { SetProperty(ref designerVisible, value); }
+		}
+
+		private bool customerVisible;   //Comment
+		public bool CustomerVisible
+		{
+			get { return customerVisible; }
+			set { SetProperty(ref customerVisible, value); }
 		}
 
 		private int orderNumber;   //Comment
@@ -73,7 +80,8 @@ namespace XMart.ViewModels
 			UserType = string.Empty;
 			UserId = string.Empty;
 			UserAvatar = string.Empty;
-			Visible = false;
+			DesignerVisible = false;
+			CustomerVisible = false;
 
 			InitMePage();
 
@@ -107,7 +115,8 @@ namespace XMart.ViewModels
 				UserId = GlobalVariables.LoggedUser.id.ToString();
 				UserType = GlobalVariables.LoggedUser.userType == "0" ? "客户" : "设计师";
 				UserAvatar = GlobalVariables.LoggedUser.file == null ? "star_yellow.png" : GlobalVariables.LoggedUser.file;
-				Visible = GlobalVariables.LoggedUser.userType == "0" ? false : true;
+				CustomerVisible = GlobalVariables.LoggedUser.userType == "0" ? true : false;
+				DesignerVisible = !CustomerVisible;
 
 				//if (!Tools.IsNetConnective())
 				//{

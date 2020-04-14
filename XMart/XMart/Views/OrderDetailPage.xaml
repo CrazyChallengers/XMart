@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
-             x:Class="XMart.Views.OrderDetailPage">
+             x:Class="XMart.Views.OrderDetailPage"
+             x:Name="page">
 
     <ContentPage.Resources>
         <Style x:Key="SectionStyle" TargetType="Label">
@@ -140,8 +141,8 @@
                                             </Grid.RowDefinitions>
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="140"/>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
                                             </Grid.ColumnDefinitions>
 
                                             <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
@@ -151,7 +152,7 @@
                                                    VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                             
                                             <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14"
-                                               VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                               VerticalOptions="Center" HorizontalOptions="Start">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <Span Text="品牌："/>
@@ -162,10 +163,10 @@
                                                 </Label.FormattedText>
                                             </Label>
                                             
-                                            <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                            <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                                 <Label.FormattedText>
                                                     <FormattedString>
-                                                        <Span Text="售价" FontSize="12"/>
+                                                        <Span Text="成交价" FontSize="12"/>
                                                         <Span Text="￥" FontSize="22"/>
                                                         <Span Text="{Binding salePrice}" FontSize="26"/>
                                                     </FormattedString>
@@ -191,7 +192,7 @@
                                                 </Label.FormattedText>
                                             </Label>-->
 
-                                            <Label Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                            <Label Grid.Row="3" Grid.Column="2" HorizontalOptions="Start" VerticalOptions="CenterAndExpand">
                                                 <Label.FormattedText>
                                                     <FormattedString>
                                                         <Span Text="x" FontSize="20"/>
@@ -201,6 +202,12 @@
                                                 </Label.FormattedText>
                                             </Label>
                                         </Grid>
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer x:Name="OneTapped" NumberOfTapsRequired="1"
+                                                          Command="{Binding Path=BindingContext.OneTappedCommand, Source={x:Reference Name=page}}" 
+                                                          CommandParameter="{Binding productId}"/>
+                                        </Frame.GestureRecognizers>
                                     </Frame>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>

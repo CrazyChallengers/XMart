@@ -37,8 +37,6 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="100"/>
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="60"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
@@ -72,6 +70,195 @@
                 </StackLayout>
             </StackLayout>
 
+            <Grid Grid.Row="2" Padding="20,10" IsVisible="{Binding DesignerVisible}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="StackLayout">
+                        <Setter Property="Orientation" Value="Vertical"/>
+                        <Setter Property="VerticalOptions" Value="Center"/>
+                    </Style>
+                    <Style TargetType="ff:CachedImage">
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="HeightRequest" Value="40"/>
+                        <Setter Property="WidthRequest" Value="40"/>
+                    </Style>
+                    <Style x:Key="tiltle" TargetType="Label">
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="FontSize" Value="22"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="TextColor" Value="Black"/>
+                    </Style>
+                    <Style x:Key="description" TargetType="Label">
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="FontSize" Value="16"/>
+                    </Style>
+                </Grid.Resources>
+
+                <Frame Grid.Row="0" Grid.Column="0">
+                    <StackLayout>
+                        <ff:CachedImage Source="money_today.png"/>
+                        <Label Text="今日收益" Style="{DynamicResource tiltle}"/>
+                        <Label Text="看看今天赚了多少钱" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="0" Grid.Column="1">
+                    <StackLayout>
+                        <ff:CachedImage Source="money_all.png"/>
+                        <Label Text="总收益" Style="{DynamicResource tiltle}"/>
+                        <Label Text="看看一共收益了多少" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0">
+                    <StackLayout>
+                        <ff:CachedImage Source="money_withdraw.png"/>
+                        <Label Text="可提现" Style="{DynamicResource tiltle}"/>
+                        <Label Text="提现出来就可以用了" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="1">
+                    <StackLayout>
+                        <ff:CachedImage Source="customers.png"/>
+                        <Label Text="我的客户" Style="{DynamicResource tiltle}"/>
+                        <Label Text="查看客户列表" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Row="2" Grid.Column="0">
+                    <StackLayout>
+                        <ff:CachedImage Source="orders.png"/>
+                        <Label Text="我的订单" Style="{DynamicResource tiltle}"/>
+                        <Label Text="查看订单列表" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                              CommandParameter="XMart.Views.OrderListPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame Grid.Row="2" Grid.Column="1">
+                    <StackLayout>
+                        <ff:CachedImage Source="star_blue.png"/>
+                        <Label Text="我的收藏" Style="{DynamicResource tiltle}"/>
+                        <Label Text="查看收藏列表" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                         CommandParameter="XMart.Views.CollectionPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame Grid.Row="3" Grid.Column="0">
+                    <StackLayout>
+                        <ff:CachedImage Source="location.png"/>
+                        <Label Text="地址管理" Style="{DynamicResource tiltle}"/>
+                        <Label Text="管理您的所有收货地址" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}"
+                                              CommandParameter="XMart.Views.AddressManagePage" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame Grid.Row="3" Grid.Column="1">
+                    <StackLayout>
+                        <ff:CachedImage Source="setting.png"/>
+                        <Label Text="系统设置" Style="{DynamicResource tiltle}"/>
+                        <Label Text="自定义APP设置" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <Grid Grid.Row="2" Padding="20,10" IsVisible="{Binding CustomerVisible}">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="StackLayout">
+                        <Setter Property="Orientation" Value="Vertical"/>
+                        <Setter Property="VerticalOptions" Value="Center"/>
+                    </Style>
+                    <Style TargetType="ff:CachedImage">
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="HeightRequest" Value="40"/>
+                        <Setter Property="WidthRequest" Value="40"/>
+                    </Style>
+                    <Style x:Key="tiltle" TargetType="Label">
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="FontSize" Value="22"/>
+                        <Setter Property="FontAttributes" Value="Bold"/>
+                        <Setter Property="TextColor" Value="Black"/>
+                    </Style>
+                    <Style x:Key="description" TargetType="Label">
+                        <Setter Property="HorizontalOptions" Value="Start"/>
+                        <Setter Property="FontSize" Value="16"/>
+                    </Style>
+                </Grid.Resources>
+
+                <Frame Grid.Row="0" Grid.Column="0">
+                    <StackLayout>
+                        <ff:CachedImage Source="orders.png"/>
+                        <Label Text="我的订单" Style="{DynamicResource tiltle}"/>
+                        <Label Text="查看订单列表" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                              CommandParameter="XMart.Views.OrderListPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame Grid.Row="0" Grid.Column="1">
+                    <StackLayout>
+                        <ff:CachedImage Source="star_blue.png"/>
+                        <Label Text="我的收藏" Style="{DynamicResource tiltle}"/>
+                        <Label Text="查看收藏列表" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                         CommandParameter="XMart.Views.CollectionPage"/>
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="0">
+                    <StackLayout>
+                        <ff:CachedImage Source="location.png"/>
+                        <Label Text="地址管理" Style="{DynamicResource tiltle}"/>
+                        <Label Text="管理您的所有收货地址" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}"
+                                              CommandParameter="XMart.Views.AddressManagePage" />
+                    </Frame.GestureRecognizers>
+                </Frame>
+
+                <Frame Grid.Row="1" Grid.Column="1">
+                    <StackLayout>
+                        <ff:CachedImage Source="setting.png"/>
+                        <Label Text="系统设置" Style="{DynamicResource tiltle}"/>
+                        <Label Text="自定义APP设置" Style="{DynamicResource description}"/>
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <!--
             <Grid Grid.Row="2" HeightRequest="60" RowSpacing="0" Margin="5" IsVisible="{Binding Visible}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -83,9 +270,6 @@
                 <StackLayout Grid.Column="0" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                     <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
                     <Label Text="今日收益" Style="{DynamicResource CommonLabel}"/>
-                    <!--<StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding }"/>
-                        </StackLayout.GestureRecognizers>-->
                 </StackLayout>
                 <StackLayout Grid.Column="1" Orientation="Vertical" Spacing="0" VerticalOptions="Center">
                     <Label Text="100" Style="{DynamicResource CommonLabel}" FontSize="20" FontAttributes="Bold"/>
@@ -160,7 +344,8 @@
                     </TableView>
                 </StackLayout>
             </Frame>
-
+            -->
+            
         </Grid>
 
     </ContentPage.Content>

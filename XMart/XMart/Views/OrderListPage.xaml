@@ -6,7 +6,8 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
-             x:Class="XMart.Views.OrderListPage">
+             x:Class="XMart.Views.OrderListPage"
+             x:Name="orderListPage">
 
     <ContentPage.Content>
         <Grid RowSpacing="0">
@@ -17,7 +18,105 @@
 
             <ImageButton Grid.Row="0" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
             <Label Grid.Row="0" Text="订单管理" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ImageButton Grid.Row="0" Source="refresh.png" BackgroundColor="Transparent" 
+                         HeightRequest="30" WidthRequest="30" Padding="0" Margin="10,0"
+                         HorizontalOptions="End" VerticalOptions="CenterAndExpand" Command="{Binding RefreshCommand}"/>
 
+            <Label Grid.Row="1" Text="没有订单，快去逛一逛吧" FontSize="18" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}" />
+
+            <ScrollView Grid.Row="1" Orientation="Vertical">
+                <StackLayout Orientation="Vertical">
+                    <StackLayout x:Name="CollectionItemStack" BindableLayout.ItemsSource="{Binding OrderList}" Orientation="Vertical">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="5" Margin="5,0" Style="{StaticResource BaseFrame}" HorizontalOptions="Fill">
+                                    <Grid BackgroundColor="White" Padding="5" Margin="0,5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Grid.Resources>
+                                            <Style TargetType="Label">
+                                                <Setter Property="VerticalOptions" Value="Center"/>
+                                                <Setter Property="FontSize" Value="16"/>
+                                            </Style>
+                                            <Style x:Key="HighlightLabel" TargetType="Label">
+                                                <Setter Property="HorizontalOptions" Value="Center"/>
+                                                <Setter Property="VerticalOptions" Value="Center"/>
+                                                <Setter Property="FontAttributes" Value="Bold"/>
+                                                <Setter Property="TextColor" Value="Black"/>
+                                                <Setter Property="FontSize" Value="18"/>
+                                            </Style>
+                                        </Grid.Resources>
+
+                                        <Label Grid.Row="0" Grid.Column="0" Text="{Binding orderId}"/>
+                                        <Label Grid.Row="0" Grid.Column="1" Text="{Binding addressInfo.userName}"/>
+                                        <Label Grid.Row="0" Grid.Column="2" Text="{Binding OrderStatus}" TextColor="{StaticResource ThickPink}" Style="{StaticResource HighlightLabel}"/>
+                                        <Label Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding addressInfo.streetName}"/>
+                                        <Label Grid.Row="1" Grid.Column="2" Text="{Binding PaymentType}" TextColor="{StaticResource ThickPink}" Style="{StaticResource HighlightLabel}"/>
+                                        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding createDate}"/>
+                                        <Label Grid.Row="2" Grid.Column="2" Style="{DynamicResource HighlightLabel}" TextColor="{StaticResource ThickPink}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="总计￥" FontSize="16"/>
+                                                    <Span Text="{Binding orderTotal}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <StackLayout Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" BindableLayout.ItemsSource="{Binding goodsList}" Orientation="Vertical">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Grid HeightRequest="50">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="100"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="100"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <ff:CachedImage Grid.Column="0" Source="{Binding productImg}" Aspect="AspectFit"/>
+                                                        <Label Grid.Column="1" Text="{Binding productName}" MaxLines="2" LineBreakMode="TailTruncation"
+                                                           FontSize="18" TextColor="Black"/>
+                                                        <Label Grid.Column="2">
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
+                                                                    <Span Text="{Binding salePrice}" TextColor="{StaticResource ThickPink}"/>
+                                                                    <Span Text="   x"/>
+                                                                    <Span Text="{Binding productNum}"/>
+                                                                    <Span Text="{Binding unit}"/>
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                    </Grid>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="ItemFrame" NumberOfTapsRequired="1"
+                                                          Command="{Binding Path=BindingContext.OneTappedCommand,Source={x:Reference orderListPage}}"
+                                                          CommandParameter="{Binding orderId}"/>
+                                    </Frame.GestureRecognizers>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                    <Button Text="{Binding LoadMoreButtonText}" Command="{Binding LoadMoreCommand}" BackgroundColor="Transparent" IsEnabled="{Binding ButtonIsEnable}"/>
+                </StackLayout>
+            </ScrollView>
+
+            <ActivityIndicator Grid.Row="1" IsRunning="{Binding IndicatorIsRunning}" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+            <!--
             <StackLayout Grid.Row="1" VerticalOptions="Fill">
                 <Label Text="无订单" HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding Visible}"/>
                 <ListView x:Name="list" ItemsSource="{Binding OrderList}" VerticalOptions="Center"
@@ -108,6 +207,7 @@
                     </ListView.Behaviors>
                 </ListView>
             </StackLayout>
+            -->
         </Grid>
     </ContentPage.Content>
 </ContentPage>

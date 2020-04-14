@@ -7,7 +7,8 @@
              xmlns:controls="clr-namespace:XMart.Controls"
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
-             x:Class="XMart.Views.OrderingPage">
+             x:Class="XMart.Views.OrderingPage"
+             x:Name="orderingPage">
 
     <ContentPage.Resources>
         <Style x:Key="SectionStyle" TargetType="Label">
@@ -136,6 +137,12 @@
                                             </Label.FormattedText>
                                         </Label>
                                     </Grid>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="OneTapped" NumberOfTapsRequired="1"
+                                                          Command="{Binding Path=BindingContext.OneTappedCommand, Source={x:Reference Name=orderingPage}}" 
+                                                          CommandParameter="{Binding productId}"/>
+                                    </Frame.GestureRecognizers>
                                 </Frame>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>

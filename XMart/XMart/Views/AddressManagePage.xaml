@@ -42,7 +42,6 @@
                 <ListView x:Name="list" ItemsSource="{Binding AddressList}"
                           VerticalOptions="Center" HasUnevenRows="True"
                           IsPullToRefreshEnabled="True"
-                          IsRefreshing="{Binding IsRefreshing}" 
                           RefreshControlColor="{StaticResource MainColor}" 
                           RefreshCommand="{Binding RefreshCommand}">
                     <ListView.ItemTemplate>
