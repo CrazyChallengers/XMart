@@ -7,7 +7,8 @@
              xmlns:controls="clr-namespace:XMart.Controls"
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
-             x:Class="XMart.Views.OrderingPage">
+             x:Class="XMart.Views.OrderingPage"
+             x:Name="orderingPage">
 
     <ContentPage.Resources>
         <Style x:Key="SectionStyle" TargetType="Label">
@@ -136,6 +137,12 @@
                                             </Label.FormattedText>
                                         </Label>
                                     </Grid>
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer x:Name="OneTapped" NumberOfTapsRequired="1"
+                                                          Command="{Binding Path=BindingContext.OneTappedCommand, Source={x:Reference Name=orderingPage}}" 
+                                                          CommandParameter="{Binding productId}"/>
+                                    </Frame.GestureRecognizers>
                                 </Frame>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -149,17 +156,17 @@
                 <CheckBox x:Name="AllCheckedButton" Color="{StaticResource MainColor}" 
                           IsChecked="{Binding IsAllChecked,Mode=TwoWay}" CheckedChanged="AllCheckedButton_CheckedChanged"/>-->
 
-                <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="22"/>
-                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center" FontSize="22">
+                <Label Text="合计：" HorizontalOptions="Start" VerticalOptions="Center" FontSize="18"/>
+                <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="￥" TextColor="Red"/>
+                            <Span Text="￥" TextColor="Red" FontSize="20"/>
                             <Span Text="{Binding TotalSelectedPrice}" TextColor="Red" FontSize="24" FontAttributes="Bold"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
 
-                <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="22">
+                <Label HorizontalOptions="EndAndExpand" VerticalOptions="Center" FontSize="18">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="共"/>
@@ -169,9 +176,9 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Button x:Name="OrderButton" Text="提交订单" HeightRequest="40" WidthRequest="100" 
-                        CornerRadius="20" BackgroundColor="Crimson" TextColor="White" Padding="0"
-                        HorizontalOptions="End" VerticalOptions="Center" FontSize="22"
+                <Button x:Name="OrderButton" Text="提交订单" HeightRequest="30" WidthRequest="80" 
+                        CornerRadius="15" BackgroundColor="Crimson" TextColor="White" Padding="0"
+                        HorizontalOptions="End" VerticalOptions="Center" FontSize="18"
                         Command="{Binding OrderCommand}"/>
 
             </StackLayout>

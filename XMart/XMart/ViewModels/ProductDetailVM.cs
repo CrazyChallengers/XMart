@@ -79,9 +79,16 @@ namespace XMart.ViewModels
 
             AddToCartCommand = new Command(() =>
             {
-                var page = new AddToCartView(Product);
-
-                PopupNavigation.Instance.PushAsync(page);
+                if (GlobalVariables.IsLogged)
+                {
+                    var page = new AddToCartView(Product);
+                    PopupNavigation.Instance.PushAsync(page);
+                }
+                else
+                {
+                    LoginPage loginPage = new LoginPage();
+                    Application.Current.MainPage.Navigation.PushModalAsync(loginPage);
+                }
             }, () => { return true; });
 
             BuyCommand = new Command(() =>
@@ -110,9 +117,17 @@ namespace XMart.ViewModels
 
             ShareCommand = new Command(() =>
             {
-                string para = "?productId=" + Product.productId + "&userId=" + GlobalVariables.LoggedUser.id;
-                MessagingCenter.Send(new object(), "Register");//首先进行注册，然后订阅注册的结果。
-                MessagingCenter.Send(new object(), "ShareToFriend", para);
+                if (GlobalVariables.IsLogged)
+                {
+                    string para = "?productId=" + Product.productId + "&userId=" + GlobalVariables.LoggedUser.id;
+                    MessagingCenter.Send(new object(), "Register");//首先进行注册，然后订阅注册的结果。
+                    MessagingCenter.Send(new object(), "ShareToFriend", para);
+                }
+                else
+                {
+                    LoginPage loginPage = new LoginPage();
+                    Application.Current.MainPage.Navigation.PushModalAsync(loginPage);
+                }
             }, () => { return true; });
 
             CallServiceCommand = new Command(() =>

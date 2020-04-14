@@ -80,6 +80,7 @@ namespace XMart.ViewModels
         public Command PayCommand { get; set; }
         public Command DeleteOrderCommand { get; set; }
         public Command DeleteCommand { get; set; }
+        public Command<long> OneTappedCommand { get; set; }
 
         public OrderDetailViewModel(long orderId)
         {
@@ -123,6 +124,12 @@ namespace XMart.ViewModels
             {
                 DeleteBtnVisible = !DeleteBtnVisible;
             }, () => { return true; });
+
+            OneTappedCommand = new Command<long>((id) =>
+            {
+                ProductDetailPage productDetailPage = new ProductDetailPage(id.ToString());
+                Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+            }, (id) => { return true; });
 
             MessagingCenter.Subscribe<object, string>(this, "PaySuccess", (sender, resultStatus) =>
             {

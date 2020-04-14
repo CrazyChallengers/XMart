@@ -58,6 +58,7 @@ namespace XMart.ViewModels
         public Command OrderCommand { get; set; }
         public Command AllCheckCommand { get; set; }
         public Command<long> TwoTappedCommand { get; set; }
+        public Command<long> OneTappedCommand { get; set; }
         public Command<long> CheckedChangedCommand { get; set; }
         public Command RefreshCommand { get; set; }    //
 
@@ -115,15 +116,22 @@ namespace XMart.ViewModels
                 TwoTapped_TappedAsync(id);
             }, (id) => { return true; });
 
+            OneTappedCommand = new Command<long>((id) =>
+            {
+                ProductDetailPage productDetailPage = new ProductDetailPage(id.ToString());
+                Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+            }, (id) => { return true; });
+
             CheckedChangedCommand = new Command<long>((id) =>
             {
+                /*
                 foreach (var item in ItemList)
                 {
                     if (item.productId == id)
                     {
                         item.Checked = !item.Checked;
                     }
-                }
+                }*/
 
                 OnCount();
             }, (id) => { return true; });
@@ -225,7 +233,7 @@ namespace XMart.ViewModels
                         if (item.productId == id)
                         {
                             temp = item;
-                            ItemList.Remove(item);
+                            //ItemList.Remove(item);
                         }
                     }
 

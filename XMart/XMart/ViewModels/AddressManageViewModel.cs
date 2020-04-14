@@ -93,7 +93,6 @@ namespace XMart.ViewModels
         {
             try
             {
-                IsRefreshing = true;
                 if (!Tools.IsNetConnective())
                 {
                     CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
@@ -116,7 +115,6 @@ namespace XMart.ViewModels
                     Visible = true;
                     CrossToastPopUp.Current.ShowToastError("无收货地址列表，请添加。", ToastLength.Long);
                 }
-                IsRefreshing = false;
             }
             catch (Exception)
             {

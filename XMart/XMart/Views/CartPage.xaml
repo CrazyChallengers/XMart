@@ -101,9 +101,10 @@
                                         </Label.FormattedText>
                                     </Label>
 
-                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" 
+                                    <controls:NumericUpDown Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2"
                                                             x:Name="NumberStepper" Minimum="1" Step="1"
                                                             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
+
                                     <CheckBox Grid.Row="0" Grid.Column="3" x:Name="SingleCheckBox" Color="Crimson" 
                                               VerticalOptions="Start" IsChecked="{Binding Checked,Mode=TwoWay}">
                                         <CheckBox.Behaviors>
@@ -118,6 +119,9 @@
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer x:Name="TwoTapped" NumberOfTapsRequired="2"
                                                           Command="{Binding Path=BindingContext.TwoTappedCommand, Source={x:Reference Name=page}}" 
+                                                          CommandParameter="{Binding productId}"/>
+                                    <TapGestureRecognizer x:Name="OneTapped" NumberOfTapsRequired="1"
+                                                          Command="{Binding Path=BindingContext.OneTappedCommand, Source={x:Reference Name=page}}" 
                                                           CommandParameter="{Binding productId}"/>
                                 </Frame.GestureRecognizers>
                             </Frame>

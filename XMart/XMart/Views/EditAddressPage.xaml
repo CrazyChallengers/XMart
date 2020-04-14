@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
              xmlns:controls="clr-namespace:XMart.Controls"
              mc:Ignorable="d"
              x:Class="XMart.Views.EditAddressPage">
@@ -36,11 +37,72 @@
                         </TableRoot>
                     </TableView>-->
 
-                    <controls:MyEntry Placeholder="收货人姓名" Text="{Binding UserName}" Margin="0,10" HeightRequest="40"/>
+                    <controls:MyEntry Placeholder="收货人姓名" Text="{Binding UserName}" Margin="0,10" HeightRequest="40" FontSize="20"/>
 
-                    <controls:MyEntry Placeholder="电话号码" Text="{Binding Tel}" Margin="0,10" Keyboard="Numeric" MaxLength="11" HeightRequest="40"/>
+                    <controls:MyEntry Placeholder="电话号码" Text="{Binding Tel}" Margin="0,10" Keyboard="Numeric" MaxLength="11" HeightRequest="40" FontSize="20"/>
 
-                    <controls:MyEntry Placeholder="收件地址" Text="{Binding StreetName}" Margin="0,10" HeightRequest="40"/>
+                    <Label FontSize="20" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="{Binding SelectedItem,Source={x:Reference provinceList}}"/>
+                                <Span Text="{Binding SelectedItem,Source={x:Reference cityList}}"/>
+                                <Span Text="{Binding SelectedItem,Source={x:Reference countyList}}"/>
+                                <Span Text="{Binding SelectedItem,Source={x:Reference townList}}"/>
+                                <Span Text="{Binding Text,Source={x:Reference streetEntry}}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                        
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding SelectRegionCommand}"/>
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <Grid BackgroundColor="White">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <ListView x:Name="provinceList" Grid.Column="0"
+                                  ItemsSource="{Binding ProvinceList}" SelectedItem="{Binding Province}"
+                                  IsPullToRefreshEnabled="False">
+                            <ListView.Behaviors>
+                                <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                                  Command="{Binding SelectProvinceCommand}"/>
+                            </ListView.Behaviors>
+                        </ListView>
+
+                        <ListView x:Name="cityList" Grid.Column="1"
+                                  ItemsSource="{Binding CityList}" SelectedItem="{Binding City}"
+                                  IsPullToRefreshEnabled="False">
+                            <ListView.Behaviors>
+                                <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                                  Command="{Binding SelectCityCommand}"/>
+                            </ListView.Behaviors>
+                        </ListView>
+
+                        <ListView x:Name="countyList" Grid.Column="2"
+                                  ItemsSource="{Binding CountyList}" SelectedItem="{Binding County}"
+                                  IsPullToRefreshEnabled="False">
+                            <ListView.Behaviors>
+                                <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                                  Command="{Binding SelectCountyCommand}" />
+                            </ListView.Behaviors>
+                        </ListView>
+
+                        <ListView x:Name="townList" Grid.Column="3"
+                                  ItemsSource="{Binding TownList}" SelectedItem="{Binding Town}"
+                                  IsPullToRefreshEnabled="False" >
+                            <ListView.Behaviors>
+                                <behaviors:EventToCommandBehavior EventName="ItemSelected" 
+                                                                  Command="{Binding SelectTownCommand}"/>
+                            </ListView.Behaviors>
+                        </ListView>
+                    </Grid>
+
+                    <controls:MyEntry x:Name="streetEntry" Placeholder="详细地址：如道路、门牌号、小区、楼栋号、单元室等" Text="{Binding Street}" Margin="0,10" HeightRequest="40" FontSize="20"/>
 
                     <StackLayout Orientation="Horizontal" Margin="0">
                         <Label Text="是否设为默认地址" HorizontalOptions="Start" FontSize="18" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center"/>

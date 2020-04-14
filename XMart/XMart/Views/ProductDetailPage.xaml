@@ -39,24 +39,32 @@
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="60"/>
                             </Grid.ColumnDefinitions>
 
-                            <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                            <Label Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Start">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="￥" FontSize="14" TextColor="{StaticResource SkyBlue}" />
                                         <Span Text="{Binding Product.mallPrice}" FontSize="26" TextColor="{StaticResource SkyBlue}" />
-                                        <Span Text="  ￥" FontSize="14" TextColor="{StaticResource ThickPink}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="￥" FontSize="14" TextColor="{StaticResource ThickPink}"/>
                                         <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="{StaticResource ThickPink}" />
                                         <Span Text="会员价" FontSize="14" TextColor="{StaticResource ThickPink}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
                             </Label>
-
-                            <ImageButton Grid.Row="0" Grid.Column="1" Source="{Binding StarSource}" Command="{Binding StarCommand}"
+                            
+                            <ImageButton Grid.Row="0" Grid.Column="2" Source="{Binding StarSource}" Command="{Binding StarCommand}"
                                          HeightRequest="30" WidthRequest="30" BackgroundColor="Transparent"/>
-                            <Label Grid.Row="1" Grid.Column="1" Text="收藏" FontSize="14" 
+                            <Label Grid.Row="1" Grid.Column="2" Text="收藏" FontSize="14" 
                                    HorizontalOptions="Center" VerticalOptions="Center" 
                                    HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 

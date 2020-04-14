@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using XMart.Views;
 using XMart.Util;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -46,6 +42,18 @@ namespace XMart.Views
             Children.Add(new CategoryPage());
 
             //初始化，检查是否存在已记住的密码
+            /*
+            UserInfo userInfo = await App.Database.GetUserInfo();
+            if (userInfo != null)
+            {
+                GlobalVariables.LoggedUser = userInfo;
+                GlobalVariables.IsLogged = true;
+            }
+            else
+            {
+                GlobalVariables.IsLogged = false;
+            }*/
+
             string fileName = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "log.dat");
             if (File.Exists(fileName))
             {

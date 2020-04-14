@@ -81,6 +81,7 @@ namespace XMart.ViewModels
         public Command OrderCommand { get; set; }
         public Command AddressManageCommand { get; set; }
         public Command BackCommand { get; set; }
+        public Command<long> OneTappedCommand { get; set; }
 
         public OrderingViewModel(List<CartItemInfo> _productList)
         {
@@ -117,6 +118,12 @@ namespace XMart.ViewModels
                 Application.Current.MainPage.Navigation.PushModalAsync(addressManagePage);
             }, () => { return true; });
 
+            OneTappedCommand = new Command<long>((id) =>
+            {
+                ProductDetailPage productDetailPage = new ProductDetailPage(id.ToString());
+                Application.Current.MainPage.Navigation.PushModalAsync(productDetailPage);
+            }, (id) => { return true; });
+
             BackCommand = new Command(() =>
             {
                 Application.Current.MainPage.Navigation.PopModalAsync();
@@ -150,7 +157,7 @@ namespace XMart.ViewModels
                 };
                 foreach (var item in orderPara.goodsList)
                 {
-                    item.salePrice = GlobalVariables.LoggedUser.userType == "0" ? item.mallPrice : item.memberPrice;
+                    item.salePrice = item.memberPrice;
                 }
 
                 StupidRD stupidRD = _restSharpService.Order(orderPara);

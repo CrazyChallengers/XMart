@@ -8,6 +8,11 @@ using Plugin.Toast.Abstractions;
 using XMart.Util;
 using XMart.Services;
 using Xamarin.Forms;
+using System.IO;
+using System.Reflection;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Collections.ObjectModel;
 
 namespace XMart.ViewModels
 {
@@ -27,11 +32,67 @@ namespace XMart.ViewModels
 			set { SetProperty(ref tel, value); }
 		}
 
-		private string streetName;   //Comment
-		public string StreetName
+		private ObservableCollection<string> provinceList;   //Comment
+		public ObservableCollection<string> ProvinceList
 		{
-			get { return streetName; }
-			set { SetProperty(ref streetName, value); }
+			get { return provinceList; }
+			set { SetProperty(ref provinceList, value); }
+		}
+
+		private ObservableCollection<string> cityList;   //Comment
+		public ObservableCollection<string> CityList
+		{
+			get { return cityList; }
+			set { SetProperty(ref cityList, value); }
+		}
+
+		private ObservableCollection<string> countyList;   //Comment
+		public ObservableCollection<string> CountyList
+		{
+			get { return countyList; }
+			set { SetProperty(ref countyList, value); }
+		}
+
+		private ObservableCollection<string> townList;   //Comment
+		public ObservableCollection<string> TownList
+		{
+			get { return townList; }
+			set { SetProperty(ref townList, value); }
+		}
+
+		private string province;   //省
+		public string Province
+		{
+			get { return province; }
+			set { SetProperty(ref province, value); }
+		}
+
+		private string city;   //市
+		public string City
+		{
+			get { return city; }
+			set { SetProperty(ref city, value); }
+		}
+
+		private string county;   //区县
+		public string County
+		{
+			get { return county; }
+			set { SetProperty(ref county, value); }
+		}
+
+		private string town;   //乡镇
+		public string Town
+		{
+			get { return town; }
+			set { SetProperty(ref town, value); }
+		}
+
+		private string street;   //街道门牌号
+		public string Street
+		{
+			get { return street; }
+			set { SetProperty(ref street, value); }
 		}
 
 		private bool isDefault;   //Comment
@@ -49,20 +110,41 @@ namespace XMart.ViewModels
 		}
 
 		private long AddressId { get; set; }
+		private string StreetName { get; set; }
+		private JObject AllPlaces { get; set; }
 
 		public Command AddOrUpdateAddressCommand { get; set; }
 		public Command DeleteAddressCommand { get; set; }
 		public Command DeleteCommand { get; set; }
 		public Command BackCommand { get; set; }
+		public Command SelectProvinceCommand { get; set; }
+		public Command SelectCityCommand { get; set; }
+		public Command SelectCountyCommand { get; set; }
+		public Command SelectTownCommand { get; set; }
 
 		RestSharpService _restSharpService = new RestSharpService();
 
 		public EditAddressViewModel()
 		{
 			Visible = false;
+			ProvinceList = new ObservableCollection<string>();
+			CityList = new ObservableCollection<string>();
+			CountyList = new ObservableCollection<string>();
+			TownList = new ObservableCollection<string>();
+			StreetName = string.Empty;
 
-			AddOrUpdateAddressCommand = new Command(() =>
+			InitPCAS();
+
+			AddOrUpdateAddressCommand = new Command(async () =>
 			{
+				StreetName = Province + City + County + Town + Street;
+				string message = "收件人：" + UserName + "\n电话号码：" + Tel + "\n收货地址：" + StreetName;
+				bool action = await Application.Current.MainPage.DisplayAlert("请再次确认收货地址", message, "确认", "取消");
+				if (!action)
+				{
+					return;
+				}
+
 				if (AddressId == 0)
 				{
 					AddAddress();
@@ -86,6 +168,47 @@ namespace XMart.ViewModels
 			BackCommand = new Command(() =>
 			{
 				Application.Current.MainPage.Navigation.PopModalAsync();
+			}, () => { return true; });
+
+			SelectProvinceCommand = new Command(() =>
+			{
+				CityList.Clear();
+				CountyList.Clear();
+				TownList.Clear();
+				City = string.Empty;
+				County = string.Empty;
+				Town = string.Empty;
+				foreach (var item in (JObject)AllPlaces[Province])
+				{
+					CityList.Add(item.Key);
+				}
+			}, () => { return true; });
+
+			SelectCityCommand = new Command(() =>
+			{
+				CountyList.Clear();
+				TownList.Clear();
+				County = string.Empty;
+				Town = string.Empty;
+				foreach (var item in (JObject)AllPlaces[Province][City])
+				{
+					CountyList.Add(item.Key);
+				}
+			}, () => { return true; });
+
+			SelectCountyCommand = new Command(() =>
+			{
+				TownList.Clear();
+				Town = string.Empty;
+				foreach (var item in AllPlaces[Province][City][County])
+				{
+					TownList.Add(item.ToString());
+				}
+			}, () => { return true; });
+
+			SelectTownCommand = new Command(() =>
+			{
+
 			}, () => { return true; });
 		}
 
@@ -93,13 +216,27 @@ namespace XMart.ViewModels
 		{
 			UserName = addressInfo.userName;
 			Tel = addressInfo.tel;
-			StreetName = addressInfo.streetName;
+			Street = addressInfo.streetName;
 			IsDefault = addressInfo.isDefault;
 			AddressId = addressInfo.addressId;
 			Visible = false;
+			ProvinceList = new ObservableCollection<string>();
+			CityList = new ObservableCollection<string>();
+			CountyList = new ObservableCollection<string>();
+			TownList = new ObservableCollection<string>();
 
-			AddOrUpdateAddressCommand = new Command(() =>
+			InitPCAS();
+
+			AddOrUpdateAddressCommand = new Command(async () =>
 			{
+				StreetName = Province + City + County + Town + Street;
+				string message = "收件人：" + UserName + "\n电话号码：" + Tel + "\n收货地址：" + StreetName;
+				bool action = await Application.Current.MainPage.DisplayAlert("请再次确认收货地址", message, "确认", "取消");
+				if (!action)
+				{
+					return;
+				}
+
 				if (AddressId == 0)
 				{
 					AddAddress();
@@ -123,6 +260,47 @@ namespace XMart.ViewModels
 			BackCommand = new Command(() =>
 			{
 				Application.Current.MainPage.Navigation.PopModalAsync();
+			}, () => { return true; });
+
+			SelectProvinceCommand = new Command(() =>
+			{
+				CityList.Clear();
+				CountyList.Clear();
+				TownList.Clear();
+				City = string.Empty;
+				County = string.Empty;
+				Town = string.Empty;
+				foreach (var item in (JObject)AllPlaces[Province])
+				{
+					CityList.Add(item.Key);
+				}
+			}, () => { return true; });
+
+			SelectCityCommand = new Command(() =>
+			{
+				CountyList.Clear();
+				TownList.Clear();
+				County = string.Empty;
+				Town = string.Empty;
+				foreach (var item in (JObject)AllPlaces[Province][City])
+				{
+					CountyList.Add(item.Key);
+				}
+			}, () => { return true; });
+
+			SelectCountyCommand = new Command(() =>
+			{
+				TownList.Clear();
+				Town = string.Empty;
+				foreach (var item in AllPlaces[Province][City][County])
+				{
+					TownList.Add(item.ToString());
+				}
+			}, () => { return true; });
+
+			SelectTownCommand = new Command(() =>
+			{
+
 			}, () => { return true; });
 		}
 
@@ -185,6 +363,7 @@ namespace XMart.ViewModels
 				if (simpleRD.success)
 				{
 					CrossToastPopUp.Current.ShowToastSuccess("更新成功！", ToastLength.Long);
+					await Application.Current.MainPage.Navigation.PopModalAsync();
 				}
 				else
 				{
@@ -231,6 +410,7 @@ namespace XMart.ViewModels
 				if (simpleRD.success)
 				{
 					CrossToastPopUp.Current.ShowToastSuccess("添加成功！", ToastLength.Long);
+					await Application.Current.MainPage.Navigation.PopModalAsync();
 				}
 				else
 				{
@@ -243,6 +423,31 @@ namespace XMart.ViewModels
 			}
 
 
+		}
+
+		/// <summary>
+		/// 初始化行政区划
+		/// </summary>
+		private void InitPCAS()
+		{
+			try
+			{
+				var assembly = IntrospectionExtensions.GetTypeInfo(typeof(EditAddressViewModel)).Assembly;
+				using (var reader = new StreamReader(assembly.GetManifestResourceStream("XMart.Util.pcas.json")))
+				{
+					var jsonData = reader.ReadToEnd();
+					JObject questionsList = (JObject)JsonConvert.DeserializeObject(jsonData);
+					AllPlaces = questionsList;
+					foreach (var item in AllPlaces)
+					{
+						ProvinceList.Add(item.Key);
+					}
+				}
+			}
+			catch (Exception)
+			{
+				throw;
+			}
 		}
 	}
 }

@@ -43,7 +43,7 @@
                 <Frame Style="{StaticResource BaseFrame}" HeightRequest="40" HorizontalOptions="FillAndExpand"
                        CornerRadius="20" Padding="20,0" BorderColor="LightGray">
                     <controls:MyEntry x:Name="account" Placeholder="搜索商品更便捷···" Style="{StaticResource SearchEntry}"
-                                      Text="{Binding Index}" ReturnCommand="{Binding SearchCommand}"/>
+                                      Text="{Binding SearchString}" ReturnCommand="{Binding SearchCommand}"/>
                 </Frame>
                 <Button Text="搜索" BackgroundColor="Transparent" WidthRequest="60" FontSize="18" Command="{Binding SearchCommand}"/>
             </StackLayout>

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace XMart.Services
 {
-    class LocalDatabaseService
+    public class LocalDatabaseService
     {
     }
 }

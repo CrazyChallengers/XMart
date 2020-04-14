@@ -29,31 +29,71 @@ namespace XMart.ViewModels
 			set { SetProperty(ref visible, value); }
 		}
 
-		private bool isRefreshing;   //Comment
-		public bool IsRefreshing
+		private bool indicatorIsRunning;   //Comment
+		public bool IndicatorIsRunning
 		{
-			get { return isRefreshing; }
-			set { SetProperty(ref isRefreshing, value); }
+			get { return indicatorIsRunning; }
+			set { SetProperty(ref indicatorIsRunning, value); }
 		}
 
-		public Command<OrderDetail> EditCommand { get; set; }
+		private string loadMoreButtonText;   //Comment
+		public string LoadMoreButtonText
+		{
+			get { return loadMoreButtonText; }
+			set { SetProperty(ref loadMoreButtonText, value); }
+		}
+
+		private bool buttonIsEnable;   //Comment
+		public bool ButtonIsEnable
+		{
+			get { return buttonIsEnable; }
+			set { SetProperty(ref buttonIsEnable, value); }
+		}
+
+		private int totalOrderNum;   //Comment
+		public int TotalOrderNum
+		{
+			get { return totalOrderNum; }
+			set { SetProperty(ref totalOrderNum, value); }
+		}
+
+		private int orderNum;   //Comment
+		public int OrderNum
+		{
+			get { return orderNum; }
+			set { SetProperty(ref orderNum, value); }
+		}
+
+		private int page { get; set; }
+
+		public Command<long> OneTappedCommand { get; set; }
 		public Command RefreshCommand { get; set; }
 		public Command BackCommand { get; set; }
+		public Command LoadMoreCommand { get; set; }
 
 		public OrderListViewModel()
 		{
 			OrderList = new ObservableCollection<OrderDetail>();
+			page = 1;
+			TotalOrderNum = 0;
+			OrderNum = 0;
 
-			EditCommand = new Command<OrderDetail>((orderDetail) =>
+			OneTappedCommand = new Command<long>((id) =>
 			{
-				OrderDetailPage orderDetailPage = new OrderDetailPage(orderDetail.orderId);
+				OrderDetailPage orderDetailPage = new OrderDetailPage(id);
 				Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
-			}, (orderDetail) => { return true; });
+			}, (id) => { return true; });
 
 			RefreshCommand = new Command(() =>
 			{
 				InitOrderList();
-				IsRefreshing = false;
+			}, () => { return true; });
+
+			LoadMoreCommand = new Command(() =>
+			{
+				//CrossToastPopUp.Current.ShowToastWarning(str + "/" + ProductNum, ToastLength.Short);
+				page++;
+				InitOrderList();
 			}, () => { return true; });
 
 			BackCommand = new Command(() =>
@@ -71,6 +111,7 @@ namespace XMart.ViewModels
 		{
 			try
 			{
+				IndicatorIsRunning = true;
 				if (!Tools.IsNetConnective())
 				{
 					CrossToastPopUp.Current.ShowToastError("无网络连接，请检查网络。", ToastLength.Long);
@@ -78,14 +119,18 @@ namespace XMart.ViewModels
 				}
 
 				RestSharpService _restSharpService = new RestSharpService();
-				int userId = GlobalVariables.LoggedUser.id;
-				int page = 1;
 				int size = 10;
-				OrderListRD orderListRD = await _restSharpService.GetOrderListById(userId, page, size);
+				OrderListRD orderListRD = await _restSharpService.GetOrderListById(GlobalVariables.LoggedUser.id, page, size);
 
 				if (orderListRD.result.data.Count != 0)
 				{
-					OrderList = new ObservableCollection<OrderDetail>(orderListRD.result.data);
+					foreach (var item in orderListRD.result.data)
+					{
+						OrderList.Add(item);
+					}
+
+					TotalOrderNum = orderListRD.result.total;
+					OrderNum += orderListRD.result.data.Count;
 					Visible = false;
 
 					foreach (var item in OrderList)
@@ -117,10 +162,26 @@ namespace XMart.ViewModels
 				{
 					Visible = true;
 				}
+				ChangeButtonText();
+				IndicatorIsRunning = false;
 			}
 			catch (Exception)
 			{
 				throw;
+			}
+		}
+
+		private void ChangeButtonText()
+		{
+			if (OrderNum == TotalOrderNum)
+			{
+				LoadMoreButtonText = OrderNum.ToString() + "/" + TotalOrderNum.ToString() + "，" + "已全部加载";
+				ButtonIsEnable = false;
+			}
+			else
+			{
+				LoadMoreButtonText = OrderNum.ToString() + "/" + TotalOrderNum.ToString() + "，" + "点击加载更多";
+				ButtonIsEnable = true;
 			}
 		}
 	}
