@@ -5,7 +5,8 @@
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              x:Class="XMart.Views.MePage"
              Icon="Resource/drawable/me.png"
-             Title="个人中心">
+             Title="个人中心"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style x:Key="CommonLabel" TargetType="Label">
@@ -156,7 +157,7 @@
                     </StackLayout>
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
-                                         CommandParameter="XMart.Views.CollectionPage"/>
+                                              CommandParameter="XMart.Views.CollectionPage"/>
                     </Frame.GestureRecognizers>
                 </Frame>
 
@@ -178,6 +179,10 @@
                         <Label Text="系统设置" Style="{DynamicResource tiltle}"/>
                         <Label Text="自定义APP设置" Style="{DynamicResource description}"/>
                     </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                              CommandParameter="XMart.Views.SettingPage"/>
+                    </Frame.GestureRecognizers>
                 </Frame>
             </Grid>
 
@@ -255,6 +260,10 @@
                         <Label Text="系统设置" Style="{DynamicResource tiltle}"/>
                         <Label Text="自定义APP设置" Style="{DynamicResource description}"/>
                     </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                              CommandParameter="XMart.Views.SettingPage"/>
+                    </Frame.GestureRecognizers>
                 </Frame>
             </Grid>
 

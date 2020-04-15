@@ -9,7 +9,8 @@
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
              x:Class="XMart.Views.FindMorePage"
-             x:Name="findMorePage">
+             x:Name="findMorePage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style x:Key="SubLabel" TargetType="Label">

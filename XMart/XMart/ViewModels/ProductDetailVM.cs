@@ -45,6 +45,13 @@ namespace XMart.ViewModels
             set { SetProperty(ref memberPriceVisible, value); }
         }
 
+        private bool visitorVisible;   //Comment
+        public bool VisitorVisible
+        {
+            get { return visitorVisible; }
+            set { SetProperty(ref visitorVisible, value); }
+        }
+
         private bool cusPriceVisile;   //Comment
         public bool CusPriceVisible
         {
@@ -66,6 +73,7 @@ namespace XMart.ViewModels
         {
             //CusPriceVisible = GlobalVariables.LoggedUser.userType == "0";
             MemberPriceVisible = GlobalVariables.IsLogged;
+            VisitorVisible = !MemberPriceVisible;
 
             Product = new ProductInfo();
             StarSource = "star_gray.png";
@@ -136,17 +144,17 @@ namespace XMart.ViewModels
                 {
                     PhoneDialer.Open("18080961008");
                 }
-                catch (ArgumentNullException anEx)
+                catch (ArgumentNullException)
                 {
                     // Number was null or white space
                     CrossToastPopUp.Current.ShowToastError("无联系方式", ToastLength.Short);
                 }
-                catch (FeatureNotSupportedException ex)
+                catch (FeatureNotSupportedException)
                 {
                     // Phone Dialer is not supported on this device.
                     CrossToastPopUp.Current.ShowToastError("该设备不支持拨号", ToastLength.Short);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     // Other error has occurred.
                     CrossToastPopUp.Current.ShowToastError("出现其他错误", ToastLength.Short);

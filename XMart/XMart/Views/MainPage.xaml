@@ -8,7 +8,8 @@
             android:TabbedPage.IsSwipePagingEnabled="True"
             xmlns:views="clr-namespace:XMart.Views"
             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-            x:Class="XMart.Views.MainPage">
+            x:Class="XMart.Views.MainPage"
+            BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <!--<views:HomePage/>
     <views:CategoryPage/>

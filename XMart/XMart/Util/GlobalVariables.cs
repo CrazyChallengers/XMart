@@ -10,5 +10,7 @@ namespace XMart.Util
         public static bool IsLogged { get; set; }
 
         public static UserInfo LoggedUser {get; set;}
+
+        public static bool DarkMode { get; set; }
     }
 }

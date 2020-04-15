@@ -4,7 +4,8 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              xmlns:controls="clr-namespace:XMart.Controls"
-             x:Class="XMart.Views.RegisterPage">
+             x:Class="XMart.Views.RegisterPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style TargetType="Frame">

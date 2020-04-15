@@ -30,12 +30,14 @@ namespace XMart.Views
             //base.OnAppearing();
             orderDetailViewModel.InitOrderDetailPage(orderDetailViewModel.Order.orderId);
         }
-
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            orderDetailViewModel.InitOrderDetailPage(orderDetailViewModel.Order.orderId);
+            //orderDetailViewModel.InitOrderDetailPage(orderDetailViewModel.Order.orderId);
+            var orderingPage = Navigation.ModalStack.FirstOrDefault(p => p is OrderingPage);
+            Navigation.RemovePage(orderingPage);
         }*/
+
 
     }
 }

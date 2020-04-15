@@ -6,7 +6,8 @@
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
              x:Class="XMart.Views.OrderDetailPage"
-             x:Name="page">
+             x:Name="page"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style x:Key="SectionStyle" TargetType="Label">
@@ -151,6 +152,7 @@
                                             <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="18"
                                                    VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                             
+                                            <!--
                                             <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14"
                                                VerticalOptions="Center" HorizontalOptions="Start">
                                                 <Label.FormattedText>
@@ -161,8 +163,17 @@
                                                         <Span Text="{Binding mainMaterial}"/>
                                                     </FormattedString>
                                                 </Label.FormattedText>
+                                            </Label>-->
+
+                                            <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" FontSize="18">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="规格："/>
+                                                        <Span Text="{Binding attributesValues}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
                                             </Label>
-                                            
+
                                             <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
                                                 <Label.FormattedText>
                                                     <FormattedString>

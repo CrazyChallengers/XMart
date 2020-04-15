@@ -5,7 +5,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
-             x:Class="XMart.Views.AddressManagePage">
+             x:Class="XMart.Views.AddressManagePage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style x:Key="UserNameStyle" TargetType="Label">

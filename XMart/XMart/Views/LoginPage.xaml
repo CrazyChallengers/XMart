@@ -6,7 +6,8 @@
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              Icon="Resource/drawable/circle.png"
              x:Class="XMart.Views.LoginPage"
-             Title="登录/注册">
+             Title="登录/注册"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style x:Name="FrameStyle" TargetType="Frame">

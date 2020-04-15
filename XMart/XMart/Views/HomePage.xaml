@@ -8,7 +8,8 @@
              x:Class="XMart.Views.HomePage"
              Icon="Resource/drawable/home.png"
              x:Name="homePage"
-             Title="首页">
+             Title="首页"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style x:Key="SectionTitle" TargetType="Label">
@@ -66,7 +67,7 @@
                                                 <RowDefinition Height="100"/>
                                                 <RowDefinition/>
                                             </Grid.RowDefinitions>
-                                            
+
                                             <ff:CachedImage Grid.Row="0" Source="{Binding icon}" Aspect="AspectFill"/>
 
                                             <Label Grid.Row="1" Text="{Binding name}" FontSize="16" LineBreakMode="TailTruncation" 
@@ -98,40 +99,40 @@
                                 <DataTemplate>
                                     <Frame Style="{StaticResource BaseFrame}" HeightRequest="180" WidthRequest="120" Margin="5">
                                         <Grid WidthRequest="120" RowSpacing="0">
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="120"/>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="20"/>
-                                            <RowDefinition Height="20"/>
-                                        </Grid.RowDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="120"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
 
-                                        <ff:CachedImage Grid.Row="0" Source="{Binding picUrl}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill"/>
-                                        
-                                        <ff:CachedImage Grid.Row="0" Source="discount.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Start"/>
-                                        <Label Grid.Row="1" Text="{Binding productName}" TextColor="Black" FontSize="16" LineBreakMode="TailTruncation"/>
-                                        <Label Grid.Row="2" FontSize="18" FontAttributes="Bold">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
-                                                    <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                        <Label Grid.Row="3" FontSize="16">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
-                                                    <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
+                                            <ff:CachedImage Grid.Row="0" Source="{Binding picUrl}" HeightRequest="80" WidthRequest="80" Aspect="AspectFill"/>
 
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer NumberOfTapsRequired="1" 
+                                            <ff:CachedImage Grid.Row="0" Source="discount.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Start"/>
+                                            <Label Grid.Row="1" Text="{Binding productName}" TextColor="Black" FontSize="16" LineBreakMode="TailTruncation"/>
+                                            <Label Grid.Row="2" FontSize="18" FontAttributes="Bold" IsVisible="{Binding BindingContext.MemberVisible,Source={x:Reference homePage}}">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="￥" TextColor="{StaticResource ThickPink}"/>
+                                                        <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label Grid.Row="3" FontSize="16">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="￥" TextColor="{StaticResource SkyBlue}"/>
+                                                        <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer NumberOfTapsRequired="1" 
                                                                   Command="{Binding Path=BindingContext.ItemTapCommand, Source={x:Reference Name=homePage}}" 
                                                                   CommandParameter="{Binding productId}"/>
-                                        </Grid.GestureRecognizers>
-                                    </Grid>
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
                                     </Frame>
                                 </DataTemplate>
                             </BindableLayout.ItemTemplate>

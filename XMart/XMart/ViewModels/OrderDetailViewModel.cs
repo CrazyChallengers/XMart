@@ -81,7 +81,7 @@ namespace XMart.ViewModels
         public Command DeleteOrderCommand { get; set; }
         public Command DeleteCommand { get; set; }
         public Command<long> OneTappedCommand { get; set; }
-
+         
         public OrderDetailViewModel(long orderId)
         {
             Order = new OrderDetail();

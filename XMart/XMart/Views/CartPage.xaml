@@ -7,6 +7,7 @@
              xmlns:viewModels="clr-namespace:XMart.ViewModels"
              x:Class="XMart.Views.CartPage"
              Icon="Resource/drawable/cart.png"
+             BackgroundColor="{DynamicResource PageBackgroundColor}"
              Title="购物车"
              x:Name="page">
     
@@ -60,7 +61,7 @@
 
                                     <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding productImg}"/>
                                     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding productName}" 
-                                           FontSize="Large" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
+                                           FontSize="18" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" FontSize="Medium"
                                            VerticalOptions="Center" VerticalTextAlignment="Center"/>
                                     <!--<Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
@@ -73,7 +74,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>-->
-                                    <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                    <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="会员价" FontSize="12"/>
@@ -82,7 +83,7 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                    <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start">
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="市场价" FontSize="12"/>
@@ -91,12 +92,12 @@
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
-                                    <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
+
+                                    <Label Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" FontSize="18">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="市场价" FontSize="12"/>
-                                                <Span Text="￥" FontSize="22"/>
-                                                <Span Text="{Binding mallPrice}" FontSize="26"/>
+                                                <Span Text="规格："/>
+                                                <Span Text="{Binding attributesValues}"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

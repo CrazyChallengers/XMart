@@ -6,7 +6,8 @@
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              xmlns:controls="clr-namespace:XMart.Controls"
              mc:Ignorable="d"
-             x:Class="XMart.Views.EditAddressPage">
+             x:Class="XMart.Views.EditAddressPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
     <ContentPage.Content>
         <StackLayout>
             <Grid>
