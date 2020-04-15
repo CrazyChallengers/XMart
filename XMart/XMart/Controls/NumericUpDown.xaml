@@ -6,7 +6,7 @@
 
     <ContentView.Resources>
         <Style TargetType="Label">
-            <Setter Property="FontSize" Value="Large" />
+            <Setter Property="FontSize" Value="18" />
             <Setter Property="TextColor" Value="Black" />
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="VerticalOptions" Value="Center" />

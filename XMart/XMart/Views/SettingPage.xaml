@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:behaviors="clr-namespace:XMart.Behaviors"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.SettingPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.Resources>
+        <Style x:Key="SectionTiltleLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Gray"/>
+        </Style>
+        <Style x:Key="OptionLabel" TargetType="Label">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="TextColor" Value="Black"/>
+        </Style>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ImageButton Grid.Row="0" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+            <Label Grid.Row="0" Text="设置" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+            <StackLayout Grid.Row="1" Orientation="Vertical" Margin="10">
+                <Label Text="个性化" Style="{DynamicResource SectionTiltleLabel}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
+                    <Label Text="深色模式" Style="{DynamicResource OptionLabel}"/>
+                    <Switch x:Name="ThemeSwitch" HorizontalOptions="EndAndExpand" IsToggled="{Binding DarkModeIsToggled}">
+                        <Switch.Behaviors>
+                            <behaviors:EventToCommandBehavior EventName="Toggled" Command="{Binding ThemeCommand}" />
+                        </Switch.Behaviors>
+                    </Switch>
+                </StackLayout>
+
+                <Label Text="关于美而好" Style="{DynamicResource SectionTiltleLabel}"/>
+                <Label Text="版本号：1.7.1"/>
+                <Label Text="开发者：西南交大人工智能研究院、成都万云互联科技有限公司"/>
+                <Label Text="隐私政策"/>
+                <Label Text="权限说明"/>
+                <Label Text="帮助"/>
+                <Label Text="服务条款"/>
+                <Label Text="官网"/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

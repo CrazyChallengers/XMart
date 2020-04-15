@@ -100,11 +100,10 @@ namespace XMart.Services
             return cartItemListRD;
         }
 
-        public async Task<SimpleRD> AddToCart(string memberId, string productId, string num)
+        public async Task<SimpleRD> AddToCart(string memberId, string productId, string num, string attributeValue)
         {
             string url = "/member/addCart";
-            string json = "{\"userId\":" + memberId
-                + ", \"productId\":" + productId + ", \"productNum\":" + num + "}";
+            string json = "{\"userId\":" + memberId + ", \"productId\":" + productId + ", \"productNum\":" + num + ", \"attributesValues\":\"" + attributeValue  + "\"}";
 
             SimpleRD simpleRD = await RestSharpHelper<SimpleRD>.PostAsync(url, json);
 

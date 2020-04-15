@@ -4,7 +4,9 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="XMart.Views.PayWebPage">
+             x:Class="XMart.Views.PayWebPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    
     <ContentPage.Content>
         <StackLayout>
             <WebView x:Name="wb" IsVisible="True" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">

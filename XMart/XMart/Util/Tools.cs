@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
@@ -102,5 +103,6 @@ namespace XMart.Util
             return status;
         }
         */
+
     }
 }

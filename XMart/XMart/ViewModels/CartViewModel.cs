@@ -34,26 +34,12 @@ namespace XMart.ViewModels
             set { SetProperty(ref itemNumber, value); }
         }
 
-        //private bool isAllChecked;   //是否全选
-        //public bool IsAllChecked
-        //{
-        //    get { return isAllChecked; }
-        //    set { SetProperty(ref isAllChecked, value); }
-        //}
-
         private int checkedNumber;   //选择数量
         public int CheckedNumber
         {
             get { return checkedNumber; }
             set { SetProperty(ref checkedNumber, value); }
         }
-
-        //private Color allCheckedButton_Color;   //comment
-        //public Color AllCheckedButton_Color
-        //{
-        //    get { return allCheckedButton_Color; }
-        //    set { SetProperty(ref allCheckedButton_Color, value); }
-        //}
 
         public Command OrderCommand { get; set; }
         public Command AllCheckCommand { get; set; }
@@ -97,19 +83,6 @@ namespace XMart.ViewModels
                     Application.Current.MainPage.Navigation.PushModalAsync(orderingPage);
                 }
             }, () => { return true; });
-
-            /*
-            AllCheckCommand = new Command(() =>
-            {
-                IsAllChecked = !IsAllChecked;
-                AllCheckedButton_Color = IsAllChecked ? Color.Crimson : Color.LightGray;
-                foreach (var item in ItemList)
-                {
-                    item.Checked = IsAllChecked;
-                }
-
-                OnCount();
-            }, () => { return true; });*/
 
             TwoTappedCommand = new Command<long>((id) =>
             {

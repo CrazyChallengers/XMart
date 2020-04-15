@@ -12,7 +12,7 @@ namespace XMart.Views
     public partial class HomePage : ContentPage
     {
         HomeViewModel homeViewModel = new HomeViewModel();
-        int index = 0;
+        //int index = 0;
 
         public HomePage()
         {

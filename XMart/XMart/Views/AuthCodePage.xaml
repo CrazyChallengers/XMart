@@ -5,7 +5,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
-             x:Class="XMart.Views.AuthCodePage">
+             x:Class="XMart.Views.AuthCodePage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+    
     <ContentPage.Content>
         <StackLayout VerticalOptions="StartAndExpand" Margin="30,35">
             <ImageButton x:Name="BackButton" Source="back_gray.png" Style="{StaticResource BackButton}" Command="{Binding BackCommand}" 

@@ -55,9 +55,10 @@ namespace XMart.Controls
                         VerticalOptions = LayoutOptions.CenterAndExpand
                     });
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     //Debug.WriteLine(e.Message);
+                    throw;
                 }
             }
 

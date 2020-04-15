@@ -86,6 +86,9 @@ namespace XMart.ViewModels
 
 			RefreshCommand = new Command(() =>
 			{
+				TotalOrderNum = 0;
+				OrderNum = 0;
+				OrderList.Clear();
 				InitOrderList();
 			}, () => { return true; });
 
@@ -101,13 +104,14 @@ namespace XMart.ViewModels
 				Application.Current.MainPage.Navigation.PopModalAsync();
 			}, () => { return true; });
 
+			/*
 			if (GlobalVariables.IsLogged)
 			{
 				InitOrderList();
-			}
+			}*/
 		}
 
-		private async void InitOrderList()
+		public async void InitOrderList()
 		{
 			try
 			{

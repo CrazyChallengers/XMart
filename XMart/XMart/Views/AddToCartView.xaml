@@ -5,6 +5,7 @@
                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                  xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                  xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:behaviors ="clr-namespace:XMart.Behaviors"
                  xmlns:controls="clr-namespace:XMart.Controls"
                  mc:Ignorable="d"
                  x:Class="XMart.Views.AddToCartView">
@@ -28,45 +29,51 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" Source="{Binding Product.productImageBig}"/>
+            <ff:CachedImage Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Source="{Binding Product.productImageBig}"/>
             <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.productName}" 
                    FontSize="20" TextColor="Black" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.subTitle}" FontSize="16" VerticalOptions="Center" VerticalTextAlignment="Center"/>
-            <Label Grid.Row="2" Grid.Column="1" TextColor="{StaticResource ThickPink}" 
-                   VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+            <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Product.subTitle}" FontSize="16" 
+                   VerticalOptions="Center" VerticalTextAlignment="Center" MaxLines="2" LineBreakMode="TailTruncation"/>
+            
+            <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" TextColor="{StaticResource ThickPink}" WidthRequest="200"
+                   VerticalOptions="Center" HorizontalOptions="Center" IsVisible="{Binding MemberPriceVisible}">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="会员价" FontSize="12"/>
                         <Span Text="￥" FontSize="22"/>
-                        <Span Text="{Binding Product.memberPrice}" FontSize="26"/>
+                        <Span Text="{Binding MemberPrice}" FontSize="26"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+            <Label Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" TextColor="{StaticResource SkyBlue}" WidthRequest="200"
+                   VerticalOptions="Center" HorizontalOptions="Center">
                 <Label.FormattedText>
                     <FormattedString>
                         <Span Text="市场价" FontSize="12"/>
                         <Span Text="￥" FontSize="18"/>
-                        <Span Text="{Binding Product.mallPrice}" FontSize="18"/>
+                        <Span Text="{Binding MallPrice}" FontSize="18"/>
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <Label Grid.Row="3" Grid.Column="1" TextColor="Red" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="市场价" FontSize="12"/>
-                        <Span Text="￥" FontSize="22"/>
-                        <Span Text="{Binding Product.mallPrice}" FontSize="26"/>
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
+
+            <Picker x:Name="AttributePicker" Grid.Row="2" Grid.Column="2" Title="规格"
+                    ItemsSource="{Binding Product.itemAttributeValues}" 
+                    ItemDisplayBinding="{Binding attributeValue}"  
+                    SelectedIndex="{Binding Index,Mode=TwoWay}">
+                <Picker.Behaviors>
+                    <behaviors:EventToCommandBehavior EventName="SelectedIndexChanged" Command="{Binding SelectAttributeCommand}"/>
+                </Picker.Behaviors>
+            </Picker>
 
             <controls:NumericUpDown Grid.Row="3" Grid.Column="2" x:Name="NumberStepper" Minimum="1" Step="1"
-                                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding productNum}"/>
+                                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Value="{Binding ProductNum}"/>
 
-            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3" Text="添加到购物车" TextColor="White" CornerRadius="10"
-                        VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" BackgroundColor="Crimson"
+            <Button Grid.Row="4" Grid.Column="1" Text="添加到购物车" TextColor="White"
+                        VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" BackgroundColor="Crimson"
                         Command="{Binding AddToCartCommand}"/>
+            <Button Grid.Row="4" Grid.Column="2" Text="立即采购" TextColor="White"
+                        VerticalOptions="CenterAndExpand" HorizontalOptions="Fill" BackgroundColor="Goldenrod"
+                        Command="{Binding ToOrderCommand}"/>
         </Grid>
         <!--<ff:CachedImage Source="{Binding Product.productImageBig}" HeightRequest="150" WidthRequest="150"/>
                 <Label Text="{Binding Product.productName}" FontSize="20"/>

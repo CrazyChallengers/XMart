@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using XMart.Util;
 using XMart.ViewModels;
 
 namespace XMart.Views
@@ -13,12 +14,27 @@ namespace XMart.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class OrderListPage : ContentPage
     {
+        OrderListViewModel orderListViewModel = new OrderListViewModel();
+
         public OrderListPage()
         {
             InitializeComponent();
 
-            BindingContext = new OrderListViewModel();
+            BindingContext = orderListViewModel;
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (GlobalVariables.IsLogged)
+            {
+                orderListViewModel.TotalOrderNum = 0;
+                orderListViewModel.OrderNum = 0;
+                orderListViewModel.OrderList.Clear();
+                orderListViewModel.InitOrderList();
+            }
+            //var orderingPage = Navigation.ModalStack.FirstOrDefault(p => p is OrderingPage);
+            //Navigation.RemovePage(orderingPage);
+        }
     }
 }

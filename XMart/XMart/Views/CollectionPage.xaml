@@ -8,7 +8,8 @@
              xmlns:controls="clr-namespace:XMart.Controls"
              mc:Ignorable="d"
              x:Class="XMart.Views.CollectionPage"
-             x:Name="collectionPage">
+             x:Name="collectionPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
     
     <ContentPage.Resources>
         <Style x:Key="LabelStyle" TargetType="Label">

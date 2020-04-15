@@ -109,7 +109,7 @@ namespace XMart.ViewModels
 
             OrderCommand = new Command(() =>
             {
-                Order();
+                OrderAsync();
             }, () => { return true; });
 
             AddressManageCommand = new Command(() =>
@@ -128,12 +128,13 @@ namespace XMart.ViewModels
             {
                 Application.Current.MainPage.Navigation.PopModalAsync();
             }, () => { return true; });
+
         }
 
         /// <summary>
         /// 提交订单
         /// </summary>
-        private void Order()
+        private async void OrderAsync()
         {
             try
             {
@@ -166,8 +167,12 @@ namespace XMart.ViewModels
                 {
                     CrossToastPopUp.Current.ShowToastSuccess("提交订单成功！请及时支付！", ToastLength.Long);
 
+                    //var stack1 = Application.Current.MainPage.Navigation.NavigationStack;
+                    //var stack2 = Application.Current.MainPage.Navigation.ModalStack;
+                    //Application.Current.MainPage.Navigation.RemovePage(stack2[stack2.Count - 1]);
+                    await Application.Current.MainPage.Navigation.PopModalAsync();
                     OrderDetailPage orderDetailPage = new OrderDetailPage(stupidRD.result);
-                    Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
+                    await Application.Current.MainPage.Navigation.PushModalAsync(orderDetailPage);
                 }
                 else
                 {

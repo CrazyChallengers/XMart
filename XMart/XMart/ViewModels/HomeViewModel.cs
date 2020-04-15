@@ -107,6 +107,15 @@ namespace XMart.ViewModels
             set { SetProperty(ref searchString, value); }
         }
 
+        private bool memberVisible;   //Comment
+        public bool MemberVisible
+        {
+            get { return memberVisible; }
+            set { SetProperty(ref memberVisible, value); }
+        }
+
+
+
         public Command<long> ItemTapCommand { set; get; }
         public Command<int> FindMoreCommand { get; set; }
         public Command<int> CarouselTappedCommand { get; set; }
@@ -120,6 +129,7 @@ namespace XMart.ViewModels
 
             //TimerCallback timerDelegate = new TimerCallback(Tick);
             //timer = new Timer(timerDelegate, null, 0, 5000); //5秒执行一次Tick方法
+            MemberVisible = GlobalVariables.IsLogged;
 
             CarouselTappedCommand = new Command<int>((position) =>
             {

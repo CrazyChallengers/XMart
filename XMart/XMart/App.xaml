@@ -6,13 +6,7 @@
              x:Class="XMart.App">
     <Application.Resources>
         <ResourceDictionary>
-            <Color x:Key="MainColor">#353f48</Color>
-            <Color x:Key="DeepBlue">#353f48</Color>
-            <Color x:Key="SkyBlue">#01acf2</Color>
-            <Color x:Key="LightBlue">#83d7f9</Color>
-            <Color x:Key="GrassGreen">#71c043</Color>
-            <Color x:Key="ThickPink">#d93365</Color>
-            <Color x:Key="LightPink">#e0557f</Color>
+            <ResourceDictionary Source="Themes/LightTheme.xaml" />
             
             <util:ScreenHelper x:Key="Size"></util:ScreenHelper>
             <!--style-->

@@ -6,7 +6,8 @@
              xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
              xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              mc:Ignorable="d"
-             x:Class="XMart.Views.ProductDetailPage">
+             x:Class="XMart.Views.ProductDetailPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
     <ContentPage.Content>
         <Grid RowSpacing="0">
             <Grid.RowDefinitions>
@@ -56,7 +57,7 @@
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="￥" FontSize="14" TextColor="{StaticResource ThickPink}"/>
-                                        <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="{StaticResource ThickPink}" />
+                                        <Span Text="{Binding Product.memberPrice}" FontSize="26" TextColor="{StaticResource ThickPink}" FontAttributes="Bold"/>
                                         <Span Text="会员价" FontSize="14" TextColor="{StaticResource ThickPink}"/>
                                     </FormattedString>
                                 </Label.FormattedText>
@@ -92,6 +93,43 @@
 
                     <StackLayout BackgroundColor="White" Padding="10">
                         <Label Text="产品规格" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
+                        <StackLayout BindableLayout.ItemsSource="{Binding Product.itemAttributeValues}" IsVisible="{Binding MemberPriceVisible}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Label VerticalOptions="Center" FontSize="18">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding attributeValue}" TextColor="Black"/>
+                                                <Span Text="  ￥" TextColor="{StaticResource SkyBlue}"/>
+                                                <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
+                                                <Span Text="  ￥" TextColor="{StaticResource ThickPink}" FontAttributes="Bold"/>
+                                                <Span Text="{Binding memberPrice}" TextColor="{StaticResource ThickPink}" FontSize="22" FontAttributes="Bold"/>
+                                                <Span Text="会员价" TextColor="{StaticResource ThickPink}" FontSize="14"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                        <StackLayout BindableLayout.ItemsSource="{Binding Product.itemAttributeValues}" IsVisible="{Binding VisitorVisible}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Label VerticalOptions="Center" FontSize="18">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding attributeValue}" TextColor="Black"/>
+                                                <Span Text="  ￥" TextColor="{StaticResource SkyBlue}"/>
+                                                <Span Text="{Binding mallPrice}" TextColor="{StaticResource SkyBlue}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+                    </StackLayout>
+
+                    <StackLayout BackgroundColor="White" Padding="10">
+                        <Label Text="产品详情" TextColor="Black" FontSize="20" FontAttributes="Bold"/>
                         <Label>
                             <Label.FormattedText>
                                 <FormattedString>
@@ -192,9 +230,9 @@
                 <Label Grid.Row="1" Grid.Column="1" Text="加购物车" FontSize="16" 
                        HorizontalOptions="Center" VerticalOptions="Center" HorizontalTextAlignment="Center" VerticalTextAlignment="Center"/>
 
-                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="AddToCartBtn" Text="采购" 
+                <Button Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" x:Name="AddToCartBtn" Text="立即采购" 
                         BackgroundColor="{StaticResource ThickPink}" TextColor="White" FontSize="18"
-                        Command="{Binding BuyCommand}"/>
+                        Command="{Binding AddToCartCommand}"/>
 
                 <Button Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" x:Name="BuyButton" Text="推荐"
                         BackgroundColor="{StaticResource LightPink}" TextColor="White" FontSize="18"

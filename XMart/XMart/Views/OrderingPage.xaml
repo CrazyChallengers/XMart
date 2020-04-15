@@ -8,7 +8,8 @@
              xmlns:behaviors="clr-namespace:XMart.Behaviors"
              mc:Ignorable="d"
              x:Class="XMart.Views.OrderingPage"
-             x:Name="orderingPage">
+             x:Name="orderingPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.Resources>
         <Style x:Key="SectionStyle" TargetType="Label">
@@ -87,7 +88,7 @@
                                         <Label Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding subTitle}" 
                                                FontSize="14" MaxLines="2" LineBreakMode="TailTruncation"
                                                VerticalOptions="Center" VerticalTextAlignment="Center"/>
-                                        <!--<Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>-->
+                                        <!--<Picker Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Title="规格......" WidthRequest="80" HorizontalOptions="CenterAndExpand"/>
 
                                         <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="14"
                                                VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
@@ -99,9 +100,18 @@
                                                     <Span Text="{Binding mainMaterial}"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
+                                        </Label>-->
+
+                                        <Label Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalOptions="Start" VerticalOptions="Center" FontSize="18">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="规格："/>
+                                                    <Span Text="{Binding attributesValues}"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
                                         </Label>
-                                        
-                                        <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+
+                                        <Label Grid.Row="3" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥" FontSize="22"/>
@@ -110,7 +120,7 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Label Grid.Row="4" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding MemberPriceVisible}">
+                                        <Label Grid.Row="4" Grid.Column="1" TextColor="{StaticResource SkyBlue}" VerticalOptions="Center" HorizontalOptions="Start">
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="￥" FontSize="18"/>
@@ -118,14 +128,7 @@
                                                 </FormattedString>
                                             </Label.FormattedText>
                                         </Label>
-                                        <Label Grid.Row="4" Grid.Column="1" TextColor="{StaticResource ThickPink}" VerticalOptions="Center" HorizontalOptions="Start" IsVisible="{Binding CusPriceVisible}">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="￥" FontSize="22"/>
-                                                    <Span Text="{Binding mallPrice}" FontSize="26"/>
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
+
 
                                         <Label Grid.Row="4" Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                             <Label.FormattedText>
