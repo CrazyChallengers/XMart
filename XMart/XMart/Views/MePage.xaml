@@ -41,7 +41,9 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Text="个人中心" TextColor="Black" FontSize="24"
+            <ff:CachedImage Grid.Row="0" Grid.RowSpan="3" Source="backgroud.jpg" Aspect="Fill"/>
+
+            <Label Grid.Row="0" Text="个人中心" TextColor="Black" FontSize="24" FontAttributes="Bold"
                    HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
             <Button Grid.Row="0" Text="退出" TextColor="Crimson" BackgroundColor="Transparent" FontSize="18"
                    HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand" Command="{Binding LoginOutCommand}"/>
@@ -68,6 +70,11 @@
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                              CommandParameter="XMart.Views.EditUserInfoPage"/>
+                    </StackLayout.GestureRecognizers>
                 </StackLayout>
             </StackLayout>
 
@@ -135,6 +142,10 @@
                         <Label Text="我的客户" Style="{DynamicResource tiltle}"/>
                         <Label Text="查看客户列表" Style="{DynamicResource description}"/>
                     </StackLayout>
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding NavigateCommand}" 
+                                              CommandParameter="XMart.Views.CustomerListPage"/>
+                    </Frame.GestureRecognizers>
                 </Frame>
 
                 <Frame Grid.Row="2" Grid.Column="0">

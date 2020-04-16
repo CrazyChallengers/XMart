@@ -114,8 +114,6 @@ namespace XMart.ViewModels
             set { SetProperty(ref memberVisible, value); }
         }
 
-
-
         public Command<long> ItemTapCommand { set; get; }
         public Command<int> FindMoreCommand { get; set; }
         public Command<int> CarouselTappedCommand { get; set; }
@@ -125,12 +123,17 @@ namespace XMart.ViewModels
 
         public HomeViewModel()
         {
+            CarouselList = new List<HomePanelContent>();
+            CatList = new List<Category>();
+            HotProductList = new List<HomePanelContent>();
+
+            MemberVisible = GlobalVariables.IsLogged;
+
             InitHomePage();
 
             //TimerCallback timerDelegate = new TimerCallback(Tick);
             //timer = new Timer(timerDelegate, null, 0, 5000); //5秒执行一次Tick方法
-            MemberVisible = GlobalVariables.IsLogged;
-
+            
             CarouselTappedCommand = new Command<int>((position) =>
             {
                 string url = CarouselList[position].fullUrl;

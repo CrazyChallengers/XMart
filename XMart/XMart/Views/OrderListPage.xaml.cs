@@ -30,6 +30,7 @@ namespace XMart.Views
             {
                 orderListViewModel.TotalOrderNum = 0;
                 orderListViewModel.OrderNum = 0;
+                orderListViewModel.page = 1;
                 orderListViewModel.OrderList.Clear();
                 orderListViewModel.InitOrderList();
             }

@@ -9,6 +9,7 @@ using XMart.Models;
 using Xamarin.Essentials;
 using Plugin.Toast;
 using Plugin.Toast.Abstractions;
+using Xamarin.Forms.Xaml;
 
 namespace XMart.Views
 {

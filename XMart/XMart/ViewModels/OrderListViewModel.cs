@@ -64,7 +64,7 @@ namespace XMart.ViewModels
 			set { SetProperty(ref orderNum, value); }
 		}
 
-		private int page { get; set; }
+		public int page { get; set; }
 
 		public Command<long> OneTappedCommand { get; set; }
 		public Command RefreshCommand { get; set; }
