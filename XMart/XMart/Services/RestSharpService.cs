@@ -83,6 +83,19 @@ namespace XMart.Services
             LoginRD loginRD = await RestSharpHelper<LoginRD>.PostAsync(url, json);
             return loginRD;
         }
+
+        /// <summary>
+        /// 获取客户列表
+        /// </summary>
+        /// <param name="tel"></param>
+        /// <returns></returns>
+        public async Task<CustomerListRD> GetCustomers(string tel)
+        {
+            string url = "/member/getClient?phone=" + tel;
+
+            CustomerListRD customerListRD = await RestSharpHelper<CustomerListRD>.GetAsync(url);
+            return customerListRD;
+        }
         #endregion
 
         #region 购物车
@@ -402,14 +415,5 @@ namespace XMart.Services
         }
         #endregion
 
-        /// <summary>
-        /// 检测是否连接互联网
-        /// </summary>
-        /// <returns></returns>
-        private bool IsNetConnective()
-        {
-            var current = Connectivity.NetworkAccess;
-            return current == NetworkAccess.Internet;
-        }
     }
 }

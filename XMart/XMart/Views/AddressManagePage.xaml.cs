@@ -28,5 +28,10 @@ namespace XMart.Views
         {
             list.SelectedItem = -1;
         }
+
+        protected override void OnAppearing()
+        {
+            addressManageViewModel.InitAddressList();
+        }
     }
 }

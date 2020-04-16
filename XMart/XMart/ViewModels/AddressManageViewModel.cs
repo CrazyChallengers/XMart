@@ -89,7 +89,7 @@ namespace XMart.ViewModels
         /// <summary>
         /// 获取地址列表
         /// </summary>
-        private async void InitAddressList()
+        public async void InitAddressList()
         {
             try
             {

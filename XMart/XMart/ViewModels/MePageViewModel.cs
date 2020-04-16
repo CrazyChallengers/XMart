@@ -73,6 +73,7 @@ namespace XMart.ViewModels
 		public Command<string> NavigateCommand { get; set; }
 		public Command LoginOutCommand { get; set; }
 		public Command ReloadCommand { get; set; }
+		public Command EditUserInfoCommand { get; set; }
 
 		public MePageViewModel()
 		{
@@ -105,6 +106,7 @@ namespace XMart.ViewModels
 			{
 				InitMePage();
 			}, () => { return true; });
+
 		}
 
 		private void InitMePage()

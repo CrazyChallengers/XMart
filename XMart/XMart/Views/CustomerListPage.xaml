@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ff="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:cv="clr-namespace:CarouselView.FormsPlugin.Abstractions;assembly=CarouselView.FormsPlugin.Abstractions"
+             mc:Ignorable="d"
+             x:Class="XMart.Views.CustomerListPage"
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
+
+    <ContentPage.Content>
+        <Grid RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <ImageButton Grid.Row="0" Source="back_gray.png" Command="{Binding BackCommand}" Style="{StaticResource BackButton}" HorizontalOptions="Start"/>
+            <Label Grid.Row="0" Text="我的客户" TextColor="Black" FontSize="24" HorizontalOptions="Center" VerticalOptions="Center"/>
+
+            <cv:CarouselViewControl Grid.Row="1" x:Name="carouselView" ItemsSource="{Binding CustomerList}" ShowIndicators="True">
+                <cv:CarouselViewControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+                            <!--
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="CurrentItem">
+                                        <VisualState.Setters>
+                                            <Setter Property="Scale" Value="1.1" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="PreviousItem">
+                                        <VisualState.Setters>
+                                            <Setter Property="Opacity" Value="0.5" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="NextItem">
+                                        <VisualState.Setters>
+                                            <Setter Property="Opacity" Value="0.5" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="DefaultItem">
+                                        <VisualState.Setters>
+                                            <Setter Property="Opacity" Value="0.25" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>-->
+
+                            <Frame HasShadow="True" BorderColor="DarkGray" CornerRadius="5" HeightRequest="400" WidthRequest="200" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                                <StackLayout>
+                                    <Label Text="{Binding username}" FontAttributes="Bold" FontSize="22" TextColor="Black"
+                                           HorizontalOptions="Center" VerticalOptions="Center" />
+                                    <ff:CachedImage Source="star_yellow.png" Aspect="AspectFill" HeightRequest="150"
+                                                    WidthRequest="150" HorizontalOptions="Center" />
+                                    <Label Text="{Binding phone}" HorizontalOptions="Center" />
+                                    <Label Text="{Binding buyCompanyName}" FontAttributes="Italic" HorizontalOptions="Center"
+                                           MaxLines="5" LineBreakMode="TailTruncation" />
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+                    </DataTemplate>
+                </cv:CarouselViewControl.ItemTemplate>
+            </cv:CarouselViewControl>
+        
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
